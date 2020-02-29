@@ -11,6 +11,8 @@
 #include "mario_actions_object.h"
 #include "memory.h"
 #include "behavior_data.h"
+#include "game.h"
+#include "display.h"
 
 struct LandingAction {
     s16 numFrames;
@@ -460,8 +462,13 @@ void update_walking_speed(struct MarioState *m) {
         m->forwardVel = 48.0f;
     }
 
-    m->faceAngle[1] =
-        m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0x800, 0x800);
+    if(m->action == ACT_GRIND) {
+        m->faceAngle[1] =
+            m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0, 0);
+    } else {
+        m->faceAngle[1] =
+            m->intendedYaw - approach_s32((s16)(m->intendedYaw - m->faceAngle[1]), 0, 0x800, 0x800);
+    }
     apply_slope_accel(m);
 }
 
@@ -784,6 +791,10 @@ s32 act_walking(struct MarioState *m) {
     s16 startYaw = m->faceAngle[1];
 
     mario_drop_held_object(m);
+
+    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
+        return set_mario_action(m, ACT_GRIND, 0);
+    }
 
     if (should_begin_sliding(m)) {
         return set_mario_action(m, ACT_BEGIN_SLIDING, 0);
@@ -1551,6 +1562,10 @@ s32 act_dive_slide(struct MarioState *m) {
 
     play_mario_landing_sound_once(m, SOUND_ACTION_TERRAIN_BODY_HIT_GROUND);
 
+    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
+        return set_mario_action(m, ACT_GRIND, 0);
+    }
+
     //! If the dive slide ends on the same frame that we pick up on object,
     // mario will not be in the dive slide action for the call to
     // mario_check_object_grab, and so will end up in the regular picking action,
@@ -1774,6 +1789,11 @@ s32 common_landing_cancels(struct MarioState *m, struct LandingAction *landingAc
 }
 
 s32 act_jump_land(struct MarioState *m) {
+
+    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
+        return set_mario_action(m, ACT_GRIND, 0);
+    }
+
     if (common_landing_cancels(m, &sJumpLandAction, set_jumping_action)) {
         return TRUE;
     }
@@ -1831,6 +1851,10 @@ s32 act_hold_freefall_land(struct MarioState *m) {
 s32 act_long_jump_land(struct MarioState *m) {
     if (!(m->input & INPUT_Z_DOWN)) {
         m->input &= ~INPUT_A_PRESSED;
+    }
+
+    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
+        return set_mario_action(m, ACT_GRIND, 0);
     }
 
     if (common_landing_cancels(m, &sLongJumpLandAction, set_jumping_action)) {
@@ -1927,6 +1951,80 @@ s32 act_hold_quicksand_jump_land(struct MarioState *m) {
     return cancel;
 }
 
+s32 act_grind(struct MarioState *m) {
+
+    int grindSteps = 0;
+    for(grindSteps = 0; grindSteps < 4; grindSteps++) {
+
+    Vec3f startPos;
+    s16 startYaw = m->faceAngle[1];
+
+    if(m->input & INPUT_Z_DOWN) {
+        m->forwardVel = 11.25;
+    } else {
+        m->forwardVel = 8;
+    }
+    m->intendedMag *= 1.0f;
+
+    m->actionState = 0;
+    vec3f_copy(startPos, m->pos);
+    update_walking_speed(m);
+
+    // int angleOffset = m->floor->force - m->faceAngle[1];
+    // angleOffset = abs(angleOffset);
+    // if (angleOffset > 0x2000) {
+    //     m->faceAngle[1] = m->floor->force + 0x8000;
+    // } else {
+    //     m->faceAngle[1] = m->floor->force;
+    //}
+
+    if(m->floor->force - m->faceAngle[1] > 0x4000 || m->floor->force - m->faceAngle[1] > 0xFFFFC000) {
+        m->faceAngle[1] = m->floor->force + 0x8000;
+    } else {
+        m->faceAngle[1] = m->floor->force;
+    }
+    
+    m->intendedYaw = m->faceAngle;
+
+    switch (perform_ground_step(m)) {
+        case GROUND_STEP_LEFT_GROUND:
+            set_mario_action(m, ACT_FREEFALL, 0);
+            set_mario_animation(m, MARIO_ANIM_GENERAL_FALL);
+            break;
+
+        case GROUND_STEP_NONE:
+            func_802652F0(m);
+            if(m->input & INPUT_Z_DOWN) {
+                if(!(gGlobalTimer % 8) && grindSteps == 3) {
+                    m->particleFlags |= PARTICLE_1;
+                } 
+            }
+            m->particleFlags |= PARTICLE_DUST;
+            set_mario_animation(m, MARIO_ANIM_RIDING_SHELL);
+            break;
+
+        case GROUND_STEP_HIT_WALL:
+            func_802659E8(m, startPos);
+            m->actionTimer = 0;
+            break;
+    }
+
+    perform_ground_step(m);
+
+    if (m->action == ACT_FREEFALL) {
+        return FALSE;
+    }
+    }
+
+    if(gPlayer1Controller->buttonPressed & A_BUTTON) {
+        m->forwardVel = m->forwardVel * 6;
+        return set_mario_action(m, ACT_JUMP, 0);
+    }
+
+    return FALSE;
+
+}
+
 s32 check_common_moving_cancels(struct MarioState *m) {
     if (m->pos[1] < m->waterLevel - 100) {
         return set_water_plunge_action(m);
@@ -2000,6 +2098,7 @@ s32 mario_execute_moving_action(struct MarioState *m) {
         case ACT_QUICKSAND_JUMP_LAND:      cancel = act_quicksand_jump_land(m);      break;
         case ACT_HOLD_QUICKSAND_JUMP_LAND: cancel = act_hold_quicksand_jump_land(m); break;
         case ACT_LONG_JUMP_LAND:           cancel = act_long_jump_land(m);           break;
+        case ACT_GRIND:                    cancel = act_grind(m);                    break;
     }
     /* clang-format on */
 
