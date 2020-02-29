@@ -25,7 +25,7 @@ const GeoLayout sa_area_1_level[] = {
 		GEO_OPEN_NODE(),
 			GEO_CAMERA_FRUSTUM_WITH_FUNC(45.0000, 100, 30000, geo_camera_fov),
 			GEO_OPEN_NODE(),
-				GEO_CAMERA(1, 0, 0, 0, 0, -500, 0, geo_camera_main),
+				GEO_CAMERA(0xE, 0, 0, 0, 0, -500, 0, geo_camera_main),
 				GEO_OPEN_NODE(),
 					GEO_BRANCH(1, sa_area_1_root),
 					GEO_RENDER_OBJ(),
