@@ -1233,12 +1233,14 @@ s32 lvl_init_or_update(s16 initOrUpdate, UNUSED s32 unused) {
 
 s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
 
-s16 tempStarsStartup = save_file_get_total_star_count(gCurrSaveFileNum - 1, 0, 24);
+/*s16 tempStarsStartup = save_file_get_total_star_count(gCurrSaveFileNum - 1, 0, 24);
 if (tempStarsStartup == 0) {
     levelNum = 0x1E;
 } else {
     levelNum = 0x0C;
-}
+}*/
+
+levelNum = 0x10;
 
 #ifdef VERSION_EU
     s16 var = eu_get_language();
