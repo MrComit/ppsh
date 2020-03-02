@@ -15,8 +15,4 @@ extern const MacroObject sa_seg7_macro_objs[];
 // script
 extern const LevelScript level_sa_entry[];
 
-
-#include "levels/sa/header.inc.h"
-
-
 #endif
