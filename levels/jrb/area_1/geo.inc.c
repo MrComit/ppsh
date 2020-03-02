@@ -6,7 +6,6 @@ const GeoLayout jrb_area_1_root[] = {
 			GEO_ANIMATED_PART(1, 0, 0, 0, NULL),
 			GEO_OPEN_NODE(),
 				GEO_ANIMATED_PART(1, 0, 0, 0, jrb_visual_mesh),
-				GEO_ANIMATED_PART(1, 0, 0, 0, jrb_visual_001_mesh),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
