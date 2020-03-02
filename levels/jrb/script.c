@@ -173,7 +173,7 @@ const LevelScript level_jrb_entry[] = {
     #include "levels/jrb/script.inc.c"
 
 	FREE_LEVEL_POOL(),
-    MARIO_POS(0x01, 0, 1376, 1258, 1186),
+    MARIO_POS(0x01, 0, 0, 500, 0),
     CALL(/*arg*/ 0, /*func*/ lvl_init_or_update),
     CALL_LOOP(/*arg*/ 1, /*func*/ lvl_init_or_update),
     CLEAR_LEVEL(),
