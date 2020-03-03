@@ -1,4 +1,4 @@
-# Makefile to rebuild SM64 split image
+﻿# Makefile to rebuild SM64 split image
 
 ### Default target ###
 
@@ -12,7 +12,8 @@ default: all
 # Version of the game to build
 VERSION ?= us
 # Graphics microcode used
-GRUCODE ?= f3d_old
+#GRUCODE ?= f3d_old
+GRUCODE ?= f3dex2
 # If COMPARE is 1, check the output sha1sum when building 'all'
 COMPARE ?= 1
 # If NON_MATCHING is 1, define the NON_MATCHING and AVOID_UB macros when building (recommended)
@@ -148,7 +149,8 @@ MIPSISET := -mips2 -32
 ifeq ($(VERSION),eu)
   OPT_FLAGS := -O2
 else
-  OPT_FLAGS := -g
+#  OPT_FLAGS := -g
+  OPT_FLAGS := -O2
 endif
 
 # File dependencies and variables for specific files
