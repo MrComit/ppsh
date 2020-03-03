@@ -96,7 +96,8 @@
 #define CAM_ANGLE_LAKITU 2
 
 #define CAMERA_MODE_NONE              0x00
-#define CAMERA_MODE_RADIAL            0x01
+//#define CAMERA_MODE_RADIAL            0x01
+#define CAMERA_MODE_RADIAL            0x0E
 #define CAMERA_MODE_OUTWARD_RADIAL    0x02
 #define CAMERA_MODE_BEHIND_MARIO      0x03
 #define CAMERA_MODE_CLOSE             0x04 // Inside Castle / Big Boo's Haunt
@@ -107,7 +108,8 @@
 #define CAMERA_MODE_BOSS_FIGHT        0x0B
 #define CAMERA_MODE_PARALLEL_TRACKING 0x0C
 #define CAMERA_MODE_FIXED             0x0D
-#define CAMERA_MODE_8_DIRECTIONS      0x0E // AKA Parallel Camera, Bowser Courses & Rainbow Road
+//#define CAMERA_MODE_8_DIRECTIONS      0x0E // AKA Parallel Camera, Bowser Courses & Rainbow Road
+#define CAMERA_MODE_8_DIRECTIONS      0x01 // AKA Parallel Camera, Bowser Courses & Rainbow Road
 #define CAMERA_MODE_FREE_ROAM         0x10
 #define CAMERA_MODE_SPIRAL_STAIRS     0x11
 
