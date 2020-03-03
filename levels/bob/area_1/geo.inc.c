@@ -7,7 +7,7 @@ const GeoLayout bob_area_1_Level[] = {
 			GEO_OPEN_NODE(),
 				GEO_ANIMATED_PART(1, 0, -1834, 0, Sandfloor_mesh),
 				GEO_ANIMATED_PART(5, 0, -824, 0, Sandfloor_001_mesh),
-				GEO_ANIMATED_PART(1, -2119, -1834, -2247, Start_Island_mesh),
+				GEO_ANIMATED_PART(1, -5585, -1834, -2247, Start_Island_mesh),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
