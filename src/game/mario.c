@@ -1027,7 +1027,7 @@ s32 set_jump_from_landing(struct MarioState *m) {
         }
     }
 
-    if (mario_floor_is_steep(m)) {
+    if (mario_floor_is_steep(m) && m->floor->type !=SURFACE_NOT_SLIPPERY && m->floor->type !=SURFACE_DEFAULT) {
         set_steep_jump_action(m);
     } else {
         if ((m->doubleJumpTimer == 0) || (m->squishTimer != 0)) {
@@ -1086,7 +1086,7 @@ s32 set_jumping_action(struct MarioState *m, u32 action, u32 actionArg) {
         }
     }
 
-    if (mario_floor_is_steep(m)) {
+    if (mario_floor_is_steep(m) && m->floor->type !=SURFACE_NOT_SLIPPERY && m->floor->type !=SURFACE_DEFAULT) {
         set_steep_jump_action(m);
     } else {
         set_mario_action(m, action, actionArg);
