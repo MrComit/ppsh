@@ -2,10 +2,18 @@ extern const GeoLayout bob_area_1_Level[];
 extern const GeoLayout bob_area_1_level[];
 extern const Collision bob_area_1_Level_collision[];
 extern const MacroObject bob_area_1_Area_macro_objs[];
+extern const Gfx Bridge_mesh[];
+extern const Gfx Bridge_001_mesh[];
 extern const Gfx Circle_mesh[];
 extern const Gfx Circle_001_mesh[];
+extern const Gfx Circle_002_mesh[];
+extern const Gfx Circle_003_mesh[];
+extern const Gfx Circle_004_mesh[];
+extern const Gfx Cube_001_mesh[];
 extern const Gfx Sandfloor_mesh[];
 extern const Gfx Sandfloor_001_mesh[];
 extern const Gfx Start_Island_mesh[];
+extern const Gfx TREP_001_mesh[];
+extern const Gfx TREP_000_mesh[];
 extern const Gfx material_revert_render_settings[];
 
