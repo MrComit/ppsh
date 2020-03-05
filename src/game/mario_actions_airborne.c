@@ -817,6 +817,40 @@ s32 act_water_jump(struct MarioState *m) {
     return FALSE;
 }
 
+s32 act_dolphin_jump(struct MarioState *m) {
+//    if (m->forwardVel < 15.0f) {
+//        mario_set_forward_vel(m, 15.0f);
+//    }
+
+    //play_mario_sound(m, SOUND_ACTION_UNKNOWN432, 0);
+    //set_mario_animation(m, MARIO_ANIM_SINGLE_JUMP);
+
+    switch (perform_air_step(m, AIR_STEP_CHECK_LEDGE_GRAB)) {
+        case AIR_STEP_LANDED:
+            set_mario_action(m, ACT_JUMP_LAND, 0);
+            set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
+            break;
+
+        case AIR_STEP_HIT_WALL:
+            mario_set_forward_vel(m, 15.0f);
+            break;
+
+        case AIR_STEP_GRABBED_LEDGE:
+#ifndef VERSION_JP
+            set_mario_animation(m, MARIO_ANIM_IDLE_ON_LEDGE);
+#endif
+            set_mario_action(m, ACT_LEDGE_GRAB, 0);
+            set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
+            break;
+
+        case AIR_STEP_HIT_LAVA_WALL:
+            lava_boost_on_wall(m);
+            break;
+    }
+
+    return FALSE;
+}
+
 s32 act_hold_water_jump(struct MarioState *m) {
     if (m->marioObj->oInteractStatus & INT_STATUS_MARIO_DROP_OBJECT) {
         return drop_and_set_mario_action(m, ACT_FREEFALL, 0);
@@ -2028,6 +2062,8 @@ s32 mario_execute_airborne_action(struct MarioState *m) {
         case ACT_RIDING_HOOT:          cancel = act_riding_hoot(m);          break;
         case ACT_TOP_OF_POLE_JUMP:     cancel = act_top_of_pole_jump(m);     break;
         case ACT_VERTICAL_WIND:        cancel = act_vertical_wind(m);        break;
+        /* custom */
+        case ACT_DOLPHIN_JUMP:         cancel = act_dolphin_jump(m);       break;
     }
     /* clang-format on */
 

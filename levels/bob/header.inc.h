@@ -10,6 +10,8 @@ extern const Gfx Circle_002_mesh[];
 extern const Gfx Circle_003_mesh[];
 extern const Gfx Circle_004_mesh[];
 extern const Gfx Cube_001_mesh[];
+extern const Gfx Plane_000_mesh[];
+extern const Gfx Plane_001_mesh[];
 extern const Gfx Sandfloor_mesh[];
 extern const Gfx Sandfloor_001_mesh[];
 extern const Gfx Start_Island_mesh[];
