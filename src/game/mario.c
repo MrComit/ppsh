@@ -1177,19 +1177,20 @@ s32 transition_submerged_to_walking(struct MarioState *m) {
  * non-submerged action. This also applies the water surface camera preset.
  */
 s32 set_water_plunge_action(struct MarioState *m) {
-    m->forwardVel = m->forwardVel / 4.0f;
-    m->vel[1] = m->vel[1] / 2.0f;
+    if (m->prevAction != ACT_DOLPHIN_JUMP) {
+        m->forwardVel = m->forwardVel / 4.0f;
+        m->vel[1] = m->vel[1] / 2.0f;
 
-    m->pos[1] = m->waterLevel - 100;
+        m->pos[1] = m->waterLevel - 100;
 
-    m->faceAngle[2] = 0;
+        m->faceAngle[2] = 0;
 
-    vec3s_set(m->angleVel, 0, 0, 0);
+        vec3s_set(m->angleVel, 0, 0, 0);
 
-    if ((m->action & ACT_FLAG_DIVING) == 0) {
-        m->faceAngle[0] = 0;
+        if ((m->action & ACT_FLAG_DIVING) == 0) {
+            m->faceAngle[0] = 0;
+        }
     }
-
     if (m->area->camera->mode != CAMERA_MODE_WATER_SURFACE) {
         set_camera_mode(m->area->camera, CAMERA_MODE_WATER_SURFACE, 1);
     }
@@ -1433,9 +1434,9 @@ void set_submerged_cam_preset_and_spawn_bubbles(struct MarioState *m) {
                 set_camera_mode(m->area->camera, CAMERA_MODE_CLOSE, 1);
             }
         } else {
-            if ((heightBelowWater > 800.0f) && (camPreset != CAMERA_MODE_BEHIND_MARIO)) {
-                set_camera_mode(m->area->camera, CAMERA_MODE_BEHIND_MARIO, 1);
-            }
+            //if ((heightBelowWater > 800.0f) && (camPreset != CAMERA_MODE_BEHIND_MARIO)) {
+            //    set_camera_mode(m->area->camera, CAMERA_MODE_BEHIND_MARIO, 1);
+            //}
 
             if ((heightBelowWater < 400.0f) && (camPreset != CAMERA_MODE_WATER_SURFACE)) {
                 set_camera_mode(m->area->camera, CAMERA_MODE_WATER_SURFACE, 1);
@@ -1470,11 +1471,11 @@ void update_mario_health(struct MarioState *m) {
                     // When Mario is near the water surface, recover health (unless in snow),
                     // when in snow terrains lose 3 health.
                     // If using the debug level select, do not lose any HP to water.
-                    if ((m->pos[1] >= (m->waterLevel - 140)) && !terrainIsSnow) {
+                    /*if ((m->pos[1] >= (m->waterLevel - 140)) && !terrainIsSnow) {
                         m->health += 0x1A;
                     } else if (gDebugLevelSelect == 0) {
                         m->health -= (terrainIsSnow ? 3 : 1);
-                    }
+                    }*/
                 }
             }
         }

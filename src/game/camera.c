@@ -1918,13 +1918,16 @@ s32 mode_behind_mario(struct Camera *c) {
     c->pos[2] = newPos[2];
 
     // Keep the camera above the water surface if swimming
-    if (c->mode == CAMERA_MODE_WATER_SURFACE) {
+    /*if (c->mode == CAMERA_MODE_WATER_SURFACE) {
         floorHeight = find_floor(c->pos[0], c->pos[1], c->pos[2], &floor);
         newPos[1] = marioState->waterLevel + 120;
-        if (newPos[1] < (floorHeight += 120.f)) {
-            newPos[1] = floorHeight;
+//        if (newPos[1] < (floorHeight += 120.f)) {
+//            newPos[1] = floorHeight;
+//        }
+        if (marioState->pos[1] + 240.0f < marioState->waterLevel) {
+            newPos[1] = marioState->pos[1];
         }
-    }
+    }*/
     approach_camera_height(c, newPos[1], 50.f);
     waterHeight = find_water_level(c->pos[0], c->pos[2]) + 100.f;
     if (c->pos[1] <= waterHeight) {
@@ -2027,7 +2030,7 @@ s16 update_slide_camera(struct Camera *c) {
 }
 
 void mode_behind_mario_camera(struct Camera *c) {
-    c->nextYaw = mode_behind_mario(c);
+        c->nextYaw = mode_behind_mario(c);
 }
 
 s32 nop_update_water_camera(UNUSED struct Camera *c, UNUSED Vec3f focus, UNUSED Vec3f pos) {
@@ -3108,7 +3111,9 @@ void update_camera(struct Camera *c) {
                     break;
 
                 case CAMERA_MODE_WATER_SURFACE:
-                    mode_water_surface_camera(c);
+                    //mode_water_surface_camera(c);
+                    c->mode = CAMERA_MODE_8_DIRECTIONS;
+                    mode_8_directions_camera(c);
                     break;
 
                 case CAMERA_MODE_INSIDE_CANNON:
@@ -5604,10 +5609,9 @@ void set_fixed_cam_axis_sa_lobby(UNUSED s16 preset) {
  *      or if the camera is in mario mode and mario is not swimming or in water with the metal cap
  */
 void check_blocking_area_processing(const u8 *mode) {
-    if (sMarioCamState->action & ACT_FLAG_METAL_WATER ||
-                        *mode == CAMERA_MODE_BEHIND_MARIO || *mode == CAMERA_MODE_WATER_SURFACE) {
-        sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
-    }
+//    if (sMarioCamState->action & ACT_FLAG_METAL_WATER || *mode == CAMERA_MODE_BEHIND_MARIO || *mode == CAMERA_MODE_WATER_SURFACE) {
+//        sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
+//    }
 
     if (gCurrLevelNum == LEVEL_DDD || gCurrLevelNum == LEVEL_WDW || gCurrLevelNum == LEVEL_COTMC) {
         sStatusFlags &= ~CAM_FLAG_BLOCK_AREA_PROCESSING;
