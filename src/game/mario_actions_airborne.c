@@ -827,6 +827,7 @@ s32 act_dolphin_jump(struct MarioState *m) {
 
     switch (perform_air_step(m, AIR_STEP_CHECK_LEDGE_GRAB)) {
         case AIR_STEP_LANDED:
+            m->forwardVel = 0.0f;
             set_mario_action(m, ACT_JUMP_LAND, 0);
             set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
             break;
@@ -848,6 +849,8 @@ s32 act_dolphin_jump(struct MarioState *m) {
             break;
     }
 
+    m->faceAngle[0] = -atan2s(m->vel[1], m->forwardVel / 2) + 0x4000;
+    vec3s_set(m->marioObj->header.gfx.angle, -m->faceAngle[0], m->faceAngle[1], m->faceAngle[2]);
     return FALSE;
 }
 
