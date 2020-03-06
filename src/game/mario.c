@@ -1190,6 +1190,8 @@ s32 set_water_plunge_action(struct MarioState *m) {
         if ((m->action & ACT_FLAG_DIVING) == 0) {
             m->faceAngle[0] = 0;
         }
+    } else {
+        //spawn_object(m->marioObj, MODEL_WATER_SPLASH, bhvWaterSplash);
     }
     if (m->area->camera->mode != CAMERA_MODE_WATER_SURFACE) {
         set_camera_mode(m->area->camera, CAMERA_MODE_WATER_SURFACE, 1);
@@ -1429,11 +1431,11 @@ void set_submerged_cam_preset_and_spawn_bubbles(struct MarioState *m) {
         heightBelowWater = (f32)(m->waterLevel - 80) - m->pos[1];
         camPreset = m->area->camera->mode;
 
-        if ((m->action & ACT_FLAG_METAL_WATER)) {
-            if (camPreset != CAMERA_MODE_CLOSE) {
-                set_camera_mode(m->area->camera, CAMERA_MODE_CLOSE, 1);
-            }
-        } else {
+        //if ((m->action & ACT_FLAG_METAL_WATER)) {
+            //if (camPreset != CAMERA_MODE_CLOSE) {
+                //set_camera_mode(m->area->camera, CAMERA_MODE_CLOSE, 1);
+            //}
+        //} else {
             //if ((heightBelowWater > 800.0f) && (camPreset != CAMERA_MODE_BEHIND_MARIO)) {
             //    set_camera_mode(m->area->camera, CAMERA_MODE_BEHIND_MARIO, 1);
             //}
@@ -1447,7 +1449,7 @@ void set_submerged_cam_preset_and_spawn_bubbles(struct MarioState *m) {
                     m->particleFlags |= PARTICLE_5;
                 }
             }
-        }
+        //}
     }
 }
 
