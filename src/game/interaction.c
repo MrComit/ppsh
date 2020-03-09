@@ -732,7 +732,7 @@ u32 interact_water_ring(struct MarioState *m, UNUSED u32 interactType, struct Ob
 u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     u32 starIndex;
     u32 starGrabAction = ACT_STAR_DANCE_EXIT;
-    u32 noExit = (o->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
+    u32 noExit = 1;
     u32 grandStar = (o->oInteractionSubtype & INT_SUBTYPE_GRAND_STAR) != 0;
 
     if (m->health >= 0x100) {
@@ -768,7 +768,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         m->interactObj = o;
         m->usedObj = o;
 
-        starIndex = (o->oBehParams >> 24) & 0x1F;
+        starIndex = (o->oBehParams >> 24) & 0xFF;
         save_file_collect_star_or_key(m->numCoins, starIndex);
 
         m->numStars =
@@ -1567,8 +1567,8 @@ u32 func_8024FC94(struct MarioState *m, u32 arg) {
         return TRUE;
     }
 
-    if (m->action == ACT_WALKING) {
-        if (arg) {
+    if (m->action == ACT_WALKING || m->action == ACT_METAL_WATER_WALKING) {
+        /*if (arg) {
             return TRUE;
         }
 
@@ -1576,7 +1576,8 @@ u32 func_8024FC94(struct MarioState *m, u32 arg) {
 
         if (val6 == 0x0080 || val6 == 0x007F || val6 == 0x006C) {
             return TRUE;
-        }
+        }*/
+        return TRUE;
     }
 
     return FALSE;

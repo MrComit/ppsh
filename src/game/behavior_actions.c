@@ -284,3 +284,6 @@ void func_802B2328(s32 n, s32 a1, s32 a2, s32 r) {
 #include "behaviors/wind_particle.inc.c"
 #include "behaviors/snowman_wind.inc.c"
 #include "behaviors/walking_penguin.inc.c"
+
+/* custom */
+#include "behaviors/koopa_npc.inc.c"

@@ -343,9 +343,16 @@ void save_file_reload(void) {
 void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
     s32 fileIndex = gCurrSaveFileNum - 1;
     s32 courseIndex = gCurrCourseNum - 1;
-
-    s32 starFlag = 1 << starIndex;
+    s32 CourseId = 0;
+    s32 starFlag;
     UNUSED s32 flags = save_file_get_flags();
+
+    while (starIndex >= 8) {
+        starIndex -= 8;
+        CourseId++;
+    }
+
+    starFlag = 1 << starIndex;
 
     gLastCompletedCourseNum = courseIndex + 1;
     gLastCompletedStarNum = starIndex + 1;
@@ -386,8 +393,8 @@ void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
             break;
 
         default:
-            if (!(save_file_get_star_flags(fileIndex, courseIndex) & starFlag)) {
-                save_file_set_star_flags(fileIndex, courseIndex, starFlag);
+            if (!(save_file_get_star_flags(fileIndex, CourseId) & starFlag)) {
+                save_file_set_star_flags(fileIndex, CourseId, starFlag);
             }
             break;
     }
@@ -475,9 +482,9 @@ u32 save_file_get_star_flags(s32 fileIndex, s32 courseIndex) {
     u32 starFlags;
 
     if (courseIndex == -1) {
-        starFlags = (gSaveBuffer.files[fileIndex][0].flags >> 24) & 0x7F;
+        starFlags = (gSaveBuffer.files[fileIndex][0].flags >> 24) /*& 0x7F*/;
     } else {
-        starFlags = gSaveBuffer.files[fileIndex][0].courseStars[courseIndex] & 0x7F;
+        starFlags = gSaveBuffer.files[fileIndex][0].courseStars[courseIndex] /*& 0x7F*/;
     }
 
     return starFlags;

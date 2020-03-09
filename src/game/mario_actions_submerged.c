@@ -107,7 +107,6 @@ static u32 perform_water_full_step(struct MarioState *m, Vec3f nextPos) {
         if (ceilHeight - floorHeight < 160.0f) {
             return WATER_STEP_CANCELLED;
         }
-
         vec3f_set(m->pos, nextPos[0], floorHeight, nextPos[2]);
         m->floor = floor;
         m->floorHeight = floorHeight;
@@ -164,6 +163,7 @@ static void apply_water_current(struct MarioState *m, Vec3f step) {
 }
 
 static u32 perform_water_step(struct MarioState *m) {
+    s32 i;
     UNUSED u32 unused;
     u32 stepResult;
     Vec3f nextPos;
@@ -176,17 +176,18 @@ static u32 perform_water_step(struct MarioState *m) {
         apply_water_current(m, step);
     }
 
-    nextPos[0] = m->pos[0] + step[0];
-    nextPos[1] = m->pos[1] + step[1];
-    nextPos[2] = m->pos[2] + step[2];
+    for (i = 0; i < 4; i++) {
+        nextPos[0] = m->pos[0] + (step[0] / 4.0f);
+        nextPos[1] = m->pos[1] + (step[1] / 4.0f);
+        nextPos[2] = m->pos[2] + (step[2] / 4.0f);
 
-    if (nextPos[1] > m->waterLevel - 80) {
-        nextPos[1] = m->waterLevel - 80;
-        m->vel[1] = 0.0f;
+        if (nextPos[1] > m->waterLevel - 80) {
+            nextPos[1] = m->waterLevel - 80;
+            m->vel[1] = 0.0f;
+        }
+
+        stepResult = perform_water_full_step(m, nextPos);
     }
-
-    stepResult = perform_water_full_step(m, nextPos);
-
     vec3f_copy(marioObj->header.gfx.pos, m->pos);
     vec3s_set(marioObj->header.gfx.angle, -m->faceAngle[0], m->faceAngle[1], m->faceAngle[2]);
 
@@ -315,7 +316,7 @@ static void update_swimming_yaw(struct MarioState *m) {
 static void update_swimming_pitch(struct MarioState *m) {
     s16 targetPitch;
     s16 pitchVel;
-    if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK) {
+    if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
         targetPitch = -(s16)(504.0f * m->controller->stickY);
     } else {
         targetPitch = -(s16)(252.0f * m->controller->stickY);
@@ -329,7 +330,7 @@ static void update_swimming_pitch(struct MarioState *m) {
 
     if (m->action == ACT_FLUTTER_KICK) {
         pitchVel *= 3.5f;
-    } else if (m->action == ACT_DASH_ATTACK) {
+    } else if (m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
         pitchVel *= 2;
     }
 
@@ -343,11 +344,11 @@ static void update_swimming_pitch(struct MarioState *m) {
         }
     }
 
-    if (m->faceAngle[0] > 0x4000 && (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK)) {
+    if (m->faceAngle[0] > 0x4000 && (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END)) {
         m->faceAngle[0] = 0x4000;
     }
 
-        if (m->faceAngle[0] < -0x4000 && (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK)) {
+        if (m->faceAngle[0] < -0x4000 && (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END)) {
         m->faceAngle[0] = -0x4000;
     }
 
@@ -678,6 +679,10 @@ static s32 act_flutter_kick(struct MarioState *m) {
 
     if (m->pos[1] > m->waterLevel - 100.0f && m->faceAngle[0] > 0x800 && (m->faceAngle[0] > 0x1800 || m->forwardVel > 40.0f)) {
         m->pos[1] = m->waterLevel - 50.0f;
+        if (m->faceAngle[0] < -0x3000) {
+            m->faceAngle[0] = -0x3000;
+            m->forwardVel += 10.0f;
+        }
         m->vel[1] = m->forwardVel * sins(m->faceAngle[0]);
         return set_mario_action(m, ACT_DOLPHIN_JUMP, 0);
     }
@@ -1607,6 +1612,10 @@ static s32 act_dash_attack(struct MarioState *m) {
 
     if (m->pos[1] > m->waterLevel - 100.0f && m->faceAngle[0] > 0x800 && (m->faceAngle[0] > 0x1800 || m->forwardVel > 40.0f)) {
         m->pos[1] = m->waterLevel - 50.0f;
+        if (m->faceAngle[0] < -0x3000) {
+            m->faceAngle[0] = -0x3000;
+            m->forwardVel += 10.0f;
+        }
         m->vel[1] = m->forwardVel * sins(m->faceAngle[0]);
         return set_mario_action(m, ACT_DOLPHIN_JUMP, 0);
     }
@@ -1633,6 +1642,16 @@ static s32 act_dash_attack_end(struct MarioState *m){
 
     if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
+    }
+
+    if (m->pos[1] > m->waterLevel - 100.0f && m->faceAngle[0] > 0x800 && (m->faceAngle[0] > 0x1800 || m->forwardVel > 40.0f)) {
+        m->pos[1] = m->waterLevel - 50.0f;
+        if (m->faceAngle[0] < -0x3000) {
+            m->faceAngle[0] = -0x3000;
+            m->forwardVel += 10.0f;
+        }
+        m->vel[1] = m->forwardVel * sins(m->faceAngle[0]);
+        return set_mario_action(m, ACT_DOLPHIN_JUMP, 0);
     }
 
     func_802713A8(m);
