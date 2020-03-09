@@ -548,6 +548,9 @@ void BehDustSmokeLoop(void);
 void BehYoshiLoop(void);
 void bhvLllVolcanoFallingTrap_loop(void);
 
+/* custom */
+void bhv_koopa_npc_loop(void);
+
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 
 // Bowser

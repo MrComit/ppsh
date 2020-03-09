@@ -210,14 +210,14 @@ void handle_power_meter_actions(s16 numHealthWedges) {
     sPowerMeterStoredHealth = numHealthWedges;
 
     // If mario is swimming, keep showing power meter
-    if (gPlayerCameraState->action & ACT_FLAG_SWIMMING) {
-        if (sPowerMeterHUD.animation == POWER_METER_HIDDEN
-            || sPowerMeterHUD.animation == POWER_METER_EMPHASIZED) {
-            sPowerMeterHUD.animation = POWER_METER_DEEMPHASIZING;
-            sPowerMeterHUD.y = 166;
-        }
-        sPowerMeterVisibleTimer = 0;
-    }
+//    if (gPlayerCameraState->action & ACT_FLAG_SWIMMING) {
+//        if (sPowerMeterHUD.animation == POWER_METER_HIDDEN
+//            || sPowerMeterHUD.animation == POWER_METER_EMPHASIZED) {
+//            sPowerMeterHUD.animation = POWER_METER_DEEMPHASIZING;
+//            sPowerMeterHUD.y = 166;
+//        }
+//        sPowerMeterVisibleTimer = 0;
+//    }
 }
 
 /**

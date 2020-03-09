@@ -412,6 +412,8 @@ s32 act_reading_npc_dialog(struct MarioState *m) {
     } else if (m->actionState == 23) {
         if (m->flags & MARIO_CAP_IN_HAND) {
             set_mario_action(m, ACT_PUTTING_ON_CAP, 0);
+        } else if (m->pos[1] < m->waterLevel - 80.0f) {
+            set_mario_action(m, m->heldObj == NULL ? ACT_METAL_WATER_STANDING : ACT_HOLD_METAL_WATER_STANDING, 0);
         } else {
             set_mario_action(m, m->heldObj == NULL ? ACT_IDLE : ACT_HOLD_IDLE, 0);
         }
@@ -533,7 +535,11 @@ s32 act_reading_sign(struct MarioState *m) {
             // dialog finished
             if (gCamera->cutscene == 0) {
                 disable_time_stop();
-                set_mario_action(m, ACT_IDLE, 0);
+                if (m->prevAction == ACT_METAL_WATER_STANDING || m->prevAction == ACT_METAL_WATER_WALKING) {
+                    set_mario_action(m, ACT_METAL_WATER_STANDING, 0);
+                } else {
+                    set_mario_action(m, ACT_IDLE, 0);
+                }
             }
             break;
     }
