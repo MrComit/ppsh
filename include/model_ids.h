@@ -585,4 +585,22 @@
 #define MODEL_VCUTM_WARP_PIPE                     MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 #define MODEL_CASTLE_GROUNDS_WARP_PIPE            MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 
+
+// custom global
+
+#define MODEL_STAR_PIECE 0x30
+#define MODEL_STAR_PIECE_SWITCH 0x31
+
+
+// custom incel islands
+
+
+// custom cuck canyon
+
+
+
+// custom simp city
+
+
+
 #endif

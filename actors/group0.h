@@ -342,4 +342,12 @@ extern const Gfx white_particle_small_dl_end[];
 extern const Gfx white_particle_small_dl[];
 extern const Gfx white_particle_small_unused_dl[];
 
+
+#include "star_piece/geo_declarations.h"
+
+#include "star_piece_switch/geo_declarations.h"
+#include "star_piece_switch/collision_declarations.h"
+
+
+
 #endif

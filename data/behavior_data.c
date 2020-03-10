@@ -16,6 +16,7 @@
 
 #include "actors/common0.h"
 #include "actors/common1.h"
+#include "actors/group0.h"
 #include "actors/group1.h"
 #include "actors/group2.h"
 #include "actors/group3.h"
@@ -6070,5 +6071,36 @@ const BehaviorScript bhvKoopaNpc[] = {
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
         CALL_NATIVE(bhv_koopa_npc_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvStarPiece[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HITBOX(120, 120),
+    SET_INT(oIntangibleTimer, 0),
+    SCALE(80),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_piece_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvStarPieceSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(star_piece_switch_star_piece_switch_collision),
+    SET_HOME(),
+    //SCALE(70),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_piece_switch_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvStarPieceStar[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_piece_star_loop),
     END_LOOP(),
 };

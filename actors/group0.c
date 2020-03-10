@@ -25,3 +25,6 @@
 #include "white_particle_small/model.inc.c"
 
 #include "sparkle_animation/model.inc.c"
+#include "star_piece/model.inc.c"
+#include "star_piece_switch/model.inc.c"
+#include "star_piece_switch/collision.inc.c"

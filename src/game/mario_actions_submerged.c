@@ -677,7 +677,7 @@ static s32 act_flutter_kick(struct MarioState *m) {
         return set_mario_action(m, ACT_SWIMMING_END, 0);
     }
 
-    if (m->pos[1] > m->waterLevel - 100.0f && m->faceAngle[0] > 0x800 && (m->faceAngle[0] > 0x1800 || m->forwardVel > 40.0f)) {
+    if (m->forwardVel > 15.0f && m->pos[1] > m->waterLevel - 100.0f && m->faceAngle[0] > 0x800 && (m->faceAngle[0] > 0x1800 || m->forwardVel > 40.0f)) {
         m->pos[1] = m->waterLevel - 50.0f;
         if (m->faceAngle[0] < -0x3000) {
             m->faceAngle[0] = -0x3000;
@@ -1022,7 +1022,7 @@ static s32 act_water_plunge(struct MarioState *m) {
 
     f32 endVSpeed;
 
-    if (m->prevAction == ACT_DOLPHIN_JUMP) {
+    if (m->prevAction == ACT_DOLPHIN_JUMP || m->input & INPUT_A_PRESSED != 0) {
         if (m->actionState == 0) {
             play_sound(SOUND_ACTION_UNKNOWN430, m->marioObj->header.gfx.cameraToObject);
             if (m->peakHeight - m->pos[1] > 1150.0f) {
@@ -1610,7 +1610,7 @@ static s32 act_dash_attack(struct MarioState *m) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
-    if (m->pos[1] > m->waterLevel - 100.0f && m->faceAngle[0] > 0x800 && (m->faceAngle[0] > 0x1800 || m->forwardVel > 40.0f)) {
+    if (m->forwardVel > 15.0f && m->pos[1] > m->waterLevel - 100.0f && m->faceAngle[0] > 0x800 && (m->faceAngle[0] > 0x1800 || m->forwardVel > 40.0f)) {
         m->pos[1] = m->waterLevel - 50.0f;
         if (m->faceAngle[0] < -0x3000) {
             m->faceAngle[0] = -0x3000;
