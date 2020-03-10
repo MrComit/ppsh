@@ -16,3 +16,5 @@
 #include "water_splash/geo.inc.c"
 #include "sparkle_animation/geo.inc.c"
 #include "mario/geo.inc.c"
+#include "star_piece/geo.inc.c"
+#include "star_piece_switch/geo.inc.c"
