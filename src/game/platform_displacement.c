@@ -176,6 +176,9 @@ void apply_mario_platform_displacement(void) {
     platform = gMarioPlatform;
     if (!(gTimeStopState & TIME_STOP_ACTIVE) && gMarioObject != NULL && platform != NULL) {
         apply_platform_displacement(1, platform);
+    } else if (!(gTimeStopState & TIME_STOP_ACTIVE) && gMarioState->ceil != NULL && gMarioState->ceil->object != NULL && gMarioState->action & ACT_FLAG_HANGING) {
+        platform = gMarioState->ceil->object;
+        apply_platform_displacement(1, platform);      
     }
 }
 

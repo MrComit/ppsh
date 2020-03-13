@@ -594,6 +594,9 @@
 
 // custom incel islands
 
+#define MODEL_SAND_MOUND 0xFF
+#define MODEL_CONSTRUCTION 0xFE
+
 
 // custom cuck canyon
 

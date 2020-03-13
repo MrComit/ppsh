@@ -73,6 +73,9 @@ const LevelScript level_bob_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BOB_CHAIN_CHOMP_GATE, bob_geo_000440),
     LOAD_MODEL_FROM_GEO(MODEL_BOB_SEESAW_PLATFORM,  bob_geo_000458),
     LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS,      bob_geo_000470),
+    LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_WARP_PIPE,    warp_pipe_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_SAND_MOUND, sand_mound_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_CONSTRUCTION, construction_geo),
 
     //AREA(/*index*/ 1, bob_geo_000488),
 //        JUMP_LINK(script_func_local_1),

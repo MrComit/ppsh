@@ -555,6 +555,10 @@ void bhv_star_piece_loop(void);
 void bhv_star_piece_switch_loop(void);
 void bhv_star_piece_star_loop(void);
 
+void bhv_sand_mound_loop(void);
+void bhv_star_by_switch_loop(void);
+void bhv_construction_loop(void);
+
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 
 // Bowser

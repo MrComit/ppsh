@@ -1,7 +1,7 @@
 
 static void fire_spitter_act_idle(void) {
     approach_f32_ptr(&o->header.gfx.scale[0], 0.2f, 0.002f);
-    if (o->oTimer > 150 && o->oDistanceToMario < 800.0f && !(o->oMoveFlags & 0x00000078)) {
+    if (o->oTimer > 150 && o->oDistanceToMario < 1500.0f && !(o->oMoveFlags & 0x00000078)) {
         o->oAction = FIRE_SPITTER_ACT_SPIT_FIRE;
         o->oFireSpitterScaleVel = 0.05f;
     }
@@ -21,7 +21,7 @@ static void fire_spitter_act_spit_fire(void) {
             o->oAction = FIRE_SPITTER_ACT_IDLE;
         } else {
             PlaySound2(SOUND_OBJ_FLAME_BLOWN);
-            obj_spit_fire(0, 0, 0, 5.0f, MODEL_RED_FLAME_SHADOW, 20.0f, 15.0f, 0x1000);
+            obj_spit_fire(0, 0, 0, 5.0f, MODEL_RED_FLAME_SHADOW, 25.0f, 20.0f, 0x100);
         }
     }
 }

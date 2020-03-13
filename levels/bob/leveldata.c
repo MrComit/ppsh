@@ -26,3 +26,11 @@
 #include "levels/bob/grate_door/collision.inc.c"
 #include "levels/bob/areas/1/trajectory.inc.c"
 #include "levels/bob/leveldata.inc.c"
+
+#include "levels/bob/sand_mound/model.inc.c"
+#include "levels/bob/sand_mound/collision_declarations.h"
+#include "levels/bob/sand_mound/collision.inc.c"
+
+#include "levels/bob/construction/model.inc.c"
+#include "levels/bob/construction/collision_declarations.h"
+#include "levels/bob/construction/collision.inc.c"

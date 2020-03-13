@@ -1,4 +1,4 @@
-// Parameters: dialog enum ID, (unused), lines per box, left offset, width
+﻿// Parameters: dialog enum ID, (unused), lines per box, left offset, width
 
 #ifdef VERSION_EU
 #define COMRADES "friends"
@@ -36,71 +36,36 @@ can talk to some other\n\
 characters by facing them\n\
 and pressing [B]."))
 
-DEFINE_DIALOG(DIALOG_001, 1, 4, 95, 200, _("\
-Watch out! If you wander\n\
-around here, you're liable\n\
-to be " PLASTERED " by a\n\
-water bomb!\n\
-Those enemy Bob-ombs love\n\
-to fight, and they're\n\
-always finding ways to\n\
-attack.\n\
-This meadow has become\n\
-a battlefield ever since\n\
-the Big Bob-omb got his\n\
-paws on the Power Star.\n\
-Can you recover the Star\n\
-for us? Cross the bridge\n\
-and go left up the path\n\
-to find the Big Bob-omb.\n\
-Please come back to see\n\
-me after you've retrieved\n\
-the Power Star!"))
+DEFINE_DIALOG(DIALOG_001, 1, 3, 95, 200, _("\
+Hey Mario! You still know\n\
+how to walk underwater\n\
+right?\n\
+Just press [Z] and [B] at\n\
+the same time, and you'll\n\
+sink to the bottom!\n\
+You might even be able\n\
+to activate underwater\n\
+switches by doing this!"))
 
-DEFINE_DIALOG(DIALOG_002, 1, 4, 95, 200, _("\
-Hey, you! It's dangerous\n\
-ahead, so listen up! Take\n\
-my advice.\n\
+DEFINE_DIALOG(DIALOG_002, 1, 3, 95, 200, _("\
+Wow that was crazy!\n\
+There was a switch under\n\
+the water just like I said!"))
+
+DEFINE_DIALOG(DIALOG_003, 1, 4, 95, 200, _("\
+There's too much noise in\n\
+this town!\n\
 \n\
-Cross the two\n\
-bridges ahead, then\n\
-watch for falling\n\
-water bombs.\n\
-The Big Bob-omb at the\n\
-top of the mountain is\n\
-very powerful--don't let\n\
-him grab you!\n\
-We're Bob-omb Buddies,\n\
-and we're on your side.\n\
-You can talk to us\n\
-whenever you'd like to!"))
-
-DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
-Thank you, Mario! The Big\n\
-Bob-omb is nothing but a\n\
-big dud now! But the\n\
-battle for the castle has\n\
-just begun.\n\
-Other enemies are holding\n\
-the other Power Stars. If\n\
-you recover more Stars,\n\
-you can open new doors\n\
-that lead to new worlds!\n\
-My Bob-omb Buddies are\n\
-waiting for you. Be sure\n\
-to talk to them--they'll\n\
-set up cannons for you."))
+\n\
+Ever since they started\n\
+building that sex doll\n\
+factory, I haven't been\n\
+able to hear myself think!"))
 
 DEFINE_DIALOG(DIALOG_004, 1, 3, 95, 200, _("\
-We're peace-loving\n\
-Bob-ombs, so we don't use\n\
-cannons.\n\
-But if you'd like\n\
-to blast off, we don't\n\
-mind. Help yourself.\n\
-We'll prepare all of the\n\
-cannons in this course for\n\
-you to use. Bon Voyage!"))
+I just don't understand\n\
+why no females want to\n\
+come to our village!"))
 
 DEFINE_DIALOG(DIALOG_005, 1, 3, 30, 200, _("\
 Hey, Mario! Is it true\n\
@@ -138,18 +103,14 @@ Here you go--you've won\n\
 it, fair and square!"))
 
 DEFINE_DIALOG(DIALOG_008, 1, 4, 30, 200, _("\
-BEWARE OF CHAIN CHOMP\n\
-Extreme Danger!\n\
-Get close and press [C]^\n\
-for a better look.\n\
-Scary, huh?\n\
-See the Red Coin on top\n\
-of the stake?\n\
+Hey! What do you think\n\
+you're doing here???\n\
 \n\
-When you collect eight of\n\
-them, a Power Star will\n\
-appear in the meadow\n\
-across the bridge."))
+\n\
+This is MY house!\n\
+And no one enters \n\
+Koopa the Dick's house\n\
+without permission!"))
 
 DEFINE_DIALOG(DIALOG_009, 1, 5, 30, 200, _("\
 Long time, no see! Wow,\n\

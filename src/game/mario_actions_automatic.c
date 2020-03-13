@@ -341,9 +341,11 @@ s32 perform_hanging_step(struct MarioState *m, Vec3f nextPos) {
 s32 update_hang_moving(struct MarioState *m) {
     s32 stepResult;
     Vec3f nextPos;
-    f32 maxSpeed = 4.0f;
+    //f32 maxSpeed = 4.0f;
+    f32 maxSpeed = 20.0f;
 
-    m->forwardVel += 1.0f;
+//    m->forwardVel += 1.0f;
+    m->forwardVel += 3.0f;
     if (m->forwardVel > maxSpeed) {
         m->forwardVel = maxSpeed;
     }
@@ -383,7 +385,7 @@ void update_hang_stationary(struct MarioState *m) {
 s32 act_start_hanging(struct MarioState *m) {
     m->actionTimer++;
 
-    if ((m->input & INPUT_NONZERO_ANALOG) && m->actionTimer >= 31) {
+    if ((m->input & INPUT_NONZERO_ANALOG) && m->actionTimer >= 10) {
         return set_mario_action(m, ACT_HANGING, 0);
     }
 
@@ -396,7 +398,7 @@ s32 act_start_hanging(struct MarioState *m) {
     }
 
     //! Crash if mario's referenced ceiling is NULL (same for other hanging actions)
-    if (m->ceil->type != SURFACE_HANGABLE) {
+    if (m->ceil == NULL || m->ceil->type != SURFACE_HANGABLE) {
         return set_mario_action(m, ACT_FREEFALL, 0);
     }
 
@@ -424,7 +426,7 @@ s32 act_hanging(struct MarioState *m) {
         return set_mario_action(m, ACT_GROUND_POUND, 0);
     }
 
-    if (m->ceil->type != SURFACE_HANGABLE) {
+    if (m->ceil == NULL || m->ceil->type != SURFACE_HANGABLE) {
         return set_mario_action(m, ACT_FREEFALL, 0);
     }
 
@@ -448,7 +450,7 @@ s32 act_hang_moving(struct MarioState *m) {
         return set_mario_action(m, ACT_GROUND_POUND, 0);
     }
 
-    if (m->ceil->type != SURFACE_HANGABLE) {
+    if (m->ceil == NULL || m->ceil->type != SURFACE_HANGABLE) {
         return set_mario_action(m, ACT_FREEFALL, 0);
     }
 
