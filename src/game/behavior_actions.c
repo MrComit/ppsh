@@ -288,3 +288,7 @@ void func_802B2328(s32 n, s32 a1, s32 a2, s32 r) {
 /* custom */
 #include "behaviors/koopa_npc.inc.c"
 #include "behaviors/star_pieces.inc.c"
+
+#include "behaviors/sand_mound.inc.c"
+#include "behaviors/star_spawning.inc.c"
+#include "behaviors/construction.inc.c"

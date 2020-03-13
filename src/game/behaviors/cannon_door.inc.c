@@ -1,9 +1,9 @@
 // cannon.c.inc
 
 void bhv_cannon_closed_init(void) {
-    struct Object *cannon;
+    //struct Object *cannon;
 
-    if (save_file_is_cannon_unlocked() == 1) {
+    /*if (save_file_is_cannon_unlocked() == 1) {
         // If the cannon is open, spawn a cannon and despawn the object.
         cannon = spawn_object(o, MODEL_CANNON_BASE, bhvCannon);
         cannon->oBehParams2ndByte = o->oBehParams2ndByte;
@@ -13,7 +13,7 @@ void bhv_cannon_closed_init(void) {
 
         o->oAction = CANNON_TRAP_DOOR_ACT_OPEN;
         o->activeFlags = 0;
-    }
+    }*/
 }
 
 void CannonTrapDoorOpeningLoop(void) {
@@ -25,8 +25,8 @@ void CannonTrapDoorOpeningLoop(void) {
         o->oPosY += o->oVelY;
         o->oVelX = 0;
     } else {
-        if (o->oTimer == 80) {
-            bhv_cannon_closed_init();
+        if (o->oTimer == 60) {
+            o->activeFlags = 0;
             return;
         }
 
@@ -37,25 +37,27 @@ void CannonTrapDoorOpeningLoop(void) {
 }
 
 void bhv_cannon_closed_loop(void) {
+struct Object *pswitch;
+
     switch (o->oAction) {
         case CANNON_TRAP_DOOR_ACT_CLOSED:
             o->oVelX = 0;
             o->oVelY = 0;
             o->oDrawingDistance = 4000.0f;
 
-            if (save_file_is_cannon_unlocked() == 1)
+            pswitch = obj_nearest_object_with_behavior(bhvFloorSwitchCannon);
+            if (pswitch == NULL) {
+                o->activeFlags = 0;
+                break;
+            }
+            if (pswitch->oAction == 2)
                 o->oAction = CANNON_TRAP_DOOR_ACT_CAM_ZOOM;
             break;
 
         case CANNON_TRAP_DOOR_ACT_CAM_ZOOM:
-            if (o->oTimer == 60)
-                o->oAction = CANNON_TRAP_DOOR_ACT_OPENING;
-
-            o->oDrawingDistance = 20000.0f;
-            break;
-
-        case CANNON_TRAP_DOOR_ACT_OPENING:
+            cutscene_object(0x96, o);
             CannonTrapDoorOpeningLoop();
+            o->oDrawingDistance = 20000.0f;
             break;
     }
 }

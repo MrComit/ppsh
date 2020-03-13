@@ -264,19 +264,21 @@ static void update_swimming_yaw(struct MarioState *m) {
     if (m->action == ACT_FLUTTER_KICK) {
         targetYawVel = -(s16)(20.0f * m->controller->stickX);
         //targetYawVel = -(s16)(10.0f * m->controller->stickX);
+    } else if (m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
+        targetYawVel = -(s16)(15.0f * m->controller->stickX);
     } else {
         targetYawVel = -(s16)(10.0f * m->controller->stickX);
     }
 
     if (targetYawVel > 0) {
         if (m->angleVel[1] < 0) {
-            if (m->action == ACT_FLUTTER_KICK) {
+            if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, incdec, incdec);
             } else {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, 0x20, 0x10);
             }
         } else {
-            if (m->action == ACT_FLUTTER_KICK) {
+            if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, incdec, incdec);
             } else {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, 0x10, 0x20);
@@ -284,20 +286,20 @@ static void update_swimming_yaw(struct MarioState *m) {
         }
     } else if (targetYawVel < 0) {
         if (m->angleVel[1] > 0) {
-            if (m->action == ACT_FLUTTER_KICK) {
+            if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, incdec, incdec);
             } else {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, 0x20, 0x10);
             }
         } else {
-            if (m->action == ACT_FLUTTER_KICK) {
+            if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, incdec, incdec);
             } else {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, 0x20, 0x10);
             }
         }
     } else {
-        if (m->action == ACT_FLUTTER_KICK) {
+        if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
             m->angleVel[1] = approach_s32(m->angleVel[1], 0, incdec, incdec);
         } else {
             m->angleVel[1] = approach_s32(m->angleVel[1], 0, 0x40, 0x40);
@@ -661,7 +663,7 @@ static s32 act_flutter_kick(struct MarioState *m) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
-    if (m->input & INPUT_Z_PRESSED) {
+    if (m->input & INPUT_Z_DOWN) {
         m->actionTimer = 0;
         return set_mario_action(m, ACT_DASH_ATTACK, 0);
     }
@@ -1600,11 +1602,25 @@ static s32 check_common_submerged_cancels(struct MarioState *m) {
 
 
 static s32 act_dash_attack(struct MarioState *m) {
+    func_802713A8(m);
+    set_mario_animation(m, MARIO_ANIM_DASH_ATTACK);
     m->actionTimer++;
-    if (m->actionTimer > 20) {
+
+    if(!(m->input & INPUT_Z_DOWN)) {
+        m->actionState = 1;
+    }
+    
+    if (m->actionState == 1 && (m->marioObj->header.gfx.unk38.animFrame == 19 || (m->actionTimer > 20 && m->marioObj->header.gfx.unk38.animFrame == 7))) {
+        m->actionState = 0;
         m->actionTimer = 0;
         return set_mario_action(m, ACT_DASH_ATTACK_END, 0);
     }
+
+    //m->actionTimer++;
+    //if (m->actionTimer > 20) {
+    //    m->actionTimer = 0;
+    //    return set_mario_action(m, ACT_DASH_ATTACK_END, 0);
+    //}
 
     if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
@@ -1626,17 +1642,17 @@ static s32 act_dash_attack(struct MarioState *m) {
     m->forwardVel = approach_f32(m->forwardVel, 70.0f, 10.0f, 1.5f);
     sSwimStrength = MIN_SWIM_STRENGTH + 10;
 
-    func_802713A8(m);
-    set_mario_animation(m, MARIO_ANIM_DASH_ATTACK);
     common_swimming_step(m, sSwimStrength);
     return FALSE;
 }
 
 static s32 act_dash_attack_end(struct MarioState *m){
+    func_802713A8(m);
+    set_mario_animation(m, MARIO_ANIM_DASH_ATTACK_END);
 
-    m->actionTimer++;
-    if (m->actionTimer > 8) {
-        m->actionTimer = 0;
+    //m->actionTimer++;
+    if (m->marioObj->header.gfx.unk38.animFrame == 10) {
+        //m->actionTimer = 0;
         return set_mario_action(m, ACT_FLUTTER_KICK, 0);
     }
 
@@ -1651,11 +1667,10 @@ static s32 act_dash_attack_end(struct MarioState *m){
             m->forwardVel += 10.0f;
         }
         m->vel[1] = m->forwardVel * sins(m->faceAngle[0]);
+        set_mario_animation(m, MARIO_ANIM_DASH_ATTACK);
         return set_mario_action(m, ACT_DOLPHIN_JUMP, 0);
     }
 
-    func_802713A8(m);
-    set_mario_animation(m, MARIO_ANIM_DASH_ATTACK_END);
     common_swimming_step(m, sSwimStrength);
     return FALSE;
 }

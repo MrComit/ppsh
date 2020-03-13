@@ -3,6 +3,12 @@
 
 #include "types.h"
 
+#include "levels/bob/sand_mound/collision_declarations.h"
+#include "levels/bob/sand_mound/geo_declarations.h"
+
+#include "levels/bob/construction/collision_declarations.h"
+#include "levels/bob/construction/geo_declarations.h"
+
 // geo
 extern const GeoLayout bob_geo_000440[];
 extern const GeoLayout bob_geo_000458[];
@@ -33,6 +39,5 @@ extern const LevelScript level_bob_entry[];
 
 
 #include "levels/bob/header.inc.h"
-
 
 #endif

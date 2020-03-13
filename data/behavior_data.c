@@ -6104,3 +6104,53 @@ const BehaviorScript bhvStarPieceStar[] = {
         CALL_NATIVE(bhv_star_piece_star_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvSandMound[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(Sand_Mound_Sand_Mound_collision),
+    SCALE(125),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sand_mound_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvStarNoRotate[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SCALE(260),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_collect_star_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_collect_star_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvStarFromSwitch[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_by_switch_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvConstruction[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(chain_001_chain_001_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x3000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_construction_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvFloorSwitchCannon[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    GOTO(bhvFloorSwitchHardcodedModel + 1),
+};

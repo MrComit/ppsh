@@ -12,6 +12,18 @@ static struct ObjectHitbox sCollectStarHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+static struct ObjectHitbox sCollectStarHitbox2 = {
+    /* interactType:      */ INTERACT_STAR_OR_KEY,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 43,
+    /* height:            */ 10,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
 void bhv_collect_star_init(void) {
     s8 sp1F;
     u8 sp1E;
@@ -31,11 +43,17 @@ void bhv_collect_star_init(void) {
         o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_STAR];
     }
 
-    set_object_hitbox(o, &sCollectStarHitbox);
+    if (!(obj_has_behavior(bhvStarNoRotate))) {
+        set_object_hitbox(o, &sCollectStarHitbox);
+    } else {
+        set_object_hitbox(o, &sCollectStarHitbox2);
+    }
 }
 
 void bhv_collect_star_loop(void) {
-    o->oFaceAngleYaw += 0x800;
+    if (!(obj_has_behavior(bhvStarNoRotate))) {
+        o->oFaceAngleYaw += 0x800;
+    }
 
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         mark_obj_for_deletion(o);

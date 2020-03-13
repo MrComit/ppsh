@@ -550,5 +550,11 @@ extern const BehaviorScript bhvKoopaNpc[];
 extern const BehaviorScript bhvStarPiece[];
 extern const BehaviorScript bhvStarPieceSwitch[];
 extern const BehaviorScript bhvStarPieceStar[];
+extern const BehaviorScript bhvStarNoRotate[];
+
+extern const BehaviorScript bhvSandMound[];
+extern const BehaviorScript bhvStarFromSwitch[];
+extern const BehaviorScript bhvConstruction[];
+extern const BehaviorScript bhvFloorSwitchCannon[];
 
 #endif /* _BEHAVIOR_DATA_H */
