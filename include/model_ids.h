@@ -596,6 +596,7 @@
 
 #define MODEL_SAND_MOUND 0xFF
 #define MODEL_CONSTRUCTION 0xFE
+#define MODEL_BARRICADE 0xFD
 
 
 // custom cuck canyon

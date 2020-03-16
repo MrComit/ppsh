@@ -32,3 +32,8 @@ UNUSED static const u64 binid_3 = 3;
 #include "spiny/anims/data.inc.c"
 #include "spiny/anims/table.inc.c"
 UNUSED static const u64 binid_4 = 4;
+
+
+#include "sushi/model.inc.c"
+#include "sushi/anims/data.inc.c"
+#include "sushi/anims/table.inc.c"

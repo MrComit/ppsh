@@ -68,8 +68,11 @@ void bhv_bowser_course_red_coin_star_loop(void) {
             if (o->oTimer > 2) {
                 func_802F1BD4(o->oPosX, o->oPosY, o->oPosZ);
                 func_802A3004();
-                o->activeFlags = 0;
+                //o->activeFlags = 0;
+                o->oAction = 2;
             }
+            break;
+        case 2:
             break;
     }
 }

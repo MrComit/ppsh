@@ -41,6 +41,17 @@ void bhv_yellow_coin_loop(void) {
     o->oAnimState++;
 }
 
+
+void bhv_spinning_ycoin_loop(void) {
+    bhv_coin_sparkles_init();
+    o->oAnimState++;
+
+    o->oCoinDir += o->oCoinDirAdd;
+    o->oPosX = o->oHomeX + (sins((s16)o->oCoinDir) * o->oCoinMag);
+    o->oPosZ = o->oHomeZ + (coss((s16)o->oCoinDir) * o->oCoinMag);
+
+}
+
 void bhv_temp_coin_loop(void) {
     o->oAnimState++;
     if (obj_wait_then_blink(200, 20))

@@ -77,6 +77,10 @@ static u32 perform_water_full_step(struct MarioState *m, Vec3f nextPos) {
     floorHeight = find_floor(nextPos[0], nextPos[1], nextPos[2], &floor);
     ceilHeight = vec3f_find_ceil(nextPos, floorHeight, &ceil);
 
+    if (wall == NULL) {
+        m->wall = NULL;
+    }
+
     if (floor == NULL) {
         return WATER_STEP_CANCELLED;
     }
@@ -88,6 +92,9 @@ static u32 perform_water_full_step(struct MarioState *m, Vec3f nextPos) {
             m->floorHeight = floorHeight;
 
             if (wall != NULL) {
+                if (m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
+                    m->wall = wall;
+                }
                 return WATER_STEP_HIT_WALL;
             } else {
                 return WATER_STEP_NONE;
@@ -388,6 +395,11 @@ static s32 act_water_idle(struct MarioState *m) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
+    if (m->input & INPUT_Z_DOWN) {
+        m->actionTimer = 0;
+        return set_mario_action(m, ACT_DASH_ATTACK, 0);
+    }
+
     if (m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_WATER_PUNCH, 0);
     }
@@ -430,6 +442,11 @@ static s32 act_water_action_end(struct MarioState *m) {
     //if (m->flags & MARIO_METAL_CAP) {
     if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
+    }
+
+    if (m->input & INPUT_Z_DOWN) {
+        m->actionTimer = 0;
+        return set_mario_action(m, ACT_DASH_ATTACK, 0);
     }
 
     if (m->input & INPUT_B_PRESSED) {
@@ -574,6 +591,11 @@ static s32 act_breaststroke(struct MarioState *m) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
+    if (m->input & INPUT_Z_DOWN) {
+        m->actionTimer = 0;
+        return set_mario_action(m, ACT_DASH_ATTACK, 0);
+    }
+
     if (m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_WATER_PUNCH, 0);
     }
@@ -623,6 +645,11 @@ static s32 act_swimming_end(struct MarioState *m) {
     //if (m->flags & MARIO_METAL_CAP) {
     if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
+    }
+
+    if (m->input & INPUT_Z_DOWN) {
+        m->actionTimer = 0;
+        return set_mario_action(m, ACT_DASH_ATTACK, 0);
     }
 
     if (m->input & INPUT_B_PRESSED) {
@@ -683,7 +710,7 @@ static s32 act_flutter_kick(struct MarioState *m) {
         m->pos[1] = m->waterLevel - 50.0f;
         if (m->faceAngle[0] < -0x3000) {
             m->faceAngle[0] = -0x3000;
-            m->forwardVel += 10.0f;
+            m->forwardVel += 15.0f;
         }
         m->vel[1] = m->forwardVel * sins(m->faceAngle[0]);
         return set_mario_action(m, ACT_DOLPHIN_JUMP, 0);
@@ -1602,6 +1629,7 @@ static s32 check_common_submerged_cancels(struct MarioState *m) {
 
 
 static s32 act_dash_attack(struct MarioState *m) {
+s16 wallDYaw;
     func_802713A8(m);
     set_mario_animation(m, MARIO_ANIM_DASH_ATTACK);
     m->actionTimer++;
@@ -1614,6 +1642,15 @@ static s32 act_dash_attack(struct MarioState *m) {
         m->actionState = 0;
         m->actionTimer = 0;
         return set_mario_action(m, ACT_DASH_ATTACK_END, 0);
+    }
+
+    if (m->wall != NULL) {
+        wallDYaw = atan2s(m->wall->normal.z, m->wall->normal.x) - m->faceAngle[1];
+        if ((wallDYaw < -0x7800 || wallDYaw > 0x7800) && (m->faceAngle[0] < 0x1000 && m->faceAngle[0] > -0x1000)) {
+            m->forwardVel = -10.0f;
+            ShakeScreen(SHAKE_POS_SMALL);
+            return set_mario_action(m, ACT_BACKWARD_WATER_KB, 0);
+        }
     }
 
     //m->actionTimer++;
@@ -1630,7 +1667,7 @@ static s32 act_dash_attack(struct MarioState *m) {
         m->pos[1] = m->waterLevel - 50.0f;
         if (m->faceAngle[0] < -0x3000) {
             m->faceAngle[0] = -0x3000;
-            m->forwardVel += 10.0f;
+            m->forwardVel += 15.0f;
         }
         m->vel[1] = m->forwardVel * sins(m->faceAngle[0]);
         return set_mario_action(m, ACT_DOLPHIN_JUMP, 0);
@@ -1647,6 +1684,7 @@ static s32 act_dash_attack(struct MarioState *m) {
 }
 
 static s32 act_dash_attack_end(struct MarioState *m){
+s16 wallDYaw;
     func_802713A8(m);
     set_mario_animation(m, MARIO_ANIM_DASH_ATTACK_END);
 
@@ -1654,6 +1692,15 @@ static s32 act_dash_attack_end(struct MarioState *m){
     if (m->marioObj->header.gfx.unk38.animFrame == 10) {
         //m->actionTimer = 0;
         return set_mario_action(m, ACT_FLUTTER_KICK, 0);
+    }
+
+    if (m->wall != NULL) {
+        wallDYaw = atan2s(m->wall->normal.z, m->wall->normal.x) - m->faceAngle[1];
+        if (wallDYaw < -0x7800 || wallDYaw > 0x7800) {
+            m->forwardVel = -10.0f;
+            ShakeScreen(SHAKE_POS_SMALL);
+            return set_mario_action(m, ACT_BACKWARD_WATER_KB, 0);
+        }
     }
 
     if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
@@ -1664,7 +1711,7 @@ static s32 act_dash_attack_end(struct MarioState *m){
         m->pos[1] = m->waterLevel - 50.0f;
         if (m->faceAngle[0] < -0x3000) {
             m->faceAngle[0] = -0x3000;
-            m->forwardVel += 10.0f;
+            m->forwardVel += 15.0f;
         }
         m->vel[1] = m->forwardVel * sins(m->faceAngle[0]);
         set_mario_animation(m, MARIO_ANIM_DASH_ATTACK);

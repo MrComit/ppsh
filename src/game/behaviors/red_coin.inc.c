@@ -79,3 +79,25 @@ void bhv_red_coin_loop(void) {
         o->oInteractStatus = 0;
     }
 }
+
+
+void bhv_spinning_rcoin_loop(void) {
+    obj_set_behavior(bhvRedCoin);
+    if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+        if (o->parentObj != NULL) {
+            o->parentObj->oHiddenStarTriggerCounter++;
+            if (o->parentObj->oHiddenStarTriggerCounter != 8) {
+                spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
+            }
+            play_sound(SOUND_MENU_COLLECT_RED_COIN
+                           + (((u8) o->parentObj->oHiddenStarTriggerCounter - 1) << 16),
+                       gDefaultSoundArgs);
+        }
+        CoinCollected();
+        o->oInteractStatus = 0;
+    }
+
+    o->oCoinDir += o->oCoinDirAdd;
+    o->oPosX = o->oHomeX + (sins((s16)o->oCoinDir) * o->oCoinMag);
+    o->oPosZ = o->oHomeZ + (coss((s16)o->oCoinDir) * o->oCoinMag);
+}

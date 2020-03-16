@@ -771,4 +771,16 @@ extern void obj_rotate_towards_point(struct Object *, Vec3f, s16, s16, s16, s16)
 
 extern Gfx *geo_camera_fov(s32 callContext, struct GraphNode *g, UNUSED void *context);
 
+
+
+
+
+
+
+
+
+extern s8 gUnderwaterCam;
+
+
+
 #endif /* _CAMERA_H */

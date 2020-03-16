@@ -34,3 +34,7 @@
 #include "levels/bob/construction/model.inc.c"
 #include "levels/bob/construction/collision_declarations.h"
 #include "levels/bob/construction/collision.inc.c"
+
+#include "levels/bob/barricade/model.inc.c"
+#include "levels/bob/barricade/collision_declarations.h"
+#include "levels/bob/barricade/collision.inc.c"

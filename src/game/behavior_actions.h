@@ -558,6 +558,11 @@ void bhv_star_piece_star_loop(void);
 void bhv_sand_mound_loop(void);
 void bhv_star_by_switch_loop(void);
 void bhv_construction_loop(void);
+void bhv_barricade_loop(void);
+void bhv_spinning_coins_init(void);
+
+void bhv_spinning_ycoin_loop(void);
+void bhv_spinning_rcoin_loop(void);
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 

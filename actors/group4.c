@@ -16,10 +16,10 @@ UNUSED static const u64 binid_0 = 0;
 #include "manta/anims/table.inc.c"
 UNUSED static const u64 binid_1 = 1;
 
-#include "sushi/model.inc.c"
-#include "sushi/anims/data.inc.c"
-#include "sushi/anims/table.inc.c"
-UNUSED static const u64 binid_2 = 2;
+//#include "sushi/model.inc.c"
+//#include "sushi/anims/data.inc.c"
+//#include "sushi/anims/table.inc.c"
+//UNUSED static const u64 binid_2 = 2;
 
 #include "unagi/model.inc.c"
 #include "unagi/anims/data.inc.c"

@@ -3,6 +3,23 @@
 
 #include "types.h"
 
+// sushi
+extern const GeoLayout sushi_geo[];
+extern const Gfx sushi_seg5_dl_05009CC0[];
+extern const Gfx sushi_seg5_dl_05009DD0[];
+extern const Gfx sushi_seg5_dl_05009F30[];
+extern const Gfx sushi_seg5_dl_0500A008[];
+extern const Gfx sushi_seg5_dl_0500A0E8[];
+extern const Gfx sushi_seg5_dl_0500A160[];
+extern const Gfx sushi_seg5_dl_0500A580[];
+extern const Gfx sushi_seg5_dl_0500A748[];
+extern const Gfx sushi_seg5_dl_0500A768[];
+extern const Gfx sushi_seg5_dl_0500A860[];
+extern const Gfx sushi_seg5_dl_0500A8A8[];
+extern const Gfx sushi_seg5_dl_0500A958[];
+extern const Gfx sushi_seg5_dl_0500A990[];
+extern const struct Animation *const sushi_seg5_anims_0500AE54[];
+
 // bubba
 extern const GeoLayout bubba_geo[];
 extern const Gfx bubba_seg5_dl_05004A40[];
