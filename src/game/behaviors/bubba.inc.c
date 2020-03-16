@@ -3,7 +3,7 @@
 static struct ObjectHitbox sBubbaHitbox = {
     /* interactType:      */ INTERACT_CLAM_OR_BUBBA,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 1,
+    /* damageOrCoinValue: */ 2,
     /* health:            */ 99,
     /* numLootCoins:      */ 0,
     /* radius:            */ 300,
@@ -126,7 +126,8 @@ void bhv_bubba_loop(void) {
             bubba_act_0();
             break;
         case 1:
-            bubba_act_1();
+            //bubba_act_1();
+            bubba_act_0();
             break;
     }
 

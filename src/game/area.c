@@ -19,6 +19,7 @@
 #include "level_update.h"
 #include "engine/geo_layout.h"
 #include "save_file.h"
+#include "camera.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *D_8033A160[0x100];
@@ -348,6 +349,14 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
     play_transition(transType, time, red, green, blue);
 }
 
+
+void shade_screen_underwater(void) {
+    gWarpTransition.data.red = 0;
+    gWarpTransition.data.green = 150;
+    gWarpTransition.data.blue = 240;
+    //gWarpTransition.time = 10;
+}
+
 void render_game(void) {
     if (gCurrentArea != NULL && !gWarpTransition.pauseRendering) {
         geo_process_root(gCurrentArea->unk04, D_8032CE74, D_8032CE78, gFBSetColor);
@@ -375,6 +384,19 @@ void render_game(void) {
         } else
             gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                           SCREEN_HEIGHT - BORDER_HEIGHT);
+
+        if (!gWarpTransition.isActive && gUnderwaterCam == TRUE) {
+            shade_screen_underwater();
+            render_screen_transition(0, WARP_TRANSITION_FADE_FROM_COLOR, 10,
+                                                          &gWarpTransition.data);
+                //if (!gWarpTransition.isActive) {
+                //    if (gWarpTransition.type & 1) {
+                //        gWarpTransition.pauseRendering = TRUE;
+                //    } else {
+                        set_warp_transition_rgb(0, 0, 0);
+                //    }
+                //}
+        }
 
         if (gWarpTransition.isActive) {
             if (gWarpTransDelay == 0) {

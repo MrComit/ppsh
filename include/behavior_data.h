@@ -556,5 +556,10 @@ extern const BehaviorScript bhvSandMound[];
 extern const BehaviorScript bhvStarFromSwitch[];
 extern const BehaviorScript bhvConstruction[];
 extern const BehaviorScript bhvFloorSwitchCannon[];
+extern const BehaviorScript bhvBarricade[];
+extern const BehaviorScript bhvSpinningCoins[];
+extern const BehaviorScript bhvSpinningYCoin[];
+extern const BehaviorScript bhvSpinningRCoin[];
+
 
 #endif /* _BEHAVIOR_DATA_H */

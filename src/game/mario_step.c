@@ -360,6 +360,7 @@ u32 check_ledge_grab(struct MarioState *m, struct Surface *wall, Vec3f intendedP
 
     // Only ledge grab if the wall displaced mario in the opposite direction of
     // his velocity.
+
     if (displacementX * m->vel[0] + displacementZ * m->vel[2] > 0.0f) {
         return 0;
     }

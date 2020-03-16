@@ -5997,7 +5997,7 @@ const BehaviorScript bhvBubba[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 200, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
-    SCALE(50),
+    SCALE(20),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bubba_loop),
     END_LOOP(),
@@ -6152,5 +6152,53 @@ const BehaviorScript bhvConstruction[] = {
 
 const BehaviorScript bhvFloorSwitchCannon[] = {
     BEGIN(OBJ_LIST_SURFACE),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x4000),
     GOTO(bhvFloorSwitchHardcodedModel + 1),
+};
+
+const BehaviorScript bhvBarricade[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(BarricadeCol_BarricadeCol_collision),
+    SET_FLOAT(oCollisionDistance, 0x1000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_barricade_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSpinningCoins[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_spinning_coins_init),
+    BREAK(),
+};
+
+const BehaviorScript bhvSpinningYCoin[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    // Yellow coin - common:
+    BILLBOARD(),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_yellow_coin_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_spinning_ycoin_loop),
+        DROP_TO_FLOOR(),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSpinningRCoin[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oAnimState, -1),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_red_coin_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_spinning_rcoin_loop),
+        ADD_INT(oAnimState, 1),
+        DROP_TO_FLOOR(),
+    END_LOOP(),
 };

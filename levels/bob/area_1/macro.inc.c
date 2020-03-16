@@ -6,6 +6,16 @@ const MacroObject bob_area_1_Area_macro_objs[] = {
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_line_horizontal, 113, 4471, -289, -19773, 0x00000000),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_line_horizontal, -113, 8726, -289, -19765, 0x00000000),
 	MACRO_OBJECT(macro_fire_spitter, 0, -13564, 200, -16776),
+	MACRO_OBJECT(macro_red_coin, 0, 12849, -722, -4333),
+	MACRO_OBJECT(macro_red_coin, 0, 15138, -569, 5681),
+	MACRO_OBJECT(macro_red_coin, 0, 9547, -2893, 3926),
+	MACRO_OBJECT(macro_red_coin, 0, 6620, 115, -20222),
+	MACRO_OBJECT(macro_red_coin, 0, 1173, -499, -9896),
+	MACRO_OBJECT(macro_red_coin, 0, -25, -2058, 3519),
+	MACRO_OBJECT(macro_red_coin, 0, 18595, -1701, -12409),
+	MACRO_OBJECT(macro_red_coin, 0, -14769, -71, -15875),
+	MACRO_OBJECT(macro_red_coin, 0, 9727, -732, -13074),
+	MACRO_OBJECT(macro_sushi, 0, -4767, -1075, -15543),
 	MACRO_OBJECT_END(),
 };
 

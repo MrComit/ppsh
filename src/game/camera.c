@@ -28,6 +28,9 @@
 #include "paintings.h"
 #include "engine/graph_node.h"
 #include "level_table.h"
+
+#include "segment2.h"
+
 #define BOUNDS_EXTENSION 4.0f
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
@@ -75,6 +78,9 @@
  *          -Y                      +Z                      -Y
  *
  */
+
+
+s8 gUnderwaterCam = FALSE;
 
 // BSS
 /**
@@ -1168,6 +1174,24 @@ void mode_radial_camera(struct Camera *c) {
     pan_ahead_of_player(c);
 }
 
+
+/*void shade_screen_underwater(void) {
+    create_dl_translation_matrix(1, 0, 240.0f, 0);
+    create_dl_scale_matrix(2, 2.6f, 3.4f, 1.0f);
+    //gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 110);
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 80, 220);
+    gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    u16 warpTransitionRGBA16 = ((0 >> 3) << 11) | ((0 >> 3) << 6) | ((80 >> 3) << 1) | 1;
+
+    gWarpTransFBSetColor = (warpTransitionRGBA16 << 16) | warpTransitionRGBA16;
+    gWarpTransRed = 0;
+    gWarpTransGreen = 0;
+    gWarpTransBlue = 80;
+}*/
+
+
 /**
  * A mode that only has 8 camera angles, 45 degrees apart
  */
@@ -1193,6 +1217,14 @@ void mode_8_directions_camera(struct Camera *c) {
     c->pos[2] = pos[2];
     sAreaYawChange = sAreaYaw - oldAreaYaw;
     set_camera_height(c, pos[1]);
+
+    /*if (c->pos[1] < gMarioState->waterLevel) {
+        gUnderwaterCam = TRUE;
+    } else {
+        gUnderwaterCam = FALSE;
+    }*/
+
+
 }
 
 /**
@@ -3204,6 +3236,13 @@ void update_camera(struct Camera *c) {
     update_lakitu(c);
 
     gLakituState.lastFrameAction = sMarioCamState->action;
+
+    if (c->pos[1] < gMarioState->waterLevel + 78.0f /*&& sCurrPlayMode != 2*/) {
+        gUnderwaterCam = TRUE;
+    } else {
+        gUnderwaterCam = FALSE;
+    }
+
 }
 
 /**
@@ -11541,6 +11580,7 @@ void obj_rotate_towards_point(struct Object *o, Vec3f point, s16 pitchOff, s16 y
     o->oMoveAnglePitch = approach_s16_asymptotic(o->oMoveAnglePitch, pitchOff - pitch, pitchDiv);
     o->oMoveAngleYaw = approach_s16_asymptotic(o->oMoveAngleYaw, yaw + yawOff, yawDiv);
 }
+
 
 #include "behaviors/intro_peach.inc.c"
 #include "behaviors/intro_lakitu.inc.c"

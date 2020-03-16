@@ -9,6 +9,9 @@
 #include "levels/bob/construction/collision_declarations.h"
 #include "levels/bob/construction/geo_declarations.h"
 
+#include "levels/bob/barricade/collision_declarations.h"
+#include "levels/bob/barricade/geo_declarations.h"
+
 // geo
 extern const GeoLayout bob_geo_000440[];
 extern const GeoLayout bob_geo_000458[];

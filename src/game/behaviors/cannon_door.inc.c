@@ -25,8 +25,9 @@ void CannonTrapDoorOpeningLoop(void) {
         o->oPosY += o->oVelY;
         o->oVelX = 0;
     } else {
-        if (o->oTimer == 60) {
+        if (o->oTimer == 100) {
             o->activeFlags = 0;
+            set_mario_npc_dialog(0);
             return;
         }
 
@@ -50,14 +51,17 @@ struct Object *pswitch;
                 o->activeFlags = 0;
                 break;
             }
-            if (pswitch->oAction == 2)
+            if (pswitch->oAction == 2) {
                 o->oAction = CANNON_TRAP_DOOR_ACT_CAM_ZOOM;
+                //set_mario_npc_dialog(1);
+            }
             break;
 
         case CANNON_TRAP_DOOR_ACT_CAM_ZOOM:
             cutscene_object(0x96, o);
             CannonTrapDoorOpeningLoop();
-            o->oDrawingDistance = 20000.0f;
+            o->oDrawingDistance = 28672.0f;
+            set_mario_npc_dialog(1);
             break;
     }
 }

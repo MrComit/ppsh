@@ -7000,6 +7000,10 @@ sound_ref .sound_menu_mario_castle_warp2
   sound_ref .sound_menu_collect_red_coin
   sound_ref .sound_menu_collect_red_coin
   sound_ref .sound_menu_collect_red_coin
+
+  sound_ref .sound_menu_collect_red_coin
+  sound_ref .sound_menu_collect_red_coin
+
   sound_ref .sound_menu_collect_secret
   sound_ref .sound_menu_collect_secret
   sound_ref .sound_menu_collect_secret
@@ -7801,6 +7805,9 @@ chan_end
   .byte 9
   .byte 11
   .byte 12
+
+  .byte 14
+  .byte 16
 
   .layer_3146:
   layer_delay 0x6

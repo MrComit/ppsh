@@ -22,3 +22,6 @@
 
 #include "levels/bob/construction/geo_declarations.h"
 #include "levels/bob/construction/geo.inc.c"
+
+#include "levels/bob/barricade/geo_declarations.h"
+#include "levels/bob/barricade/geo.inc.c"

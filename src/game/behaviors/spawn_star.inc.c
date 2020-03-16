@@ -18,7 +18,7 @@ static struct ObjectHitbox sCollectStarHitbox2 = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 43,
+    /* radius:            */ 40,
     /* height:            */ 10,
     /* hurtboxRadius:     */ 0,
     /* hurtboxHeight:     */ 0,
@@ -167,12 +167,15 @@ void func_802F1BD4(f32 sp20, f32 sp24, f32 sp28) {
 
 void bhv_hidden_red_coin_star_init(void) {
     s16 sp36;
+    s16 sp362;
     struct Object *sp30;
 
-    if (gCurrCourseNum != 3)
-        spawn_object(o, MODEL_TRANSPARENT_STAR, bhvRedCoinStarMarker);
+    //if (gCurrCourseNum != 3)
+    spawn_object(o, MODEL_TRANSPARENT_STAR, bhvRedCoinStarMarker);
 
     sp36 = count_objects_with_behavior(bhvRedCoin);
+    sp362 = count_objects_with_behavior(bhvSpinningRCoin);
+    sp36 += sp362;
     if (sp36 == 0) {
         sp30 =
             spawn_object_abs_with_rot(o, 0, MODEL_STAR, bhvStar, o->oPosX, o->oPosY, o->oPosZ, 0, 0, 0);
@@ -180,7 +183,7 @@ void bhv_hidden_red_coin_star_init(void) {
         o->activeFlags = 0;
     }
 
-    o->oHiddenStarTriggerCounter = 8 - sp36;
+    o->oHiddenStarTriggerCounter = 10 - sp36;
 }
 
 void bhv_hidden_red_coin_star_loop(void) {
@@ -195,8 +198,11 @@ void bhv_hidden_red_coin_star_loop(void) {
             if (o->oTimer > 2) {
                 func_802F1B84(o->oPosX, o->oPosY, o->oPosZ);
                 func_802A3004();
-                o->activeFlags = 0;
+                //o->activeFlags = 0;
+                o->oAction = 2;
             }
+            break;
+        case 2:
             break;
     }
 }

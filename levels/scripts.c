@@ -227,7 +227,7 @@ const LevelScript script_func_global_4[] = {
 const LevelScript script_func_global_5[] = {
     LOAD_MODEL_FROM_GEO(MODEL_MANTA_RAY,               manta_seg5_geo_05008D14),
     LOAD_MODEL_FROM_GEO(MODEL_UNAGI,                   unagi_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_SUSHI,                   sushi_geo),
+    //LOAD_MODEL_FROM_GEO(MODEL_SUSHI,                   sushi_geo),
     LOAD_MODEL_FROM_DL( MODEL_DL_WHIRLPOOL,            whirlpool_seg5_dl_05013CB8, LAYER_TRANSPARENT),
     LOAD_MODEL_FROM_GEO(MODEL_CLAM_SHELL,              clam_shell_geo),
     RETURN(),
@@ -291,6 +291,7 @@ const LevelScript script_func_global_12[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WIGGLER_HEAD,            wiggler_head_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WIGGLER_BODY,            wiggler_body_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BUBBA,                   bubba_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_SUSHI,                   sushi_geo),
     RETURN(),
 };
 

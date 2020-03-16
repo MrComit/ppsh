@@ -11,6 +11,9 @@
 #include "segment2.h"
 #include "camera.h"
 
+
+#include "level_update.h"
+
 u8 sTransitionColorFadeCount[4] = { 0 };
 u16 sTransitionTextureFadeCount[2] = { 0 };
 
@@ -72,8 +75,13 @@ s32 dl_transition_color(s8 fadeTimer, u8 transTime, struct WarpTransitionData *t
 }
 
 s32 render_fade_transition_from_color(s8 fadeTimer, u8 transTime, struct WarpTransitionData *transData) {
-    u8 alpha = set_transition_color_fade_alpha(1, fadeTimer, transTime);
+    u8 alpha;
 
+    if (gUnderwaterCam == FALSE) {
+        alpha = set_transition_color_fade_alpha(1, fadeTimer, transTime);
+    } else {
+        alpha = 100;
+    }
     return dl_transition_color(fadeTimer, transTime, transData, alpha);
 }
 

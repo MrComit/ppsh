@@ -1161,4 +1161,14 @@
 #define /*0x0FC*/ oYoshiChosenHome OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ oYoshiTargetYaw  OBJECT_FIELD_S32(0x1E)
 
+
+/* custom spinning coins */
+#define /*0x0FC*/ oCoinMag OBJECT_FIELD_S32(0x1D)
+#define /*0x100*/ oCoinDir OBJECT_FIELD_S32(0x1E)
+#define /*0x104*/ oCoinDirAdd OBJECT_FIELD_S32(0x1F)
+
+
+
+
+
 #endif

@@ -2,4 +2,6 @@
 #include "levels/bob/area_1/macro.inc.c"
 #include "levels/bob/area_2/collision.inc.c"
 #include "levels/bob/area_2/macro.inc.c"
+#include "levels/bob/area_3/collision.inc.c"
+#include "levels/bob/area_3/macro.inc.c"
 #include "levels/bob/model.inc.c"
