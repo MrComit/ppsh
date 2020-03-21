@@ -35,6 +35,26 @@ extern const Gfx bubba_seg5_dl_05005738[];
 extern const Gfx bubba_seg5_dl_05005840[];
 extern const Gfx bubba_seg5_dl_05005978[];
 
+extern const Gfx Porcupuffer_mesh[];
+extern const Gfx Porcupuffer_mesh_tri_5[];
+extern const Gfx Porcupuffer_mesh_tri_4[];
+extern const Gfx Porcupuffer_mesh_tri_3[];
+extern const Gfx Porcupuffer_mesh_tri_2[];
+extern const Gfx Porcupuffer_mesh_tri_1[];
+extern const Gfx Porcupuffer_mesh_tri_0[];
+extern const Gfx mat_Spike[];
+extern const Gfx mat_LightSkin[];
+extern const Gfx mat_revert_LightSkin[];
+extern const Gfx mat_Eyes[];
+extern const Gfx mat_revert_Eyes[];
+extern const Gfx mat_Skin[];
+extern const Gfx mat_revert_Fin[];
+extern const Gfx mat_Fin[];
+extern const Gfx mat_Appendage[];
+extern const Gfx mat_revert_Appendage[];
+
+
+
 // lakitu_enemy
 extern const GeoLayout enemy_lakitu_geo[];
 extern const Gfx lakitu_enemy_seg5_dl_05012760[];

@@ -184,20 +184,18 @@ Do you want to Save?\n\
 \n\
 //You Bet//Not Now"))
 
-DEFINE_DIALOG(DIALOG_015, 1, 4, 30, 200, _("\
-You can punch enemies to\n\
-knock them down. Press [A]\n\
-to jump, [B] to punch.\n\
-Press [A] then [B] to Kick.\n\
-To pick something up,\n\
-press [B], too. To throw\n\
-something you're holding,\n\
-press [B] again."))
+DEFINE_DIALOG(DIALOG_015, 1, 5, 30, 200, _("\
+Hi Mario! They call me\n\
+Koopa the Chick!\n\
+it's not safe for me to\n\
+stay on the mainland, so\n\
+i just live down here."))
 
 DEFINE_DIALOG(DIALOG_016, 1, 3, 30, 200, _("\
-Hop on the shiny shell and\n\
-ride wherever you want to\n\
-go! Shred those enemies!"))
+Koopa the Dick is so mad\n\
+at society that he's locked\n\
+himself inside his house...\n\
+It's kinda sad, honestly."))
 
 DEFINE_DIALOG(DIALOG_017, 1, 4, 30, 200, _("\
 I'm the Big Bob-omb, lord\n\
@@ -225,15 +223,19 @@ the back and hurl me to\n\
 this royal turf? I think\n\
 that you cannot!"))
 
-DEFINE_DIALOG(DIALOG_018, 1, 4, 30, 200, _("\
-I'm sleeping because...\n\
-...I'm sleepy. I don't\n\
-like being disturbed.\n\
-Please walk quietly."))
+DEFINE_DIALOG(DIALOG_018, 1, 3, 30, 200, _("\
+I cant beleive this shiat\n\
+\n\
+\n\
+if marios MICRO DICK\n\
+touches the quicksand he \n\
+just fucking dies."))
 
-DEFINE_DIALOG(DIALOG_019, 1, 2, 30, 200, _("\
-Shhh! Please walk\n\
-quietly in the hallway!"))
+DEFINE_DIALOG(DIALOG_019, 1, 4, 30, 200, _("\
+If you approach the water\n\
+surface with enough speed,\n\
+you'll jump out of the\n\
+water like a dolphin!"))
 
 DEFINE_DIALOG(DIALOG_020, 1, 6, 95, 150, _("\
 Dear Mario:\n\
@@ -297,30 +299,11 @@ stairs, you need 70\n\
 Stars.\n\
 Bwa ha ha!"))
 
-DEFINE_DIALOG(DIALOG_030, 1, 6, 30, 200, _("\
-Hello! The Lakitu Bros.,\n\
-cutting in with a live\n\
-update on Mario's\n\
-progress. He's about to\n\
-learn a technique for\n\
-sneaking up on enemies.\n\
-The trick is this: He has\n\
-to walk very slowly in\n\
-order to walk quietly.\n\
-\n\
-\n\
-\n\
-And wrapping up filming\n\
-techniques reported on\n\
-earlier, you can take a\n\
-look around using [C]> and\n\
-[C]<. Press [C]| to view the\n\
-action from a distance.\n\
-When you can't move the\n\
-camera any farther, the\n\
-buzzer will sound. This is\n\
-the Lakitu Bros.,\n\
-signing off."))
+DEFINE_DIALOG(DIALOG_030, 1, 2, 30, 200, _("\
+Hold the [A] button while\n\
+underwater to swim fast!\n\
+Then try holding [Z] to\n\
+do a special dash attack!"))
 
 DEFINE_DIALOG(DIALOG_031, 1, 5, 30, 200, _("\
 No way! You beat me...\n\
@@ -333,34 +316,21 @@ hand over this Star to\n\
 the winner of the race.\n\
 Congrats, Mario!"))
 
-DEFINE_DIALOG(DIALOG_032, 1, 5, 30, 200, _("\
-If you get the Wing Cap,\n\
-you can fly! Put the cap\n\
-on, then do a Triple\n\
-Jump--jump three times\n\
-in a row--to take off.\n\
-You can fly even higher\n\
-if you blast out of a\n\
-cannon wearing the\n\
-Wing Cap!\n\
+DEFINE_DIALOG(DIALOG_032, 1, 4, 30, 200, _("\
+It's a grandkoopa clock.\n\
+You can hear it moving.\n\
 \n\
-Use the [C] Buttons to look\n\
-around while flying, and\n\
-press [Z] to land."))
+\n\
+KOOPA THE TICK\n\
+KOOPA THE TOCK\n\
+KOOPA THE TICK\n\
+KOOPA THE TOCK"))
 
-DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
-Ciao! You've reached\n\
-Princess Toadstool's\n\
-castle via a warp pipe.\n\
-Using the controller is a\n\
-piece of cake. Press [A] to\n\
-jump and [B] to attack.\n\
-Press [B] to read signs,\n\
-too. Use the Control Stick\n\
-in the center of the\n\
-controller to move Mario\n\
-around. Now, head for\n\
-the castle."))
+DEFINE_DIALOG(DIALOG_033, 1, 3, 30, 200, _("\
+It's a computer. It's \n\
+showing a website you've\n\
+never heard of - 4Chan.\n\
+>tfw no koopa gf"))
 
 DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
 Good afternoon. The\n\

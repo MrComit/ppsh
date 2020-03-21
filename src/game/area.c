@@ -20,6 +20,7 @@
 #include "engine/geo_layout.h"
 #include "save_file.h"
 #include "camera.h"
+#include "level_geo.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *D_8033A160[0x100];
@@ -211,6 +212,11 @@ void func_8027A7C4(void) {
 }
 
 void load_area(s32 index) {
+    gLightColor = 0x00;
+    gLightAction = 0x00;
+    gLightApproach = 0x00;
+    gLightSpeed = 0x00;
+    gLightTimer = 0x00;
     if (gCurrentArea == NULL && gAreaData[index].unk04 != NULL) {
         gCurrentArea = &gAreaData[index];
         gCurrAreaIndex = gCurrentArea->index;

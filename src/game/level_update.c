@@ -551,6 +551,7 @@ void check_instant_warp(void) {
 
                 cameraAngle = gMarioState->area->camera->yaw;
 
+                //gCurrentArea->flags = 0x00;
                 change_area(warp->area);
                 gMarioState->area = gCurrentArea;
 

@@ -93,6 +93,10 @@ void bhv_particle_loop() {
         mark_object_for_deletion(o);
         try_to_spawn_object(5, 0, o, MODEL_SPOT_ON_GROUND, bhvWaterSurfaceWhiteWave2);
     }
+    if ((gMarioState->action == ACT_DASH_ATTACK || gMarioState->action == ACT_DASH_ATTACK_END) && o->oTimer > 6) {
+        mark_object_for_deletion(o);
+        try_to_spawn_object(5, 0, o, MODEL_SPOT_ON_GROUND, bhvWaterSurfaceWhiteWave2);        
+    }
 }
 
 void bhv_small_bubbles_loop(void) {

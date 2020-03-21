@@ -5,14 +5,26 @@ static struct ObjectHitbox sBubbaHitbox = {
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
     /* health:            */ 99,
-    /* numLootCoins:      */ 0,
-    /* radius:            */ 300,
-    /* height:            */ 200,
-    /* hurtboxRadius:     */ 300,
-    /* hurtboxHeight:     */ 200,
+    /* numLootCoins:      */ 3,
+    /* radius:            */ 600,
+    /* height:            */ 400,
+    /* hurtboxRadius:     */ 450,
+    /* hurtboxHeight:     */ 300,
 };
 
-void bubba_act_0(void) {
+static struct ObjectHitbox sBubbaHitbox2 = {
+    /* interactType:      */ INTERACT_CLAM_OR_BUBBA,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 3,
+    /* health:            */ 99,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 600,
+    /* height:            */ 400,
+    /* hurtboxRadius:     */ 450,
+    /* hurtboxHeight:     */ 300,
+};
+
+/*void bubba_act_0(void) {
     f32 sp24;
 
     sp24 = obj_lateral_dist_to_home();
@@ -44,9 +56,9 @@ void bubba_act_0(void) {
             o->oBubbaUnkF8 = random_linear_offset(100, 100);
         }
     }
-}
+}*/
 
-void bubba_act_1(void) {
+/*void bubba_act_1(void) {
     s16 val06;
     s16 val04;
 
@@ -98,10 +110,39 @@ void bubba_act_1(void) {
             approach_f32_ptr(&o->oBubbaUnkF4, 20.0f, 0.5f);
         }
     }
-}
+}*/
 
 void bhv_bubba_loop(void) {
-    UNUSED s32 unused;
+    set_object_hitbox(o, &sBubbaHitbox);
+    if (o->oAction == 1) {
+        if (o->oBubbaUnk104 > 12) {
+            o->header.gfx.node.flags &= 0x0001;
+            o->activeFlags = 0;
+            PlaySound2(SOUND_OBJ_ENEMY_DEATH_LOW);
+            func_802A3004();
+            spawn_object_loot_yellow_coins(o, o->oNumLootCoins, 50.0f);
+        }
+        o->oFaceAngleRoll -= 0x800;
+        o->oBubbaUnk104++;
+        obj_move_standard(-78);
+
+    } else {
+        o->oPosX = o->oHomeX + sins(o->oSushiSharkUnkF4) * 600.0f;
+        o->oPosZ = o->oHomeZ + coss(o->oSushiSharkUnkF4) * 600.0f;
+        o->oMoveAngleYaw = o->oSushiSharkUnkF4 + 0x4000;
+        o->oSushiSharkUnkF4 += 0x100;
+        o->oFaceAnglePitch = 0;
+        o->oTimer = 0;
+        if (o->oDistanceToMario < 200.0f && (gMarioState->action == ACT_DASH_ATTACK || gMarioState->action == ACT_DASH_ATTACK_END)) {
+            o->oAction = 1;
+            o->oMoveAngleYaw = o->oAngleToMario;
+            o->oForwardVel = -30.0f;
+            obj_become_intangible();
+        }
+    }
+    obj_update_floor_and_walls();
+
+    /*UNUSED s32 unused;
     struct Object *sp38;
     s16 sp36;
 
@@ -169,5 +210,41 @@ void bhv_bubba_loop(void) {
     o->oFloorHeight += 150.0f;
     if (o->oPosY < o->oFloorHeight) {
         o->oPosY = o->oFloorHeight;
+    }*/
+}
+
+void bhv_porcupuffer_init(void) {
+    o->oSushiSharkUnkF4 = o->oFaceAngleYaw;
+}
+
+void bhv_porcupuffer_loop(void) {
+    o->oAnimState = 1;
+    set_object_hitbox(o, &sBubbaHitbox2);
+    if (o->oAction == 1) {
+        if (o->oBubbaUnk104 > 12) {
+            o->header.gfx.node.flags &= 0x0001;
+            o->activeFlags = 0;
+            PlaySound2(SOUND_OBJ_ENEMY_DEATH_LOW);
+            func_802A3004();
+            spawn_object_loot_yellow_coins(o, o->oNumLootCoins, 50.0f);
+        }
+        o->oFaceAngleRoll -= 0x800;
+        o->oBubbaUnk104++;
+        obj_move_standard(-78);
+
+    } else {
+        o->oPosX = o->oHomeX + sins(o->oSushiSharkUnkF4) * 100.0f;
+        o->oPosZ = o->oHomeZ + coss(o->oSushiSharkUnkF4) * 1200.0f;
+        o->oMoveAngleYaw = o->oSushiSharkUnkF4 + 0x4000;
+        o->oSushiSharkUnkF4 += 0x100;
+        o->oFaceAnglePitch = 0;
+        o->oTimer = 0;
+        if (o->oDistanceToMario < 200.0f && (gMarioState->action == ACT_DASH_ATTACK || gMarioState->action == ACT_DASH_ATTACK_END)) {
+            o->oAction = 1;
+            o->oMoveAngleYaw = o->oAngleToMario;
+            o->oForwardVel = -30.0f;
+            obj_become_intangible();
+        }
     }
+    obj_update_floor_and_walls();
 }
