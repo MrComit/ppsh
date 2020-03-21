@@ -205,6 +205,10 @@ u32 determine_interaction(struct MarioState *m, struct Object *o) {
         }
     }
 
+    if (m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
+        interaction = INT_SLIDE_KICK;
+    }
+
     if (interaction == 0 && (action & ACT_FLAG_AIR)) {
         if (m->vel[1] < 0.0f) {
             if (m->pos[1] > o->oPosY) {
@@ -715,10 +719,10 @@ u32 interact_coin(struct MarioState *m, UNUSED u32 interactType, struct Object *
 
     o->oInteractStatus = INT_STATUS_INTERACTED;
 
-    if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && m->numCoins - o->oDamageOrCoinValue < 100
+    /*if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && m->numCoins - o->oDamageOrCoinValue < 100
         && m->numCoins >= 100) {
         bhv_spawn_star_no_level_exit(6);
-    }
+    }*/
 
     return FALSE;
 }

@@ -1,5 +1,5 @@
 #include <ultra64.h>
-
+#include "PR/gbi.h"
 #include "sm64.h"
 #include "rendering_graph_node.h"
 #include "mario_misc.h"
@@ -8,6 +8,9 @@
 #include "camera.h"
 #include "envfx_snow.h"
 #include "level_geo.h"
+#include "levels/bob/header.h"
+#include "level_update.h"
+#include "audio/external.h"
 
 /**
  * Geo function that generates a displaylist for environment effects such as
@@ -74,4 +77,68 @@ Gfx *geo_skybox_main(s32 callContext, struct GraphNode *node, UNUSED Mat4 *mtx) 
                             gLakituState.focus[1], gLakituState.focus[2]);
     }
     return gfx;
+}
+
+
+
+u8 gLightColor = 0x00;
+u8 gLightAction = 0x00;
+u8 gLightApproach = 0x00;
+u8 gLightSpeed = 0x00;
+u32 gLightTimer = 0x00;
+
+
+//#define COL gColColor
+
+//#define gdSPChangeLights0(ar,ag,ab) gdSPDefLights0(ar, ag, ab);
+
+Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
+    Lights0 *light;
+    Lights0 newLight = gdSPDefLights0(0x40, 0x40, 0x40);
+    if (sCurrPlayMode == 0) {
+        newLight.a.l.col[0] = gLightColor;
+        newLight.a.l.col[1] = gLightColor;
+        newLight.a.l.col[2] = gLightColor;
+        light = segmented_to_virtual(&bob_Rocks_lights);
+        *light = newLight;
+        gLightTimer++;
+
+        gLightColor = approach_s16_symmetric(gLightColor, gLightApproach, gLightSpeed);
+        switch (gLightAction) {
+            case 0:
+                gLightApproach = 0xA;
+                gLightSpeed = 0x4;
+                if (gLightTimer > 75) {
+                    gLightAction++;
+                    gLightTimer = 0;
+                    play_sound(SOUND_MENU_CLICK_CHANGE_VIEW, gDefaultSoundArgs);
+                }
+                break;
+            case 1:
+            case 2:
+            case 3:
+                if (gLightTimer > 15) {
+                    play_sound(SOUND_MENU_CLICK_CHANGE_VIEW, gDefaultSoundArgs);
+                    gLightTimer = 0;
+                    gLightAction++;
+                }
+                break;
+            case 4:
+                gLightApproach = 0xEF;
+                gLightSpeed = 0x40;
+            
+                if (gLightColor == gLightApproach) {
+                    gLightTimer = 0;
+                    gLightAction = 0;
+                }
+                break;
+
+
+
+
+        }
+
+
+    }
+    return NULL;
 }

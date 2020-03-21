@@ -6066,6 +6066,7 @@ const BehaviorScript bhvKoopaNpc[] = {
     ANIMATE(7),
     SCALE(150),
     SET_INT(oBobombBuddyRole, 0),
+    SET_FLOAT(oDrawingDistance, 0x3000),
     SET_HOME(),
     CALL_NATIVE(bhv_bobomb_buddy_init),
     BEGIN_LOOP(),
@@ -6200,5 +6201,19 @@ const BehaviorScript bhvSpinningRCoin[] = {
         CALL_NATIVE(bhv_spinning_rcoin_loop),
         ADD_INT(oAnimState, 1),
         DROP_TO_FLOOR(),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvPorcupuffer[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x3000),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 200, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    SCALE(20),
+    CALL_NATIVE(bhv_porcupuffer_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_porcupuffer_loop),
     END_LOOP(),
 };

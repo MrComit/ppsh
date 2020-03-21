@@ -10,5 +10,12 @@ struct Struct802761D0
 
 extern Gfx *geo_enfvx_main(s32 a, struct GraphNode *b, f32 c[4][4]);
 extern Gfx *geo_skybox_main(s32 a, struct GraphNode *b, UNUSED Mat4 *c);
+extern Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node);
+
+extern u8 gLightColor;
+extern u8 gLightAction;
+extern u8 gLightApproach;
+extern u8 gLightSpeed;
+extern u32 gLightTimer;
 
 #endif /* _LEVEL_GEO_H */

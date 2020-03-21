@@ -43,4 +43,6 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/header.inc.h"
 
+extern const Lights0 bob_Rocks_lights;
+
 #endif

@@ -9,7 +9,7 @@ struct Object *coin;
     mag = (f32)((o->oBehParams >> 24) & 0xFF) * 20.0f;
     dirAdd = ((o->oBehParams >> 16) & 0xFF) << 4;
 
-    if ((o->oBehParams & 0xFF) == 0) {
+    if ((o->oBehParams & 0xFF00) == 0) {
         coin = spawn_object(o, MODEL_YELLOW_COIN, bhvSpinningYCoin);
     } else {
         coin = spawn_object(o, MODEL_RED_COIN, bhvSpinningRCoin);

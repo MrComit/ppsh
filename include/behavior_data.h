@@ -560,6 +560,7 @@ extern const BehaviorScript bhvBarricade[];
 extern const BehaviorScript bhvSpinningCoins[];
 extern const BehaviorScript bhvSpinningYCoin[];
 extern const BehaviorScript bhvSpinningRCoin[];
+extern const BehaviorScript bhvPorcupuffer[];
 
 
 #endif /* _BEHAVIOR_DATA_H */

@@ -1168,7 +1168,9 @@
 #define /*0x104*/ oCoinDirAdd OBJECT_FIELD_S32(0x1F)
 
 
-
-
+/* koopa npc */
+#define /*0x104*/ oKoopaAction OBJECT_FIELD_S32(0x1F)
+#define /*0x1B0*/ oKoopaRunAngleX OBJECT_FIELD_S16(0x4A, 0)
+#define /*0x1B4*/ oKoopaRunAngleZ OBJECT_FIELD_U32(0x4B)
 
 #endif
