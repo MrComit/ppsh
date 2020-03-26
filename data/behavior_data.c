@@ -4613,6 +4613,7 @@ const BehaviorScript bhvHiddenStarTrigger[] = {
     SET_INT(oIntangibleTimer, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hidden_star_trigger_loop),
+        SPAWN_CHILD_WITH_PARAM(/*Bhv param*/ 0, /*Model*/ MODEL_NONE, /*Behavior*/ bhvSparkleSpawn),
     END_LOOP(),
 };
 
@@ -6215,5 +6216,20 @@ const BehaviorScript bhvPorcupuffer[] = {
     CALL_NATIVE(bhv_porcupuffer_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_porcupuffer_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvFBblock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0xF00),
+    LOAD_COLLISION_DATA(fbblock_collision),
+    CALL_NATIVE(bhv_FBblock_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_FBblock_loop),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

@@ -568,6 +568,9 @@ void bhv_spinning_rcoin_loop(void);
 void bhv_porcupuffer_loop(void);
 void bhv_porcupuffer_init(void);
 
+void bhv_FBblock_loop(void);
+void bhv_FBblock_init(void);
+
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 
 // Bowser

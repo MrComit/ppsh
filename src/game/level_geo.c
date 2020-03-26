@@ -11,6 +11,7 @@
 #include "levels/bob/header.h"
 #include "level_update.h"
 #include "audio/external.h"
+#include "audio/data.h"
 
 /**
  * Geo function that generates a displaylist for environment effects such as
@@ -81,7 +82,7 @@ Gfx *geo_skybox_main(s32 callContext, struct GraphNode *node, UNUSED Mat4 *mtx) 
 
 
 
-u8 gLightColor = 0x00;
+u8 gLightColor = 0xEF;
 u8 gLightAction = 0x00;
 u8 gLightApproach = 0x00;
 u8 gLightSpeed = 0x00;
@@ -94,31 +95,56 @@ u32 gLightTimer = 0x00;
 
 Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
     Lights0 *light;
-    Lights0 newLight = gdSPDefLights0(0x40, 0x40, 0x40);
+    Lights0 *light2;
+    Lights0 newLight = gdSPDefLights0(0xEF, 0xEF, 0xEF);
+
     if (sCurrPlayMode == 0) {
         newLight.a.l.col[0] = gLightColor;
         newLight.a.l.col[1] = gLightColor;
         newLight.a.l.col[2] = gLightColor;
         light = segmented_to_virtual(&bob_Rocks_lights);
         *light = newLight;
-        gLightTimer++;
+        light2 = segmented_to_virtual(&bob_Rocks2_lights);
+        *light2 = newLight;
 
         gLightColor = approach_s16_symmetric(gLightColor, gLightApproach, gLightSpeed);
+        /*switch (gLightAction) {
+            case 0:
+                gLightApproach = 0xB;
+                gLightSpeed = 0x4;   
+                if ((gAudioFrameCount & 0xFF) % 240 == 0) {
+                    gLightAction = 1;
+                }
+                break;
+            case 1:
+                gLightApproach = 0xEF;
+                gLightSpeed = 0x40;
+            
+                if (gLightTimer > 2) {
+                    gLightTimer = 0;
+                    gLightAction = 0;
+                }
+                gLightTimer++;
+                break;
+        }*/
+
+
+
         switch (gLightAction) {
             case 0:
-                gLightApproach = 0xA;
+                gLightApproach = 0xB;
                 gLightSpeed = 0x4;
-                if (gLightTimer > 75) {
+                if (gLightTimer > 74) {
                     gLightAction++;
                     gLightTimer = 0;
-                    play_sound(SOUND_MENU_CLICK_CHANGE_VIEW, gDefaultSoundArgs);
+                    play_sound(SOUND_LIGHT_TICK, gDefaultSoundArgs);
                 }
                 break;
             case 1:
             case 2:
             case 3:
-                if (gLightTimer > 15) {
-                    play_sound(SOUND_MENU_CLICK_CHANGE_VIEW, gDefaultSoundArgs);
+                if (gLightTimer > 14) {
+                    play_sound(SOUND_LIGHT_TICK, gDefaultSoundArgs);
                     gLightTimer = 0;
                     gLightAction++;
                 }
@@ -127,18 +153,15 @@ Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
                 gLightApproach = 0xEF;
                 gLightSpeed = 0x40;
             
-                if (gLightColor == gLightApproach) {
-                    gLightTimer = 0;
+                if (gLightTimer > 2) {
+                    //gLightTimer = 0;
                     gLightAction = 0;
                 }
                 break;
 
-
-
-
         }
 
-
+    gLightTimer++;
     }
     return NULL;
 }

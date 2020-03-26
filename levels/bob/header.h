@@ -12,6 +12,9 @@
 #include "levels/bob/barricade/collision_declarations.h"
 #include "levels/bob/barricade/geo_declarations.h"
 
+#include "levels/bob/FBblock/collision_header.h"
+#include "levels/bob/FBblock/geo_header.h"
+
 // geo
 extern const GeoLayout bob_geo_000440[];
 extern const GeoLayout bob_geo_000458[];
@@ -44,5 +47,6 @@ extern const LevelScript level_bob_entry[];
 #include "levels/bob/header.inc.h"
 
 extern const Lights0 bob_Rocks_lights;
+extern const Lights0 bob_Rocks2_lights;
 
 #endif
