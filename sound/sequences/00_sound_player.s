@@ -7844,7 +7844,7 @@ chan_end
   chan_setnotepriority 14
   chan_setpanmix 0
   chan_ioreadval 4
-  chan_subtract 0x30
+  chan_subtract 0x32
   chan_readseq .major_scale
   chan_writeseq 0, .layer_31A0, 1
   chan_setlayer 0, .layer_31A0

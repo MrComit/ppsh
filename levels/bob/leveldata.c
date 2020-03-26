@@ -38,3 +38,7 @@
 #include "levels/bob/barricade/model.inc.c"
 #include "levels/bob/barricade/collision_declarations.h"
 #include "levels/bob/barricade/collision.inc.c"
+
+#include "levels/bob/FBblock/model.inc.c"
+#include "levels/bob/FBblock/collision_header.h"
+#include "levels/bob/FBblock/collision.inc.c"

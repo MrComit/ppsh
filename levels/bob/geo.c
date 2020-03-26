@@ -25,3 +25,6 @@
 
 #include "levels/bob/barricade/geo_declarations.h"
 #include "levels/bob/barricade/geo.inc.c"
+
+#include "levels/bob/FBblock/geo_header.h"
+#include "levels/bob/FBblock/geo.inc.c"

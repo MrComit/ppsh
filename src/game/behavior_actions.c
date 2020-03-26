@@ -294,3 +294,4 @@ void func_802B2328(s32 n, s32 a1, s32 a2, s32 r) {
 #include "behaviors/construction.inc.c"
 #include "behaviors/barricade.inc.c"
 #include "behaviors/spinning_coins.inc.c"
+#include "behaviors/FBblock.inc.c"

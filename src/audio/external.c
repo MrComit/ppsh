@@ -466,6 +466,7 @@ u8 sBackgroundMusicDefaultVolume[] = {
     70,  // SEQ_EVENT_CUTSCENE_ENDING
     65,  // SEQ_MENU_FILE_SELECT
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
+    75,
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,
@@ -480,12 +481,14 @@ u8 sMaxChannelsForSoundBank[SOUND_BANK_COUNT] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
 
 // Banks 2 and 7 both grew from 0x30 sounds to 0x40 in size in US.
 #ifdef VERSION_JP
-#define BANK27_SIZE 0x30
+#define BANK2_SIZE 0x30
+#define BANK7_SIZE 0x30
 #else
-#define BANK27_SIZE 0x40
+#define BANK2_SIZE 0x40
+#define BANK7_SIZE 0x42
 #endif
 u8 sNumSoundsPerBank[SOUND_BANK_COUNT] = {
-    0x70, 0x30, BANK27_SIZE, 0x80, 0x20, 0x80, 0x20, BANK27_SIZE, 0x80, 0x80,
+    0x70, 0x30, BANK2_SIZE, 0x80, 0x20, 0x80, 0x20, BANK7_SIZE, 0x80, 0x80,
 };
 #undef BANK27_SIZE
 

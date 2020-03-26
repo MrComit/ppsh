@@ -212,7 +212,7 @@ void func_8027A7C4(void) {
 }
 
 void load_area(s32 index) {
-    gLightColor = 0x00;
+    gLightColor = 0xEF;
     gLightAction = 0x00;
     gLightApproach = 0x00;
     gLightSpeed = 0x00;
