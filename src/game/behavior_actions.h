@@ -551,6 +551,9 @@ void bhvLllVolcanoFallingTrap_loop(void);
 /* custom */
 void bhv_koopa_npc_loop(void);
 void koopa_the_wimp_loop(void);
+void koopa_the_sick_loop(void);
+void bhv_koopa_npc_init(void);
+void koopa_the_mechanic_loop(void);
 
 void bhv_star_piece_loop(void);
 void bhv_star_piece_switch_loop(void);
@@ -570,6 +573,8 @@ void bhv_porcupuffer_init(void);
 
 void bhv_FBblock_loop(void);
 void bhv_FBblock_init(void);
+
+void bhv_ii_bridge_loop(void);
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 

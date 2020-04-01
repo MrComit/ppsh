@@ -15,6 +15,12 @@
 #include "levels/bob/FBblock/collision_header.h"
 #include "levels/bob/FBblock/geo_header.h"
 
+#include "levels/bob/palmtree/collision_header.h"
+#include "levels/bob/palmtree/geo_header.h"
+
+#include "levels/bob/bridge/collision_header.h"
+#include "levels/bob/bridge/geo_header.h"
+
 // geo
 extern const GeoLayout bob_geo_000440[];
 extern const GeoLayout bob_geo_000458[];

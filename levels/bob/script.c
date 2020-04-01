@@ -79,6 +79,8 @@ const LevelScript level_bob_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_CONSTRUCTION, construction_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BARRICADE, barricade_geo),
     LOAD_MODEL_FROM_GEO(MODEL_FBblock, FBblock_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_PALM_TREE, palmtree_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BRIDGE, bridge_geo),
 
     //AREA(/*index*/ 1, bob_geo_000488),
 //        JUMP_LINK(script_func_local_1),

@@ -53,26 +53,27 @@ void bhv_red_coin_loop(void) {
     // If Mario interacted with the object...
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         // ...and there is a red coin star in the level...
-        if (o->parentObj != NULL) {
+        //if (o->parentObj != NULL) {
             // ...increment the star's counter.
-            o->parentObj->oHiddenStarTriggerCounter++;
+            //o->parentObj->oHiddenStarTriggerCounter++;
+            gRedCoinsCollected++;
 
             // For JP version, play an identical sound for all coins.
 #ifdef VERSION_JP
             create_sound_spawner(SOUND_GENERAL_RED_COIN);
 #endif
             // Spawn the orange number counter, as long as it isn't the last coin.
-            if (o->parentObj->oHiddenStarTriggerCounter != 8) {
-                spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
+            if (gRedCoinsCollected != 8) {
+                spawn_orange_number(gRedCoinsCollected, 0, 0, 0);
             }
 
             // On all versions but the JP version, each coin collected plays a higher noise.
 #ifndef VERSION_JP
             play_sound(SOUND_MENU_COLLECT_RED_COIN
-                           + (((u8) o->parentObj->oHiddenStarTriggerCounter - 1) << 16),
+                           + (((u8) gRedCoinsCollected - 1) << 16),
                        gDefaultSoundArgs);
 #endif
-        }
+        //}
 
         CoinCollected();
         // Despawn the coin.
@@ -84,15 +85,16 @@ void bhv_red_coin_loop(void) {
 void bhv_spinning_rcoin_loop(void) {
     obj_set_behavior(bhvRedCoin);
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-        if (o->parentObj != NULL) {
-            o->parentObj->oHiddenStarTriggerCounter++;
-            if (o->parentObj->oHiddenStarTriggerCounter != 8) {
-                spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
+        //if (o->parentObj != NULL) {
+            //o->parentObj->oHiddenStarTriggerCounter++;
+            gRedCoinsCollected++;
+            if (gRedCoinsCollected != 8) {
+                spawn_orange_number(gRedCoinsCollected, 0, 0, 0);
             }
             play_sound(SOUND_MENU_COLLECT_RED_COIN
-                           + (((u8) o->parentObj->oHiddenStarTriggerCounter - 1) << 16),
+                           + (((u8) gRedCoinsCollected - 1) << 16),
                        gDefaultSoundArgs);
-        }
+        //}
         CoinCollected();
         o->oInteractStatus = 0;
     }

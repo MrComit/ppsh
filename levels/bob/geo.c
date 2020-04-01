@@ -28,3 +28,10 @@
 
 #include "levels/bob/FBblock/geo_header.h"
 #include "levels/bob/FBblock/geo.inc.c"
+
+#include "levels/bob/palmtree/geo_header.h"
+#include "levels/bob/palmtree/geo.inc.c"
+
+#include "levels/bob/bridge/geo_header.h"
+#include "levels/bob/bridge/geo.inc.c"
+

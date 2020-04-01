@@ -5,7 +5,7 @@ static struct ObjectHitbox sBubbaHitbox = {
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
     /* health:            */ 99,
-    /* numLootCoins:      */ 3,
+    /* numLootCoins:      */ 1,
     /* radius:            */ 600,
     /* height:            */ 400,
     /* hurtboxRadius:     */ 450,
@@ -120,7 +120,7 @@ void bhv_bubba_loop(void) {
             o->activeFlags = 0;
             PlaySound2(SOUND_OBJ_ENEMY_DEATH_LOW);
             func_802A3004();
-            spawn_object_loot_yellow_coins(o, o->oNumLootCoins, 50.0f);
+            //spawn_object_loot_yellow_coins(o, o->oNumLootCoins, 50.0f);
         }
         o->oFaceAngleRoll -= 0x800;
         o->oBubbaUnk104++;
@@ -226,7 +226,7 @@ void bhv_porcupuffer_loop(void) {
             o->activeFlags = 0;
             PlaySound2(SOUND_OBJ_ENEMY_DEATH_LOW);
             func_802A3004();
-            spawn_object_loot_yellow_coins(o, o->oNumLootCoins, 50.0f);
+            //spawn_object_loot_yellow_coins(o, o->oNumLootCoins, 50.0f);
         }
         o->oFaceAngleRoll -= 0x800;
         o->oBubbaUnk104++;

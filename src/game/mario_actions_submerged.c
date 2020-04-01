@@ -266,10 +266,11 @@ static void update_swimming_speed(struct MarioState *m, f32 decelThreshold) {
 }
 
 static void update_swimming_yaw(struct MarioState *m) {
-    s16 incdec = 0x140;
+    s16 inc = 0x100;
+    s16 dec = 0x400;
     s16 targetYawVel;
     if (m->action == ACT_FLUTTER_KICK) {
-        targetYawVel = -(s16)(20.0f * m->controller->stickX);
+        targetYawVel = -(s16)(18.0f * m->controller->stickX);
         //targetYawVel = -(s16)(10.0f * m->controller->stickX);
     } else if (m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
         targetYawVel = -(s16)(15.0f * m->controller->stickX);
@@ -280,13 +281,13 @@ static void update_swimming_yaw(struct MarioState *m) {
     if (targetYawVel > 0) {
         if (m->angleVel[1] < 0) {
             if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
-                m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, incdec, incdec);
+                m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, dec, dec);
             } else {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, 0x20, 0x10);
             }
         } else {
             if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
-                m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, incdec, incdec);
+                m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, inc, inc);
             } else {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, 0x10, 0x20);
             }
@@ -294,20 +295,20 @@ static void update_swimming_yaw(struct MarioState *m) {
     } else if (targetYawVel < 0) {
         if (m->angleVel[1] > 0) {
             if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
-                m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, incdec, incdec);
+                m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, dec, dec);
             } else {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, 0x20, 0x10);
             }
         } else {
             if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
-                m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, incdec, incdec);
+                m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, inc, inc);
             } else {
                 m->angleVel[1] = approach_s32(m->angleVel[1], targetYawVel, 0x20, 0x10);
             }
         }
     } else {
         if (m->action == ACT_FLUTTER_KICK || m->action == ACT_DASH_ATTACK || m->action == ACT_DASH_ATTACK_END) {
-            m->angleVel[1] = approach_s32(m->angleVel[1], 0, incdec, incdec);
+            m->angleVel[1] = approach_s32(m->angleVel[1], 0, dec, dec);
         } else {
             m->angleVel[1] = approach_s32(m->angleVel[1], 0, 0x40, 0x40);
         }
@@ -319,7 +320,7 @@ static void update_swimming_yaw(struct MarioState *m) {
     } else {
         m->faceAngle[2] = -m->angleVel[1] * 8;
     }*/
-    m->faceAngle[2] = -m->angleVel[1] * 8;
+    m->faceAngle[2] = -m->angleVel[1] * 2;
 }
 
 static void update_swimming_pitch(struct MarioState *m) {
@@ -711,6 +712,7 @@ static s32 act_flutter_kick(struct MarioState *m) {
         if (m->faceAngle[0] < -0x3000) {
             m->faceAngle[0] = -0x3000;
             m->forwardVel += 15.0f;
+            m->forwardVel *= 2;
         }
         m->vel[1] = m->forwardVel * sins(m->faceAngle[0]);
         return set_mario_action(m, ACT_DOLPHIN_JUMP, 0);
@@ -1668,6 +1670,7 @@ s16 wallDYaw;
         if (m->faceAngle[0] < -0x3000) {
             m->faceAngle[0] = -0x3000;
             m->forwardVel += 15.0f;
+            m->forwardVel *= 2;
         }
         m->vel[1] = m->forwardVel * sins(m->faceAngle[0]);
         return set_mario_action(m, ACT_DOLPHIN_JUMP, 0);
@@ -1712,6 +1715,7 @@ s16 wallDYaw;
         if (m->faceAngle[0] < -0x3000) {
             m->faceAngle[0] = -0x3000;
             m->forwardVel += 15.0f;
+            m->forwardVel *= 2;
         }
         m->vel[1] = m->forwardVel * sins(m->faceAngle[0]);
         set_mario_animation(m, MARIO_ANIM_DASH_ATTACK);

@@ -13,7 +13,7 @@ const MacroObject bob_area_4_Area_4_macro_objs[] = {
 	MACRO_OBJECT(macro_coin_ring_horizontal, -177, -673, -234, 1841),
 	MACRO_OBJECT(macro_coin_line_horizontal, -155, -87, -234, -4921),
 	MACRO_OBJECT(macro_coin_line_horizontal, 162, -84, -234, -3450),
-	MACRO_OBJECT(macro_coin_line_horizontal, -162, -49, -234, 6907),
+	MACRO_OBJECT(macro_coin_line_horizontal, -162, -142, -234, 6656),
 	MACRO_OBJECT(macro_fire_fly_guy, 0, 429, 23, 8191),
 	MACRO_OBJECT(macro_fire_fly_guy, 0, -749, 23, -3734),
 	MACRO_OBJECT(macro_fire_fly_guy, 0, 493, 23, -4365),

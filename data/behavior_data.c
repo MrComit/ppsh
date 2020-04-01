@@ -796,6 +796,7 @@ const BehaviorScript bhvWarp[] = {
 const BehaviorScript bhvWarpPipe[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
     SET_INT(oInteractType, INTERACT_WARP),
     LOAD_COLLISION_DATA(warp_pipe_seg3_collision_03009AC8),
     SET_FLOAT(oDrawingDistance, 16000),
@@ -4083,12 +4084,13 @@ const BehaviorScript bhvJetStreamWaterRing[] = {
 
 const BehaviorScript bhvMantaRayWaterRing[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     LOAD_ANIMATIONS(oAnimations, water_ring_seg6_anims_06013F7C),
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 75, /*Height*/ 20, /*Downwards offset*/ 20),
     SET_INTERACT_TYPE(INTERACT_WATER_RING),
     SET_INT(oDamageOrCoinValue, 2),
     SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oDrawingDistance, 5000),
     CALL_NATIVE(bhv_manta_ray_water_ring_init),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
@@ -6070,6 +6072,7 @@ const BehaviorScript bhvKoopaNpc[] = {
     SET_FLOAT(oDrawingDistance, 0x3000),
     SET_HOME(),
     CALL_NATIVE(bhv_bobomb_buddy_init),
+    CALL_NATIVE(bhv_koopa_npc_init),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
         CALL_NATIVE(bhv_koopa_npc_loop),
@@ -6210,7 +6213,7 @@ const BehaviorScript bhvPorcupuffer[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
-    SET_FLOAT(oDrawingDistance, 0x3000),
+    SET_FLOAT(oDrawingDistance, 0x1400),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 200, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
     SCALE(20),
     CALL_NATIVE(bhv_porcupuffer_init),
@@ -6230,6 +6233,28 @@ const BehaviorScript bhvFBblock[] = {
     CALL_NATIVE(bhv_FBblock_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_FBblock_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvPalmTree[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0xF00),
+    LOAD_COLLISION_DATA(palmtree_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvIIBridge[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_FLOAT(oDrawingDistance, 0x7000),
+    SET_FLOAT(oCollisionDistance, 0x7000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_ii_bridge_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
