@@ -332,78 +332,39 @@ showing a website you've\n\
 never heard of - 4Chan.\n\
 >tfw no koopa gf"))
 
-DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
-Good afternoon. The\n\
-Lakitu Bros., here,\n\
-reporting live from just\n\
-outside the Princess's\n\
-castle.\n\
-\n\
-Mario has just arrived\n\
-on the scene, and we'll\n\
-be filming the action live\n\
-as he enters the castle\n\
-and pursues the missing\n\
-Power Stars.\n\
-As seasoned cameramen,\n\
-we'll be shooting from the\n\
-recommended angle, but\n\
-you can change the\n\
-camera angle by pressing\n\
-the [C] Buttons.\n\
-If we can't adjust the\n\
-view any further, we'll\n\
-buzz. To take a look at\n\
-the surroundings, stop\n\
-and press [C]^.\n\
-\n\
-Press [A] to resume play.\n\
-Switch camera modes with\n\
-the [R] Button. Signs along\n\
-the way will review these\n\
-instructions.\n\
-\n\
-For now, reporting live,\n\
-this has been the\n\
-Lakitu Bros."))
+DEFINE_DIALOG(DIALOG_034, 1, 5, 30, 200, _("\
+There was gonna be a\n\
+sick ass squid boss\n\
+fight here with like\n\
+tentacles and you had\n\
+to like throw clams at\n\
+him or something but i\n\
+couldnt figure out how\n\
+to program it so i put\n\
+this here instead."))
 
 DEFINE_DIALOG(DIALOG_035, 1, 5, 30, 200, _("\
-There are four camera, or\n\
-『[C],』 Buttons. Press [C]^\n\
-to look around using the\n\
-Control Stick.\n\
+Hey hey hey! It's me!\n\
+Koopa the SICK! If you\n\
+wanna get coochie, you\n\
+gotta get RADICAL.\n\
 \n\
-You'll usually see Mario\n\
-through Lakitu's camera.\n\
-It is the camera\n\
-recommended for normal\n\
-play.\n\
-You can change angles by\n\
-pressing [C]>. If you press\n\
-[R], the view switches to\n\
-Mario's camera, which\n\
-is directly behind him.\n\
-Press [R] again to return\n\
-to Lakitu's camera. Press\n\
-[C]| to see Mario from\n\
-afar, using either\n\
-Lakitu's or Mario's view."))
+If you prove yourself\n\
+as a swimming master,\n\
+you're sure to get that\n\
+coochie!\n\
+\n\
+Try swimming through 20\n\
+of my rings in under 30\n\
+seconds and I'll give\n\
+you something special!\n\
+//Yes////No"))
 
-DEFINE_DIALOG(DIALOG_036, 1, 5, 30, 200, _("\
-OBSERVATION PLATFORM\n\
-Press [C]^ to take a look\n\
-around. Don't miss\n\
-anything!\n\
-\n\
-Press [R] to switch to\n\
-Mario's camera. It\n\
-always follows Mario.\n\
-Press [R] again to switch\n\
-to Lakitu's camera.\n\
-Pause the game and\n\
-switch the mode to 『fix』\n\
-the camera in place while\n\
-holding [R]. Give it a try!"))
+DEFINE_DIALOG(DIALOG_036, 1, 4, 30, 200, _("\
+Mario, Thank you for\n\
+saving me! Please take\n\
+this as a token of my\n\
+gratitude!"))
 
 DEFINE_DIALOG(DIALOG_037, 1, 2, 30, 200, _("\
 I win! You lose!\n\
@@ -418,31 +379,28 @@ power, the door slowly\n\
 opens."))
 
 DEFINE_DIALOG(DIALOG_039, 1, 4, 30, 200, _("\
-No visitors allowed,\n\
-by decree of\n\
-the Big Bob-omb\n\
-\n\
-I shall never surrender my\n\
-Stars, for they hold the\n\
-power of the castle in\n\
-their glow.\n\
-They were a gift from\n\
-Bowser, the Koopa King\n\
-himself, and they lie well\n\
-hidden within my realm.\n\
-Not a whisper of their\n\
-whereabouts shall leave\n\
-my lips. Oh, all right,\n\
-perhaps one hint:\n\
-Heed the Star names at\n\
-the beginning of the\n\
-course.\n\
-//--The Big Bob-omb"))
+It's not safe for us to be\n\
+underwater. The sea is too\n\
+infested with ferocious \n\
+Porcupuffers!\n\
+Poor Koopa the Wimp fell\n\
+into the water 2 weeks\n\
+ago and no one is brave\n\
+enough to save him."))
 
-DEFINE_DIALOG(DIALOG_040, 1, 3, 30, 200, _("\
-Warning!\n\
-Cold, Cold Crevasse\n\
-Below!"))
+DEFINE_DIALOG(DIALOG_040, 1, 4, 30, 180, _("\
+Welcome to our Island\n\
+Mario! Things haven't\n\
+been the best here,\n\
+though.\n\
+Nowadays most of the\n\
+koopas here just stay\n\
+inside their houses all\n\
+day, only coming\n\
+outside to throw their\n\
+trash into the sea.\n\
+And some don't even\n\
+do that!"))
 
 DEFINE_DIALOG(DIALOG_041, 1, 3, 30, 200, _("\
 I win! You lose!\n\
@@ -453,30 +411,32 @@ messin' with Koopa the\n\
 Quick.\n\
 Better luck next time!"))
 
-DEFINE_DIALOG(DIALOG_042, 1, 4, 30, 200, _("\
-Caution! Narrow Bridge!\n\
-Cross slowly!\n\
+DEFINE_DIALOG(DIALOG_042, 1, 3, 30, 200, _("\
+Ah! You've found me!\n\
 \n\
 \n\
-You can jump to the edge\n\
-of the cliff and hang on,\n\
-and you can climb off the\n\
-edge if you move slowly.\n\
-When you want to let go,\n\
-either press [Z] or press\n\
-the Control Stick in the\n\
-direction of Mario's back.\n\
-To climb up, press Up on\n\
-the Control Stick. To\n\
-scurry up quickly, press\n\
-the [A] Button."))
+Now I can finally go\n\
+fix that bridge that's\n\
+been out all this time!\n\
+Thank you Mario, please\n\
+take this!"))
 
 DEFINE_DIALOG(DIALOG_043, 1, 5, 30, 200, _("\
-If you jump and hold the\n\
-[A] Button, you can hang on\n\
-to some objects overhead.\n\
-It's the same as grabbing\n\
-a flying bird!"))
+The bridge has been out\n\
+for days now, and no one\n\
+has been able to travel\n\
+to Cuck Canyon since!\n\
+\n\
+I called a repairman to\n\
+come and fix it, but he\n\
+somehow managed to get\n\
+himself trapped in the\n\
+tower...\n\
+We rely on trucks from\n\
+the canyon to deliver us\n\
+our fedoras and cum socks.\n\
+Can you please help us find\n\
+him Mario?"))
 
 DEFINE_DIALOG(DIALOG_044, 1, 5, 95, 200, _("\
 Whooo's there? Whooo\n\

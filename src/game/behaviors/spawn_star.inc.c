@@ -187,22 +187,38 @@ void bhv_hidden_red_coin_star_init(void) {
 }
 
 void bhv_hidden_red_coin_star_loop(void) {
-    gRedCoinsCollected = o->oHiddenStarTriggerCounter;
+    //gRedCoinsCollected = o->oHiddenStarTriggerCounter;
+    struct Object *sp1C;
+
+    /*if (gRedCoinsCollected != 8) {
+        o->oTimer = 0;
+    }
+    if (o->oTimer > 2) {
+        //func_802F1B84(o->oPosX, o->oPosY, o->oPosZ);
+        sp1C = func_802F1A50(sp1C, o->oPosX, o->oPosY, o->oPosZ);
+        sp1C->oBehParams2ndByte = 1;
+        func_802A3004();
+        //o->activeFlags = 0; 
+    }*/
+
     switch (o->oAction) {
         case 0:
-            if (o->oHiddenStarTriggerCounter == 8)
+            if (gRedCoinsCollected == 8)
                 o->oAction = 1;
             break;
 
         case 1:
             if (o->oTimer > 2) {
-                func_802F1B84(o->oPosX, o->oPosY, o->oPosZ);
-                func_802A3004();
+                sp1C = func_802F1A50(sp1C, o->oPosX, o->oPosY, o->oPosZ);
+                sp1C->oBehParams2ndByte = 1;
                 //o->activeFlags = 0;
                 o->oAction = 2;
             }
             break;
         case 2:
+            if (sp1C == NULL) {
+                o->activeFlags = 0;
+            }
             break;
     }
 }

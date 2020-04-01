@@ -15,7 +15,7 @@ void bhv_warp_loop(void) {
     o->oInteractStatus = 0;
 
     if ((((o->oBehParams >> 8) & 0xFF) != 0) && obj_has_behavior(bhvWarpPipe)) {
-        if ((o->oTimer > 20) && o->oPosY < o->oHomeY - 200.0f) {
+        if ((o->oTimer > 20) && o->oPosY > o->oHomeY - 250.0f) {
             o->oPosY -= 10.0f;
         }
     }

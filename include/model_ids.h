@@ -598,6 +598,9 @@
 #define MODEL_CONSTRUCTION 0xFE
 #define MODEL_BARRICADE 0xFD
 #define MODEL_FBblock 0xFC
+#define MODEL_PALM_TREE 0xFB
+#define MODEL_II_WATER_RING 0xFA
+#define MODEL_BRIDGE 0xF9
 
 // custom cuck canyon
 

@@ -993,6 +993,7 @@ s32 play_mode_normal(void) {
         } else if (pressed_paused()) {
             func_80248C28(1);
             gCameraMovementFlags |= CAM_MOVE_PAUSE_SCREEN;
+            gUnderwaterCam = FALSE;
             set_play_mode(PLAY_MODE_PAUSED);
         }
     }

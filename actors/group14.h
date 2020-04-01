@@ -133,4 +133,9 @@ extern const Gfx whomp_seg6_dl_06020038[];
 extern const struct Animation *const whomp_seg6_anims_06020A04[];
 extern const s16 whomp_seg6_collision_06020A0C[];
 
+// water ring
+extern const GeoLayout water_ring_geo[];
+extern const Gfx water_ring_seg6_dl_06013AC0[];
+extern const struct Animation *const water_ring_seg6_anims_06013F7C[];
+
 #endif

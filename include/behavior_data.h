@@ -562,5 +562,7 @@ extern const BehaviorScript bhvSpinningYCoin[];
 extern const BehaviorScript bhvSpinningRCoin[];
 extern const BehaviorScript bhvPorcupuffer[];
 extern const BehaviorScript bhvFBblock[];
+extern const BehaviorScript bhvPalmTree[];
+extern const BehaviorScript bhvIIBridge[];
 
 #endif /* _BEHAVIOR_DATA_H */

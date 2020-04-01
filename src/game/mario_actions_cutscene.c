@@ -645,7 +645,8 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
     } else if (m->actionState == 2 && is_anim_at_end(m)) {
         disable_time_stop();
         func_80248D90();
-        dialogID = get_star_collection_dialog(m);
+        /* DISABLED STAR MILESTONES*/
+        dialogID = 0;//get_star_collection_dialog(m);
         if (dialogID != 0) {
             // look up for dialog
             set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, dialogID);

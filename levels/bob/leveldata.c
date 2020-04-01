@@ -20,6 +20,7 @@
 #include "levels/bob/seesaw_platform/model.inc.c"
 #include "levels/bob/grate_door/model.inc.c"
 #include "levels/bob/areas/1/collision.inc.c"
+//#include "levels/bob/areas/1/collision2.inc.c"
 #include "levels/bob/areas/1/macro.inc.c"
 #include "levels/bob/chain_chomp_gate/collision.inc.c"
 #include "levels/bob/seesaw_platform/collision.inc.c"
@@ -42,3 +43,12 @@
 #include "levels/bob/FBblock/model.inc.c"
 #include "levels/bob/FBblock/collision_header.h"
 #include "levels/bob/FBblock/collision.inc.c"
+
+#include "levels/bob/palmtree/model.inc.c"
+#include "levels/bob/palmtree/collision_header.h"
+#include "levels/bob/palmtree/collision.inc.c"
+
+#include "levels/bob/bridge/model.inc.c"
+#include "levels/bob/bridge/collision_header.h"
+#include "levels/bob/bridge/collision_up.inc.c"
+#include "levels/bob/bridge/collision_down.inc.c"

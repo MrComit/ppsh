@@ -659,6 +659,7 @@ struct LakituState
 // bss order hack to not affect BSS order. if possible, remove me, but it will be hard to match otherwise
 #ifndef INCLUDED_FROM_CAMERA_C
 // BSS
+extern s16 s8DirModeYawOffset;
 extern s16 sSelectionFlags;
 extern s16 sCameraSideCFlags;
 extern s16 sCameraSoundFlags;
