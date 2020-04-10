@@ -21,6 +21,7 @@
 #include "save_file.h"
 #include "camera.h"
 #include "level_geo.h"
+#include "seq_ids.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *D_8033A160[0x100];

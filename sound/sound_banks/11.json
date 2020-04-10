@@ -79,6 +79,18 @@
             [1, 32700],
             [32700, 29430],
             "hang"
+        ],
+        "envelope13": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
+        "envelope14": [
+            [2, 32700],
+            [205, 0],
+            [1, 0],
+            "hang"
         ]
     },
     "instruments": {
@@ -223,6 +235,16 @@
             "sound_lo": "1E",
             "sound": "1F",
             "sound_hi": "20"
+        },
+        "inst12": {
+            "release_rate": 43,
+            "envelope": "envelope13",
+            "sound": "41"
+        },
+        "inst13": {
+            "release_rate": 53,
+            "envelope": "envelope14",
+            "sound": "04"
         }
     },
     "instrument_list": [
@@ -239,6 +261,8 @@
         "inst8",
         "inst9",
         "inst10",
-        "inst11"
+        "inst11",
+        "inst12",
+        "inst13"
     ]
 }

@@ -948,6 +948,9 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
 
     if (gUnderwaterCam){
         c->pos[1] = gMarioState->pos[1] + 400.0f;
+        func_8031FFB4(0, 60, 40);
+    } else {
+        sequence_player_unlower(0, 60);
     }
 
     if (gCurrLevelArea == AREA_DDD_SUB) {
