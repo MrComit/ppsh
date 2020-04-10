@@ -693,7 +693,11 @@ static s32 act_flutter_kick(struct MarioState *m) {
 
     if (m->input & INPUT_Z_DOWN) {
         m->actionTimer = 0;
-        return set_mario_action(m, ACT_DASH_ATTACK, 0);
+        if (m->prevAction == ACT_DOLPHIN_JUMP) {
+            return set_mario_action(m, ACT_DASH_ATTACK, 0);
+        } else {
+            return set_mario_action(m, ACT_DASH_ATTACK, 1);
+        }
     }
 
     if (m->input & INPUT_B_PRESSED) {
@@ -1679,7 +1683,11 @@ s16 wallDYaw;
     //m->faceAngle[2] += 0x1A00;
     m->particleFlags |= PARTICLE_DUST;
     m->particleFlags |= PARTICLE_9;
-    m->forwardVel = approach_f32(m->forwardVel, 70.0f, 10.0f, 1.5f);
+    if (m->actionArg == 0 || m->actionTimer > 1) {
+        m->forwardVel = approach_f32(m->forwardVel, 70.0f, 10.0f, 5.0f);
+    } else {
+        m->forwardVel = 105.0f; //approach_f32(m->forwardVel, 90.0f, 40.0f, 1.5f);
+    }
     sSwimStrength = MIN_SWIM_STRENGTH + 10;
 
     common_swimming_step(m, sSwimStrength);

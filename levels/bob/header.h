@@ -54,5 +54,6 @@ extern const LevelScript level_bob_entry[];
 
 extern const Lights0 bob_Rocks_lights;
 extern const Lights0 bob_Rocks2_lights;
+extern const Gfx mat_bob_sm64_material_water[];
 
 #endif

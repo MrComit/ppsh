@@ -369,6 +369,16 @@ s16 sDynUnk38[] = {
     DYN1(MARIO_IS_IN_AREA, 3, 7),
     0,
 };
+
+s16 sDynII[] = {
+    SEQ_REJECT,
+    DYN1(MARIO_IS_IN_AREA, 3, 8),
+    DYN1(MARIO_Y_LT, -1000, 10),
+    //DYN1(MARIO_IS_IN_AREA, 1, 9),
+    //DYN1(MARIO_IS_IN_AREA, 2, 9),
+    9,
+};
+
 s16 sDynNone[] = { SEQ_SOUND_PLAYER, 0 };
 
 u8 sCurrentMusicDynamic = 0xff;
@@ -395,7 +405,7 @@ struct MusicDynamic {
     /*0xA*/ s16 dur2;
 }; // size = 0xC
 
-struct MusicDynamic sMusicDynamics[8] = {
+struct MusicDynamic sMusicDynamics[11] = {
     { 0x0000, 127, 100, 0x0e43, 0, 100 }, // SEQ_LEVEL_WATER
     { 0x0003, 127, 100, 0x0e40, 0, 100 }, // SEQ_LEVEL_WATER
     { 0x0e43, 127, 200, 0x0000, 0, 200 }, // SEQ_LEVEL_WATER
@@ -404,6 +414,9 @@ struct MusicDynamic sMusicDynamics[8] = {
     { 0x0070, 127, 10, 0x0000, 0, 100 },  // SEQ_LEVEL_SPOOKY
     { 0x0000, 127, 100, 0x0070, 0, 10 },  // SEQ_LEVEL_SPOOKY
     { 0xffff, 127, 100, 0x0000, 0, 100 }, // any (unused)
+    { 0x1C00, 127, 20, 0x00FB, 0, 20 }, // SEQ_REJECT
+    { 0x00FB, 127, 20, 0x1C00, 0, 20 }, // SEQ_REJECT
+    { 0x1C00, 127, 20, 0x0031, 0, 20 }, // SEQ_REJECT
 };
 
 #define STUB_LEVEL(_0, _1, _2, _3, echo1, echo2, echo3, _7, _8) { echo1, echo2, echo3 },
@@ -466,7 +479,8 @@ u8 sBackgroundMusicDefaultVolume[] = {
     70,  // SEQ_EVENT_CUTSCENE_ENDING
     65,  // SEQ_MENU_FILE_SELECT
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
-    75,
+    75, //blinking ballad
+    75, // reject society
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,
@@ -1808,7 +1822,7 @@ void process_level_music_dynamics(void) {
                 }
                 case MARIO_Y_LT: {
                     s16 temp = gMarioStates[0].pos[1];
-                    if (temp >= conditionValues[j])
+                    if (temp >= conditionValues[j] || (gCurrLevelNum == AREA_BOB && gUnderwaterCam == TRUE))
                         j = condIndex + 1;
                     break;
                 }
@@ -1826,6 +1840,12 @@ void process_level_music_dynamics(void) {
                 }
                 case MARIO_IS_IN_ROOM: {
                     // s16 temp = gMarioCurrentRoom;
+                    if (gCurrLevelNum == AREA_BOB) {
+                        if (gUnderwaterCam == TRUE) {
+                            j = condIndex + 1;
+                        }
+                        break;
+                    }
                     if (gMarioCurrentRoom != conditionValues[j])
                         j = condIndex + 1;
                     break;
