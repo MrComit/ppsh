@@ -24,10 +24,10 @@ void play_far_fall_sound(struct MarioState *m) {
     u32 action = m->action;
     if (!(action & ACT_FLAG_INVULNERABLE) && action != ACT_TWIRLING && action != ACT_FLYING
         && !(m->flags & MARIO_UNKNOWN_18)) {
-        if (m->peakHeight - m->pos[1] > 1150.0f) {
-            play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
-            m->flags |= MARIO_UNKNOWN_18;
-        }
+        //if (m->peakHeight - m->pos[1] > 1150.0f) {
+        //    play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
+        //    m->flags |= MARIO_UNKNOWN_18;
+        //}
     }
 }
 
@@ -58,7 +58,8 @@ s32 lava_boost_on_wall(struct MarioState *m) {
 }
 
 s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
-    f32 fallHeight;
+    return FALSE;
+    /*f32 fallHeight;
     f32 damageHeight;
 
     fallHeight = m->peakHeight - m->pos[1];
@@ -91,7 +92,7 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
         }
     }
 
-    return FALSE;
+    return FALSE;*/
 }
 
 s32 check_kick_or_dive_in_air(struct MarioState *m) {
@@ -204,9 +205,16 @@ void update_air_without_turn(struct MarioState *m) {
     f32 dragThreshold;
     s16 intendedDYaw;
     f32 intendedMag;
+    f32 sidewaysMultiplier;
 
     if (!check_horizontal_wind(m)) {
-        dragThreshold = m->action == ACT_LONG_JUMP ? 48.0f : 32.0f;
+        if (m->floor != NULL && m->floor->type != SURFACE_VERTICAL_WIND) {
+            dragThreshold = m->action == ACT_LONG_JUMP ? 48.0f : 32.0f;
+            sidewaysMultiplier = 10.0f;
+        } else {
+            dragThreshold = 64.0f;
+            sidewaysMultiplier = 50.0f;
+        }
         m->forwardVel = approach_f32(m->forwardVel, 0.0f, 0.35f, 0.35f);
 
         if (m->input & INPUT_NONZERO_ANALOG) {
@@ -214,7 +222,7 @@ void update_air_without_turn(struct MarioState *m) {
             intendedMag = m->intendedMag / 32.0f;
 
             m->forwardVel += intendedMag * coss(intendedDYaw) * 1.5f;
-            sidewaysSpeed = intendedMag * sins(intendedDYaw) * 10.0f;
+            sidewaysSpeed = intendedMag * sins(intendedDYaw) * sidewaysMultiplier;
         }
 
         //! Uncapped air speed. Net positive when moving forward.
@@ -354,6 +362,19 @@ void update_flying(struct MarioState *m) {
     m->slideVelZ = m->vel[2];
 }
 
+/*void check_water_dive(struct MarioState *m) {
+    struct Surface *floor;
+    f32 floorHeight;
+    floorHeight = find_floor(m->pos[0], m->pos[1], m->pos[2], &floor);
+    if (floorHeight < m->waterLevel) {
+        m->faceAngle[0] = approach_s16_symmetric(m->faceAngle[0], 0x7000, 0x300);
+        vec3s_set(m->marioObj->header.gfx.angle, m->faceAngle[0], m->faceAngle[1], m->faceAngle[2]);
+        set_mario_animation(m, MARIO_ANIM_FLUTTERKICK);
+    } else {
+        m->faceAngle[0] = 0;
+    }
+}*/
+
 u32 common_air_action_step(struct MarioState *m, u32 landAction, s32 animation, u32 stepArg) {
     u32 stepResult;
 
@@ -438,6 +459,7 @@ s32 act_jump(struct MarioState *m) {
     play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP, 0);
     common_air_action_step(m, ACT_JUMP_LAND, MARIO_ANIM_SINGLE_JUMP,
                            AIR_STEP_CHECK_LEDGE_GRAB | AIR_STEP_CHECK_HANG);
+    //check_water_dive(m);
     return FALSE;
 }
 

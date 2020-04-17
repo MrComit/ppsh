@@ -49,23 +49,60 @@ static void shift_t(Gfx *dl, u32 cmd, u16 t) {
     tile->v += t;
 }
 
+static void shift_st(Gfx *dl, u32 cmd, u16 s, u16 t) {
+    SetTileSize *tile = segmented_to_virtual(dl);
+    tile += cmd;
+    tile->s += s;
+    tile->u += s;
+    tile->t += t;
+    tile->v += t;
+}
+
+
+u16 sTimers[2] = {0, 0};
+
+static void shift_uv(Vtx *vert, u16 vertcount, s16 speed, s8 u, s8 v, u16 timer) {
+    u32 i;
+    Vtx *verts = segmented_to_virtual(vert);
+    for (i = 0; i < vertcount; i++) {
+        if (u)
+            verts[i].n.tc[0] += speed;
+        if (v)
+            verts[i].n.tc[1] += speed;
+    }
+
+    if (sTimers[timer] * absi(speed) > 4096) {
+        for (i = 0; i < vertcount; i++) {
+            if (u)
+                verts[i].n.tc[0] -= 4096 * signum_positive(speed);
+            if (v)
+                verts[i].n.tc[1] -= 4096 * signum_positive(speed);
+        }
+        sTimers[timer] = 0;
+    }
+    sTimers[timer]++;
+}
+
 /**
  * Main scrolling texture function. Call this every frame.
  * Add an entry to the switch (and make sure it's appropiate for the area you want it
  * to be active in, using another switch).
  */
 
+
+extern bob_a1_Sandfloor_001_mesh_vtx;
+extern bob_A3_Water_mesh_vtx;
+
 void rgfx_update_scroll() {
     switch(gCurrLevelNum) {
         case LEVEL_BOB:
             switch(gCurrAreaIndex) {
                 case 1:
-                    shift_s(&mat_bob_sm64_material_water, 19, 1);
-                    shift_t(&mat_bob_sm64_material_water, 19, 1);
+                    //shift_st(&mat_bob_sm64_material_water, 19, 1, 1);
+                    shift_uv(&bob_a1_Sandfloor_001_mesh_vtx, 4, 5, TRUE, FALSE, 0);
                     break;
                 case 3:
-                    shift_s(&mat_bob_sm64_material_water, 19, 0);
-                    shift_t(&mat_bob_sm64_material_water, 19, -1);
+                    shift_uv(&bob_A3_Water_mesh_vtx, 8, -5, FALSE, TRUE, 1);
                     break;
         }
         break;

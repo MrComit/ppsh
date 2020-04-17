@@ -575,6 +575,16 @@ void bhv_FBblock_loop(void);
 void bhv_FBblock_init(void);
 
 void bhv_ii_bridge_loop(void);
+void bhv_mole_npc_loop(void);
+void mole_npc_default_loop(void);
+void mole_npc_act0(void);
+void mole_npc_act1(void);
+void mole_npc_act2(void);
+void mole_npc_act3(void);
+void mole_npc_act4(void);
+void mole_npc_act5(void);
+
+//void bhv_canyon_elevator_loop(void);
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 

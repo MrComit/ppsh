@@ -14,9 +14,16 @@ void bhv_ii_bridge_loop(void) {
             }
             break;
         case 1:
-            if (gMarioObject->platform == o && o->oDistanceToMario > 7000) {
-                o->activeFlags = 0;
+            if (gMarioObject->platform == o && o->oDistanceToMario > 6000) {
+                sDelayedWarpOp = 0x10;
+                sDelayedWarpTimer = 12;
+                sSourceWarpNodeId = 0xAB;
+                func_8024A48C(sSourceWarpNodeId);
+                play_transition(1, 0xC, 0x00, 0x00, 0x00);
+                o->oAction = 2;
             }
+            break;
+        case 2:
             break;
     }
 }

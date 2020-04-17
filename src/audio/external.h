@@ -24,6 +24,11 @@ void sequence_player_fade_out(u8 player, u16 fadeTimer);
 void fade_volume_scale(u8 player, u8 targetScale, u16 fadeTimer);
 void func_8031FFB4(u8 player, u16 fadeTimer, u8 arg2);
 void sequence_player_unlower(u8 player, u16 fadeTimer);
+
+void sequence_underwater(u8 player, u16 fadeTimer, u8 arg2);
+void sequence_abovewater(u8 player, u16 fadeTimer);
+
+
 void set_sound_disabled(u8 disabled);
 void sound_init(void);
 void func_803205E8(u32 soundBits, f32 *vec);

@@ -1,0 +1,16 @@
+const GeoLayout canyon_button_geo[] = {
+	GEO_CULLING_RADIUS(4096),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(1, canyon_button_layer1button_mesh),
+			GEO_DISPLAY_LIST(2, canyon_button_layer2button_mesh),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(0, canyon_button_material_revert_render_settings),
+		GEO_DISPLAY_LIST(1, canyon_button_material_revert_render_settings),
+		GEO_DISPLAY_LIST(2, canyon_button_material_revert_render_settings),
+		GEO_DISPLAY_LIST(3, canyon_button_material_revert_render_settings),
+		GEO_DISPLAY_LIST(4, canyon_button_material_revert_render_settings),
+		GEO_DISPLAY_LIST(5, canyon_button_material_revert_render_settings),
+		GEO_DISPLAY_LIST(6, canyon_button_material_revert_render_settings),
+		GEO_DISPLAY_LIST(7, canyon_button_material_revert_render_settings),
+	GEO_END(),
+};
