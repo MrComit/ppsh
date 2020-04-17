@@ -16229,7 +16229,7 @@ const Gfx bob_a1_sandfloor_visual_mesh[] = {
 
 
 
-static const Vtx bob_a1_Sandfloor_001_mesh_vtx[] = {
+const Vtx bob_a1_Sandfloor_001_mesh_vtx[] = {
 	{{{-27273, 0, 27273},0, {0xE021, 0x23BF},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{27273, 0, 27273},0, {0x23BF, 0x23BF},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{27273, 0, -27273},0, {0x23BF, 0xE021},{0x0, 0x7F, 0x0, 0xFF}}},
@@ -23857,7 +23857,7 @@ const Gfx bob_Table_005_mesh[] = {
 
 
 
-static const Vtx bob_A3_Water_mesh_vtx[] = {
+const Vtx bob_A3_Water_mesh_vtx[] = {
 	{{{0, 339, -10971},0, {0xE6AC, 0x43C4},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{-7758, 339, -7758},0, {0x1D34, 0x43C4},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{-10971, 339, 0},0, {0x43C4, 0x1D34},{0x0, 0x7F, 0x0, 0xFF}}},

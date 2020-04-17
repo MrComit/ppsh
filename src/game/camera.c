@@ -884,6 +884,9 @@ void pan_ahead_of_player(struct Camera *c) {
 }
 
 s16 find_in_bounds_yaw_wdw_bob_thi(Vec3f pos, Vec3f origin, s16 yaw) {
+#ifdef BOUNDS_EXTENSION
+    return yaw;
+#endif
     switch (gCurrLevelArea) {
         case AREA_WDW_MAIN:
             yaw = clamp_positions_and_find_yaw(pos, origin, 4508.f, -3739.f, 4508.f, -3739.f);
@@ -948,9 +951,9 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
 
     if (gUnderwaterCam){
         c->pos[1] = gMarioState->pos[1] + 400.0f;
-        func_8031FFB4(0, 60, 40);
+        sequence_underwater(0, 60, 40);
     } else {
-        sequence_player_unlower(0, 60);
+        sequence_abovewater(0, 60);
     }
 
     if (gCurrLevelArea == AREA_DDD_SUB) {
@@ -4482,9 +4485,9 @@ s32 is_behind_surface(Vec3f pos, struct Surface *surf) {
                 (surf->vertex3[2] - surf->vertex2[2]) * (surf->vertex2[0] - surf->vertex1[0]);
     f32 normZ = (surf->vertex2[0] - surf->vertex1[0]) * (surf->vertex3[1] - surf->vertex2[1]) -
                 (surf->vertex3[0] - surf->vertex2[0]) * (surf->vertex2[1] - surf->vertex1[1]);
-    f32 dirX = surf->vertex1[0] - pos[0];
-    f32 dirY = surf->vertex1[1] - pos[1];
-    f32 dirZ = surf->vertex1[2] - pos[2];
+    f32 dirX = surf->vertex1[0] - pos[0] / BOUNDS_EXTENSION;
+    f32 dirY = surf->vertex1[1] - pos[1] / BOUNDS_EXTENSION;
+    f32 dirZ = surf->vertex1[2] - pos[2] / BOUNDS_EXTENSION;
 
     if (dirX * normX + dirY * normY + dirZ * normZ < 0) {
         behindSurface = 1;
@@ -6419,6 +6422,9 @@ struct CameraTrigger sCamBBH[] = {
  *
  * Each table is terminated with NULL_TRIGGER
  */
+struct CameraTrigger sCamWF[] = {
+	NULL_TRIGGER
+};
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
     NULL,
     #include "levels/level_defines.h"
@@ -6612,7 +6618,7 @@ s16 camera_course_processing(struct Camera *c) {
     if (!(sStatusFlags & CAM_FLAG_BLOCK_AREA_PROCESSING)) {
         switch (gCurrLevelArea) {
             case AREA_WF:
-                if (sMarioCamState->action == ACT_RIDING_HOOT) {
+                /*if (sMarioCamState->action == ACT_RIDING_HOOT) {
                     transition_to_camera_mode(c, CAMERA_MODE_SLIDE_HOOT, 60);
                 } else {
                     switch (sMarioGeometry.currFloorType) {
@@ -6631,7 +6637,7 @@ s16 camera_course_processing(struct Camera *c) {
                         default:
                             set_camera_mode_radial(c, 60);
                     }
-                }
+                }*/
                 break;
 
             case AREA_BBH:

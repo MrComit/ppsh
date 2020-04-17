@@ -564,5 +564,8 @@ extern const BehaviorScript bhvPorcupuffer[];
 extern const BehaviorScript bhvFBblock[];
 extern const BehaviorScript bhvPalmTree[];
 extern const BehaviorScript bhvIIBridge[];
+extern const BehaviorScript bhvMoleNpc[];
+extern const BehaviorScript bhvCanyonElevator[];
+extern const BehaviorScript bhvCanyonButton[];
 
 #endif /* _BEHAVIOR_DATA_H */

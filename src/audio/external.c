@@ -542,6 +542,7 @@ struct SoundCharacteristics gSoundBanks[SOUND_BANK_COUNT][40];
 u8 D_80363808[SOUND_BANK_COUNT];
 u8 D_80363812;
 static u8 sCapVolumeTo40;
+static u8 sCapVolumeTo70;
 struct SequenceQueueItem sBackgroundMusicQueue[MAX_BG_MUSIC_QUEUE_SIZE];
 
 #ifdef VERSION_EU
@@ -1937,6 +1938,30 @@ void sequence_player_unlower(u8 player, u16 fadeTimer) {
     }
 }
 
+void sequence_underwater(u8 player, u16 fadeTimer, u8 arg2) {
+    if (player == 0) {
+        sCapVolumeTo70 = TRUE;
+        func_803200E4(fadeTimer);
+    } else if (gSequencePlayers[player].enabled == TRUE) {
+        func_8031D6E4(player, fadeTimer, arg2);
+    }
+}
+
+
+
+void sequence_abovewater(u8 player, u16 fadeTimer) {
+    sCapVolumeTo70 = FALSE;
+    if (player == 0) {
+        if (gSequencePlayers[player].state != SEQUENCE_PLAYER_STATE_FADE_OUT) {
+            func_803200E4(fadeTimer);
+        }
+    } else {
+        if (gSequencePlayers[player].enabled == TRUE) {
+            func_8031D7B0(player, fadeTimer);
+        }
+    }
+}
+
 // returns fade volume or 0xff for background music
 u8 func_803200E4(u16 fadeTimer) {
     u8 vol = 0xff;
@@ -1963,6 +1988,10 @@ u8 func_803200E4(u16 fadeTimer) {
 
     if (sCapVolumeTo40 && vol > 40) {
         vol = 40;
+    }
+
+    if (sCapVolumeTo70 && vol > 55) {
+        vol = 55;
     }
 
     if (D_80332110 != 0 && vol > 20) {
@@ -2042,6 +2071,7 @@ void sound_init(void) {
     sUnused80332118 = 0;
     D_80363812 = 0;
     sCapVolumeTo40 = FALSE;
+    sCapVolumeTo70 = FALSE;
     D_80332110 = 0;
     sUnused80332114 = 0;
     sPlayer0CurSeqId = 0xff;

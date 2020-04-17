@@ -1601,6 +1601,12 @@ s32 act_putting_on_cap(struct MarioState *m) {
 void stuck_in_ground_handler(struct MarioState *m, s32 animation, s32 unstuckFrame, s32 target2,
                              s32 target3, s32 endAction) {
     s32 animFrame = set_mario_animation(m, animation);
+    if (animFrame < unstuckFrame - 20) {
+        animFrame = unstuckFrame - 20;
+        set_anim_to_frame(m, animFrame);
+    }
+    //animFrame++;
+    //set_anim_to_frame(m, animFrame);
 
     if (m->input & INPUT_A_PRESSED) {
         m->actionTimer++;
@@ -1609,6 +1615,7 @@ void stuck_in_ground_handler(struct MarioState *m, s32 animation, s32 unstuckFra
             set_anim_to_frame(m, animFrame);
         }
     }
+    m->actionTimer++;
 
     stop_and_set_height_to_floor(m);
 
@@ -1621,6 +1628,9 @@ void stuck_in_ground_handler(struct MarioState *m, s32 animation, s32 unstuckFra
     }
 
     if (is_anim_at_end(m)) {
+    //if (m->actionTimer > 20) {
+        //animFrame = unstuckFrame - 1;
+        //set_anim_to_frame(m, animFrame);
         set_mario_action(m, endAction, 0);
     }
 }

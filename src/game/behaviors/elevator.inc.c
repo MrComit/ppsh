@@ -1,5 +1,8 @@
 // elevator.c.inc
 
+s16 Positions[] = { 1964, 0,     1, -461, 0,   0, -512, 0,   0,    -2611, 0,
+                     0,   -2360, 0, 0,    214, 0, 0,    -50, 1945, 1,     0 };
+
 void func_802AD01C(void) {
     PlaySound2(SOUND_GENERAL_QUIET_POUND1);
     ShakeScreen(SHAKE_POS_SMALL);
@@ -84,15 +87,15 @@ void ActionElevator3() // nearly identical to action 2
 }
 
 void bhv_elevator_init(void) {
-    s32 sp1C = D_8032F38C[o->oBehParams2ndByte * 3 + 2];
+    s32 sp1C = Positions[o->oBehParams2ndByte * 3 + 2];
     if (sp1C == 0) {
-        o->oElevatorUnkF4 = D_8032F38C[o->oBehParams2ndByte * 3];
+        o->oElevatorUnkF4 = Positions[o->oBehParams2ndByte * 3];
         o->oElevatorUnkF8 = o->oHomeY;
         o->oElevatorUnkFC = (o->oElevatorUnkF4 + o->oElevatorUnkF8) / 2;
         o->oElevatorUnk100 = obj_has_behavior(bhvRrElevatorPlatform);
     } else {
-        o->oElevatorUnkF4 = D_8032F38C[o->oBehParams2ndByte * 3];
-        o->oElevatorUnkF8 = D_8032F38C[o->oBehParams2ndByte * 3 + 1];
+        o->oElevatorUnkF4 = Positions[o->oBehParams2ndByte * 3];
+        o->oElevatorUnkF8 = Positions[o->oBehParams2ndByte * 3 + 1];
         o->oElevatorUnkFC = (o->oElevatorUnkF4 + o->oElevatorUnkF8) / 2;
         o->oElevatorUnk100 = 2;
     }

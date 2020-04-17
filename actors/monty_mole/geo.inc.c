@@ -1,6 +1,6 @@
 // 0x0C000000
 const GeoLayout monty_mole_geo[] = {
-   GEO_NODE_START(),
+   GEO_SHADOW(SHADOW_CIRCLE_4_VERTS, 0xFF, 100),
    GEO_OPEN_NODE(),
       GEO_SCALE(0x00, 16384),
       GEO_OPEN_NODE(),

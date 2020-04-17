@@ -141,6 +141,7 @@ void bhv_bubba_loop(void) {
         }
     }
     obj_update_floor_and_walls();
+    o->oInteractStatus = 0;
 
     /*UNUSED s32 unused;
     struct Object *sp38;
@@ -230,7 +231,12 @@ void bhv_porcupuffer_loop(void) {
         }
         o->oFaceAngleRoll -= 0x800;
         o->oBubbaUnk104++;
-        obj_move_standard(-78);
+        //obj_update_floor_and_walls();
+        //obj_move_standard(-78);
+        obj_compute_vel_xz();
+        o->oPosX += o->oVelX;
+        o->oPosZ += o->oVelZ;
+        //o->oPosY += o->oVelY;
 
     } else {
         o->oPosX = o->oHomeX + sins(o->oSushiSharkUnkF4) * 100.0f;
@@ -246,5 +252,5 @@ void bhv_porcupuffer_loop(void) {
             obj_become_intangible();
         }
     }
-    obj_update_floor_and_walls();
+    o->oInteractStatus = 0;
 }

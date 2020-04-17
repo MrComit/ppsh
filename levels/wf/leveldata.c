@@ -67,3 +67,9 @@
 #include "levels/wf/areas/1/collision.inc.c"
 #include "levels/wf/areas/1/macro.inc.c"
 #include "levels/wf/areas/1/movtext.inc.c"
+#include "levels/wf/leveldata.inc.c"
+
+#include "levels/wf/canyon_elevator/model.inc.c"
+#include "levels/wf/canyon_elevator/collision.inc.c"
+#include "levels/wf/canyon_button/model.inc.c"
+#include "levels/wf/canyon_button/collision.inc.c"

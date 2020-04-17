@@ -604,6 +604,8 @@
 
 // custom cuck canyon
 
+#define MODEL_CANYON_ELEVATOR 0xFF
+#define MODEL_CANYON_BUTTON 0xFE
 
 
 // custom simp city
