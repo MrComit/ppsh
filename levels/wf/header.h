@@ -109,4 +109,6 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/canyon_button/collision_header.h"
 
+#include "levels/wf/mole_wrench/geo_header.h"
+
 #endif

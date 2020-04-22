@@ -362,18 +362,15 @@ void update_flying(struct MarioState *m) {
     m->slideVelZ = m->vel[2];
 }
 
-/*void check_water_dive(struct MarioState *m) {
-    struct Surface *floor;
-    f32 floorHeight;
-    floorHeight = find_floor(m->pos[0], m->pos[1], m->pos[2], &floor);
-    if (floorHeight < m->waterLevel) {
-        m->faceAngle[0] = approach_s16_symmetric(m->faceAngle[0], 0x7000, 0x300);
+void check_water_dive(struct MarioState *m) {
+    if (m->floorHeight + 200.0f < (f32)m->waterLevel) {
+        m->faceAngle[0] = -atan2s(/*m->forwardVel + */20.0f, m->vel[1]);
         vec3s_set(m->marioObj->header.gfx.angle, m->faceAngle[0], m->faceAngle[1], m->faceAngle[2]);
         set_mario_animation(m, MARIO_ANIM_FLUTTERKICK);
     } else {
         m->faceAngle[0] = 0;
     }
-}*/
+}
 
 u32 common_air_action_step(struct MarioState *m, u32 landAction, s32 animation, u32 stepArg) {
     u32 stepResult;
@@ -459,7 +456,7 @@ s32 act_jump(struct MarioState *m) {
     play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP, 0);
     common_air_action_step(m, ACT_JUMP_LAND, MARIO_ANIM_SINGLE_JUMP,
                            AIR_STEP_CHECK_LEDGE_GRAB | AIR_STEP_CHECK_HANG);
-    //check_water_dive(m);
+    check_water_dive(m);
     return FALSE;
 }
 
@@ -479,6 +476,7 @@ s32 act_double_jump(struct MarioState *m) {
     play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP, SOUND_MARIO_HOOHOO);
     common_air_action_step(m, ACT_DOUBLE_JUMP_LAND, animation,
                            AIR_STEP_CHECK_LEDGE_GRAB | AIR_STEP_CHECK_HANG);
+    check_water_dive(m);
     return FALSE;
 }
 

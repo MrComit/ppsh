@@ -606,6 +606,7 @@
 
 #define MODEL_CANYON_ELEVATOR 0xFF
 #define MODEL_CANYON_BUTTON 0xFE
+#define MODEL_WRENCH 0xFD
 
 
 // custom simp city

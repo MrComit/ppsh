@@ -567,5 +567,7 @@ extern const BehaviorScript bhvIIBridge[];
 extern const BehaviorScript bhvMoleNpc[];
 extern const BehaviorScript bhvCanyonElevator[];
 extern const BehaviorScript bhvCanyonButton[];
+extern const BehaviorScript bhvWrenchCollect[];
+extern const BehaviorScript bhvWrenchStar[];
 
 #endif /* _BEHAVIOR_DATA_H */

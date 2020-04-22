@@ -296,4 +296,5 @@ void func_802B2328(s32 n, s32 a1, s32 a2, s32 r) {
 #include "behaviors/FBblock.inc.c"
 #include "behaviors/ii_bridge.inc.c"
 #include "behaviors/mole_npc.inc.c"
-//#include "canyon_elevator.inc.c"
+#include "behaviors/canyon_elevator.inc.c"
+#include "behaviors/wrench_collect.inc.c"

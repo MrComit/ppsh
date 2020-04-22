@@ -1,6 +1,6 @@
 // elevator.c.inc
 
-s16 Positions[] = { 1964, 0,     1, -461, 0,   0, -512, 0,   0,    -2611, 0,
+s16 Positions[] = { 1856, 0,     0, -461, 0,   0, -512, 0,   0,    -2611, 0,
                      0,   -2360, 0, 0,    214, 0, 0,    -50, 1945, 1,     0 };
 
 void func_802AD01C(void) {
@@ -18,13 +18,13 @@ void ActionElevator0(void) {
                 o->oAction = 1;
         }
     } else if (gMarioObject->oPosY > o->oElevatorUnkFC || o->oElevatorUnk100 == 1) {
-        o->oPosY = o->oElevatorUnkF8;
-        if (gMarioObject->platform == o)
-            o->oAction = 2;
-    } else {
         o->oPosY = o->oElevatorUnkF4;
         if (gMarioObject->platform == o)
             o->oAction = 1;
+    } else {
+        o->oPosY = o->oElevatorUnkF8;
+        if (gMarioObject->platform == o)
+            o->oAction = 2;
     }
 }
 
@@ -92,7 +92,7 @@ void bhv_elevator_init(void) {
         o->oElevatorUnkF4 = Positions[o->oBehParams2ndByte * 3];
         o->oElevatorUnkF8 = o->oHomeY;
         o->oElevatorUnkFC = (o->oElevatorUnkF4 + o->oElevatorUnkF8) / 2;
-        o->oElevatorUnk100 = obj_has_behavior(bhvRrElevatorPlatform);
+        o->oElevatorUnk100 = 1;//obj_has_behavior(bhvRrElevatorPlatform);
     } else {
         o->oElevatorUnkF4 = Positions[o->oBehParams2ndByte * 3];
         o->oElevatorUnkF8 = Positions[o->oBehParams2ndByte * 3 + 1];

@@ -6301,10 +6301,11 @@ const BehaviorScript bhvCanyonElevator[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(canyon_elevator_collision),
     SET_HOME(),
-    CALL_NATIVE(bhv_elevator_init),
-    CALL_NATIVE(bhv_init_room),
+    //CALL_NATIVE(bhv_elevator_init),
+    //CALL_NATIVE(bhv_init_room),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_elevator_loop),
+        //CALL_NATIVE(bhv_elevator_loop),
+        CALL_NATIVE(bhv_canyon_elevator_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
@@ -6318,5 +6319,26 @@ const BehaviorScript bhvCanyonButton[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_purple_switch_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvWrenchCollect[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    DROP_TO_FLOOR(),
+    SET_HOME(),
+    CALL_NATIVE(bhv_wrench_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_wrench_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvWrenchStar[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_by_wrench_loop),
     END_LOOP(),
 };
