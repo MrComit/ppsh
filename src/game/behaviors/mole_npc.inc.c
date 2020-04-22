@@ -14,6 +14,7 @@ void mole_npc_default_loop(void) {
     switch (o->oAction) {
         case 0:
             mole_npc_act0();
+            o->oFaceAnglePitch = 0x4000;
             break;
         case 1:
             mole_npc_act1();

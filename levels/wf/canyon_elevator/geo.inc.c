@@ -1,5 +1,5 @@
 const GeoLayout canyon_elevator_geo[] = {
-	GEO_NODE_START(),
+	GEO_CULLING_RADIUS(4096),
 	GEO_OPEN_NODE(),
 		GEO_ANIMATED_PART(1, 0, 0, 0, canyon_elevator_CanyonElevator_mesh),
 		GEO_DISPLAY_LIST(0, canyon_elevator_material_revert_render_settings),

@@ -1,0 +1,16 @@
+const GeoLayout mole_wrench_geo[] = {
+	//GEO_NODE_START(),
+	GEO_CULLING_RADIUS(4096),
+	GEO_OPEN_NODE(),
+		GEO_ANIMATED_PART(1, 0, 0, 0, mole_wrench_Wrench_mesh),
+		GEO_DISPLAY_LIST(0, mole_wrench_material_revert_render_settings),
+		GEO_DISPLAY_LIST(1, mole_wrench_material_revert_render_settings),
+		GEO_DISPLAY_LIST(2, mole_wrench_material_revert_render_settings),
+		GEO_DISPLAY_LIST(3, mole_wrench_material_revert_render_settings),
+		GEO_DISPLAY_LIST(4, mole_wrench_material_revert_render_settings),
+		GEO_DISPLAY_LIST(5, mole_wrench_material_revert_render_settings),
+		GEO_DISPLAY_LIST(6, mole_wrench_material_revert_render_settings),
+		GEO_DISPLAY_LIST(7, mole_wrench_material_revert_render_settings),
+	GEO_CLOSE_NODE(),
+	GEO_END(),
+};

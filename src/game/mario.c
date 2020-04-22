@@ -775,7 +775,7 @@ static void set_mario_y_vel_based_on_fspeed(struct MarioState *m, f32 initialVel
     }
 
     if (CurrObj != 0) {
-        if (CurrObj->oVelY <= 0.0f) {
+        if (CurrObj->oVelY > 0.0f) {
             m->vel[1] += CurrObj->oVelY;
             m->pos[1] += CurrObj->oVelY;
         }

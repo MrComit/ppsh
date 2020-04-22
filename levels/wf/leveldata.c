@@ -73,3 +73,4 @@
 #include "levels/wf/canyon_elevator/collision.inc.c"
 #include "levels/wf/canyon_button/model.inc.c"
 #include "levels/wf/canyon_button/collision.inc.c"
+#include "levels/wf/mole_wrench/model.inc.c"

@@ -140,6 +140,7 @@ const LevelScript level_wf_entry[] = {
     //LOAD_MODEL_FROM_GEO(MODEL_WF_KICKABLE_BOARD_FELLED,         wf_geo_000BC8),
     LOAD_MODEL_FROM_GEO(MODEL_CANYON_ELEVATOR, canyon_elevator_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CANYON_BUTTON, canyon_button_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_WRENCH, mole_wrench_geo),
 
     //AREA(/*index*/ 1, wf_geo_000BF8),
 //        OBJECT(/*model*/ MODEL_NONE, /*pos*/  2600, 1256,  5120, /*angle*/ 0, 90, 0, /*behParam*/ 0x000A0000, /*beh*/ bhvWarps74),

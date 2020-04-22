@@ -584,7 +584,11 @@ void mole_npc_act3(void);
 void mole_npc_act4(void);
 void mole_npc_act5(void);
 
-//void bhv_canyon_elevator_loop(void);
+void bhv_canyon_elevator_loop(void);
+
+void bhv_wrench_init(void);
+void bhv_wrench_loop(void);
+void bhv_star_by_wrench_loop(void);
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 
