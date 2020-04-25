@@ -1,0 +1,15 @@
+const GeoLayout quicksand_platforming_geo[] = {
+	GEO_CULLING_RADIUS(0x800),
+	GEO_OPEN_NODE(),
+		GEO_ANIMATED_PART(1, 0, 0, 0, quicksand_platforming_Quicksand_Platform_002_mesh),
+		GEO_DISPLAY_LIST(0, quicksand_platforming_material_revert_render_settings),
+		GEO_DISPLAY_LIST(1, quicksand_platforming_material_revert_render_settings),
+		GEO_DISPLAY_LIST(2, quicksand_platforming_material_revert_render_settings),
+		GEO_DISPLAY_LIST(3, quicksand_platforming_material_revert_render_settings),
+		GEO_DISPLAY_LIST(4, quicksand_platforming_material_revert_render_settings),
+		GEO_DISPLAY_LIST(5, quicksand_platforming_material_revert_render_settings),
+		GEO_DISPLAY_LIST(6, quicksand_platforming_material_revert_render_settings),
+		GEO_DISPLAY_LIST(7, quicksand_platforming_material_revert_render_settings),
+	GEO_CLOSE_NODE(),
+	GEO_END(),
+};

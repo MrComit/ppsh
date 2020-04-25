@@ -1,6 +1,6 @@
 const GeoLayout mole_wrench_geo[] = {
 	//GEO_NODE_START(),
-	GEO_CULLING_RADIUS(4096),
+	GEO_CULLING_RADIUS(0x800),
 	GEO_OPEN_NODE(),
 		GEO_ANIMATED_PART(1, 0, 0, 0, mole_wrench_Wrench_mesh),
 		GEO_DISPLAY_LIST(0, mole_wrench_material_revert_render_settings),

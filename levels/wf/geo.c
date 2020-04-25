@@ -44,3 +44,6 @@
 #include "levels/wf/canyon_elevator/geo.inc.c"
 #include "levels/wf/canyon_button/geo.inc.c"
 #include "levels/wf/mole_wrench/geo.inc.c"
+#include "levels/wf/quicksand_platforming/geo.inc.c"
+#include "levels/wf/floating_rock/geo.inc.c"
+#include "levels/wf/rock_door/geo.inc.c"

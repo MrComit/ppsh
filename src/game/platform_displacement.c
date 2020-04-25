@@ -10,6 +10,7 @@
 #include "level_update.h"
 #include "engine/surface_collision.h"
 #include "object_list_processor.h"
+#include "include/behavior_data.h"
 
 u16 D_8032FEC0 = 0;
 
@@ -131,9 +132,15 @@ void apply_platform_displacement(u32 isMario, struct Object *platform) {
             gMarioStates[0].faceAngle[1] += rotation[1];
         }
 
-        platformPosX = platform->oPosX;
-        platformPosY = platform->oPosY;
-        platformPosZ = platform->oPosZ;
+        if (object_has_behavior(platform, bhvSPlat)) {
+            platformPosX = platform->oHomeX;
+            platformPosY = platform->oHomeY;
+            platformPosZ = platform->oHomeZ;
+        } else {
+            platformPosX = platform->oPosX;
+            platformPosY = platform->oPosY;
+            platformPosZ = platform->oPosZ;           
+        }
 
         currentObjectOffset[0] = x - platformPosX;
         currentObjectOffset[1] = y - platformPosY;

@@ -111,4 +111,16 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/mole_wrench/geo_header.h"
 
+#include "levels/wf/quicksand_platforming/geo_header.h"
+
+#include "levels/wf/quicksand_platforming/collision_header.h"
+
+#include "levels/wf/floating_rock/geo_header.h"
+
+#include "levels/wf/floating_rock/collision_header.h"
+
+#include "levels/wf/rock_door/geo_header.h"
+
+#include "levels/wf/rock_door/collision_header.h"
+
 #endif

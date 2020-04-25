@@ -146,9 +146,9 @@ void uv_update_scroll() {
                     break;
         }   
             break;
-        case LEVEL_WF:
+        /*case LEVEL_WF:
             if (gCurrAreaIndex == 1)
                 shift_uv(SCROLL_UV, &wf_Quicksand_mesh_vtx, 24, 32, 32, 0, -16);
-            break;
+            break;*/
     }
 }

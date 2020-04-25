@@ -20,3 +20,9 @@ u8 CL_run_timer(u16 timer) {
         return TRUE;
     return FALSE;
 }
+
+
+void CL_Move() {
+    obj_compute_vel_xz();
+    obj_move_using_vel_and_gravity();
+}
