@@ -1,0 +1,15 @@
+const GeoLayout rock_door_geo[] = {
+	GEO_CULLING_RADIUS(0x800),
+	GEO_OPEN_NODE(),
+		GEO_ANIMATED_PART(1, 0, 0, 0, rock_door_RockDoor_mesh),
+		GEO_DISPLAY_LIST(0, rock_door_material_revert_render_settings),
+		GEO_DISPLAY_LIST(1, rock_door_material_revert_render_settings),
+		GEO_DISPLAY_LIST(2, rock_door_material_revert_render_settings),
+		GEO_DISPLAY_LIST(3, rock_door_material_revert_render_settings),
+		GEO_DISPLAY_LIST(4, rock_door_material_revert_render_settings),
+		GEO_DISPLAY_LIST(5, rock_door_material_revert_render_settings),
+		GEO_DISPLAY_LIST(6, rock_door_material_revert_render_settings),
+		GEO_DISPLAY_LIST(7, rock_door_material_revert_render_settings),
+	GEO_CLOSE_NODE(),
+	GEO_END(),
+};

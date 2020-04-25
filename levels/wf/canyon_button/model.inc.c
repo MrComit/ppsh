@@ -163,6 +163,37 @@ const Gfx mat_revert_canyon_button_Button[] = {
 };
 
 
+const Gfx mat_canyon_button_Button_2[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetTextureLUT(G_TT_RGBA16),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, canyon_button_xx_3_ci8_pal_rgba16),
+	gsDPTileSync(),
+	gsDPSetTile(0, 0, 0, 256, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadSync(),
+	gsDPLoadTLUTCmd(7, 54),
+	gsDPPipeSync(),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_8b, 32, canyon_button_xx_3_ci8),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 7, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
+	gsDPLoadSync(),
+	gsDPLoadTile(7, 0, 0, 124, 124),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(0, 0, 0, 124, 124),
+	gsSPSetLights1(canyon_button_Button_lights),
+	gsDPSetEnvColor(171, 224, 255, 255),
+	gsSPEndDisplayList(),
+};
+
+const Gfx mat_revert_canyon_button_Button_2[] = {
+	gsDPPipeSync(),
+	gsDPSetTextureLUT(G_TT_NONE),
+	gsSPEndDisplayList(),
+};
+
+
 const Vtx canyon_button_layer1button_mesh_vtx[] = {
 	{{{-159, 0, 159},0, {0x3F0, 0x3F0},{0x81, 0x0, 0x0, 0xFF}}},
 	{{{-159, 42, 159},0, {0x3F0, 0x367},{0x81, 0x0, 0x0, 0xFF}}},
@@ -203,6 +234,13 @@ const Gfx canyon_button_layer1button_mesh[] = {
 	gsSPEndDisplayList(),
 };
 
+const Gfx canyon_button_layer1button_mesh_2[] = {
+	gsSPDisplayList(mat_canyon_button_Button_2),
+	gsSPDisplayList(canyon_button_layer1button_mesh_tri_0),
+	gsSPDisplayList(mat_revert_canyon_button_Button_2),
+	gsSPEndDisplayList(),
+};
+
 
 
 const Vtx canyon_button_layer2button_mesh_vtx[] = {
@@ -237,6 +275,13 @@ const Gfx canyon_button_layer2button_mesh[] = {
 	gsSPDisplayList(mat_canyon_button_Button),
 	gsSPDisplayList(canyon_button_layer2button_mesh_tri_0),
 	gsSPDisplayList(mat_revert_canyon_button_Button),
+	gsSPEndDisplayList(),
+};
+
+const Gfx canyon_button_layer2button_mesh_2[] = {
+	gsSPDisplayList(mat_canyon_button_Button_2),
+	gsSPDisplayList(canyon_button_layer2button_mesh_tri_0),
+	gsSPDisplayList(mat_revert_canyon_button_Button_2),
 	gsSPEndDisplayList(),
 };
 

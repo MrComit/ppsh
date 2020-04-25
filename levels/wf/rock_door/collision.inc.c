@@ -1,0 +1,17 @@
+const Collision rock_door_collision[] = {
+	COL_INIT(),
+	COL_VERTEX_INIT(6),
+	COL_VERTEX(-787, 0, -562),
+	COL_VERTEX(803, 0, 538),
+	COL_VERTEX(803, -1214, 538),
+	COL_VERTEX(-787, -1214, -562),
+	COL_VERTEX(779, -1214, 574),
+	COL_VERTEX(-811, -1214, -526),
+	COL_TRI_INIT(SURFACE_DEFAULT, 4),
+	COL_TRI(0, 1, 2),
+	COL_TRI(0, 2, 3),
+	COL_TRI(3, 2, 4),
+	COL_TRI(3, 4, 5),
+	COL_TRI_STOP(),
+	COL_END()
+};

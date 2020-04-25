@@ -441,7 +441,7 @@ s32 mario_execute_object_action(struct MarioState *m) {
         return TRUE;
     }
 
-    if (mario_update_quicksand(m, 0.5f)) {
+    if (mario_update_quicksand(m, 1.5f)) {
         return TRUE;
     }
 

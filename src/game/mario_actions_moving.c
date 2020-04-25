@@ -485,7 +485,7 @@ void update_walking_speed(struct MarioState *m) {
     targetSpeed = m->intendedMag < maxTargetSpeed ? m->intendedMag : maxTargetSpeed;
 
     if (m->quicksandDepth > 10.0f) {
-        targetSpeed *= 6.25 / m->quicksandDepth;
+        targetSpeed *= 8.0 / m->quicksandDepth;
     }
 
     if (m->forwardVel <= 0.0f) {
@@ -1953,14 +1953,16 @@ s32 act_backflip_land(struct MarioState *m) {
 s32 quicksand_jump_land_action(struct MarioState *m, s32 animation1, s32 animation2, u32 endAction,
                                u32 airAction) {
     if (m->actionTimer++ < 6) {
-        m->quicksandDepth -= (7 - m->actionTimer) * 0.8f;
-        if (m->quicksandDepth < 1.0f) {
-            m->quicksandDepth = 1.1f;
-        }
+        //m->quicksandDepth -= (7 - m->actionTimer) * 2.2f;
+        m->quicksandDepth -= m->quicksandDepth / (7 - m->actionTimer);
+        //if (m->quicksandDepth < 1.0f) {
+        //    m->quicksandDepth = 1.1f;
+        //}
 
         play_mario_jump_sound(m);
         set_mario_animation(m, animation1);
     } else {
+        m->quicksandDepth = 0;
         if (m->actionTimer >= 13) {
             return set_mario_action(m, endAction, 0);
         }
@@ -2237,7 +2239,7 @@ s32 mario_execute_moving_action(struct MarioState *m) {
         return TRUE;
     }
 
-    if (mario_update_quicksand(m, 0.25f)) {
+    if (mario_update_quicksand(m, 0.75f)) {
         return TRUE;
     }
 

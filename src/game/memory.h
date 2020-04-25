@@ -55,4 +55,6 @@ void *alloc_display_list(u32 size);
 void func_80278A78(struct MarioAnimation *a, void *b, struct Animation *target);
 s32 func_80278AD4(struct MarioAnimation *a, u32 b);
 
+
+extern uintptr_t sSegmentROMTable[32];
 #endif

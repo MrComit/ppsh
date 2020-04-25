@@ -14,7 +14,7 @@ void bhv_purple_switch_loop(void) {
          * switch's middle section, transition to the pressed state.
          */
         case PURPLE_SWITCH_IDLE:
-            if (!obj_has_behavior(bhvCanyonButton)) {
+            if (!obj_has_behavior(bhvCanyonButton) && !obj_has_behavior(bhvBlueCanyonButton)) {
                 obj_set_model(MODEL_PURPLE_SWITCH);
                 obj_scale(1.5f);
                 if (gMarioObject->platform == o && !(gMarioStates->action & MARIO_UNKNOWN_13)) {
@@ -48,12 +48,12 @@ void bhv_purple_switch_loop(void) {
                 if (o->oBehParams2ndByte == 1 && gMarioObject->platform != o) {
                     o->oAction++;
                 } else {
-                    if (o->oTimer < 360) {
+                    if (o->oTimer < 1010) {
                         play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gDefaultSoundArgs);
                     } else {
                         play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gDefaultSoundArgs);
                     }
-                    if (o->oTimer > 400) {
+                    if (o->oTimer > 1050) {
                         o->oAction = PURPLE_SWITCH_WAIT_FOR_MARIO_TO_GET_OFF;
                     }
                 }

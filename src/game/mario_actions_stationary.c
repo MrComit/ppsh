@@ -1174,7 +1174,7 @@ s32 mario_execute_stationary_action(struct MarioState *m) {
         return 1;
     }
 
-    if (mario_update_quicksand(m, 0.5f)) {
+    if (mario_update_quicksand(m, 1.5f)) {
         return 1;
     }
 

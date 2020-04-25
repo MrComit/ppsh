@@ -546,12 +546,10 @@ extern const BehaviorScript bhvUnusedFakeStar[];
 /* custom */
 
 extern const BehaviorScript bhvKoopaNpc[];
-
 extern const BehaviorScript bhvStarPiece[];
 extern const BehaviorScript bhvStarPieceSwitch[];
 extern const BehaviorScript bhvStarPieceStar[];
 extern const BehaviorScript bhvStarNoRotate[];
-
 extern const BehaviorScript bhvSandMound[];
 extern const BehaviorScript bhvStarFromSwitch[];
 extern const BehaviorScript bhvConstruction[];
@@ -569,5 +567,9 @@ extern const BehaviorScript bhvCanyonElevator[];
 extern const BehaviorScript bhvCanyonButton[];
 extern const BehaviorScript bhvWrenchCollect[];
 extern const BehaviorScript bhvWrenchStar[];
+extern const BehaviorScript bhvSPlat[];
+extern const BehaviorScript bhvFloatRock[];
+extern const BehaviorScript bhvBlueCanyonButton[];
+extern const BehaviorScript bhvRockDoor[];
 
 #endif /* _BEHAVIOR_DATA_H */

@@ -1,3 +1,4 @@
+#include "texscroll.h"
 #include <ultra64.h>
 
 #include "sm64.h"
@@ -1127,7 +1128,7 @@ s32 update_level(void) {
 
     switch (sCurrPlayMode) {
         case PLAY_MODE_NORMAL:
-            changeLevel = play_mode_normal();
+            changeLevel = play_mode_normal(); scroll_textures();
             break;
         case PLAY_MODE_PAUSED:
             changeLevel = play_mode_paused();
@@ -1312,6 +1313,9 @@ s32 lvl_set_current_level(UNUSED s16 arg0, s32 levelNum) {
     if (gDebugLevelSelect != 0 && gShowProfiler == 0) {
         return 0;
     }
+
+    if (gCurrLevelNum == LEVEL_WF || gCurrLevelNum == LEVEL_JRB)
+        return 0;
 
     return 1;
 }

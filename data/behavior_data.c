@@ -6342,3 +6342,62 @@ const BehaviorScript bhvWrenchStar[] = {
         CALL_NATIVE(bhv_star_by_wrench_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvSPlat[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(quicksand_platforming_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    SET_HOME(),
+    SCALE(77),
+    SPAWN_CHILD(/*Model*/ MODEL_STAR_PIECE, /*Behavior*/ bhvStarPiece),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_splat_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvFloatRock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(floating_rock_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x600),
+    SET_HOME(),
+    SCALE(65),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_float_rock_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+
+};
+
+const BehaviorScript bhvBlueCanyonButton[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_INT(oAnimState, 1),
+    LOAD_COLLISION_DATA(canyon_button_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_purple_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvRockDoor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(rock_door_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x1000),
+    CALL_NATIVE(bhv_rock_door_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_rock_door_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

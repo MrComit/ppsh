@@ -7,7 +7,6 @@ void bhv_star_piece_switch_loop(void) {
     if (star == NULL) {
         mark_object_for_deletion(o);
     }
-
     o->oHiddenStarTriggerCounter  = (s32)((o->oBehParams >> 24) & 0xFF) * 30;
     o->oStarSelectorTimer  = (s32)((o->oBehParams >> 16) & 0xFF) * 15;
 
@@ -86,6 +85,7 @@ void bhv_star_piece_switch_loop(void) {
                 // ???
                 //o->oPosY = gMarioObject->oPosY - 40.0f;
                 o->oPosY = o->oHomeY;
+                o->oVelY = 0;
 
                 func_802AA618(0, 0, 46.0f);
             } else {
@@ -103,6 +103,13 @@ struct Object *star;
     star = obj_nearest_object_with_behavior(bhvStarPieceStar);
     if (star == NULL) {
         mark_object_for_deletion(o);
+    }
+
+    if (o->parentObj != NULL) {
+        o->oPosX = o->parentObj->oPosX;
+        o->oPosY = o->parentObj->oPosY + 100.0f;
+        o->oPosZ = o->parentObj->oPosZ;
+
     }
 
     o->oFaceAngleYaw += 0x600;

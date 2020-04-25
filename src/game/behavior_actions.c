@@ -298,3 +298,6 @@ void func_802B2328(s32 n, s32 a1, s32 a2, s32 r) {
 #include "behaviors/mole_npc.inc.c"
 #include "behaviors/canyon_elevator.inc.c"
 #include "behaviors/wrench_collect.inc.c"
+#include "behaviors/splat.inc.c"
+#include "behaviors/floating_rock.inc.c"
+#include "behaviors/rock_door.inc.c"
