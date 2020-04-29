@@ -4009,7 +4009,9 @@ const BehaviorScript bhvSmallBully[] = {
 const BehaviorScript bhvBigBully[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, bully_seg5_anims_0500470C),
+    LOAD_ANIMATIONS(oAnimations, monty_mole_seg5_anims_05007248),
+    SET_OBJ_PHYSICS(50, 5.0, -50, 1000, 0.93, 1.3, 0, 0),
+    SET_FLOAT(oDrawingDistance, 0x5000),
     DROP_TO_FLOOR(),
     SET_HOME(),
     CALL_NATIVE(bhv_big_bully_init),
@@ -5243,7 +5245,7 @@ const BehaviorScript bhvCameraLakitu[] = {
 
 const BehaviorScript bhvCloud[] = {
     BEGIN(OBJ_LIST_DEFAULT),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO /*| OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW */| OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BILLBOARD(),
     SET_HOME(),
     SET_INT(oOpacity, 240),
@@ -6301,6 +6303,8 @@ const BehaviorScript bhvCanyonElevator[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(canyon_elevator_collision),
     SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x800),
     //CALL_NATIVE(bhv_elevator_init),
     //CALL_NATIVE(bhv_init_room),
     BEGIN_LOOP(),
@@ -6393,11 +6397,26 @@ const BehaviorScript bhvRockDoor[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(rock_door_collision),
-    SET_FLOAT(oDrawingDistance, 0x4000),
-    SET_FLOAT(oCollisionDistance, 0x1000),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x800),
     CALL_NATIVE(bhv_rock_door_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_rock_door_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvRedCanyonButton[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_INT(oAnimState, 2),
+    SCALE(80),
+    LOAD_COLLISION_DATA(canyon_button_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_purple_switch_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

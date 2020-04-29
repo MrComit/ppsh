@@ -53,7 +53,7 @@ OSViMode osViModeTable[] = {
       { /*ctrl*/ 12574,
         /*width*/ 320,
         /*burst*/ 65348153,
-        /*vSync*/ 525,
+        /*vSync*/ 525, // RCVI HACK GOES HERE
         /*hSync*/ 3093,
         /*leap*/ 202705941,
         /*hStart*/ 7078636,

@@ -4,7 +4,7 @@ static struct ObjectHitbox sSmallBullyHitbox = {
     /* interactType:      */ INTERACT_BULLY,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
-    /* health:            */ 0,
+    /* health:            */ 3,
     /* numLootCoins:      */ 0,
     /* radius:            */ 73,
     /* height:            */ 123,
@@ -16,16 +16,16 @@ static struct ObjectHitbox sBigBullyHitbox = {
     /* interactType:      */ INTERACT_BULLY,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
-    /* health:            */ 0,
+    /* health:            */ 3,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 115,
-    /* height:            */ 235,
-    /* hurtboxRadius:     */ 105,
-    /* hurtboxHeight:     */ 225,
+    /* radius:            */ 36,
+    /* height:            */ 61,
+    /* hurtboxRadius:     */ 31,
+    /* hurtboxHeight:     */ 56,
 };
 
 void bhv_small_bully_init(void) {
-    SetObjAnimation(0);
+    SetObjAnimation(3);
 
     o->oHomeX = o->oPosX;
     o->oHomeZ = o->oPosZ;
@@ -38,7 +38,7 @@ void bhv_small_bully_init(void) {
 }
 
 void bhv_big_bully_init(void) {
-    SetObjAnimation(0);
+    SetObjAnimation(3);
 
     o->oHomeX = o->oPosX;
     o->oHomeY = o->oPosY;
@@ -47,6 +47,8 @@ void bhv_big_bully_init(void) {
     o->oGravity = 5.0;
     o->oFriction = 0.93;
     o->oBuoyancy = 1.3;
+    o->oHealth = 3;
+    obj_scale(4.0);
 
     set_object_hitbox(o, &sBigBullyHitbox);
 }
@@ -86,7 +88,7 @@ void BullyChaseMarioLoop(void) {
 
     if (!is_point_within_radius_of_mario(homeX, posY, homeZ, 1000)) {
         o->oAction = BULLY_ACT_PATROL;
-        SetObjAnimation(0);
+        SetObjAnimation(3);
     }
 }
 
@@ -103,7 +105,7 @@ void BullyKnockbackLoop(void) {
     if (o->oBullyKBTimerAndMinionKOCounter == 18) {
         o->oAction = BULLY_ACT_CHASE_MARIO;
         o->oBullyKBTimerAndMinionKOCounter = 0;
-        SetObjAnimation(1);
+        SetObjAnimation(3);
     }
 }
 
@@ -168,6 +170,11 @@ void BullyStep(void) {
     BullyBackUpCheck(collisionFlags);
     PlayBullyStompingSound();
     obj_check_floor_death(collisionFlags, sObjFloor);
+    if (o->oAction == BULLY_ACT_LAVA_DEATH) {
+        o->oHealth--;
+        o->oVelY = 75.0f;
+        PlaySound2(SOUND_OBJ2_LARGE_BULLY_ATTACKED);
+    }
 
     if (o->oBullySubtype & BULLY_STYPE_CHILL) {
         if (o->oPosY < 1030.0f)
@@ -191,21 +198,41 @@ void BullySpawnCoin(void) {
 }
 
 void BullyLavaDeath(void) {
-    if (obj_lava_death() == 1) {
-        if (o->oBehParams2ndByte == BULLY_BP_SIZE_SMALL) {
-            if (o->oBullySubtype == BULLY_STYPE_MINION)
-                o->parentObj->oBullyKBTimerAndMinionKOCounter++;
-            BullySpawnCoin();
-        } else {
-            func_802A3004();
+    s16 homeAngle;
+    obj_become_intangible();
+    if (o->oHealth == 0) {
+        if (obj_lava_death() == 1) {
+            if (o->oBehParams2ndByte == BULLY_BP_SIZE_SMALL) {
+                if (o->oBullySubtype == BULLY_STYPE_MINION)
+                    o->parentObj->oBullyKBTimerAndMinionKOCounter++;
+                BullySpawnCoin();
+            } else {
+                func_802A3004();
 
-            if (o->oBullySubtype == BULLY_STYPE_CHILL)
-                create_star(130.0f, 1600.0f, -4335.0f);
-            else {
-                create_star(0, 950.0f, -6800.0f);
-                spawn_object_abs_with_rot(o, 0, MODEL_NONE, bhvLllTumblingBridge, 0, 154, -5631, 0, 0,
+                if (o->oBullySubtype == BULLY_STYPE_CHILL)
+                    create_star(130.0f, 1600.0f, -4335.0f);
+                else {
+                    create_star(12556.0f, 300.0f, 8152.0f);
+                    spawn_object_abs_with_rot(o, 0, MODEL_NONE, bhvLllTumblingBridge, 0, 154, -5631, 0, 0,
                                           0);
+                }
             }
+        }
+
+    } else {
+        //o->oFloorHeight = find_floor_height(o->oPosX, o->oPosY + 200.0f, o->oPosZ);
+        obj_update_floor_and_walls();
+        o->oGravity = -2.5f;
+        CL_Move();
+        homeAngle = obj_angle_to_home();
+        o->oFaceAngleYaw = homeAngle;
+        o->oMoveAngleYaw = homeAngle;
+        o->oForwardVel = approach_f32(o->oForwardVel, 50.0f, 1.0, 1.0);//30.0f;
+        if (o->oPosY - o->oFloorHeight < 40.0f) {
+            o->oAction = 0;
+            o->oGravity = 5.0f;
+            o->oPosY = o->oFloorHeight;
+            obj_become_tangible();
         }
     }
 }
@@ -227,7 +254,7 @@ void bhv_bully_loop(void) {
 
             if (obj_return_home_if_safe(o, o->oHomeX, o->oPosY, o->oHomeZ, 800) == 1) {
                 o->oAction = BULLY_ACT_CHASE_MARIO;
-                SetObjAnimation(1);
+                SetObjAnimation(3);
             }
 
             BullyStep();
@@ -257,7 +284,7 @@ void bhv_bully_loop(void) {
             break;
     }
 
-    set_object_visibility(o, 3000);
+    //set_object_visibility(o, 3000);
 }
 
 // sp38 = arg0

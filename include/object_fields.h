@@ -399,6 +399,7 @@
 #define /*0x0FC*/ oCloudBlowing              OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ oCloudGrowSpeed            OBJECT_FIELD_F32(0x1E)
 #define /*0x1AC*/ oCloudFwooshMovementRadius OBJECT_FIELD_S16(0x49, 0)
+#define /*0x1AC*/ oCloudSineAngle            OBJECT_FIELD_S16(0x4A, 0)
 
 /* Coin */
 #define /*0x0F4*/ oCoinUnkF4  OBJECT_FIELD_S32(0x1B)
