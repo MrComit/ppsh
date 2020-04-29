@@ -34,7 +34,8 @@ static void cloud_act_spawn_parts(void) {
         // Spawn fwoosh's face
         spawn_object_relative(5, 0, 0, 0, o, MODEL_FWOOSH, bhvCloudPart);
 
-        obj_scale(3.0f);
+        obj_scale(12.0f);
+        //o->header.gfx.scale[1] = 30.0f;
 
         o->oCloudCenterX = o->oPosX;
         o->oCloudCenterY = o->oPosY;
@@ -47,7 +48,7 @@ static void cloud_act_spawn_parts(void) {
  * Wait for mario to approach, then unhide and enter the spawn parts action.
  */
 static void cloud_act_fwoosh_hidden(void) {
-    if (o->oDistanceToMario < 2000.0f) {
+    if (o->oDistanceToMario < 10000.0f) {
         obj_unhide();
         o->oAction = CLOUD_ACT_SPAWN_PARTS;
     }
@@ -58,16 +59,17 @@ static void cloud_act_fwoosh_hidden(void) {
  * long enough, blow wind at him.
  */
 static void cloud_fwoosh_update(void) {
-    if (o->oDistanceToMario > 2500.0f) {
+    if (o->oDistanceToMario > 10000.0f) {
         o->oAction = CLOUD_ACT_UNLOAD;
     } else {
         if (o->oCloudBlowing) {
+            o->oMoveAngleYaw = o->oFaceAngleYaw;
             o->header.gfx.scale[0] += o->oCloudGrowSpeed;
 
-            if ((o->oCloudGrowSpeed -= 0.005f) < -0.16f) {
+            if ((o->oCloudGrowSpeed -= 0.02f) < -0.64) {
                 // Stop blowing once we are shrinking faster than -0.16
                 o->oCloudBlowing = o->oTimer = 0;
-            } else if (o->oCloudGrowSpeed < -0.1f) {
+            } else if (o->oCloudGrowSpeed < -0.4f) {
                 // Start blowing once we start shrinking faster than -0.1
                 PlaySound(SOUND_AIR_BLOW_WIND);
                 func_802C76E0(12, 3.0f, 0.0f, -50.0f, 120.0f);
@@ -76,22 +78,34 @@ static void cloud_fwoosh_update(void) {
             }
         } else {
             // Return to normal size
-            approach_f32_ptr(&o->header.gfx.scale[0], 3.0f, 0.012f);
-            o->oCloudFwooshMovementRadius += 0xC8;
+            approach_f32_ptr(&o->header.gfx.scale[0], 10.0f, 0.5f);
+            //o->oCloudFwooshMovementRadius += 0xC8;
 
             // If mario stays nearby for 100 frames, begin blowing
-            if (o->oDistanceToMario < 1000.0f) {
-                if (o->oTimer > 100) {
+            if (o->header.gfx.scale[0] == 10.0f && o->oDistanceToMario < 1000.0f 
+                /*&& -0x1000 < o->oAngleToMario - o->oFaceAngleYaw*/ && absi((s16)o->oAngleToMario - (s16)o->oFaceAngleYaw) < 0x1000) {
+                Vec3f detector;
+                detector[0] = gMarioState->pos[0];// + 300.0 * sins(o->oFaceAngleYaw);
+                detector[1] = gMarioState->pos[1] + 100.0f;
+                detector[2] = gMarioState->pos[2];// + 300.0 * coss(o->oFaceAngleYaw);
+                if (resolve_and_return_wall_collisions(detector, 0.0f, 500.0f) == NULL || o->oBehParams >> 24 != 0) {
                     o->oCloudBlowing = TRUE;
-                    o->oCloudGrowSpeed = 0.14f;
+                    o->oCloudGrowSpeed = 0.56f;
                 }
-            } else {
-                o->oTimer = 0;
             }
 
             o->oCloudCenterX = o->oHomeX + 100.0f * coss(o->oCloudFwooshMovementRadius);
-            o->oPosZ = o->oHomeZ + 100.0f * sins(o->oCloudFwooshMovementRadius);
+            //o->oPosZ = o->oHomeZ + 100.0f * sins(o->oCloudFwooshMovementRadius);
             o->oCloudCenterY = o->oHomeY;
+
+            if (o->oBehParams >> 24 == 0) {
+                o->oMoveAngleYaw = o->oFaceAngleYaw + 0x4000;
+                CL_Move();
+                o->oCloudSineAngle += 0x280;
+                o->oForwardVel = coss(o->oCloudSineAngle) * 50.0f;
+            } else {
+                o->oFaceAngleYaw += 0x200;
+            }
         }
 
         obj_scale(o->header.gfx.scale[0]);
@@ -115,7 +129,7 @@ static void cloud_act_main(void) {
         } else {
             o->oCloudCenterX = o->parentObj->oPosX;
             o->oCloudCenterY = o->parentObj->oPosY;
-            o->oPosZ = o->parentObj->oPosZ;
+            //o->oPosZ = o->parentObj->oPosZ;
 
             o->oMoveAngleYaw = o->parentObj->oFaceAngleYaw;
         }
@@ -131,8 +145,8 @@ static void cloud_act_main(void) {
 
     localOffset = 2 * coss(localOffsetPhase) * o->header.gfx.scale[0];
 
-    o->oPosX = o->oCloudCenterX + localOffset;
-    o->oPosY = o->oCloudCenterY + localOffset + 12.0f * o->header.gfx.scale[0];
+    //o->oPosX = o->oCloudCenterX + localOffset;
+    //o->oPosY = o->oCloudCenterY + localOffset + 12.0f * o->header.gfx.scale[0];
 }
 
 /**
@@ -153,6 +167,7 @@ static void cloud_act_unload(void) {
  * Update function for bhvCloud.
  */
 void bhv_cloud_update(void) {
+
     switch (o->oAction) {
         case CLOUD_ACT_SPAWN_PARTS:
             cloud_act_spawn_parts();

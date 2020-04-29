@@ -117,6 +117,9 @@ Gfx *geo18_title_screen(s32 sp50, struct GraphNode *sp54, UNUSED void *context) 
             scaleY = 0.0f;
             scaleZ = 0.0f;
         }
+        scaleX = 1.0f;
+        scaleY = 1.0f;
+        scaleZ = 1.0f;
         guScale(scaleMat, scaleX, scaleY, scaleZ);
         gSPMatrix(displayListIter++, scaleMat, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
         gSPDisplayList(displayListIter++, &intro_seg7_dl_0700B3A0);
@@ -137,7 +140,7 @@ Gfx *geo18_fade_transition(s32 sp40, struct GraphNode *sp44, UNUSED void *contex
         displayList = alloc_display_list(5 * sizeof(*displayList));
         displayListIter = displayList;
         gSPDisplayList(displayListIter++, dl_proj_mtx_fullscreen);
-        gDPSetEnvColor(displayListIter++, 255, 255, 255, gTitleFadeCounter);
+        gDPSetEnvColor(displayListIter++, 255, 255, 255, 255);
         if (gTitleFadeCounter == 255) {
             if (0) {
             }

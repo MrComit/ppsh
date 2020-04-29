@@ -6,15 +6,17 @@
  * the environment.
  */
 
+u16 gRedSwitchesPushed = 0;
+
 void bhv_purple_switch_loop(void) {
-    UNUSED s32 unused;
     switch (o->oAction) {
         /**
          * Set the switch's model and scale. If Mario is standing near the
          * switch's middle section, transition to the pressed state.
          */
         case PURPLE_SWITCH_IDLE:
-            if (!obj_has_behavior(bhvCanyonButton) && !obj_has_behavior(bhvBlueCanyonButton)) {
+            if (!obj_has_behavior(bhvCanyonButton) && !obj_has_behavior(bhvBlueCanyonButton) 
+                && !obj_has_behavior(bhvRedCanyonButton)) {
                 obj_set_model(MODEL_PURPLE_SWITCH);
                 obj_scale(1.5f);
                 if (gMarioObject->platform == o && !(gMarioStates->action & MARIO_UNKNOWN_13)) {
@@ -23,8 +25,9 @@ void bhv_purple_switch_loop(void) {
                     }
                 }
             } else {
-                if (gMarioObject->platform == o && !(gMarioStates->action & MARIO_UNKNOWN_13))
+                if (gMarioObject->platform == o && !(gMarioStates->action & MARIO_UNKNOWN_13)) {
                     o->oAction = PURPLE_SWITCH_PRESSED;
+                }
             }
             break;
         /**
@@ -34,6 +37,16 @@ void bhv_purple_switch_loop(void) {
         case PURPLE_SWITCH_PRESSED:
             func_802A3398(2, 3, 1.5f, 0.2f);
             if (o->oTimer == 3) {
+                if (obj_has_behavior(bhvCanyonButton))
+                    SetComitCutscene(180, 1, 1);
+                if (obj_has_behavior(bhvRedCanyonButton)) {
+                    gRedSwitchesPushed++;
+                    play_sound(SOUND_MENU_COLLECT_SECRET + (((u8) gRedSwitchesPushed - 1) << 16), gDefaultSoundArgs);
+                    if (gRedSwitchesPushed >=5)
+                        SetComitCutscene(180, 1, 2);
+                    else
+                        spawn_orange_number(gRedSwitchesPushed, 0, 0, 0);
+                }
                 PlaySound2(SOUND_GENERAL2_PURPLE_SWITCH);
                 o->oAction = PURPLE_SWITCH_TICKING;
                 ShakeScreen(SHAKE_POS_SMALL);
@@ -44,6 +57,19 @@ void bhv_purple_switch_loop(void) {
          * up. When time is up, move to a waiting-while-pressed state.
          */
         case PURPLE_SWITCH_TICKING:
+            if (o->oTimer > 180) {
+                if (obj_has_behavior(bhvCanyonButton)) {
+                    create_star(o->oPosX, o->oPosY + 300.0f, o->oPosZ);
+                    o->oAction = 5;
+                }
+            }
+            if (obj_has_behavior(bhvRedCanyonButton)) {
+                if (gRedSwitchesPushed >= 5)
+                    o->oAction = 6;
+                else
+                    o->oAction = 5;
+
+            }
             if (o->oBehParams2ndByte != 0) {
                 if (o->oBehParams2ndByte == 1 && gMarioObject->platform != o) {
                     o->oAction++;
@@ -77,6 +103,15 @@ void bhv_purple_switch_loop(void) {
         case PURPLE_SWITCH_WAIT_FOR_MARIO_TO_GET_OFF:
             if (!obj_is_mario_on_platform()) {
                 o->oAction = PURPLE_SWITCH_UNPRESSED;
+            }
+            break;
+        case 5:
+            break;
+        case 6:
+            if (o->oTimer > 180) {
+                create_star(o->oPosX, o->oPosY + 300.0f, o->oPosZ);
+                gRedSwitchesPushed = 0;
+                o->oAction = 5;
             }
             break;
     }

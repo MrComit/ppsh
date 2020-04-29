@@ -571,5 +571,6 @@ extern const BehaviorScript bhvSPlat[];
 extern const BehaviorScript bhvFloatRock[];
 extern const BehaviorScript bhvBlueCanyonButton[];
 extern const BehaviorScript bhvRockDoor[];
+extern const BehaviorScript bhvRedCanyonButton[];
 
 #endif /* _BEHAVIOR_DATA_H */

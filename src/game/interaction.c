@@ -323,7 +323,7 @@ u32 does_mario_have_hat(struct MarioState *m) {
 }
 
 void mario_blow_off_cap(struct MarioState *m, f32 capSpeed) {
-    struct Object *capObject;
+    /*struct Object *capObject;
 
     if (does_mario_have_hat(m)) {
         save_file_set_cap_pos(m->pos[0], m->pos[1], m->pos[2]);
@@ -339,7 +339,8 @@ void mario_blow_off_cap(struct MarioState *m, f32 capSpeed) {
         if (m->forwardVel < 0.0f) {
             capObject->oMoveAngleYaw = (s16)(capObject->oMoveAngleYaw + 0x8000);
         }
-    }
+    }*/
+    return;
 }
 
 u32 mario_lose_cap_to_enemy(u32 arg) {
@@ -1188,7 +1189,7 @@ u32 interact_bully(struct MarioState *m, UNUSED u32 interactType, struct Object 
 
         m->forwardVel = -16.0f;
         o->oMoveAngleYaw = m->faceAngle[1];
-        o->oForwardVel = 3392.0f / o->hitboxRadius;
+        o->oForwardVel = 4247.0f / o->hitboxRadius;
 
         attack_object(o, interaction);
         bounce_back_from_attack(m, interaction);

@@ -492,6 +492,26 @@ CameraTransition sModeTransitions[] = {
 extern u8 sDanceCutsceneIndexTable[][4];
 extern u8 sZoomOutAreaMasks[];
 
+
+
+
+
+/* CUTSCENE VARIABLES */
+
+u16 gComitCutsceneActive = 0;
+u8 gComitCutsceneStopMario = FALSE;
+s16 gComitCutsceneTimer = 0;
+f32 gComitCutsceneOldPos[3];
+f32 gComitCutsceneOldFoc[3];
+
+f32 gCCPosTable[][3] = {
+    {-10891.0f, 1751.0f, 5684.0f}, {6739.0f, 4349.0f, 11585.0f}
+};
+f32 gCCFocTable[][3] = {
+    {-13487.0f, 0.0f, 4561.0f}, {1410.0f, 1965.0f, 2435.0f}
+};
+
+
 /**
  * Starts a camera shake triggered by an interaction
  */
@@ -928,6 +948,15 @@ s32 update_radial_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     return camYaw;
 }
 
+
+
+
+
+
+
+
+
+
 /**
  * Update the camera during 8 directional mode
  */
@@ -1203,13 +1232,52 @@ void mode_radial_camera(struct Camera *c) {
 }*/
 
 
+
+void SetComitCutscene(s16 timer, u16 stopMario, u16 index) {
+    s32 i;
+    
+    gComitCutsceneActive = index;
+    gComitCutsceneTimer = timer;
+    gComitCutsceneStopMario = stopMario;
+    if (stopMario)
+        set_mario_npc_dialog(1);
+    for (i = 0; i < 3; i++) {
+        gComitCutsceneOldPos[i] = gCamera->pos[i];
+        gComitCutsceneOldFoc[i] = gCamera->focus[i];
+    }
+}
+
 /**
  * A mode that only has 8 camera angles, 45 degrees apart
  */
 void mode_8_directions_camera(struct Camera *c) {
+    s32 i;
     Vec3f pos;
     UNUSED u8 unused[8];
     s16 oldAreaYaw = sAreaYaw;
+
+
+    /* CUTSCENE STUFF*/
+    if (gComitCutsceneActive) {
+        for (i = 0; i < 3; i++) {
+            c->pos[i] = gCCPosTable[gComitCutsceneActive - 1][i];
+            c->focus[i] = gCCFocTable[gComitCutsceneActive - 1][i];
+        }
+
+        if (gComitCutsceneTimer-- <= 0) {
+            gComitCutsceneActive = 0;
+            if (gComitCutsceneStopMario) {
+                gComitCutsceneStopMario = FALSE;
+                set_mario_npc_dialog(0);
+            }
+            for (i = 0; i < 3; i++) {
+                c->pos[i] = gComitCutsceneOldPos[i];
+                c->focus[i] = gComitCutsceneOldFoc[i];
+            }
+        }
+        return;
+    }
+    /* END CUTSCENE STUFF */
 
     radial_camera_input(c, 0.f);
 

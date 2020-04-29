@@ -31,6 +31,7 @@ const LevelScript level_intro_entry_1[] = {
     FREE_LEVEL_POOL(),
     LOAD_AREA(/*area*/ 1),
     CALL(/*arg*/ 0, /*func*/ LevelProc_8016F508),
+    TRANSITION(/*transType*/ WARP_TRANSITION_FADE_FROM_COLOR, /*time*/ 16, /*color*/ 0x00, 0x00, 0x00),
     SLEEP(/*frames*/ 75),
     TRANSITION(/*transType*/ WARP_TRANSITION_FADE_INTO_COLOR, /*time*/ 16, /*color*/ 0x00, 0x00, 0x00),
     SLEEP(/*frames*/ 16),
