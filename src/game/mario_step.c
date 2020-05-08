@@ -446,9 +446,9 @@ s32 perform_air_quarter_step(struct MarioState *m, Vec3f intendedPos, u32 stepAr
     }
     if (nextPos[1] + 160.0f > ceilHeight) {
         // KAZE'S CEILING FIX
-//        if (m->ceil != NULL && (m->ceil->upperY << 2) >= m->pos[1] && (m->ceil->lowerY << 2) < m->pos[1] + 100.0f) {
-//            m->pos[0] += m->ceil->normal.x * 100;
-//            m->pos[2] += m->ceil->normal.z * 100;
+        //if (m->ceil != NULL && (m->ceil->upperY << 2) >= m->pos[1] && (m->ceil->lowerY << 2) < m->pos[1] + 100.0f) {
+        //    m->pos[0] += m->ceil->normal.x * 100;
+        //    m->pos[2] += m->ceil->normal.z * 100;
 
         //END KAZE'S CEILING FIX
         if (m->vel[1] >= 0.0f) {
@@ -471,7 +471,7 @@ s32 perform_air_quarter_step(struct MarioState *m, Vec3f intendedPos, u32 stepAr
 
         m->pos[1] = nextPos[1];
         return AIR_STEP_HIT_WALL;
-//    }
+    //}
     }
 
     //! When the wall is not completely vertical or there is a slight wall

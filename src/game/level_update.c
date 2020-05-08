@@ -171,7 +171,7 @@ u8 unused1[4] = { 0 };
 s8 D_8032C9E0 = 0;
 u8 unused3[4];
 u8 unused4[2];
-
+u8 gCoinStarCollected = 0;
 
 
 
@@ -526,39 +526,54 @@ void func_8024A0E0(void) {
     }
 }
 
-void check_instant_warp(void) {
-    s16 cameraAngle;
-    struct Surface *floor;
+void apply_instant_warp(struct InstantWarp *warp) {
+s16 cameraAngle;
+    if (warp->id != 0) {
+            gMarioState->pos[0] += warp->displacement[0];
+            gMarioState->pos[1] += warp->displacement[1];
+            gMarioState->pos[2] += warp->displacement[2];
 
-    if (gCurrLevelNum == LEVEL_CASTLE
+            gMarioState->marioObj->oPosX = gMarioState->pos[0];
+            gMarioState->marioObj->oPosY = gMarioState->pos[1];
+            gMarioState->marioObj->oPosZ = gMarioState->pos[2];
+
+            cameraAngle = gMarioState->area->camera->yaw;
+
+            //gCurrentArea->flags = 0x00;
+            change_area(warp->area);
+            gMarioState->area = gCurrentArea;
+
+            warp_camera(warp->displacement[0], warp->displacement[1], warp->displacement[2]);
+
+            gMarioState->area->camera->yaw = cameraAngle;
+    }
+}
+
+
+void check_instant_warp(void) {
+    struct Surface *floor;
+    struct Surface *ceil;
+
+    /*if (gCurrLevelNum == LEVEL_CASTLE
         && save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 70) {
         return;
-    }
+    }*/
 
     if ((floor = gMarioState->floor) != NULL) {
         s32 index = floor->type - SURFACE_INSTANT_WARP_1B;
         if (index >= INSTANT_WARP_INDEX_START && index < INSTANT_WARP_INDEX_STOP
             && gCurrentArea->instantWarps != NULL) {
-            struct InstantWarp *warp = &gCurrentArea->instantWarps[index];
-
-            if (warp->id != 0) {
-                gMarioState->pos[0] += warp->displacement[0];
-                gMarioState->pos[1] += warp->displacement[1];
-                gMarioState->pos[2] += warp->displacement[2];
-
-                gMarioState->marioObj->oPosX = gMarioState->pos[0];
-                gMarioState->marioObj->oPosY = gMarioState->pos[1];
-                gMarioState->marioObj->oPosZ = gMarioState->pos[2];
-
-                cameraAngle = gMarioState->area->camera->yaw;
-
-                //gCurrentArea->flags = 0x00;
-                change_area(warp->area);
-                gMarioState->area = gCurrentArea;
-
-                warp_camera(warp->displacement[0], warp->displacement[1], warp->displacement[2]);
-
-                gMarioState->area->camera->yaw = cameraAngle;
+            //struct InstantWarp *warp = &gCurrentArea->instantWarps[index];
+            apply_instant_warp(&gCurrentArea->instantWarps[index]);
+        }
+    }
+    if ((ceil = gMarioState->ceil) != NULL) {
+        if (ceil->lowerY > gMarioState->pos[1]) {
+            s32 index2 = ceil->type - SURFACE_INSTANT_WARP_1B;
+            if (index2 >= INSTANT_WARP_INDEX_START && index2 < INSTANT_WARP_INDEX_STOP
+                && gCurrentArea->instantWarps != NULL) {
+                //struct InstantWarp *warp = &gCurrentArea->instantWarps[index];
+                apply_instant_warp(&gCurrentArea->instantWarps[index2]);
             }
         }
     }
@@ -1154,6 +1169,7 @@ s32 update_level(void) {
 
 s32 init_level(void) {
     s32 val4 = 0;
+    gCoinStarCollected = 0;
 
     set_play_mode(PLAY_MODE_NORMAL);
 

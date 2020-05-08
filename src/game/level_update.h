@@ -86,6 +86,7 @@ extern s16 sSourceWarpNodeId;
 extern s32 sDelayedWarpArg;
 extern u8 unused4[2];
 extern s8 sTimerRunning;
+extern u8 gCoinStarCollected;
 
 struct HudDisplay {
     /*0x00*/ s16 lives;
