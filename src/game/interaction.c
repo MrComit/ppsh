@@ -740,6 +740,10 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
     u32 noExit = 1;
     u32 grandStar = (o->oInteractionSubtype & INT_SUBTYPE_GRAND_STAR) != 0;
 
+
+    if (o->parentObj != NULL && object_has_behavior(o->parentObj, bhvHiddenRedCoinStar))
+        gCoinStarCollected = 1;
+
     if (m->health >= 0x100) {
         mario_stop_riding_and_holding(m);
 

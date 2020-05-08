@@ -1,12 +1,39 @@
 void bhv_mole_npc_loop(void) {
 
-    switch ((o->oBehParams >> 24) & 0xFF) {
+    switch (o->oBehParams >> 24) {
         case 0:
+        case 1:
+        case 2:
             //bhv_bobomb_buddy_loop();
             mole_npc_default_loop();
             break;
+    }
+}
+
+
+
+
+
+void mole_spawn_star(f32 x, f32 y, f32 z, s16 param) {
+    o->oBehParams = (o->oBehParams << 8) >> 8;
+    o->oBehParams |= o->oBehParams2ndByte << 24;
+    create_star(x, y, z);
+    o->oBehParams = (o->oBehParams << 8) >> 8;
+    o->oBehParams |= param << 24;
+    o->oInteractType = 0x40000000;
+    o->oAction = 2;
+}
+
+
+void mole_npc_act6(void) {
+    switch (o->oBehParams >> 24) {
         case 1:
+            mole_spawn_star(3384.0f, 226.0f, 14622.0f, 1);
             break;
+        case 2:
+            mole_spawn_star(-20353.0f, -239.0f, 2883.0f, 2);
+            break;
+
     }
 }
 
@@ -31,6 +58,9 @@ void mole_npc_default_loop(void) {
             break;
         case 5:
             mole_npc_act5();
+            break;
+        case 6:
+            mole_npc_act6();
             break;
     }
 }
@@ -99,8 +129,9 @@ void mole_npc_act4(void) {
         PlaySound2(SOUND_OBJ_BOBOMB_WALK);
 
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
-    if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario)
+    if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
         o->oAction = 5;
+    }
 
     PlaySound2(SOUND_ACTION_READ_SIGN);
 }
@@ -115,7 +146,11 @@ void mole_npc_act5(void) {
         o->activeFlags &= ~0x20; /* bit 5 */
         //o->oBobombBuddyHasTalkedToMario = BOBOMB_BUDDY_HAS_TALKED;
         o->oInteractStatus = 0;
-        o->oAction = 2;
-                }
+
+        if (o->oBehParams >> 24 == 1 || o->oBehParams >> 24 == 2)
+            o->oAction = 6;
+        else
+            o->oAction = 2;
+        }
     }
 }

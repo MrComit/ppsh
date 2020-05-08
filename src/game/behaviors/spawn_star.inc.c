@@ -1,3 +1,5 @@
+#include "game/level_update.h"
+
 // spawn_star.c.inc
 
 static struct ObjectHitbox sCollectStarHitbox = {
@@ -189,6 +191,10 @@ void bhv_hidden_red_coin_star_init(void) {
 void bhv_hidden_red_coin_star_loop(void) {
     //gRedCoinsCollected = o->oHiddenStarTriggerCounter;
     struct Object *sp1C;
+    if (gCoinStarCollected) {
+        o->activeFlags = 0;
+        return;
+    }
 
     /*if (gRedCoinsCollected != 8) {
         o->oTimer = 0;
@@ -216,7 +222,7 @@ void bhv_hidden_red_coin_star_loop(void) {
             }
             break;
         case 2:
-            if (sp1C == NULL) {
+            if (sp1C == NULL || sp1C->activeFlags == 0) {
                 o->activeFlags = 0;
             }
             break;

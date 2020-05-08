@@ -9,14 +9,16 @@ struct Object *gswitch = obj_nearest_object_with_behavior(bhvCanyonButton);
             o->oMoveAngleYaw = o->oFaceAngleYaw + 0x12B9;
             if (o->oBehParams2ndByte == 0) {
                 //if (save_file_get_star_flags(gCurrSaveFileNum - 1, 1) & 0x10/* grey button star id*/)
-                    //o->oAction = 2;
+                    o->oAction = 1;
+                    o->oForwardVel = 10.0f;
                 if (gswitch != NULL && gswitch->oAction == 1) {
                     o->oAction = 1;
                     o->oForwardVel = 10.0f;
                 }
             } else {
                 //if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) & 0x4/* red button star id*/)
-                    //o->oAction = 2;
+                    o->oAction = 1;
+                    o->oForwardVel = 10.0f;
                 if (gRedSwitchesPushed >= 5) {
                     o->oAction = 1;
                     o->oForwardVel = 10.0f;
@@ -28,7 +30,7 @@ struct Object *gswitch = obj_nearest_object_with_behavior(bhvCanyonButton);
             CL_Move();
             PlaySound(SOUND_ENV_METAL_BOX_PUSH);
             if (o->oTimer > 100) {
-                play_puzzle_jingle();
+                //play_puzzle_jingle();
                 o->oAction = 2;
                 o->oForwardVel = 0;
                 o->oVelX = 0;
@@ -39,9 +41,12 @@ struct Object *gswitch = obj_nearest_object_with_behavior(bhvCanyonButton);
             break;
         case 2:
             o->oPosY = o->oHomeY;
-            if (gMarioObject->platform == o || absi(o->oHomeY - gMarioObject->oPosY) > absi((o->oHomeY + 1852.0f) - gMarioObject->oPosY)) {
-                o->oAction = 3;
-                o->oVelY = 20.0f;
+            if (o->oDistanceToMario < 4000.0f) {
+                if (gMarioObject->platform == o || 
+                    absi(o->oHomeY - gMarioObject->oPosY) > absi((o->oHomeY + 1852.0f) - gMarioObject->oPosY)) {
+                    o->oAction = 3;
+                    o->oVelY = 20.0f;
+                }
             }
             break;
         case 3:
@@ -60,9 +65,12 @@ struct Object *gswitch = obj_nearest_object_with_behavior(bhvCanyonButton);
             break;
         case 5:
             o->oPosY = o->oHomeY + 1852.0f;
-            if (gMarioObject->platform == o || absi(o->oHomeY - gMarioObject->oPosY) < absi((o->oHomeY + 1852.0f) - gMarioObject->oPosY)) {
-                o->oAction = 6;
-                o->oVelY = -20.0f;
+            if (o->oDistanceToMario < 4000.0f) {
+                if (gMarioObject->platform == o || 
+                    absi(o->oHomeY - gMarioObject->oPosY) < absi((o->oHomeY + 1852.0f) - gMarioObject->oPosY)) {
+                    o->oAction = 6;
+                    o->oVelY = -20.0f;
+                }
             }
             break;
         case 6:
