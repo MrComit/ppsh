@@ -576,6 +576,8 @@ void bhv_FBblock_init(void);
 
 void bhv_ii_bridge_loop(void);
 void bhv_mole_npc_loop(void);
+void bhv_queen_mole_loop(void);
+void bhv_queen_mole_init(void);
 void mole_npc_default_loop(void);
 void mole_npc_act0(void);
 void mole_npc_act1(void);
@@ -589,8 +591,16 @@ void bhv_wrench_loop(void);
 void bhv_star_by_wrench_loop(void);
 void bhv_splat_loop(void);
 void bhv_float_rock_loop(void);
+void bhv_horizontal_rock_loop(void);
+void bhv_float_rock_queen_loop(void);
+void bhv_horizontal_rock_queen_loop(void);
 void bhv_rock_door_loop(void);
 void bhv_rock_door_init(void);
+void bhv_queen_wrench_loop(void);
+void bhv_queen_wrench_init(void);
+void bhv_bomb_switch_loop(void);
+void bhv_bomb_boulder_loop(void);
+void bhv_wrench_thrower_loop(void);
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 

@@ -301,3 +301,5 @@ void func_802B2328(s32 n, s32 a1, s32 a2, s32 r) {
 #include "behaviors/splat.inc.c"
 #include "behaviors/floating_rock.inc.c"
 #include "behaviors/rock_door.inc.c"
+#include "behaviors/mole_queen.inc.c"
+#include "behaviors/bomb_stuff.inc.c"

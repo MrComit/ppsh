@@ -211,6 +211,21 @@ Gfx *geo_switch_area(s32 run, struct GraphNode *node) {
     return NULL;
 }
 
+#ifdef AVOID_UB
+Gfx *geo_switch_console_mode(s32 run, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_console_mode(s32 run, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (run == TRUE) {
+        switchCase = (struct GraphNodeSwitchCase *) node;
+        switchCase->selectedCase = 0;
+    }
+
+    return NULL;
+}
+
 void func_8029D558(Mat4 a0, struct Object *a1) {
     f32 spC, sp8, sp4;
 

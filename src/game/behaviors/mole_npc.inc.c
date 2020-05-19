@@ -28,10 +28,10 @@ void mole_spawn_star(f32 x, f32 y, f32 z, s16 param) {
 void mole_npc_act6(void) {
     switch (o->oBehParams >> 24) {
         case 1:
-            mole_spawn_star(3384.0f, 226.0f, 14622.0f, 1);
+            mole_spawn_star(3384.0f, 226.0f, 14622.0f, 0x12);
             break;
         case 2:
-            mole_spawn_star(-20353.0f, -239.0f, 2883.0f, 2);
+            mole_spawn_star(-20353.0f, -239.0f, 2883.0f, 0x10);
             break;
 
     }

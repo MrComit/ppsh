@@ -628,15 +628,18 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
                 break;
 
             case 80:
+                m->actionState = 3;
+                m->healCounter = 31;
+                break;
+        }
+    } else if (m->actionState == 3) {
                 if ((m->actionArg & 1) == 0) {
                     level_trigger_warp(m, WARP_OP_STAR_EXIT);
-                } else {
+                } else if (m->health >= 0x800) {
                     enable_time_stop();
                     create_dialog_box_with_response(/*gLastCompletedStarNum == 7 ? DIALOG_013 : */DIALOG_014);
                     m->actionState = 1;
                 }
-                break;
-        }
     } else if (m->actionState == 1 && gDialogResponse) {
         if (gDialogResponse == 1) {
             save_file_do_save(gCurrSaveFileNum - 1);
@@ -2630,6 +2633,18 @@ static s32 check_for_instant_quicksand(struct MarioState *m) {
     return FALSE;
 }
 
+
+
+static s32 act_cutscene_jump(struct MarioState *m) {
+    set_mario_animation(m, MARIO_ANIM_SINGLE_JUMP);
+    if (perform_air_step(m, 0) == AIR_STEP_LANDED) {
+        set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
+        mario_set_forward_vel(m, 0.0f);
+        play_mario_landing_sound(m, SOUND_ACTION_TERRAIN_LANDING);
+    }
+    return FALSE;
+}
+
 s32 mario_execute_cutscene_action(struct MarioState *m) {
     s32 cancel;
 
@@ -2690,6 +2705,7 @@ s32 mario_execute_cutscene_action(struct MarioState *m) {
         case ACT_BUTT_STUCK_IN_GROUND:       cancel = act_butt_stuck_in_ground(m);       break;
         case ACT_FEET_STUCK_IN_GROUND:       cancel = act_feet_stuck_in_ground(m);       break;
         case ACT_PUTTING_ON_CAP:             cancel = act_putting_on_cap(m);             break;
+        case ACT_CUTSCENE_JUMP:              cancel = act_cutscene_jump(m);              break;
     }
     /* clang-format on */
 

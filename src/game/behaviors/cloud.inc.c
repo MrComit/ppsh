@@ -82,7 +82,7 @@ static void cloud_fwoosh_update(void) {
             //o->oCloudFwooshMovementRadius += 0xC8;
 
             // If mario stays nearby for 100 frames, begin blowing
-            if (o->header.gfx.scale[0] == 10.0f && o->oDistanceToMario < 3000.0f
+            if (o->header.gfx.scale[0] == 10.0f && o->oDistanceToMario < 1500.0f
                 /*&& -0x1000 < o->oAngleToMario - o->oFaceAngleYaw*/ && absi((s16)o->oAngleToMario - (s16)o->oFaceAngleYaw) < 0x1000) {
                 Vec3f detector;
                 detector[0] = gMarioState->pos[0];// + 300.0 * sins(o->oFaceAngleYaw);

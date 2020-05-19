@@ -223,13 +223,12 @@ the back and hurl me to\n\
 this royal turf? I think\n\
 that you cannot!"))
 
-DEFINE_DIALOG(DIALOG_018, 1, 3, 30, 200, _("\
-I cant beleive this shiat\n\
-\n\
-\n\
-if marios MICRO DICK\n\
-touches the quicksand he \n\
-just fucking dies."))
+DEFINE_DIALOG(DIALOG_018, 1, 5, 30, 200, _("\
+I've been stuck on the\n\
+first level for 6 hours \n\
+now and this is still \n\
+easier than getting \n\
+coochie in real life"))
 
 DEFINE_DIALOG(DIALOG_019, 1, 4, 30, 200, _("\
 If you approach the water\n\
@@ -464,114 +463,87 @@ That's it for now. Press\n\
 bye byyyyyyeeee!"))
 
 DEFINE_DIALOG(DIALOG_046, 1, 5, 30, 200, _("\
-You have to master three\n\
-important jumping\n\
-techniques.\n\
-First try the Triple Jump.\n\
+Ah, Mario! We're so glad \n\
+to see you here - our \n\
+town is in some trouble.\n\
 \n\
-Run fast, then jump three\n\
-times, one, two, three.\n\
-If you time the jumps\n\
-right, you'll hop, skip,\n\
-then jump really high.\n\
-Next, go for distance\n\
-with the Long Jump. Run,\n\
-press [Z] to crouch then [A]\n\
-to jump really far.\n\
 \n\
-To do the Wall Kick, press\n\
-[A] to jump at a wall, then\n\
-jump again when you hit\n\
-the wall.\n\
-\n\
-Got that? Triple Jump,\n\
-Long Jump, Wall Kick.\n\
-Practice, practice,\n\
-practice. You don't stand\n\
-a chance without them."))
+The queen has become \n\
+tyrannical, we're not \n\
+even allowed to go beyond \n\
+the confines of the town \n\
+without permission! \n\
+You have to make your \n\
+way up to her and take \n\
+her on. I know you can \n\
+do it Mario!"))
 
 DEFINE_DIALOG(DIALOG_047, 1, 2, 95, 200, _("\
 Hi! I'll prepare the\n\
 cannon for you!"))
 
 DEFINE_DIALOG(DIALOG_048, 1, 4, 30, 200, _("\
-Snow Mountain Summit\n\
-Watch for slippery\n\
-conditions! Please enter\n\
-the cottage first."))
+I'm trying to see if I\n\
+can get some wrenches \n\
+together. \n\
+\n\
+There should be plenty \n\
+scattered around the\n\
+town, do you think you \n\
+could bring me 5 Mario?"))
 
-DEFINE_DIALOG(DIALOG_049, 1, 5, 30, 200, _("\
-Remember that tricky Wall\n\
-Kick jump? It's a\n\
-technique you'll have to\n\
-master in order to reach\n\
-high places.\n\
-Use it to jump from wall\n\
-to wall. Press the\n\
-Control Stick in the\n\
-direction you want to\n\
-bounce to gain momentum.\n\
-Practice makes perfect!"))
+DEFINE_DIALOG(DIALOG_049, 1, 4, 30, 200, _("\
+This is my hiding spot. \n\
+Sometimes things get too \n\
+hectic and I just gotta \n\
+get away from it all. \n\
+It's quite peaceful here, \n\
+really."))
 
 DEFINE_DIALOG(DIALOG_050, 1, 4, 30, 200, _("\
-Hold [Z] to crouch and\n\
-slide down a slope.\n\
-Or press [Z] while in the\n\
-air to Pound the Ground!\n\
-If you stop, crouch, then\n\
-jump, you'll do a\n\
-Backward Somersault!\n\
-Got that?\n\
-There's more. Crouch and\n\
-then jump to do a\n\
-Long Jump! Or crouch and\n\
-walk to...never mind."))
+Wow! \n\
+\n\
+\n\
+\n\
+I can't believe you've\n\
+managed to find me. \n\
+You sure are observant \n\
+for a plumber."))
 
 DEFINE_DIALOG(DIALOG_051, 1, 6, 30, 200, _("\
-Climbing's easy! When you\n\
-jump at trees, poles or\n\
-pillars, you'll grab them\n\
-automatically. Press [A] to\n\
-jump off backward.\n\
+The King has been living \n\
+trapped inside that cave \n\
+for the last few months, \n\
+ever since our Queen \n\
+locked him in there \n\
+after a fight. \n\
+They say he's gone mad \n\
+in there, but that's all \n\
+speculation, since no one \n\
+can actually see him."))
+
+DEFINE_DIALOG(DIALOG_052, 1, 4, 30, 200, _("\
+I think I'm stuck here,\n\
+There's no way to get \n\
+down! \n\
 \n\
-To rotate around the\n\
-object, press Right or\n\
-Left on the Control Stick.\n\
-When you reach the top,\n\
-press Up to do a\n\
-handstand!\n\
-Jump off from the\n\
-handstand for a high,\n\
-stylin' dismount."))
+But I can't just stay \n\
+here, what if someone \n\
+checks my computer \n\
+while I'm not around?!"))
 
-DEFINE_DIALOG(DIALOG_052, 1, 5, 30, 200, _("\
-Stop and press [Z] to\n\
-crouch, then press [A]\n\
-to do a high, Backward\n\
-Somersault!\n\
+DEFINE_DIALOG(DIALOG_053, 1, 3, 30, 200, _("\
+The view here is great. \n\
+It's the perfect angle \n\
+to worship my queen from"))
+
+DEFINE_DIALOG(DIALOG_054, 1, 3, 30, 200, _("\
+I cant beleive this shiat\n\
 \n\
-To perform a Side\n\
-Somersault, run, do a\n\
-sharp U-turn and jump.\n\
-You can catch lots of\n\
-air with both jumps."))
-
-DEFINE_DIALOG(DIALOG_053, 1, 5, 30, 200, _("\
-Sometimes, if you pass\n\
-through a coin ring or\n\
-find a secret point in a\n\
-course, a red number will\n\
-appear.\n\
-If you trigger five red\n\
-numbers, a secret Star\n\
-will show up."))
-
-DEFINE_DIALOG(DIALOG_054, 1, 5, 30, 200, _("\
-Welcome to the snow\n\
-slide! Hop on! To speed\n\
-up, press forward on the\n\
-Control Stick. To slow\n\
-down, pull back."))
+\n\
+if marios MICRO DICK\n\
+touches the quicksand he \n\
+just fucking dies."))
 
 DEFINE_DIALOG(DIALOG_055, 1, 4, 30, 200, _("\
 Hey-ey, Mario, buddy,\n\
@@ -629,54 +601,30 @@ looks nothing like me!\n\
 Her parents must be\n\
 worried sick!"))
 
-DEFINE_DIALOG(DIALOG_060, 1, 4, 30, 200, _("\
-ATTENTION!\n\
-Read Before Diving In!\n\
+DEFINE_DIALOG(DIALOG_060, 1, 3, 30, 200, _("\
+Dear Mister Im Too Good\n\
+to Play Romhacks Made \n\
+By My Fans\n\
+This will be the last hack\n\
+I ever send your ass\n\
 \n\
-\n\
-If you stay under the\n\
-water for too long, you'll\n\
-run out of oxygen.\n\
-\n\
-Return to the surface for\n\
-air or find an air bubble\n\
-or coins to breathe while\n\
-underwater.\n\
-Press [A] to swim. Hold [A]\n\
-to swim slow and steady.\n\
-Tap [A] with smooth timing\n\
-to gain speed.\n\
-Press Up on the\n\
-Control Stick and press [A]\n\
-to dive.\n\
-\n\
-Press Down on the Control\n\
-Stick and press [A] to\n\
-return to the surface.\n\
-\n\
-Hold Down and press [A]\n\
-while on the surface near\n\
-the edge of the water to\n\
-jump out."))
+Its been six months and\n\
+still no word, \n\
+I don't deserve it?\n\
+I know you got my last \n\
+two hacks, I typed the dl\n\
+links on em perfect."))
 
-DEFINE_DIALOG(DIALOG_061, 1, 4, 30, 200, _("\
-BRRR! Frostbite Danger!\n\
-Do not swim here.\n\
-I'm serious.\n\
-/--The Penguin"))
+DEFINE_DIALOG(DIALOG_061, 1, 2, 30, 200, _("\
+SISSY HYPNO MOLE\n\
+DOMINATRIX (HD) (FULL)\n\
+..."))
 
-DEFINE_DIALOG(DIALOG_062, 1, 3, 30, 200, _("\
-Hidden inside the green\n\
-block is the amazing\n\
-Metal Cap.\n\
-Wearing it, you won't\n\
-catch fire or be hurt\n\
-by enemy attacks.\n\
-You don't even have to\n\
-breathe while wearing it.\n\
-\n\
-The only problem:\n"
-YOU_CANT_SWIM_IN_IT))
+DEFINE_DIALOG(DIALOG_062, 1, 4, 30, 200, _("\
+Fun fact: Canonically \n\
+this song takes place 10\n\
+minutes before gangnam\n\
+style"))
 
 DEFINE_DIALOG(DIALOG_063, 1, 5, 30, 200, _("\
 The Vanish Cap is inside\n\
