@@ -47,3 +47,7 @@
 #include "levels/wf/quicksand_platforming/geo.inc.c"
 #include "levels/wf/floating_rock/geo.inc.c"
 #include "levels/wf/rock_door/geo.inc.c"
+#include "levels/wf/horizontal_rock/geo.inc.c"
+#include "levels/wf/BombSwitch/geo.inc.c"
+#include "levels/wf/bomb_boulder/geo.inc.c"
+#include "levels/wf/cc_truck/geo.inc.c"

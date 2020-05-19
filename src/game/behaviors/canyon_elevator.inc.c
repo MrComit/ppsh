@@ -8,20 +8,30 @@ struct Object *gswitch = obj_nearest_object_with_behavior(bhvCanyonButton);
             obj_hide();
             o->oMoveAngleYaw = o->oFaceAngleYaw + 0x12B9;
             if (o->oBehParams2ndByte == 0) {
-                //if (save_file_get_star_flags(gCurrSaveFileNum - 1, 1) & 0x10/* grey button star id*/)
+                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 1) & 0x10/* grey button star id*/) {
                     o->oAction = 1;
                     o->oForwardVel = 10.0f;
+                    o->oBobombBlinkTimer = FALSE;
+                    return;
+                }
                 if (gswitch != NULL && gswitch->oAction == 1) {
                     o->oAction = 1;
                     o->oForwardVel = 10.0f;
+                    o->oBobombBlinkTimer = TRUE;
+                    return;
                 }
             } else {
-                //if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) & 0x4/* red button star id*/)
+                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) & 0x2/* red button star id*/) {
                     o->oAction = 1;
                     o->oForwardVel = 10.0f;
+                    o->oBobombBlinkTimer = FALSE;
+                    return;
+                }
                 if (gRedSwitchesPushed >= 5) {
                     o->oAction = 1;
                     o->oForwardVel = 10.0f;
+                    o->oBobombBlinkTimer = TRUE;
+                    return;
                 }
             }
             break;
@@ -30,7 +40,8 @@ struct Object *gswitch = obj_nearest_object_with_behavior(bhvCanyonButton);
             CL_Move();
             PlaySound(SOUND_ENV_METAL_BOX_PUSH);
             if (o->oTimer > 100) {
-                //play_puzzle_jingle();
+                if (o->oBobombBlinkTimer)
+                    play_puzzle_jingle();
                 o->oAction = 2;
                 o->oForwardVel = 0;
                 o->oVelX = 0;

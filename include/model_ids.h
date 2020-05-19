@@ -610,6 +610,10 @@
 #define MODEL_SPLAT 0xFC
 #define MODEL_FLOATING_ROCK 0xFB
 #define MODEL_ROCK_DOOR 0xFA
+#define MODEL_HORIZONTAL_ROCK 0xF9
+#define MODEL_BOMB_SWITCH 0xF8
+#define MODEL_BOMB_BOULDER 0xF7
+#define MODEL_TRUCK 0xF6
 
 // custom simp city
 

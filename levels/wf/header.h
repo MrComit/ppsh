@@ -123,4 +123,18 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/rock_door/collision_header.h"
 
+#include "levels/wf/horizontal_rock/geo_header.h"
+
+#include "levels/wf/horizontal_rock/collision_header.h"
+
+#include "levels/wf/BombSwitch/geo_header.h"
+
+#include "levels/wf/BombSwitch/collision_header.h"
+
+#include "levels/wf/bomb_boulder/geo_header.h"
+
+#include "levels/wf/bomb_boulder/collision_header.h"
+
+#include "levels/wf/cc_truck/geo_header.h"
+
 #endif

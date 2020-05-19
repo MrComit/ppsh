@@ -492,7 +492,8 @@ u32 bully_knock_back_mario(struct MarioState *mario) {
 
 void bounce_off_object(struct MarioState *m, struct Object *o, f32 velY) {
     m->pos[1] = o->oPosY + o->hitboxHeight;
-    m->vel[1] = velY;
+    if (!(object_has_behavior(o, bhvQueenMole)))
+        m->vel[1] = velY;
 
     m->flags &= ~MARIO_UNKNOWN_08;
 

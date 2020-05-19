@@ -81,15 +81,28 @@ static void shift_xyz(Vtx *vert, u16 vertcount, s16 speed, s16 cycle, u8 xyz) {
     Vtx *verts = segmented_to_virtual(vert);
     for (i = 0; i < vertcount; i++) {
         verts[i].n.ob[xyz] += speed;
+        if (verts[i].n.ob[xyz] > cycle * signum_positive(speed)) {
+            for (i = 0; i < vertcount; i++)
+                verts[i].n.ob[xyz] -= cycle * signum_positive(speed);
+            break;
+        }
     }
 
-    if (verts[xyz].n.flag > cycle) {
+    //if (verts[0].n.ob[xyz] > cycle * signum_positive(speed)) {
+    //    for (i = 0; i < vertcount; i++)
+    //        verts[i].n.ob[xyz] -= cycle * signum_positive(speed);
+    //}
+    /*if (!cycle) {
+        if (verts[i].n.ob[xyz] > 32767 || verts[i].n.ob[xyz] < -32768)
+
+    }
+    else if (verts[xyz].n.flag > cycle) {
         for (i = 0; i < vertcount; i++) {
-            verts[i].n.ob[xyz] -= cycle;
+            verts[i].n.ob[xyz] -= cycle * signum_positive(speed);
         }
         verts[xyz].n.flag = 0;
     }
-    verts[xyz].n.flag += speed;
+    verts[xyz].n.flag += absi(speed);*/
 }
 
 static void shift_xyz_sine(Vtx *vert, u16 vertcount, s16 speed, s16 cycle, u8 xyz) {
@@ -132,6 +145,10 @@ static void shift_uv(u8 scrolltype, Vtx *vert, u16 vertcount, u16 width, u16 hei
 extern bob_a1_Sandfloor_001_mesh_vtx;
 extern bob_A3_Water_mesh_vtx;
 extern wf_Quicksand_mesh_vtx;
+extern wf_dl_Clouds1_mesh_vtx_0;
+extern wf_dl_Clouds2_mesh_vtx_0;
+extern wf_dl_Clouds3_mesh_vtx_0;
+extern wf_dl_Clouds4_mesh_vtx_0;
 
 // Call this function inside play_mode_normal() in level_update.c
 void uv_update_scroll() {
@@ -146,6 +163,13 @@ void uv_update_scroll() {
                     break;
         }   
             break;
+        case LEVEL_WF:
+            if (gCurrAreaIndex == 1) {
+                shift_uv(SCROLL_X, &wf_dl_Clouds1_mesh_vtx_0, 24, 64, 32, -20, -32000);
+                shift_uv(SCROLL_X, &wf_dl_Clouds2_mesh_vtx_0, 24, 64, 32, -20, -32000);
+                shift_uv(SCROLL_X, &wf_dl_Clouds3_mesh_vtx_0, 24, 64, 32, -20, -32000);
+                shift_uv(SCROLL_X, &wf_dl_Clouds4_mesh_vtx_0, 24, 64, 32, -20, -32000);
+            }
         /*case LEVEL_WF:
             if (gCurrAreaIndex == 1)
                 shift_uv(SCROLL_UV, &wf_Quicksand_mesh_vtx, 24, 32, 32, 0, -16);

@@ -6376,7 +6376,6 @@ const BehaviorScript bhvFloatRock[] = {
         CALL_NATIVE(bhv_float_rock_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
-
 };
 
 const BehaviorScript bhvBlueCanyonButton[] = {
@@ -6418,5 +6417,110 @@ const BehaviorScript bhvRedCanyonButton[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_purple_switch_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvHorizontalRock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(horizontal_rock_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x600),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_horizontal_rock_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvQueenMole[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, monty_mole_seg5_anims_05007248),
+    DROP_TO_FLOOR(),
+    ANIMATE(3),
+    SCALE(3000),
+    SET_FLOAT(oDrawingDistance, 0x3000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_queen_mole_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_queen_mole_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvFloatRockQueen[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(floating_rock_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x380),
+    SET_HOME(),
+    SCALE(65),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_float_rock_queen_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvHorizontalRockQueen[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(horizontal_rock_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x380),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_horizontal_rock_queen_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvThrowingWrench[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | 
+                    OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_queen_wrench_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_queen_wrench_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBombSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(BombSwitch_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bomb_switch_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBombBoulder[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(bomb_boulder_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0xA00),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bomb_boulder_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvWrenchThrower[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_wrench_thrower_loop),
     END_LOOP(),
 };

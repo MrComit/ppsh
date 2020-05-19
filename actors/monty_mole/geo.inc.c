@@ -1,5 +1,7 @@
 // 0x0C000000
 const GeoLayout monty_mole_geo[] = {
+   GEO_CULLING_RADIUS(0x800),
+   GEO_OPEN_NODE(),
    GEO_SHADOW(SHADOW_CIRCLE_4_VERTS, 0xFF, 100),
    GEO_OPEN_NODE(),
       GEO_SCALE(0x00, 16384),
@@ -36,6 +38,7 @@ const GeoLayout monty_mole_geo[] = {
             GEO_CLOSE_NODE(),
          GEO_CLOSE_NODE(),
       GEO_CLOSE_NODE(),
+   GEO_CLOSE_NODE(),
    GEO_CLOSE_NODE(),
    GEO_END(),
 };

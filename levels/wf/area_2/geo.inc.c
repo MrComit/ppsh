@@ -8,7 +8,6 @@ const GeoLayout wf_area_2_geo[] = {
 			GEO_ANIMATED_PART(1, 0, 0, 0, NULL),
 			GEO_OPEN_NODE(),
 				GEO_ANIMATED_PART(6, -16510, 0, 6010, wf_dl_Arrow_001_mesh),
-				GEO_ANIMATED_PART(1, -6149, 30, 2801, wf_dl_Chair_001_mesh),
 				GEO_ANIMATED_PART(1, -6114, 168, 2694, wf_dl_Computer_001_mesh),
 				GEO_ANIMATED_PART(1, -16655, 168, 5966, wf_dl_Computer_004_mesh),
 				GEO_ANIMATED_PART(1, -8560, 167, 1780, wf_dl_Computer_005_mesh),
