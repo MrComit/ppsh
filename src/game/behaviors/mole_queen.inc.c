@@ -1,3 +1,4 @@
+#include "audio/internal.h"
 #define QUEEN_DEATH 2
 
 static struct ObjectHitbox sMoleQueenHitbox = {
@@ -34,6 +35,44 @@ static s16 angles[3] = {0x0000, 0xC000, 0x7000};
 
 static f32 respawnPos[3][3] = {{-16524.0f, 5894.0f, 8000.0f}, {-7754.0f, 4652.0f, 2968.0f}, {-4225.0f, 3929.0f, 11470.0f}};
 
+struct MusicDynamic {
+    /*0x0*/ s16 bits1;
+    /*0x2*/ u16 volScale1;
+    /*0x4*/ s16 dur1;
+    /*0x6*/ s16 bits2;
+    /*0x8*/ u16 volScale2;
+    /*0xA*/ s16 dur2;
+}; // size = 0xC
+
+struct MusicDynamic sQueenDynamics[3] = {
+    { 0x003F, 127, 20, 0x01C0, 0, 20 }, // PHASE 1
+    { 0x007C, 127, 20, 0x0003, 0, 20 }, // PHASE 2
+    { 0x0128, 127, 20, 0x0000, 0, 20 }, // PHASE 3
+};
+
+
+void queen_boss_music(s32 index) {
+    s32 i;
+    s16 dur1 = sQueenDynamics[index].dur1;
+    s16 dur2 = sQueenDynamics[index].dur2;
+    u16 bit = 1;
+    if (index == 3) {
+        return;
+    }
+
+    for (i = 0; i < CHANNELS_MAX; i++) {
+        if (sQueenDynamics[index].bits1 & bit) {
+            fade_channel_volume_scale(0, i, sQueenDynamics[index].volScale1, dur1);
+        }
+        if (sQueenDynamics[index].bits2 & bit) {
+            fade_channel_volume_scale(0, i, sQueenDynamics[index].volScale2, dur2);
+        }
+        bit <<= 1;
+    }
+}
+
+
+
 
 static s32 cringe_anim_thing(s32 arg0, s32 arg1) {
     set_obj_animation_and_sound_state(arg0);
@@ -47,6 +86,7 @@ void damage_queen(struct MarioState *m) {
     m->pos[2] = o->oPosZ;
     m->faceAngle[1] = (m->angleVel[1] = angles[health]);
     m->vel[1] = ySpeeds[health];
+    m->healCounter = 8;
     mario_set_forward_vel(m, fSpeeds[health]);
     set_mario_action(m, ACT_CUTSCENE_JUMP, 0);
     PlaySound2(SOUND_OBJ_DYING_ENEMY1);
@@ -99,6 +139,8 @@ s16 angle;
                 o->oAction = 1;
                 o->oHealth = 3;
                 //play_sequence(0, SEQ_EVENT_BOSS, 40);
+                sequence_player_unlower(0, 60);
+                play_music(0, SEQUENCE_ARGS(4, SEQ_FEAR_BOSS), 0);
             }
             break;
         case 1:
@@ -107,8 +149,10 @@ s16 angle;
                 queen_attack_handler();
             else
                 set_obj_animation_and_sound_state(3);
-            if (o->oDistanceToMario > 10000.0f)
+            if (o->oDistanceToMario > 10000.0f) {
                 o->oAction = 0;
+                stop_background_music(SEQUENCE_ARGS(4, SEQ_FEAR_BOSS));
+            }
             if (o->oInteractStatus & INT_STATUS_INTERACTED && !(o->oInteractStatus & INT_STATUS_ATTACKED_MARIO))
                 damage_queen(m);
             if (o->oHealth == 0)
@@ -127,6 +171,7 @@ s16 angle;
             break;
         case QUEEN_DEATH:
             create_star(o->oPosX, o->oPosY + 300.0f, o->oPosZ);
+            stop_background_music(SEQUENCE_ARGS(4, SEQ_FEAR_BOSS));
             o->activeFlags = 0;
             break;
         case 3:
@@ -149,6 +194,7 @@ s16 angle;
             }
             break;
     }
+    queen_boss_music(3 - o->oHealth);
     o->oInteractStatus = 0;
 }
 
