@@ -379,6 +379,13 @@ s16 sDynII[] = {
     9,
 };
 
+s16 sDynCC[] = {
+    SEQ_FEAR,
+    DYN1(MARIO_IS_IN_AREA, 2, 11),
+    DYN1(MARIO_IS_IN_AREA, 3, 11),
+    12,
+};
+
 s16 sDynNone[] = { SEQ_SOUND_PLAYER, 0 };
 
 u8 sCurrentMusicDynamic = 0xff;
@@ -405,7 +412,7 @@ struct MusicDynamic {
     /*0xA*/ s16 dur2;
 }; // size = 0xC
 
-struct MusicDynamic sMusicDynamics[11] = {
+struct MusicDynamic sMusicDynamics[13] = {
     { 0x0000, 127, 100, 0x0e43, 0, 100 }, // SEQ_LEVEL_WATER
     { 0x0003, 127, 100, 0x0e40, 0, 100 }, // SEQ_LEVEL_WATER
     { 0x0e43, 127, 200, 0x0000, 0, 200 }, // SEQ_LEVEL_WATER
@@ -414,9 +421,11 @@ struct MusicDynamic sMusicDynamics[11] = {
     { 0x0070, 127, 10, 0x0000, 0, 100 },  // SEQ_LEVEL_SPOOKY
     { 0x0000, 127, 100, 0x0070, 0, 10 },  // SEQ_LEVEL_SPOOKY
     { 0xffff, 127, 100, 0x0000, 0, 100 }, // any (unused)
-    { 0x1C00, 127, 20, 0x00FB, 0, 20 }, // SEQ_REJECT
-    { 0x00FB, 127, 20, 0x1C00, 0, 20 }, // SEQ_REJECT
-    { 0x1C00, 127, 20, 0x0031, 0, 20 }, // SEQ_REJECT
+    { 0x1C00, 127, 20, 0x00FB, 0, 20 }, // SEQ_REJECT CAVE
+    { 0x00FB, 127, 20, 0x1C00, 0, 20 }, // SEQ_REJECT DEFAULT
+    { 0x1C00, 127, 20, 0x0031, 0, 20 }, // SEQ_REJECT WATER
+    { 0x0080, 127, 20, 0x007E, 0, 20 }, // SEQ_FEAR CAVE
+    { 0x007E, 127, 20, 0x0180, 0, 20 }, // SEQ_FEAR DEFAULT
 };
 
 #define STUB_LEVEL(_0, _1, _2, _3, echo1, echo2, echo3, _7, _8) { echo1, echo2, echo3 },
@@ -481,6 +490,8 @@ u8 sBackgroundMusicDefaultVolume[] = {
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
     75, //blinking ballad
     75, // reject society
+    75, // fear society
+    75, // fear society boss
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,

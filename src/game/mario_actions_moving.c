@@ -38,7 +38,7 @@ float grindTrajectories[15][6] = {
 // {468.75, 62.5, 2500, 12, 14, 0x0000},
 // {331.4565, 62.5, 2168.545, 7, 13, 0xA000}, //0014 all these are for test ver
 
-    {-718.75, 157.741, 7000, -1, 1, 0x0000}, //0000
+/*  {-718.75, 157.741, 7000, -1, 1, 0x0000}, //0000
     {-718.75, 157.741, 6000, 0, 2, 0x0000},
     {-718.75, 415.4775, 5538.1, 1, 3, 0x0000},
     {-722.735, 415.4775, 4524.505, 2, 4, 0xFFFFF000},
@@ -50,6 +50,9 @@ float grindTrajectories[15][6] = {
     {923.095, 227.6365, 2480.455, 7, 9, 0x0000},
     {826.315, 165.0685, 2243.94, 10, 8, 0x9000}, //0000
     {634.975, 165.0685, 1782.005, -1, 9, 0xA000}, //0010
+*/
+    {0, 88.5, 24940.95, 1, -1, 0x8000}, //0000
+    {0, 88.5, 16887.65, -1, 0, 0x8000},
 };
 
 struct LandingAction {
@@ -2061,7 +2064,7 @@ s32 act_grind(struct MarioState *m) {
     }
 
     m->faceAngle[1] = atan2s(m->pos[0] - grindTrajectories[smallestDistRow][0], m->pos[2] - grindTrajectories[smallestDistRow][2]);
-    
+
     z1 = m->pos[2]; z2 = grindTrajectories[smallestDistRow][2];
     x1 = m->pos[0]; x2 = grindTrajectories[smallestDistRow][0];
 

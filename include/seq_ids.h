@@ -41,6 +41,8 @@ enum SeqId {
     SEQ_EVENT_CUTSCENE_LAKITU,        // 0x22 (not in JP)
     SEQ_FLASHBLACK,                   // 0x23
     SEQ_REJECT,                   // 0x24
+    SEQ_FEAR,
+    SEQ_FEAR_BOSS,
     SEQ_COUNT
 };
 

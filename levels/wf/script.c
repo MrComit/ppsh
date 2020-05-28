@@ -173,7 +173,7 @@ const LevelScript level_wf_entry[] = {
 		TERRAIN(wf_area_1_collision),
 		ROOMS(wf_area_1_collision_rooms),
 		MACRO_OBJECTS(wf_area_1_Area1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_HOT),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_FEAR),
 		TERRAIN_TYPE(TERRAIN_SAND),
 	END_AREA(),
 
@@ -197,7 +197,7 @@ const LevelScript level_wf_entry[] = {
 		TERRAIN(wf_area_2_collision),
 		ROOMS(wf_area_2_collision_rooms),
 		MACRO_OBJECTS(wf_area_2_Area2_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_HOT),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_FEAR),
 		TERRAIN_TYPE(TERRAIN_SAND),
 	END_AREA(),
 
@@ -209,7 +209,7 @@ const LevelScript level_wf_entry[] = {
 		TERRAIN(wf_area_3_collision),
 		ROOMS(wf_area_3_collision_rooms),
 		MACRO_OBJECTS(wf_area_3_Area3_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_HOT),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_FEAR),
 		TERRAIN_TYPE(TERRAIN_STONE),
 	END_AREA(),
 
@@ -249,7 +249,7 @@ const LevelScript level_wf_entry[] = {
 		TERRAIN(wf_area_4_collision),
 		ROOMS(wf_area_4_collision_rooms),
 		MACRO_OBJECTS(wf_area_4_Area4_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_HOT),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_FEAR),
 		TERRAIN_TYPE(TERRAIN_STONE),
 	END_AREA(),
 
