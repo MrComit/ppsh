@@ -102,10 +102,6 @@ s32 func_802606DC(struct MarioState *m) {
 
 s32 act_idle(struct MarioState *m) {
 
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
-
     if (m->quicksandDepth > 30.0f) {
         return set_mario_action(m, ACT_IN_QUICKSAND, 0);
     }
@@ -874,10 +870,6 @@ s32 func_80262828(struct MarioState *m, u32 action) {
 
 s32 act_jump_land_stop(struct MarioState *m) {
 
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
-
     if (func_80262828(m, 0)) {
         return 1;
     }
@@ -888,10 +880,6 @@ s32 act_jump_land_stop(struct MarioState *m) {
 
 s32 act_double_jump_land_stop(struct MarioState *m) {
 
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
-
     if (func_80262828(m, 0)) {
         return 1;
     }
@@ -901,10 +889,6 @@ s32 act_double_jump_land_stop(struct MarioState *m) {
 }
 
 s32 act_side_flip_land_stop(struct MarioState *m) {
-
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
 
     if (func_80262828(m, 0)) {
         return 1;
@@ -917,10 +901,6 @@ s32 act_side_flip_land_stop(struct MarioState *m) {
 
 s32 act_freefall_land_stop(struct MarioState *m) {
 
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
-
     if (func_80262828(m, 0)) {
         return 1;
     }
@@ -931,10 +911,6 @@ s32 act_freefall_land_stop(struct MarioState *m) {
 
 s32 act_triple_jump_land_stop(struct MarioState *m) {
 
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
-
     if (func_80262828(m, ACT_JUMP)) {
         return 1;
     }
@@ -944,10 +920,6 @@ s32 act_triple_jump_land_stop(struct MarioState *m) {
 }
 
 s32 act_backflip_land_stop(struct MarioState *m) {
-
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
 
     if (!(m->input & INPUT_Z_DOWN) || m->marioObj->header.gfx.unk38.animFrame >= 6) {
         m->input &= -3;
@@ -963,10 +935,6 @@ s32 act_backflip_land_stop(struct MarioState *m) {
 
 s32 act_lava_boost_land(struct MarioState *m) {
 
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
-
     m->input &= -0x2011;
 
     if (func_80262828(m, 0)) {
@@ -978,10 +946,6 @@ s32 act_lava_boost_land(struct MarioState *m) {
 }
 
 s32 act_long_jump_land_stop(struct MarioState *m) {
-
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
 
     m->input &= -0x2001;
     if (func_80262828(m, ACT_JUMP)) {
@@ -1086,10 +1050,6 @@ s32 act_twirl_land(struct MarioState *m) {
 }
 
 s32 act_ground_pound_land(struct MarioState *m) {
-
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
     
     m->actionState = 1;
     if (m->input & INPUT_UNKNOWN_10) {
@@ -1176,6 +1136,10 @@ s32 mario_execute_stationary_action(struct MarioState *m) {
 
     if (mario_update_quicksand(m, 1.5f)) {
         return 1;
+    }
+
+    if (m->action != ACT_GRIND && m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
+        return set_mario_action(m, ACT_GRIND, 0);
     }
 
     /* clang-format off */

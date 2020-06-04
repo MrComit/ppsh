@@ -14,45 +14,33 @@
 #include "game.h"
 #include "display.h"
 
-int grindInitTriggered, grindSteps, grindTrajectoryRow, smallestDistRow;
-f32 distBetweenTrajectories = 0;
-f32 smallestDist = 64000.0;
+int grindInitTriggered;
 
-float grindTrajectories[15][6] = {
-//xpos, ypos, zpos, forward_next_point, backward_next_point, forward_angle
+struct GrindPoints {
+    Vec3f pos;
+    s16 pointNext;
+    s16 pointPrev;
+    u16 forwardAngle;
+};
 
-// {-861.485, 156.25, -562.5, 1, -1, 0x0000}, //0000
-// {-861.485, 156.25, 500, 2, 0, 0x0000},
-// {76.0155, 156.25, 750, -1, 1, 0x4000},
-// {1750, 156.25, -2062.5, 4, -1, 0xC000},
-// {1250, 156.25, -2062.5, 5, 3, 0xC000},
-// {750, 656.25, -2062.5, 6, 4, 0xC000},
-// {250, 656.25, -2062.5, -1, 5, 0xC000},
+struct GrindPoints sCurrentPoint;
 
-// {0, 62.5, 2031.25, 8, 14, 0xC000}, //0007
-// {-331.4565, 62.5, 2168.545, 9, 7, 0xE000},
-// {-468.75, 62.5, 2500, 10, 8, 0x0000},
-// {-331.4565, 62.5, 2831.455, 11, 9, 0x2000},
-// {0, 62.5, 2968.75, 12, 10, 0x4000},
-// {331.4565, 62.5, 2831.455, 13, 11, 0x6000},
-// {468.75, 62.5, 2500, 12, 14, 0x0000},
-// {331.4565, 62.5, 2168.545, 7, 13, 0xA000}, //0014 all these are for test ver
-
-/*  {-718.75, 157.741, 7000, -1, 1, 0x0000}, //0000
-    {-718.75, 157.741, 6000, 0, 2, 0x0000},
-    {-718.75, 415.4775, 5538.1, 1, 3, 0x0000},
-    {-722.735, 415.4775, 4524.505, 2, 4, 0xFFFFF000},
-    {-356.72, 415.4775, 4164.145, -1, 3, 0x6000}, //0004
-
-    {643.28, 415.3405, 3164.145, 6, -1, 0x6000}, //0005
-    {823.195, 352.772, 2982.675, 5, 7, 0xFFFFF000},
-    {923.095, 290.204, 2741.505, 6, 8, 0x0000},
-    {923.095, 227.6365, 2480.455, 7, 9, 0x0000},
-    {826.315, 165.0685, 2243.94, 10, 8, 0x9000}, //0000
-    {634.975, 165.0685, 1782.005, -1, 9, 0xA000}, //0010
-*/
-    {0, 88.5, 24940.95, 1, -1, 0x8000}, //0000
-    {0, 88.5, 16887.65, -1, 0, 0x8000},
+#define GRIND_POINTS_MAX 14
+struct GrindPoints grindTrajectories[14] = {
+    {{0, 88.5f, 24940.95f}, 1, -1, 0x8000}, //0000
+    {{0, 88.5f, 14449.2f}, -1, 0, 0x8000},
+    {{4518.685f, 88.5f, 1101.535f}, 3, 3, 0xC000},
+    {{1739.82f, 636.825f, 1101.535f}, 4, 4, 0x0000},
+    {{1739.82f, 1547.73f, 4027.78f}, 5, 5, 0x4000},
+    {{4666.065f, 3163.01f, 4027.78f}, 6, 6, 0x8000},
+    {{4666.065f, 4332.18f, 2015.625f}, 7, 7, 0xC000},
+    {{4466.065f, 4332.18f, 2015.625f}, -1, -1, 0xC000},
+    {{1834.385f, 4356.575f, 6614.85f}, 9, -1, 0xC000},
+    {{-600.0f, 4356.575f, 6614.85f}, -1, 8, 0xC000},
+    {{-1131.74f, 4602.715f, 6614.85f}, 11, -1, 0xC000},
+    {{-1834.395f, 4922.98f, 6614.85f}, -1, 10, 0xC000},
+    {{-13814.1f, 0.0f, 23253.05f}, 13, 13, 0xC000},
+    {{-14757.8f, 525.095f, 23253.05f}, -1, -1, 0xC000},
 };
 
 struct LandingAction {
@@ -833,10 +821,6 @@ s32 act_walking(struct MarioState *m) {
 
     mario_drop_held_object(m);
 
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
-
     if (should_begin_sliding(m)) {
         return set_mario_action(m, ACT_BEGIN_SLIDING, 0);
     }
@@ -1603,10 +1587,6 @@ s32 act_dive_slide(struct MarioState *m) {
 
     play_mario_landing_sound_once(m, SOUND_ACTION_TERRAIN_BODY_HIT_GROUND);
 
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
-
     //! If the dive slide ends on the same frame that we pick up on object,
     // mario will not be in the dive slide action for the call to
     // mario_check_object_grab, and so will end up in the regular picking action,
@@ -1831,10 +1811,6 @@ s32 common_landing_cancels(struct MarioState *m, struct LandingAction *landingAc
 
 s32 act_jump_land(struct MarioState *m) {
 
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
-    }
-
     if (common_landing_cancels(m, &sJumpLandAction, set_jumping_action)) {
         return TRUE;
     }
@@ -1892,10 +1868,6 @@ s32 act_hold_freefall_land(struct MarioState *m) {
 s32 act_long_jump_land(struct MarioState *m) {
     if (!(m->input & INPUT_Z_DOWN)) {
         m->input &= ~INPUT_A_PRESSED;
-    }
-
-    if(m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
-        return set_mario_action(m, ACT_GRIND, 0);
     }
 
     if (common_landing_cancels(m, &sLongJumpLandAction, set_jumping_action)) {
@@ -1994,95 +1966,18 @@ s32 act_hold_quicksand_jump_land(struct MarioState *m) {
     return cancel;
 }
 
-s32 act_grind(struct MarioState *m) {
 
-    s16 compareAngle;
-    f32 z1, x1, z2, x2;
+void moveTowardsPoint(struct MarioState *m) {
     Vec3f startPos;
     s16 startYaw = m->faceAngle[1];
-
-    if (grindInitTriggered == 0) {
-        grindSteps = 0;
-        grindTrajectoryRow = 0;
-        smallestDistRow = 0;
-        distBetweenTrajectories = 0;
-        smallestDist = 64000.0;
-        
-        for(grindTrajectoryRow = 0; grindTrajectoryRow < sizeof(grindTrajectories)/sizeof(grindTrajectories[0]); grindTrajectoryRow++) {
-            f32 distBetweenTrajectories = sqrtf((m->pos[0] - grindTrajectories[grindTrajectoryRow][0]) * (m->pos[0] - grindTrajectories[grindTrajectoryRow][0]) + (m->pos[2] - grindTrajectories[grindTrajectoryRow][2]) * (m->pos[2] - grindTrajectories[grindTrajectoryRow][2]));
-                if (distBetweenTrajectories < smallestDist) {
-
-                            // compareAngleU = m->faceAngle[1];
-                            // if (compareAngleU > 0x4000) {
-                            //     compareAngle = compareAngleU - 0x10000;
-                            // } else {
-                            //     compareAngle = compareAngleU;
-                            // }
-
-                            // compareAngle = grindTrajectories[grindTrajectoryRow][5]; // - compareAngle;
-                            // if(m->faceAngle[1] <= compareAngle + 0x4000 && m->faceAngle[1] >= compareAngle - 0x4000) {
-
-                            // z1 = m->pos[2]; z2 = grindTrajectories[grindTrajectoryRow][2];
-                            // x1 = m->pos[0]; x2 = grindTrajectories[grindTrajectoryRow][0];
-
-                            // compareAngle = atan2s(z2 - z1, x2 - x1);
-
-                                f32 dx = grindTrajectories[grindTrajectoryRow][0] - m->pos[0];
-                                f32 dz = grindTrajectories[grindTrajectoryRow][2] - m->pos[2];
-
-                                compareAngle = atan2s(dz, dx);
-                                compareAngle = compareAngle - m->faceAngle[1];
-                            if(compareAngle <= 0x4000 && compareAngle >= 0 - 0x4000) {
-                                smallestDistRow = grindTrajectoryRow;
-                                smallestDist = distBetweenTrajectories;
-                            }
-                }
-            }
-        grindInitTriggered = 1;
-    }
-
-    smallestDist = sqrtf((m->pos[0] - grindTrajectories[smallestDistRow][0]) * (m->pos[0] - grindTrajectories[smallestDistRow][0]) + (m->pos[2] - grindTrajectories[smallestDistRow][2]) * (m->pos[2] - grindTrajectories[smallestDistRow][2]));
-
-    if (smallestDist < 40) {
-            compareAngle = grindTrajectories[smallestDistRow][5];
-            if(m->faceAngle[1] > compareAngle + 0x4000 || m->faceAngle[1] < compareAngle - 0x4000) {
-                grindTrajectoryRow = grindTrajectories[smallestDistRow][4];
-                if (grindTrajectories[smallestDistRow][4] == -1) {
-                    m->forwardVel = m->forwardVel * 2;
-                    grindInitTriggered = 0;
-                    return set_mario_action(m, ACT_JUMP, 0);
-                }
-            } else {
-                grindTrajectoryRow = grindTrajectories[smallestDistRow][3];
-                if (grindTrajectories[smallestDistRow][3] == -1) {
-                    m->forwardVel = m->forwardVel * 2;
-                    grindInitTriggered = 0;
-                    return set_mario_action(m, ACT_JUMP, 0);
-                }
-        }
-        smallestDistRow = grindTrajectoryRow;
-    }
-
-    m->faceAngle[1] = atan2s(m->pos[0] - grindTrajectories[smallestDistRow][0], m->pos[2] - grindTrajectories[smallestDistRow][2]);
-
-    z1 = m->pos[2]; z2 = grindTrajectories[smallestDistRow][2];
-    x1 = m->pos[0]; x2 = grindTrajectories[smallestDistRow][0];
+    f32 z1, z2, x1, x2;
+    z1 = m->pos[2]; z2 = sCurrentPoint.pos[2];
+    x1 = m->pos[0]; x2 = sCurrentPoint.pos[0];
 
     m->faceAngle[1] = atan2s(z2 - z1, x2 - x1);
     m->intendedYaw = m->faceAngle[1];
-
-    if(m->input & INPUT_Z_DOWN) {
-        m->forwardVel = 30;
-    } else {
-        m->forwardVel = 20;
-    }
-
-
-
     startYaw = m->faceAngle[1];
-
     m->intendedMag *= 1.0f;
-
     m->actionState = 0;
     vec3f_copy(startPos, m->pos);
     update_walking_speed(m);
@@ -2114,104 +2009,92 @@ s32 act_grind(struct MarioState *m) {
     }
 
     perform_ground_step(m);
+}
+
+void setNextPoint(struct MarioState *m) {
+    s16 grindTrajectoryRow;
+    s16 compareAngle;
+    f32 smallestDist = 64000.0;
+    sCurrentPoint = grindTrajectories[0];
+    
+    for (grindTrajectoryRow = 0; grindTrajectoryRow < GRIND_POINTS_MAX; grindTrajectoryRow++) {
+        f32 distBetweenTrajectories = sqrtf((m->pos[0] - grindTrajectories[grindTrajectoryRow].pos[0]) * (m->pos[0] - grindTrajectories[grindTrajectoryRow].pos[0]) + (m->pos[2] - grindTrajectories[grindTrajectoryRow].pos[2]) * (m->pos[2] - grindTrajectories[grindTrajectoryRow].pos[2]));
+            if (distBetweenTrajectories < smallestDist) {
+                f32 dx = grindTrajectories[grindTrajectoryRow].pos[0] - m->pos[0];
+                f32 dz = grindTrajectories[grindTrajectoryRow].pos[2] - m->pos[2];
+                compareAngle = atan2s(dz, dx);
+                compareAngle = compareAngle - m->faceAngle[1];
+                if (compareAngle <= 0x4000 && compareAngle >= 0 - 0x4000) {
+                    sCurrentPoint = grindTrajectories[grindTrajectoryRow];
+                    smallestDist = distBetweenTrajectories;
+                }
+            }
+        }
+}
+
+s32 act_grind(struct MarioState *m) {
+    s16 grindTrajectoryRow;
+    s16 compareAngle;
+    f32 smallestDist;
+    if (grindInitTriggered == 0) {
+        setNextPoint(m);
+        grindInitTriggered = 1;
+    }
+
+    smallestDist = sqrtf((m->pos[0] - sCurrentPoint.pos[0]) * (m->pos[0] - sCurrentPoint.pos[0]) + (m->pos[2] - sCurrentPoint.pos[2]) * (m->pos[2] - sCurrentPoint.pos[2]));
+
+    if (smallestDist < 40) {
+            compareAngle = sCurrentPoint.forwardAngle;
+            if(m->faceAngle[1] > compareAngle + 0x4000 || m->faceAngle[1] < compareAngle - 0x4000) {
+                grindTrajectoryRow = sCurrentPoint.pointPrev;
+                if (sCurrentPoint.pointPrev == -1) {
+                    m->forwardVel *= 2;
+                    grindInitTriggered = 0;
+                    if (m->input & INPUT_Z_DOWN)
+                        return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+                    else
+                        return set_mario_action(m, ACT_JUMP, 0);
+                }
+            } else {
+                grindTrajectoryRow = sCurrentPoint.pointNext;
+                if (sCurrentPoint.pointNext == -1) {
+                    m->forwardVel = m->forwardVel * 2;
+                    grindInitTriggered = 0;
+                    if (m->input & INPUT_Z_DOWN)
+                        return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+                    else
+                        return set_mario_action(m, ACT_JUMP, 0);
+                }
+            }
+        sCurrentPoint = grindTrajectories[grindTrajectoryRow];
+    }
+
+    if (m->input & INPUT_Z_DOWN) {
+        m->forwardVel = 30;
+    } else {
+        m->forwardVel = 20;
+    }
+
+    moveTowardsPoint(m);
 
     if (m->action == ACT_FREEFALL) {
         return FALSE;
     }
-
     if(gPlayer1Controller->buttonPressed & A_BUTTON) {
         m->forwardVel = m->forwardVel * 2;
         grindInitTriggered = 0;
-        return set_mario_action(m, ACT_JUMP, 0);
+        if (m->input & INPUT_Z_DOWN)
+            return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+        else
+            return set_mario_action(m, ACT_JUMP, 0);
     }
 
+
     return FALSE;
-
-    //return set_mario_action(m, ACT_JUMP, 0);
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     for(grindSteps = 0; grindSteps < 4; grindSteps++) {
-
-//     Vec3f startPos;
-//     s16 startYaw = m->faceAngle[1];
-
-//     if(m->input & INPUT_Z_DOWN) {
-//         m->forwardVel = 11.25;
-//     } else {
-//         m->forwardVel = 8;
-//     }
-//     m->intendedMag *= 1.0f;
-
-//     m->actionState = 0;
-//     vec3f_copy(startPos, m->pos);
-//     update_walking_speed(m);
-
-
-//     if(m->floor->type != SURFACE_FLOWING_WATER) {
-//             return set_mario_action(m, ACT_JUMP, 0);
-//         } else {
-//             //if(m->floor->force - m->faceAngle[1] > 0x4000 || m->floor->force - m->faceAngle[1] > 0xFFFFC000) {
-//             if(m->faceAngle[1] > 0x4000) {
-//                 m->faceAngle[1] = m->faceAngle[1] - 0x10000;
-//             }
-//             if(m->floor->force - m->faceAngle[1] > 0x4000 || m->floor->force - m->faceAngle[1] < -16384) {
-//             m->faceAngle[1] = m->floor->force + 0x8000;
-//         } else {
-//             m->faceAngle[1] = m->floor->force;
-//     }
-// }
-    
-//     m->intendedYaw = m->faceAngle;
-
-//     switch (perform_ground_step(m)) {
-//         case GROUND_STEP_LEFT_GROUND:
-//             set_mario_action(m, ACT_FREEFALL, 0);
-//             set_mario_animation(m, MARIO_ANIM_GENERAL_FALL);
-//             break;
-
-//         case GROUND_STEP_NONE:
-//             func_802652F0(m);
-//             if(m->input & INPUT_Z_DOWN) {
-//                 if(!(gGlobalTimer % 8) && grindSteps == 3) {
-//                     m->particleFlags |= PARTICLE_1;
-//                 } 
-//             }
-//             m->particleFlags |= PARTICLE_DUST;
-//             set_mario_animation(m, MARIO_ANIM_RIDING_SHELL);
-//             break;
-
-//         case GROUND_STEP_HIT_WALL:
-//             func_802659E8(m, startPos);
-//             m->actionTimer = 0;
-//             break;
-//     }
-
-//     perform_ground_step(m);
-
-//     if (m->action == ACT_FREEFALL) {
-//         return FALSE;
-//     }
-//     }
-
-//     if(gPlayer1Controller->buttonPressed & A_BUTTON) {
-//         m->forwardVel = m->forwardVel * 6;
-//         return set_mario_action(m, ACT_JUMP, 0);
-//     }
-
-//     return FALSE;
-
 }
+
+
+
 
 s32 check_common_moving_cancels(struct MarioState *m) {
     if (m->pos[1] < m->waterLevel - 100) {
@@ -2244,6 +2127,10 @@ s32 mario_execute_moving_action(struct MarioState *m) {
 
     if (mario_update_quicksand(m, 0.75f)) {
         return TRUE;
+    }
+
+    if (m->action != ACT_GRIND && m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
+        return set_mario_action(m, ACT_GRIND, 0);
     }
 
     /* clang-format off */

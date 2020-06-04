@@ -29,9 +29,9 @@
 
 // Border Height Define for NTSC Versions
 #ifndef VERSION_EU
-#define BORDER_HEIGHT 8
+#define BORDER_HEIGHT 0
 #else
-#define BORDER_HEIGHT 1
+#define BORDER_HEIGHT 0
 #endif
 
 #endif

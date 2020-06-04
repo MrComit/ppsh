@@ -10,5 +10,6 @@ struct Object *CL_Create_Star_Ptr(f32 sp20, f32 sp24, f32 sp28);
 s16 CL_object_to_point(struct Object *o, Vec3f point);
 void CL_set_camera_pos(Vec3f pos);
 struct Object *CL_obj_nearest_object_behavior_params(const BehaviorScript *behavior, u32 params);
+f32 CL_dist_between_points(Vec3f p1, Vec3f p2);
 
 #endif
