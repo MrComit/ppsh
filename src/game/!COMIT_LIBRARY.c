@@ -87,3 +87,12 @@ struct Object *CL_obj_nearest_object_behavior_params(const BehaviorScript *behav
 
     return closestObj;
 }
+
+
+f32 CL_dist_between_points(Vec3f p1, Vec3f p2) {
+    //f32 dx = p1[0] - p2[0];
+    //f32 dy = p1[1] - p2[1];
+    //f32 dz = p1[2] - p2[2];
+    //return sqrtf(dx * dx + /*(dy * dy) +*/ dz * dz);
+    return sqrtf((p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[2] - p2[2]) * (p1[2] - p2[2]));
+}
