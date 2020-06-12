@@ -13,8 +13,10 @@
 #include "behavior_data.h"
 #include "game.h"
 #include "display.h"
+#include "obj_behaviors.h"
+#include "object_helpers2.h"
 
-int grindInitTriggered;
+s32 grindInitTriggered, grindForward;
 
 struct GrindPoints {
     Vec3f pos;
@@ -25,22 +27,132 @@ struct GrindPoints {
 
 struct GrindPoints sCurrentPoint;
 
-#define GRIND_POINTS_MAX 14
-struct GrindPoints grindTrajectories[14] = {
-    {{0, 88.5f, 24940.95f}, 1, -1, 0x8000}, //0000
-    {{0, 88.5f, 14449.2f}, -1, 0, 0x8000},
-    {{4518.685f, 88.5f, 1101.535f}, 3, 3, 0xC000},
-    {{1739.82f, 636.825f, 1101.535f}, 4, 4, 0x0000},
-    {{1739.82f, 1547.73f, 4027.78f}, 5, 5, 0x4000},
-    {{4666.065f, 3163.01f, 4027.78f}, 6, 6, 0x8000},
-    {{4666.065f, 4332.18f, 2015.625f}, 7, 7, 0xC000},
-    {{4466.065f, 4332.18f, 2015.625f}, -1, -1, 0xC000},
-    {{1834.385f, 4356.575f, 6614.85f}, 9, -1, 0xC000},
-    {{-600.0f, 4356.575f, 6614.85f}, -1, 8, 0xC000},
-    {{-1131.74f, 4602.715f, 6614.85f}, 11, -1, 0xC000},
-    {{-1834.395f, 4922.98f, 6614.85f}, -1, 10, 0xC000},
-    {{-13814.1f, 0.0f, 23253.05f}, 13, 13, 0xC000},
-    {{-14757.8f, 525.095f, 23253.05f}, -1, -1, 0xC000},
+struct GrindPoints grind0[2] = {
+    {{0, -9911.5f, 25040.95f}, -1, -1, 0x8000}, //0000
+    {{0, -9911.5f, 14399.2f}, -1, -1, 0x8000},  
+};
+
+struct GrindPoints grind1[6] = {
+    {{4518.685f, -9911.5f, 1101.535f}, -1, -1, 0xC000},
+    {{1739.82f, -9363.175f, 1101.535f}, 2, 0, 0xC000},
+    {{1739.82f, -8452.27f, 4976.85f}, 3, 1, 0x0000},
+    {{4666.065f, -6836.99f, 4976.85f}, 4, 2, 0x4000},
+    {{4676.86f, -5667.82f, 2015.165f}, 5, 3, 0x8000},
+    {{4521.715f, -5643.425f, 2015.165f}, -2, -2, 0xC000},
+};
+
+struct GrindPoints grind2[4] = {
+    {{1834.385f, -5643.425f, 6614.85f}, -2, -2, 0xC000},
+    {{-600.0f, -5643.425f, 6614.85f}, -1, -1, 0xC000},
+    {{-1131.74f, -5397.285f, 6614.85f}, -1, -1, 0xC000},
+    {{-1834.395f, -5077.02f, 6614.85f}, -2, -2, 0xC000},
+};
+
+struct GrindPoints grind3[2] = {
+    {{-13814.1f, -10000.0f, 23253.05f}, -2, -2, 0xC000},
+    {{-14757.8f, -9474.905f, 23253.05f}, -1, -1, 0xC000},
+};
+
+struct GrindPoints grind4[14] = {
+    {{13149.2f, -9911.5f, 5281.65f}, 1, 1, 0xC000},
+    {{13308.05f, -9911.5f, 5281.65f}, 2, 2, 0xC000},
+    {{15531.7f, -8595.245f, 5281.65f}, 3, 3, 0xC000},
+    {{15736.55f, -8595.245f, 5281.65f}, -1, -1, 0xC000},
+    {{16736.55f, -8595.245f, 5281.65f}, 5, 5, 0xC000},
+    {{16895.4f, -8595.245f, 5281.65f}, 6, 6, 0xC000},
+    {{19378.85f, -7278.965f, 5281.65f}, 7, 7, 0x0000},
+    {{19378.85f, -5962.715f, 7762.6f}, 8, 8, 0x0000},
+    {{19378.85f, -5962.715f, 7967.45f}, -1, -1, 0x0000},
+    {{19378.85f, -6051.22f, 8921.45f}, 10, 10, 0x0000},
+    {{19378.85f, -6051.22f, 9080.3f}, 11, 11, 0x0000},
+    {{19378.85f, -4734.95f, 11561.2f}, 12, 12, 0x4000},
+    {{16895.4f, -3418.7f,  11561.2f}, 13, 13, 0x4000},
+    {{16690.55f, -3418.7f, 11561.2f}, -1, -1, 0x4000},
+};
+
+struct GrindPoints grind5[2] = {
+    {{14437.95f, -3189.65f, 12472.4f}, 1, -2, 0x0000},
+    {{14437.95f, -3189.65f, 15596.1f}, -2, 0, 0x0000},
+};
+
+struct GrindPoints grind6[2] = {
+    {{-3232.54f, 1780.9f, -180.4395f}, -2, -2, 0x8000},
+    {{-3232.54f, 1780.9f, -2585.625f}, -2, -2, 0x8000},
+};
+
+struct GrindPoints grind7[4] = {
+    {{-1934.4f, 1785.35f, -3897.255f}, -2, -2, 0x4000},
+    {{-644.805f, 1785.35f, -3897.255f}, -1, -1, 0x4000},
+    {{1934.4f, 1220.2f, -3897.255f}, -2, -2, 0xC000},
+    {{375.558f, 1220.2f, -3897.255f}, -1, -1, 0xC000},
+};
+
+struct GrindPoints grind8[2] = {
+    {{14162.4f, -3189.65, 8171.45f}, -1, -1, 0x8000},
+    {{14162.4f, -3189.65f, 4934.1f}, -1, -1, 0x8000},
+};
+
+struct GrindPoints grind9[2] = {
+    {{14723.35f, -3189.65f, 8171.45f}, -1, -1, 0x8000},
+    {{14723.35f, -3189.65, 4934.1f}, -1, -1, 0x8000},
+};
+
+struct GrindPoints grindA[6] = {
+    {{19649.9f, 4348.55f, 7976.4f}, 1, 1, 0xC000},
+    {{19323.9f, 4348.55f, 7976.4f}, 2, 2, 0xC000},
+    {{14798.45f, 6049.85f, 7976.4f}, -1, -1, 0xC000},
+    {{14089.45f, 6115.55f, 7976.4f}, 4, 4, 0xC000},
+    {{9506.95f, 7816.3f, 7976.4f}, 5, 5, 0xC000},
+    {{9506.95f, 9132.55f, 5293.15f}, -1, -1, 0x0000},
+};
+
+struct GrindPoints grindB[3] = {
+    {{9506.95f, 8929.3f, 3898.02f}, 1, 1, 0x8000},
+    {{9506.95f, 8929.3f, 2571.32f}, 2, 2, 0x8000}, 
+    {{9149.7f, 8929.3f, 2571.32f}, -2, -2, 0xC000},
+};
+
+struct GrindPoints grindC[3] = {
+    {{9506.95f, 8929.3f, 3898.02f}, 1, 1, 0x8000},
+    {{9506.95f, 8929.3f, 2571.32f}, 2, 2, 0x8000}, 
+    {{9149.7f, 8929.3f, 2571.32f}, -2, -2, 0xC000}, // PLACEHOLDER
+};
+
+struct GrindPoints grindD[2] = {
+    {{7263.55f, 1220.2f, -2585.62f}, 1, -2, 0x0000},
+    {{7263.55f, 1220.2f, 1283.16f}, -2, 0, 0x0000}, 
+};
+
+struct GrindPoints grindE[3] = {
+    {{9311.9f, 1308.71f, -2530.67f}, 1, -1, 0x4000},
+    {{12204.15f, 1437.87f, -2530.67f}, 2, 0, 0x4000},
+    {{12204.15f, 1641.515f, -5818.5f}, -1, 1, 0x8000},
+};
+
+struct GrindPoints grindF[2] = {
+    {{-3218.09f, -5029.45f, 7921.45f}, 1, -2, 0x0000},
+    {{-3218.09f, -3184.18f, 12800.1f}, -2, 0, 0x0000},
+
+};
+
+struct GrindPoints grind10[2] = {
+    {{-16085.55f, -20.2725f, -2585.62f}, 1, -2, 0x0000},
+    {{-16085.55f, -20.2725f, 1283.16f}, -2, 0, 0x0000},
+};
+
+struct GrindPoints grind11[3] = {
+    {{-14650.45f, -1859.27f, 7969.35f}, 1, -1, 0x4000},
+    {{-10992.95f, -175.774f, 7969.35f}, 2, 0, 0x4000},
+    {{-10202.3f, -25.9445f, 7866.5f}, -1, 1, 0x4000},
+};
+
+struct GrindPoints *grindTrajectories[] = {
+    grind0, grind1, grind2, grind3, grind4, grind5, grind6, grind7, grind8, grind9, grindA, grindB, grindC, grindD, grindE,
+    grindF, grind10, grind11,
+};
+
+u16 grindLengths[] = {
+    2, 6, 4, 2, 14, 2, 2, 4, 2, 2, 6, 3, 3, 2, 3, 2, 2, 3,
 };
 
 struct LandingAction {
@@ -2011,68 +2123,80 @@ void moveTowardsPoint(struct MarioState *m) {
     perform_ground_step(m);
 }
 
-void setNextPoint(struct MarioState *m) {
+void setNextPoint(struct MarioState *m, s16 currentPath) {
     s16 grindTrajectoryRow;
     s16 compareAngle;
+    f32 z1, z2, x1, x2;
     f32 smallestDist = 64000.0;
-    sCurrentPoint = grindTrajectories[0];
+    sCurrentPoint = grindTrajectories[currentPath][0];
     
-    for (grindTrajectoryRow = 0; grindTrajectoryRow < GRIND_POINTS_MAX; grindTrajectoryRow++) {
-        f32 distBetweenTrajectories = sqrtf((m->pos[0] - grindTrajectories[grindTrajectoryRow].pos[0]) * (m->pos[0] - grindTrajectories[grindTrajectoryRow].pos[0]) + (m->pos[2] - grindTrajectories[grindTrajectoryRow].pos[2]) * (m->pos[2] - grindTrajectories[grindTrajectoryRow].pos[2]));
-            if (distBetweenTrajectories < smallestDist) {
-                f32 dx = grindTrajectories[grindTrajectoryRow].pos[0] - m->pos[0];
-                f32 dz = grindTrajectories[grindTrajectoryRow].pos[2] - m->pos[2];
+    for (grindTrajectoryRow = 0; grindTrajectoryRow < grindLengths[currentPath]; grindTrajectoryRow++) {
+        f32 distBetweenTrajectories;
+            CL_dist_between_points(m->pos, grindTrajectories[currentPath][grindTrajectoryRow].pos, &distBetweenTrajectories);
+            if (distBetweenTrajectories < smallestDist && 
+            (f32)(absf_2(m->pos[1] - grindTrajectories[currentPath][grindTrajectoryRow].pos[1]) / distBetweenTrajectories) < 1.0f) {
+                f32 dx = grindTrajectories[currentPath][grindTrajectoryRow].pos[0] - m->pos[0];
+                f32 dz = grindTrajectories[currentPath][grindTrajectoryRow].pos[2] - m->pos[2];
                 compareAngle = atan2s(dz, dx);
                 compareAngle = compareAngle - m->faceAngle[1];
-                if (compareAngle <= 0x4000 && compareAngle >= 0 - 0x4000) {
-                    sCurrentPoint = grindTrajectories[grindTrajectoryRow];
-                    smallestDist = distBetweenTrajectories;
+                if (absi((s32)compareAngle) <= 0x6000) {
+                    sCurrentPoint = grindTrajectories[currentPath][grindTrajectoryRow];
+                    if (distBetweenTrajectories < 100.0f) {
+                        vec3f_copy(m->pos, grindTrajectories[currentPath][grindTrajectoryRow].pos);
+                        m->faceAngle[1] = grindTrajectories[currentPath][grindTrajectoryRow].forwardAngle;
+                    } else
+                        smallestDist = distBetweenTrajectories;
                 }
             }
         }
+    //moveTowardsPoint(m);
+    z1 = m->pos[2]; z2 = sCurrentPoint.pos[2];
+    x1 = m->pos[0]; x2 = sCurrentPoint.pos[0];
+    if (absi((s16)sCurrentPoint.forwardAngle - (s16)atan2s(z2 - z1, x2 - x1)) >= 0x2000)
+        grindForward = FALSE;
+    else
+        grindForward = TRUE;
 }
 
 s32 act_grind(struct MarioState *m) {
     s16 grindTrajectoryRow;
-    s16 compareAngle;
     f32 smallestDist;
     if (grindInitTriggered == 0) {
-        setNextPoint(m);
+        setNextPoint(m, m->floor->force);
         grindInitTriggered = 1;
     }
 
-    smallestDist = sqrtf((m->pos[0] - sCurrentPoint.pos[0]) * (m->pos[0] - sCurrentPoint.pos[0]) + (m->pos[2] - sCurrentPoint.pos[2]) * (m->pos[2] - sCurrentPoint.pos[2]));
-
-    if (smallestDist < 40) {
-            compareAngle = sCurrentPoint.forwardAngle;
-            if(m->faceAngle[1] > compareAngle + 0x4000 || m->faceAngle[1] < compareAngle - 0x4000) {
+    CL_dist_between_points(m->pos, sCurrentPoint.pos, &smallestDist);
+    if (smallestDist < 100.0f) {
+            if(!grindForward) {
                 grindTrajectoryRow = sCurrentPoint.pointPrev;
-                if (sCurrentPoint.pointPrev == -1) {
+                if (sCurrentPoint.pointPrev < 0) {
                     m->forwardVel *= 2;
                     grindInitTriggered = 0;
-                    if (m->input & INPUT_Z_DOWN)
+                    if (m->input & INPUT_Z_DOWN && sCurrentPoint.pointPrev != -2)
                         return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
                     else
                         return set_mario_action(m, ACT_JUMP, 0);
                 }
             } else {
                 grindTrajectoryRow = sCurrentPoint.pointNext;
-                if (sCurrentPoint.pointNext == -1) {
-                    m->forwardVel = m->forwardVel * 2;
+                if (sCurrentPoint.pointNext < 0) {
+                    m->forwardVel *= 2;
                     grindInitTriggered = 0;
-                    if (m->input & INPUT_Z_DOWN)
+                    if (m->input & INPUT_Z_DOWN && sCurrentPoint.pointNext != -2)
                         return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
                     else
                         return set_mario_action(m, ACT_JUMP, 0);
                 }
             }
-        sCurrentPoint = grindTrajectories[grindTrajectoryRow];
+        vec3f_copy(m->pos, sCurrentPoint.pos);
+        sCurrentPoint = grindTrajectories[m->floor->force][grindTrajectoryRow];
     }
 
     if (m->input & INPUT_Z_DOWN) {
-        m->forwardVel = 30;
+        m->forwardVel = 35;
     } else {
-        m->forwardVel = 20;
+        m->forwardVel = 25;
     }
 
     moveTowardsPoint(m);
