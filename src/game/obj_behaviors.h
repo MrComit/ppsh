@@ -166,4 +166,6 @@ void bhv_rr_cruiser_wing_init(void);
 void bhv_rr_cruiser_wing_loop(void);
 extern void create_star(f32, f32, f32);
 
+f32 absf_2(f32 f);
+
 #endif /* _OBJ_BEHAVIORS_H */

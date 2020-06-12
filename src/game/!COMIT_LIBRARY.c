@@ -89,10 +89,19 @@ struct Object *CL_obj_nearest_object_behavior_params(const BehaviorScript *behav
 }
 
 
-f32 CL_dist_between_points(Vec3f p1, Vec3f p2) {
-    //f32 dx = p1[0] - p2[0];
-    //f32 dy = p1[1] - p2[1];
-    //f32 dz = p1[2] - p2[2];
-    //return sqrtf(dx * dx + /*(dy * dy) +*/ dz * dz);
-    return sqrtf((p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[2] - p2[2]) * (p1[2] - p2[2]));
+/*f32 CL_dist_between_points(Vec3f p1, Vec3f p2) {
+    f32 x = p2[0] - p1[0];
+    f32 y = p2[1] - p1[1];
+    f32 z = p2[2] - p1[2];
+    return sqrtf(x * x + y * y + z * z);
+    //return sqrtf((p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[2] - p2[2]) * (p1[2] - p2[2]));
+}*/
+
+
+void CL_dist_between_points(Vec3f from, Vec3f to, f32 *dist) {
+    register f32 x = to[0] - from[0];
+    register f32 y = to[1] - from[1];
+    register f32 z = to[2] - from[2];
+
+    *dist = sqrtf(x * x + y * y + z * z);
 }
