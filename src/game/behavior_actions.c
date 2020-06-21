@@ -37,6 +37,7 @@
 #include "ingame_menu.h"
 #include "rendering_graph_node.h"
 #include "level_table.h"
+//#include "!COMIT_LIBRARY.h"
 
 #define o gCurrentObject
 
@@ -303,3 +304,5 @@ void func_802B2328(s32 n, s32 a1, s32 a2, s32 r) {
 #include "behaviors/rock_door.inc.c"
 #include "behaviors/mole_queen.inc.c"
 #include "behaviors/bomb_stuff.inc.c"
+#include "behaviors/colored_cube.inc.c"
+#include "behaviors/colored_boo.inc.c"

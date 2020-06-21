@@ -67,4 +67,6 @@ extern const LevelScript level_jrb_entry[];
 #include "levels/jrb/header.inc.h"
 
 
+#include "levels/jrb/colored_cube/geo_header.h"
+
 #endif

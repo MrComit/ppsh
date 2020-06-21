@@ -331,22 +331,55 @@ const Gfx boo_seg5_dl_0500BFA0[] = {
 };
 
 // 0x0500C1B0 - 0x0500C250
-const Gfx boo_seg5_dl_0500C1B0[] = {
+const Gfx red_boo_seg5_dl_0500C1B0[] = {
     gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_BLENDRGBFADEA, G_CC_BLENDRGBFADEA),
+    gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+    gsDPSetEnvColor(254, 0, 46, 140),
     gsSPNumLights(NUMLIGHTS_1),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPTileSync(),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
     gsSPDisplayList(boo_seg5_dl_0500BEE0),
-    gsDPTileSync(),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 6, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (64 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
     gsSPDisplayList(boo_seg5_dl_0500BF48),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
+    gsSPDisplayList(boo_seg5_dl_0500BFA0),
     gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_SHADEFADEA, G_CC_SHADEFADEA),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetEnvColor(255, 255, 255, 255),
+    gsSPEndDisplayList(),
+};
+
+const Gfx blue_boo_seg5_dl_0500C1B0[] = {
+    gsDPPipeSync(),
+    gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+    gsDPSetEnvColor(55, 0, 255, 140),
+    gsSPNumLights(NUMLIGHTS_1),
+    gsSPDisplayList(boo_seg5_dl_0500BEE0),
+    gsSPDisplayList(boo_seg5_dl_0500BF48),
+    gsSPDisplayList(boo_seg5_dl_0500BFA0),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetEnvColor(255, 255, 255, 255),
+    gsSPEndDisplayList(),
+};
+
+const Gfx teal_boo_seg5_dl_0500C1B0[] = {
+    gsDPPipeSync(),
+    gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+    gsDPSetEnvColor(0, 187, 255, 140),
+    gsSPNumLights(NUMLIGHTS_1),
+    gsSPDisplayList(boo_seg5_dl_0500BEE0),
+    gsSPDisplayList(boo_seg5_dl_0500BF48),
+    gsSPDisplayList(boo_seg5_dl_0500BFA0),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetEnvColor(255, 255, 255, 255),
+    gsSPEndDisplayList(),
+};
+
+const Gfx green_boo_seg5_dl_0500C1B0[] = {
+    gsDPPipeSync(),
+    gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+    gsDPSetEnvColor(0, 255, 0, 140),
+    gsSPNumLights(NUMLIGHTS_1),
+    gsSPDisplayList(boo_seg5_dl_0500BEE0),
+    gsSPDisplayList(boo_seg5_dl_0500BF48),
     gsSPDisplayList(boo_seg5_dl_0500BFA0),
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),

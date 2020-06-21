@@ -8,7 +8,10 @@ extern const GeoLayout boo_geo[];
 extern const Gfx boo_seg5_dl_0500BEE0[];
 extern const Gfx boo_seg5_dl_0500BF48[];
 extern const Gfx boo_seg5_dl_0500BFA0[];
-extern const Gfx boo_seg5_dl_0500C1B0[];
+extern const Gfx red_boo_seg5_dl_0500C1B0[];
+extern const Gfx blue_boo_seg5_dl_0500C1B0[];
+extern const Gfx teal_boo_seg5_dl_0500C1B0[];
+extern const Gfx green_boo_seg5_dl_0500C1B0[];
 
 // book
 extern const GeoLayout bookend_geo[];

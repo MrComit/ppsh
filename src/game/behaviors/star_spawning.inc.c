@@ -27,3 +27,16 @@ void bhv_star_by_wrench_loop(void) {
             break;
     }
 }
+
+void bhv_star_by_cube_loop(void) { 
+    switch(o->oAction) {
+        case 0:
+            break;
+        case 1:
+            if (o->oHiddenStarTriggerCounter >= 4) {
+                create_star(o->oPosX, o->oPosY, o->oPosZ);
+                o->oAction = 0;
+            }
+            break;
+    }
+}

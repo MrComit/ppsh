@@ -6524,3 +6524,70 @@ const BehaviorScript bhvWrenchThrower[] = {
         CALL_NATIVE(bhv_wrench_thrower_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvColoredCube[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    DROP_TO_FLOOR(),
+    SET_HOME(),
+    SCALE(75),
+    SET_FLOAT(oDrawingDistance, 0x6000),
+    CALL_NATIVE(bhv_colored_cube_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_colored_cube_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvCubeStar[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_by_cube_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvColoredBoo[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    //SET_INT(oBehParams2ndByte, 1),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    //SET_INT(oDamageOrCoinValue, 2),
+    //SET_HITBOX(/*Radius*/ 140, /*Height*/ 80),
+    //SET_HURTBOX(/*Radius*/ 40, /*Height*/ 60),
+    SET_FLOAT(oGraphYOffset, 60),
+    CALL_NATIVE(bhv_colored_boo_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_colored_boo_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvColoredDashBoo[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    //SET_INT(oBehParams2ndByte, 1),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    SET_INT(oDamageOrCoinValue, 2),
+    //SET_HITBOX(/*Radius*/ 140, /*Height*/ 80),
+    //SET_HURTBOX(/*Radius*/ 40, /*Height*/ 60),
+    SET_FLOAT(oGraphYOffset, 60),
+    CALL_NATIVE(bhv_colored_dash_boo_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_colored_dash_boo_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvDashBooSpawner[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_dash_boo_spawner_loop),
+    END_LOOP(),
+};

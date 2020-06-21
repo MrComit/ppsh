@@ -148,10 +148,11 @@ struct Object *func_802F1A50(struct Object *sp30, f32 sp34, f32 sp38, f32 sp3C) 
     return sp30;
 }
 
-void create_star(f32 sp20, f32 sp24, f32 sp28) {
+struct Object *create_star(f32 sp20, f32 sp24, f32 sp28) {
     struct Object *sp1C;
     sp1C = func_802F1A50(sp1C, sp20, sp24, sp28);
     sp1C->oBehParams2ndByte = 0;
+    return sp1C;
 }
 
 void func_802F1B84(f32 sp20, f32 sp24, f32 sp28) {

@@ -616,7 +616,7 @@
 #define MODEL_TRUCK 0xF6
 
 // custom simp city
-
+#define MODEL_CUBE 0xFF
 
 
 #endif
