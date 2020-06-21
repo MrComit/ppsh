@@ -601,6 +601,15 @@ void bhv_queen_wrench_init(void);
 void bhv_bomb_switch_loop(void);
 void bhv_bomb_boulder_loop(void);
 void bhv_wrench_thrower_loop(void);
+void bhv_colored_cube_init(void);
+void bhv_colored_cube_loop(void);
+void bhv_star_by_cube_loop(void);
+void bhv_colored_boo_loop(void);
+void bhv_colored_boo_init(void);
+void bhv_colored_dash_boo_loop(void);
+void bhv_colored_dash_boo_init(void);
+void bhv_dash_boo_spawner_loop(void);
+
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 

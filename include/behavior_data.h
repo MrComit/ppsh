@@ -580,5 +580,10 @@ extern const BehaviorScript bhvThrowingWrench[];
 extern const BehaviorScript bhvBombSwitch[];
 extern const BehaviorScript bhvBombBoulder[];
 extern const BehaviorScript bhvWrenchThrower[];
+extern const BehaviorScript bhvColoredCube[];
+extern const BehaviorScript bhvCubeStar[];
+extern const BehaviorScript bhvColoredBoo[];
+extern const BehaviorScript bhvColoredDashBoo[];
+extern const BehaviorScript bhvDashBooSpawner[];
 
 #endif /* _BEHAVIOR_DATA_H */

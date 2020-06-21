@@ -420,6 +420,7 @@
 /* Breakable Box Small (Small Cork Box) */
 #define /*0x0F4*/ oBreakableBoxSmallReleased            OBJECT_FIELD_S32(0x1B)
 #define /*0x0FC*/ oBreakableBoxSmallFramesSinceReleased OBJECT_FIELD_S32(0x1D)
+#define /*0x0F8*/ oCubeFlag                             OBJECT_FIELD_S32(0x1C)
 
 /* Jumping Box (Crazy Box) */
 #define /*0x0F4*/ oJumpingBoxUnkF4 OBJECT_FIELD_S32(0x1B)

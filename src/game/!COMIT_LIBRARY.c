@@ -3,6 +3,7 @@
 #include "level_update.h"
 #include "camera.h"
 #include "object_list_processor.h"
+#include "include/behavior_data.h"
 #define o gCurrentObject
 
 //returns random number between min and max inclusive
@@ -30,9 +31,21 @@ void CL_Move() {
     obj_move_using_vel_and_gravity();
 }
 
+struct Object *CL_Create_Star_Helper(struct Object *sp30, f32 sp34, f32 sp38, f32 sp3C) {
+    sp30 = spawn_object_abs_with_rot(o, 0, MODEL_STAR, bhvStarSpawnCoordinates, o->oPosX, o->oPosY,
+                                     o->oPosZ, 0, 0, 0);
+    sp30->oBehParams = o->oBehParams;
+    sp30->oHomeX = sp34;
+    sp30->oHomeY = sp38;
+    sp30->oHomeZ = sp3C;
+    sp30->oFaceAnglePitch = 0;
+    sp30->oFaceAngleRoll = 0;
+    return sp30;
+}
+
 struct Object *CL_Create_Star_Ptr(f32 sp20, f32 sp24, f32 sp28) {
     struct Object *sp1C;
-    sp1C = func_802F1A50(sp1C, sp20, sp24, sp28);
+    sp1C = CL_Create_Star_Helper(sp1C, sp20, sp24, sp28);
     sp1C->oBehParams2ndByte = 0;
     return sp1C;
 }
@@ -104,4 +117,16 @@ void CL_dist_between_points(Vec3f from, Vec3f to, f32 *dist) {
     register f32 z = to[2] - from[2];
 
     *dist = sqrtf(x * x + y * y + z * z);
+}
+
+
+u32 CL_count_bits(u32 b) {
+    u32 i = 1;
+    s32 k = 0;
+    while (i != 0x80000000) {
+        if (b & i)
+            k++;
+        i = i << 1;
+    }
+    return k;
 }

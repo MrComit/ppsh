@@ -1054,7 +1054,8 @@ s32 act_hold_walking(struct MarioState *m) {
         return drop_and_set_mario_action(m, ACT_CROUCH_SLIDE, 0);
     }
 
-    m->intendedMag *= 0.4f;
+    //m->intendedMag *= 0.4f;
+    m->intendedMag *= 0.65f;
 
     update_walking_speed(m);
 
@@ -1072,7 +1073,7 @@ s32 act_hold_walking(struct MarioState *m) {
 
     func_8026570C(m);
 
-    if (0.4f * m->intendedMag - m->forwardVel > 10.0f) {
+    if (0.65f * m->intendedMag - m->forwardVel > 10.0f) {
         m->particleFlags |= PARTICLE_DUST;
     }
 
