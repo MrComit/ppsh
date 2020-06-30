@@ -3,6 +3,7 @@ extern const GeoLayout jrb_area_1[];
 extern const Collision jrb_area_1_collision[];
 extern const MacroObject jrb_area_1_Area1_macro_objs[];
 extern const GeoLayout jrb_area_2_geo[];
+<<<<<<< HEAD
 extern const GeoLayout jrb_dl_Room1B_geo[];
 extern const GeoLayout jrb_dl_Room2B_geo[];
 extern const GeoLayout jrb_dl_Room3B_geo[];
@@ -12,10 +13,17 @@ extern const GeoLayout jrb_dl_Room6B_geo[];
 extern const GeoLayout jrb_dl_Room7B_geo[];
 extern const GeoLayout jrb_dl_Room8B_geo[];
 extern const GeoLayout jrb_dl_Room9B_geo[];
+=======
+extern const GeoLayout jrb_dl_Room1_geo[];
+extern const GeoLayout jrb_dl_Room2_geo[];
+extern const GeoLayout jrb_dl_Room3_geo[];
+extern const GeoLayout jrb_dl_Room4_geo[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern const GeoLayout jrb_area_2[];
 extern const Collision jrb_area_2_collision[];
 extern const u8 jrb_area_2_collision_rooms[];
 extern const MacroObject jrb_area_2_Area2_macro_objs[];
+<<<<<<< HEAD
 extern const GeoLayout jrb_area_3_geo[];
 extern const GeoLayout jrb_dl_Room1C_geo[];
 extern const GeoLayout jrb_dl_Room2C_geo[];
@@ -23,6 +31,8 @@ extern const GeoLayout jrb_area_3[];
 extern const Collision jrb_area_3_collision[];
 extern const u8 jrb_area_3_collision_rooms[];
 extern const MacroObject jrb_area_3_Area3_macro_objs[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_BBK_mesh_vtx_0[3];
 extern Gfx jrb_dl_BBK_mesh_tri_0[];
 extern Vtx jrb_dl_BBK_mesh_vtx_1[3];
@@ -31,9 +41,15 @@ extern Vtx jrb_dl_BBK_mesh_vtx_2[3];
 extern Gfx jrb_dl_BBK_mesh_tri_2[];
 extern Vtx jrb_dl_BBK_mesh_vtx_3[6];
 extern Gfx jrb_dl_BBK_mesh_tri_3[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Bounds_000_mesh_vtx_0[148];
 extern Gfx jrb_dl_Bounds_000_mesh_tri_0[];
 extern Vtx jrb_dl_Bounds_000_mesh_vtx_1[83];
+=======
+extern Vtx jrb_dl_Bounds_000_mesh_vtx_0[160];
+extern Gfx jrb_dl_Bounds_000_mesh_tri_0[];
+extern Vtx jrb_dl_Bounds_000_mesh_vtx_1[105];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Bounds_000_mesh_tri_1[];
 extern Vtx jrb_dl_Bounds_001_mesh_vtx_0[180];
 extern Gfx jrb_dl_Bounds_001_mesh_tri_0[];
@@ -47,10 +63,21 @@ extern Vtx jrb_dl_Bounds_005_mesh_vtx_0[52];
 extern Gfx jrb_dl_Bounds_005_mesh_tri_0[];
 extern Vtx jrb_dl_Bounds_005_mesh_vtx_1[40];
 extern Gfx jrb_dl_Bounds_005_mesh_tri_1[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Bounds_007_mesh_vtx_0[42];
 extern Gfx jrb_dl_Bounds_007_mesh_tri_0[];
 extern Vtx jrb_dl_Bounds_008_mesh_vtx_0[4];
 extern Gfx jrb_dl_Bounds_008_mesh_tri_0[];
+=======
+extern Vtx jrb_dl_Building_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_mesh_tri_0[];
+extern Vtx jrb_dl_Building_mesh_vtx_1[10];
+extern Gfx jrb_dl_Building_mesh_tri_1[];
+extern Vtx jrb_dl_Building_006_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_006_mesh_tri_0[];
+extern Vtx jrb_dl_Building_006_mesh_vtx_1[10];
+extern Gfx jrb_dl_Building_006_mesh_tri_1[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Building_007_mesh_vtx_0[53];
 extern Gfx jrb_dl_Building_007_mesh_tri_0[];
 extern Vtx jrb_dl_Building_007_mesh_vtx_1[16];
@@ -59,10 +86,24 @@ extern Vtx jrb_dl_Building_009_mesh_vtx_0[14];
 extern Gfx jrb_dl_Building_009_mesh_tri_0[];
 extern Vtx jrb_dl_Building_009_mesh_vtx_1[4];
 extern Gfx jrb_dl_Building_009_mesh_tri_1[];
+<<<<<<< HEAD
+=======
+extern Vtx jrb_dl_Building_010_mesh_vtx_0[46];
+extern Gfx jrb_dl_Building_010_mesh_tri_0[];
+extern Vtx jrb_dl_Building_010_mesh_vtx_1[20];
+extern Gfx jrb_dl_Building_010_mesh_tri_1[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Building_014_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_014_mesh_tri_0[];
 extern Vtx jrb_dl_Building_014_mesh_vtx_1[10];
 extern Gfx jrb_dl_Building_014_mesh_tri_1[];
+<<<<<<< HEAD
+=======
+extern Vtx jrb_dl_Building_005_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_005_mesh_tri_0[];
+extern Vtx jrb_dl_Building_005_mesh_vtx_1[10];
+extern Gfx jrb_dl_Building_005_mesh_tri_1[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Building_015_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_015_mesh_tri_0[];
 extern Vtx jrb_dl_Building_015_mesh_vtx_1[10];
@@ -71,6 +112,17 @@ extern Vtx jrb_dl_Building_017_mesh_vtx_0[22];
 extern Gfx jrb_dl_Building_017_mesh_tri_0[];
 extern Vtx jrb_dl_Building_017_mesh_vtx_1[8];
 extern Gfx jrb_dl_Building_017_mesh_tri_1[];
+<<<<<<< HEAD
+=======
+extern Vtx jrb_dl_Building_012_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_012_mesh_tri_0[];
+extern Vtx jrb_dl_Building_012_mesh_vtx_1[10];
+extern Gfx jrb_dl_Building_012_mesh_tri_1[];
+extern Vtx jrb_dl_Building_025_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_025_mesh_tri_0[];
+extern Vtx jrb_dl_Building_025_mesh_vtx_1[10];
+extern Gfx jrb_dl_Building_025_mesh_tri_1[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Building_031_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_031_mesh_tri_0[];
 extern Vtx jrb_dl_Building_031_mesh_vtx_1[12];
@@ -79,6 +131,7 @@ extern Vtx jrb_dl_Building_033_mesh_vtx_0[10];
 extern Gfx jrb_dl_Building_033_mesh_tri_0[];
 extern Vtx jrb_dl_Building_033_mesh_vtx_1[4];
 extern Gfx jrb_dl_Building_033_mesh_tri_1[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Building_045_mesh_vtx_0[36];
 extern Gfx jrb_dl_Building_045_mesh_tri_0[];
 extern Vtx jrb_dl_Building_045_mesh_vtx_1[14];
@@ -86,6 +139,15 @@ extern Gfx jrb_dl_Building_045_mesh_tri_1[];
 extern Vtx jrb_dl_Building_050_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_050_mesh_tri_0[];
 extern Vtx jrb_dl_Building_050_mesh_vtx_1[10];
+=======
+extern Vtx jrb_dl_Building_045_mesh_vtx_0[40];
+extern Gfx jrb_dl_Building_045_mesh_tri_0[];
+extern Vtx jrb_dl_Building_045_mesh_vtx_1[14];
+extern Gfx jrb_dl_Building_045_mesh_tri_1[];
+extern Vtx jrb_dl_Building_050_mesh_vtx_0[10];
+extern Gfx jrb_dl_Building_050_mesh_tri_0[];
+extern Vtx jrb_dl_Building_050_mesh_vtx_1[4];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Building_050_mesh_tri_1[];
 extern Vtx jrb_dl_Building_053_mesh_vtx_0[30];
 extern Gfx jrb_dl_Building_053_mesh_tri_0[];
@@ -105,13 +167,26 @@ extern Vtx jrb_dl_Building_028_mesh_vtx_1[4];
 extern Gfx jrb_dl_Building_028_mesh_tri_1[];
 extern Vtx jrb_dl_Building_060_mesh_vtx_0[84];
 extern Gfx jrb_dl_Building_060_mesh_tri_0[];
+<<<<<<< HEAD
+=======
+extern Vtx jrb_dl_Building_018_mesh_vtx_0[8];
+extern Gfx jrb_dl_Building_018_mesh_tri_0[];
+extern Vtx jrb_dl_Building_018_mesh_vtx_1[22];
+extern Gfx jrb_dl_Building_018_mesh_tri_1[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Building_063_mesh_vtx_0[225];
 extern Gfx jrb_dl_Building_063_mesh_tri_0[];
 extern Vtx jrb_dl_Building_063_mesh_vtx_1[66];
 extern Gfx jrb_dl_Building_063_mesh_tri_1[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Building_064_mesh_vtx_0[20];
 extern Gfx jrb_dl_Building_064_mesh_tri_0[];
 extern Vtx jrb_dl_Building_064_mesh_vtx_1[8];
+=======
+extern Vtx jrb_dl_Building_064_mesh_vtx_0[8];
+extern Gfx jrb_dl_Building_064_mesh_tri_0[];
+extern Vtx jrb_dl_Building_064_mesh_vtx_1[24];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Building_064_mesh_tri_1[];
 extern Vtx jrb_dl_Building_065_mesh_vtx_0[30];
 extern Gfx jrb_dl_Building_065_mesh_tri_0[];
@@ -129,10 +204,24 @@ extern Vtx jrb_dl_Building_029_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_029_mesh_tri_0[];
 extern Vtx jrb_dl_Building_029_mesh_vtx_1[10];
 extern Gfx jrb_dl_Building_029_mesh_tri_1[];
+<<<<<<< HEAD
+=======
+extern Vtx jrb_dl_Building_034_mesh_vtx_0[10];
+extern Gfx jrb_dl_Building_034_mesh_tri_0[];
+extern Vtx jrb_dl_Building_034_mesh_vtx_1[4];
+extern Gfx jrb_dl_Building_034_mesh_tri_1[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Building_023_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_023_mesh_tri_0[];
 extern Vtx jrb_dl_Building_023_mesh_vtx_1[10];
 extern Gfx jrb_dl_Building_023_mesh_tri_1[];
+<<<<<<< HEAD
+=======
+extern Vtx jrb_dl_Building_068_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_068_mesh_tri_0[];
+extern Vtx jrb_dl_Building_068_mesh_vtx_1[10];
+extern Gfx jrb_dl_Building_068_mesh_tri_1[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Building_069_mesh_vtx_0[117];
 extern Gfx jrb_dl_Building_069_mesh_tri_0[];
 extern Vtx jrb_dl_Building_069_mesh_vtx_1[60];
@@ -151,6 +240,13 @@ extern Vtx jrb_dl_Building_070_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_070_mesh_tri_0[];
 extern Vtx jrb_dl_Building_070_mesh_vtx_1[16];
 extern Gfx jrb_dl_Building_070_mesh_tri_1[];
+<<<<<<< HEAD
+=======
+extern Vtx jrb_dl_Building_071_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_071_mesh_tri_0[];
+extern Vtx jrb_dl_Building_071_mesh_vtx_1[10];
+extern Gfx jrb_dl_Building_071_mesh_tri_1[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Building_062_mesh_vtx_0[10];
 extern Gfx jrb_dl_Building_062_mesh_tri_0[];
 extern Vtx jrb_dl_Building_062_mesh_vtx_1[4];
@@ -175,25 +271,53 @@ extern Vtx jrb_dl_Building_008_mesh_vtx_0[16];
 extern Gfx jrb_dl_Building_008_mesh_tri_0[];
 extern Vtx jrb_dl_Building_008_mesh_vtx_1[4];
 extern Gfx jrb_dl_Building_008_mesh_tri_1[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Building_061_mesh_vtx_0[37];
 extern Gfx jrb_dl_Building_061_mesh_tri_0[];
 extern Vtx jrb_dl_Building_061_mesh_vtx_1[12];
+=======
+extern Vtx jrb_dl_Building_061_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_061_mesh_tri_0[];
+extern Vtx jrb_dl_Building_061_mesh_vtx_1[10];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Building_061_mesh_tri_1[];
 extern Vtx jrb_dl_Building_019_mesh_vtx_0[10];
 extern Gfx jrb_dl_Building_019_mesh_tri_0[];
 extern Vtx jrb_dl_Building_019_mesh_vtx_1[4];
 extern Gfx jrb_dl_Building_019_mesh_tri_1[];
+<<<<<<< HEAD
+=======
+extern Vtx jrb_dl_Building_020_mesh_vtx_0[10];
+extern Gfx jrb_dl_Building_020_mesh_tri_0[];
+extern Vtx jrb_dl_Building_020_mesh_vtx_1[4];
+extern Gfx jrb_dl_Building_020_mesh_tri_1[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Building_021_mesh_vtx_0[10];
 extern Gfx jrb_dl_Building_021_mesh_tri_0[];
 extern Vtx jrb_dl_Building_021_mesh_vtx_1[4];
 extern Gfx jrb_dl_Building_021_mesh_tri_1[];
+<<<<<<< HEAD
+=======
+extern Vtx jrb_dl_Building_022_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_022_mesh_tri_0[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Building_030_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_030_mesh_tri_0[];
 extern Vtx jrb_dl_Building_030_mesh_vtx_1[10];
 extern Gfx jrb_dl_Building_030_mesh_tri_1[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Building_013_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_013_mesh_tri_0[];
 extern Vtx jrb_dl_Building_013_mesh_vtx_1[14];
+=======
+extern Vtx jrb_dl_Building_035_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_035_mesh_tri_0[];
+extern Vtx jrb_dl_Building_035_mesh_vtx_1[10];
+extern Gfx jrb_dl_Building_035_mesh_tri_1[];
+extern Vtx jrb_dl_Building_013_mesh_vtx_0[4];
+extern Gfx jrb_dl_Building_013_mesh_tri_0[];
+extern Vtx jrb_dl_Building_013_mesh_vtx_1[10];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Building_013_mesh_tri_1[];
 extern Vtx jrb_dl_Building_016_mesh_vtx_0[10];
 extern Gfx jrb_dl_Building_016_mesh_tri_0[];
@@ -253,12 +377,17 @@ extern Vtx jrb_dl_Building_084_mesh_vtx_0[8];
 extern Gfx jrb_dl_Building_084_mesh_tri_0[];
 extern Vtx jrb_dl_Building_084_mesh_vtx_1[4];
 extern Gfx jrb_dl_Building_084_mesh_tri_1[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Building_043_mesh_vtx_0[68];
+=======
+extern Vtx jrb_dl_Building_043_mesh_vtx_0[67];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Building_043_mesh_tri_0[];
 extern Vtx jrb_dl_Building_043_mesh_vtx_1[12];
 extern Gfx jrb_dl_Building_043_mesh_tri_1[];
 extern Vtx jrb_dl_Building_124_mesh_vtx_0[8];
 extern Gfx jrb_dl_Building_124_mesh_tri_0[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Building_125_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_125_mesh_tri_0[];
 extern Vtx jrb_dl_Building_000_mesh_vtx_0[4];
@@ -289,6 +418,8 @@ extern Vtx jrb_dl_Building_012_mesh_vtx_0[120];
 extern Gfx jrb_dl_Building_012_mesh_tri_0[];
 extern Vtx jrb_dl_Building_141_mesh_vtx_0[4];
 extern Gfx jrb_dl_Building_141_mesh_tri_0[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Crate_002_mesh_vtx_0[76];
 extern Gfx jrb_dl_Crate_002_mesh_tri_0[];
 extern Vtx jrb_dl_Crate_003_mesh_vtx_0[20];
@@ -299,6 +430,7 @@ extern Vtx jrb_dl_Crate_001_mesh_vtx_0[20];
 extern Gfx jrb_dl_Crate_001_mesh_tri_0[];
 extern Vtx jrb_dl_Crate_004_mesh_vtx_0[20];
 extern Gfx jrb_dl_Crate_004_mesh_tri_0[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Crate_005_mesh_vtx_0[20];
 extern Gfx jrb_dl_Crate_005_mesh_tri_0[];
 extern Vtx jrb_dl_Crate_006_mesh_vtx_0[20];
@@ -311,6 +443,8 @@ extern Vtx jrb_dl_Crate_009_mesh_vtx_0[20];
 extern Gfx jrb_dl_Crate_009_mesh_tri_0[];
 extern Vtx jrb_dl_Crate_010_mesh_vtx_0[20];
 extern Gfx jrb_dl_Crate_010_mesh_tri_0[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_OnlyFans_002_mesh_vtx_0[76];
 extern Gfx jrb_dl_OnlyFans_002_mesh_tri_0[];
 extern Vtx jrb_dl_OnlyFans_000_mesh_vtx_0[3];
@@ -339,11 +473,21 @@ extern Vtx jrb_dl_Rail_Fence_006_mesh_vtx_0[18];
 extern Gfx jrb_dl_Rail_Fence_006_mesh_tri_0[];
 extern Vtx jrb_dl_Rail_Fence_005_mesh_vtx_0[18];
 extern Gfx jrb_dl_Rail_Fence_005_mesh_tri_0[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Rail_Fence_008_mesh_vtx_0[180];
 extern Gfx jrb_dl_Rail_Fence_008_mesh_tri_0[];
 extern Vtx jrb_dl_Rail_Fence_001_mesh_vtx_0[36];
 extern Gfx jrb_dl_Rail_Fence_001_mesh_tri_0[];
 extern Vtx jrb_dl_Rail_Fence_007_mesh_vtx_0[62];
+=======
+extern Vtx jrb_dl_Rail_Fence_008_mesh_vtx_0[176];
+extern Gfx jrb_dl_Rail_Fence_008_mesh_tri_0[];
+extern Vtx jrb_dl_Rail_Fence_001_mesh_vtx_0[90];
+extern Gfx jrb_dl_Rail_Fence_001_mesh_tri_0[];
+extern Vtx jrb_dl_Rail_Fence_001_mesh_vtx_1[36];
+extern Gfx jrb_dl_Rail_Fence_001_mesh_tri_1[];
+extern Vtx jrb_dl_Rail_Fence_007_mesh_vtx_0[38];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Rail_Fence_007_mesh_tri_0[];
 extern Vtx jrb_dl_Rail_Fence_009_mesh_vtx_0[16];
 extern Gfx jrb_dl_Rail_Fence_009_mesh_tri_0[];
@@ -355,10 +499,13 @@ extern Vtx jrb_dl_Rail_Fence_012_mesh_vtx_0[16];
 extern Gfx jrb_dl_Rail_Fence_012_mesh_tri_0[];
 extern Vtx jrb_dl_Rail_Fence_013_mesh_vtx_0[36];
 extern Gfx jrb_dl_Rail_Fence_013_mesh_tri_0[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Rail_Fence_014_mesh_vtx_0[48];
 extern Gfx jrb_dl_Rail_Fence_014_mesh_tri_0[];
 extern Vtx jrb_dl_Rail_Fence_015_mesh_vtx_0[60];
 extern Gfx jrb_dl_Rail_Fence_015_mesh_tri_0[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_Road_001_mesh_vtx_0[8];
 extern Gfx jrb_dl_Road_001_mesh_tri_0[];
 extern Vtx jrb_dl_ShyGuyMetals_mesh_vtx_0[3];
@@ -421,10 +568,13 @@ extern Vtx jrb_dl_Window_006_mesh_vtx_0[16];
 extern Gfx jrb_dl_Window_006_mesh_tri_0[];
 extern Vtx jrb_dl_Window_008_mesh_vtx_0[16];
 extern Gfx jrb_dl_Window_008_mesh_tri_0[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Window_009_mesh_vtx_0[54];
 extern Gfx jrb_dl_Window_009_mesh_tri_0[];
 extern Vtx jrb_dl_Window_010_mesh_vtx_0[16];
 extern Gfx jrb_dl_Window_010_mesh_tri_0[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Vtx jrb_dl_YoshiCookies_mesh_vtx_0[3];
 extern Gfx jrb_dl_YoshiCookies_mesh_tri_0[];
 extern Vtx jrb_dl_YoshiCookies_mesh_vtx_1[3];
@@ -549,6 +699,7 @@ extern Vtx jrb_dl_Cube_011_mesh_vtx_0[88];
 extern Gfx jrb_dl_Cube_011_mesh_tri_0[];
 extern Vtx jrb_dl_Cube_017_mesh_vtx_0[88];
 extern Gfx jrb_dl_Cube_017_mesh_tri_0[];
+<<<<<<< HEAD
 extern Vtx jrb_dl_Box_002_mesh_vtx_0[20];
 extern Gfx jrb_dl_Box_002_mesh_tri_0[];
 extern Vtx jrb_dl_Box_003_mesh_vtx_0[20];
@@ -655,12 +806,15 @@ extern Vtx jrb_dl_MetalSlide_003_mesh_vtx_0[44];
 extern Gfx jrb_dl_MetalSlide_003_mesh_tri_0[];
 extern Vtx jrb_dl_DeathPlane_001_mesh_vtx_0[8];
 extern Gfx jrb_dl_DeathPlane_001_mesh_tri_0[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 
 extern Gfx jrb_dl_BBK_mesh[];
 extern Gfx jrb_dl_Bounds_000_mesh[];
 extern Gfx jrb_dl_Bounds_001_mesh[];
 extern Gfx jrb_dl_Bounds_003_mesh[];
 extern Gfx jrb_dl_Bounds_005_mesh[];
+<<<<<<< HEAD
 extern Gfx jrb_dl_Bounds_007_mesh[];
 extern Gfx jrb_dl_Bounds_008_mesh[];
 extern Gfx jrb_dl_Building_007_mesh[];
@@ -668,6 +822,19 @@ extern Gfx jrb_dl_Building_009_mesh[];
 extern Gfx jrb_dl_Building_014_mesh[];
 extern Gfx jrb_dl_Building_015_mesh[];
 extern Gfx jrb_dl_Building_017_mesh[];
+=======
+extern Gfx jrb_dl_Building_mesh[];
+extern Gfx jrb_dl_Building_006_mesh[];
+extern Gfx jrb_dl_Building_007_mesh[];
+extern Gfx jrb_dl_Building_009_mesh[];
+extern Gfx jrb_dl_Building_010_mesh[];
+extern Gfx jrb_dl_Building_014_mesh[];
+extern Gfx jrb_dl_Building_005_mesh[];
+extern Gfx jrb_dl_Building_015_mesh[];
+extern Gfx jrb_dl_Building_017_mesh[];
+extern Gfx jrb_dl_Building_012_mesh[];
+extern Gfx jrb_dl_Building_025_mesh[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Building_031_mesh[];
 extern Gfx jrb_dl_Building_033_mesh[];
 extern Gfx jrb_dl_Building_045_mesh[];
@@ -678,6 +845,10 @@ extern Gfx jrb_dl_Building_057_mesh[];
 extern Gfx jrb_dl_Building_059_mesh[];
 extern Gfx jrb_dl_Building_028_mesh[];
 extern Gfx jrb_dl_Building_060_mesh[];
+<<<<<<< HEAD
+=======
+extern Gfx jrb_dl_Building_018_mesh[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Building_063_mesh[];
 extern Gfx jrb_dl_Building_064_mesh[];
 extern Gfx jrb_dl_Building_065_mesh[];
@@ -685,12 +856,22 @@ extern Gfx jrb_dl_Building_032_mesh[];
 extern Gfx jrb_dl_Building_026_mesh[];
 extern Gfx jrb_dl_Building_027_mesh[];
 extern Gfx jrb_dl_Building_029_mesh[];
+<<<<<<< HEAD
 extern Gfx jrb_dl_Building_023_mesh[];
+=======
+extern Gfx jrb_dl_Building_034_mesh[];
+extern Gfx jrb_dl_Building_023_mesh[];
+extern Gfx jrb_dl_Building_068_mesh[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Building_069_mesh[];
 extern Gfx jrb_dl_Building_002_mesh[];
 extern Gfx jrb_dl_Building_001_mesh[];
 extern Gfx jrb_dl_Building_003_mesh[];
 extern Gfx jrb_dl_Building_070_mesh[];
+<<<<<<< HEAD
+=======
+extern Gfx jrb_dl_Building_071_mesh[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Building_062_mesh[];
 extern Gfx jrb_dl_Building_075_mesh[];
 extern Gfx jrb_dl_Building_077_mesh[];
@@ -699,8 +880,16 @@ extern Gfx jrb_dl_Building_079_mesh[];
 extern Gfx jrb_dl_Building_008_mesh[];
 extern Gfx jrb_dl_Building_061_mesh[];
 extern Gfx jrb_dl_Building_019_mesh[];
+<<<<<<< HEAD
 extern Gfx jrb_dl_Building_021_mesh[];
 extern Gfx jrb_dl_Building_030_mesh[];
+=======
+extern Gfx jrb_dl_Building_020_mesh[];
+extern Gfx jrb_dl_Building_021_mesh[];
+extern Gfx jrb_dl_Building_022_mesh[];
+extern Gfx jrb_dl_Building_030_mesh[];
+extern Gfx jrb_dl_Building_035_mesh[];
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Building_013_mesh[];
 extern Gfx jrb_dl_Building_016_mesh[];
 extern Gfx jrb_dl_Building_036_mesh[];
@@ -721,6 +910,7 @@ extern Gfx jrb_dl_Building_083_mesh[];
 extern Gfx jrb_dl_Building_084_mesh[];
 extern Gfx jrb_dl_Building_043_mesh[];
 extern Gfx jrb_dl_Building_124_mesh[];
+<<<<<<< HEAD
 extern Gfx jrb_dl_Building_125_mesh[];
 extern Gfx jrb_dl_Building_000_mesh[];
 extern Gfx jrb_dl_Building_006_mesh[];
@@ -730,17 +920,22 @@ extern Gfx jrb_dl_Building_022_mesh[];
 extern Gfx jrb_dl_Building_140_mesh[];
 extern Gfx jrb_dl_Building_012_mesh[];
 extern Gfx jrb_dl_Building_141_mesh[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Crate_002_mesh[];
 extern Gfx jrb_dl_Crate_003_mesh[];
 extern Gfx jrb_dl_Crate_000_mesh[];
 extern Gfx jrb_dl_Crate_001_mesh[];
 extern Gfx jrb_dl_Crate_004_mesh[];
+<<<<<<< HEAD
 extern Gfx jrb_dl_Crate_005_mesh[];
 extern Gfx jrb_dl_Crate_006_mesh[];
 extern Gfx jrb_dl_Crate_007_mesh[];
 extern Gfx jrb_dl_Crate_008_mesh[];
 extern Gfx jrb_dl_Crate_009_mesh[];
 extern Gfx jrb_dl_Crate_010_mesh[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_OnlyFans_002_mesh[];
 extern Gfx jrb_dl_OnlyFans_000_mesh[];
 extern Gfx jrb_dl_OnlyFans_001_mesh[];
@@ -760,8 +955,11 @@ extern Gfx jrb_dl_Rail_Fence_010_mesh[];
 extern Gfx jrb_dl_Rail_Fence_011_mesh[];
 extern Gfx jrb_dl_Rail_Fence_012_mesh[];
 extern Gfx jrb_dl_Rail_Fence_013_mesh[];
+<<<<<<< HEAD
 extern Gfx jrb_dl_Rail_Fence_014_mesh[];
 extern Gfx jrb_dl_Rail_Fence_015_mesh[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_Road_001_mesh[];
 extern Gfx jrb_dl_ShyGuyMetals_mesh[];
 extern Gfx jrb_dl_Skate_Ramp_mesh[];
@@ -788,8 +986,11 @@ extern Gfx jrb_dl_Window_004_mesh[];
 extern Gfx jrb_dl_Window_007_mesh[];
 extern Gfx jrb_dl_Window_006_mesh[];
 extern Gfx jrb_dl_Window_008_mesh[];
+<<<<<<< HEAD
 extern Gfx jrb_dl_Window_009_mesh[];
 extern Gfx jrb_dl_Window_010_mesh[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_YoshiCookies_mesh[];
 extern Gfx jrb_dl_Bookshelf_mesh[];
 extern Gfx jrb_dl_Box_005_mesh[];
@@ -834,6 +1035,7 @@ extern Gfx jrb_dl_Building_119_mesh[];
 extern Gfx jrb_dl_Cube_010_mesh[];
 extern Gfx jrb_dl_Cube_011_mesh[];
 extern Gfx jrb_dl_Cube_017_mesh[];
+<<<<<<< HEAD
 extern Gfx jrb_dl_Box_002_mesh[];
 extern Gfx jrb_dl_Box_003_mesh[];
 extern Gfx jrb_dl_Box_004_mesh[];
@@ -878,5 +1080,7 @@ extern Gfx jrb_dl_MetalSlide_mesh[];
 extern Gfx jrb_dl_MetalSlide_001_mesh[];
 extern Gfx jrb_dl_MetalSlide_003_mesh[];
 extern Gfx jrb_dl_DeathPlane_001_mesh[];
+=======
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 extern Gfx jrb_dl_material_revert_render_settings[];
 

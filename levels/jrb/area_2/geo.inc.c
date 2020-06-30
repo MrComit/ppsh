@@ -3,6 +3,7 @@
 const GeoLayout jrb_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+<<<<<<< HEAD
 		GEO_SWITCH_CASE(9, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, jrb_dl_Room1B_geo),
@@ -14,15 +15,28 @@ const GeoLayout jrb_area_2_geo[] = {
 			GEO_BRANCH(1, jrb_dl_Room7B_geo),
 			GEO_BRANCH(1, jrb_dl_Room8B_geo),
 			GEO_BRANCH(1, jrb_dl_Room9B_geo),
+=======
+		GEO_SWITCH_CASE(4, geo_switch_area),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, jrb_dl_Room1_geo),
+			GEO_BRANCH(1, jrb_dl_Room2_geo),
+			GEO_BRANCH(1, jrb_dl_Room3_geo),
+			GEO_BRANCH(1, jrb_dl_Room4_geo),
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+<<<<<<< HEAD
 const GeoLayout jrb_dl_Room1B_geo[] = {
+=======
+const GeoLayout jrb_dl_Room1_geo[] = {
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_ROTATE(1, 0, 0, 0, 0, 0, 0),
 		GEO_OPEN_NODE(),
+<<<<<<< HEAD
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -17007, -9539, 3756, 0, 0, 0, jrb_dl_Bookshelf_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -15149, -9701, 3749, 0, 0, 0, jrb_dl_Box_005_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -16537, -9664, 3761, 0, 0, 0, jrb_dl_Box_018_mesh),
@@ -34,11 +48,28 @@ const GeoLayout jrb_dl_Room1B_geo[] = {
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -15932, -9822, 3502, 0, 0, 0, jrb_dl_Couch_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -15032, -9935, 2413, 0, 0, 0, jrb_dl_Cube_005_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -15269, -9927, 2413, 0, 0, 0, jrb_dl_Cube_006_mesh),
+=======
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -16807, -9360, 3731, 0, 0, 0, jrb_dl_Bookshelf_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -15389, -9555, 3757, 0, 0, 0, jrb_dl_Box_005_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -16537, -10003, 3757, 0, 0, 0, jrb_dl_Box_018_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -17257, -10003, 3100, 0, 0, 0, jrb_dl_Box_021_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -17257, -10003, 2661, 0, 0, 0, jrb_dl_Box_026_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -17257, -10003, 2135, 0, 0, 0, jrb_dl_Box_032_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -16128, -5771, 2532, 0, 0, 0, jrb_dl_Building_038_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -17238, -8148, 1563, 0, 0, 0, jrb_dl_Building_101_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -15932, -9834, 3486, 0, 0, 0, jrb_dl_Couch_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -15062, -9873, 2413, 0, 0, 0, jrb_dl_Cube_005_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -15302, -9873, 2413, 0, 0, 0, jrb_dl_Cube_006_mesh),
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+<<<<<<< HEAD
 const GeoLayout jrb_dl_Room2B_geo[] = {
+=======
+const GeoLayout jrb_dl_Room2_geo[] = {
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_ROTATE(1, 0, 0, 0, 0, 0, 0),
@@ -58,11 +89,16 @@ const GeoLayout jrb_dl_Room2B_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+<<<<<<< HEAD
 const GeoLayout jrb_dl_Room3B_geo[] = {
+=======
+const GeoLayout jrb_dl_Room3_geo[] = {
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_ROTATE(1, 0, 0, 0, 0, 0, 0),
 		GEO_OPEN_NODE(),
+<<<<<<< HEAD
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -6691, -6989, 6771, 0, 0, 0, jrb_dl_Building_096_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -7196, -9572, 5446, 0, 0, 0, jrb_dl_Building_112_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -5634, -9131, 6607, 0, 0, 0, jrb_dl_Building_113_mesh),
@@ -76,15 +112,35 @@ const GeoLayout jrb_dl_Room3B_geo[] = {
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -5634, -7514, 6607, 0, 0, 0, jrb_dl_Building_123_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -5637, -9822, 6081, 0, 0, 0, jrb_dl_Couch_002_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -8741, -9822, 6203, 0, 0, 0, jrb_dl_Couch_003_mesh),
+=======
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -8909, -8706, 6628, 0, 0, 0, jrb_dl_Building_096_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -5806, -9572, 5472, 0, 0, 0, jrb_dl_Building_112_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -5672, -9212, 7384, 0, 0, 0, jrb_dl_Building_113_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -7182, -8743, 7771, 0, 0, 0, jrb_dl_Building_114_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -5806, -7930, 5472, 0, 0, 0, jrb_dl_Building_115_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -7196, -7226, 7771, 0, 0, 0, jrb_dl_Building_116_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -5806, -6622, 5472, 0, 0, 0, jrb_dl_Building_117_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -8718, -8287, 6607, 0, 0, 0, jrb_dl_Building_120_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -5672, -6319, 7384, 0, 0, 0, jrb_dl_Building_121_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -8718, -6925, 6607, 0, 0, 0, jrb_dl_Building_122_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -5672, -7596, 7384, 0, 0, 0, jrb_dl_Building_123_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -5654, -9834, 6081, 0, 0, 0, jrb_dl_Couch_002_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -8725, -9834, 6203, 0, 0, 0, jrb_dl_Couch_003_mesh),
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+<<<<<<< HEAD
 const GeoLayout jrb_dl_Room4B_geo[] = {
+=======
+const GeoLayout jrb_dl_Room4_geo[] = {
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_ROTATE(1, 0, 0, 0, 0, 0, 0),
 		GEO_OPEN_NODE(),
+<<<<<<< HEAD
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -13207, -1869, 12914, 0, 0, 0, jrb_dl_Bookshelf_002_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -10853, -2797, 15168, 0, 0, 0, jrb_dl_Box_001_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, -10821, -2797, 13045, 0, 0, 0, jrb_dl_Box_000_mesh),
@@ -178,6 +234,16 @@ const GeoLayout jrb_dl_Room9B_geo[] = {
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, 16266, -3022, 26825, 0, 0, 0, jrb_dl_Computer_001_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, 16409, -3129, 26826, 0, 0, 0, jrb_dl_Cube_033_mesh),
 			GEO_TRANSLATE_ROTATE_WITH_DL(1, 16188, -3122, 26826, 0, 0, 0, jrb_dl_Cube_034_mesh),
+=======
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -13427, -1690, 12940, 0, 0, 0, jrb_dl_Bookshelf_002_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -10870, -3249, 15274, 0, 0, 0, jrb_dl_Box_001_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -10904, -3249, 13125, 0, 0, 0, jrb_dl_Box_000_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -3228, -8701, 14094, 0, 0, 0, jrb_dl_Building_099_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -13397, -1936, 13475, 0, 0, 0, jrb_dl_Building_119_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -9725, 79, 14863, 0, 0, 0, jrb_dl_Cube_010_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -9725, 79, 14587, 0, 0, 0, jrb_dl_Cube_011_mesh),
+			GEO_TRANSLATE_ROTATE_WITH_DL(1, -9642, -2862, 14090, 0, 0, 0, jrb_dl_Cube_017_mesh),
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

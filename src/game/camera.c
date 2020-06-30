@@ -10936,7 +10936,11 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
+<<<<<<< HEAD
 	ZOOMOUT_AREA_MASK(1, 1, 1, 0, 1, 1, 0, 0), // JRB            | THI
+=======
+	ZOOMOUT_AREA_MASK(1, 1, 0, 0, 1, 1, 0, 0), // JRB            | THI
+>>>>>>> 471ad1af6a919098f2daf47cffa4d543891535d6
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // CASTLE_GROUNDS | BITDW
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // VCUTM          | BITFS
