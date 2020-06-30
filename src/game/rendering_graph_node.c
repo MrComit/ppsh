@@ -270,7 +270,8 @@ static void geo_process_level_of_detail(struct GraphNodeLevelOfDetail *node) {
     // The fixed point Mtx type is defined as 16 longs, but it's actually 16
     // shorts for the integer parts followed by 16 shorts for the fraction parts
     s16 *mtx = (s16 *) gMatStackFixed[gMatStackIndex];
-    s16 distanceFromCam = -mtx[14]; // z-component of the translation column
+    //s16 distanceFromCam = -mtx[14]; // z-component of the translation column
+    float distanceFromCam = -mtx[14] * (1 << 16) / 24576.0;
 
     if (node->minDistance <= distanceFromCam && distanceFromCam < node->maxDistance) {
         if (node->node.children != 0) {
