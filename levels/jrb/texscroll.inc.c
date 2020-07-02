@@ -8,7 +8,7 @@ void scroll_jrb_dl_MetalSlide_002_mesh_vtx_0() {
 	int deltaY;
 	Vtx *vertices = segmented_to_virtual(jrb_dl_MetalSlide_002_mesh_vtx_0);
 
-	deltaY = (int)(1.2000000476837158 * 0x20) % height;
+	deltaY = (int)(1.7999999523162842 * 0x20) % height;
 
 	if (absi(currentY) > height) {
 		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
@@ -30,7 +30,7 @@ void scroll_jrb_dl_MetalSlide_004_mesh_vtx_0() {
 	int deltaY;
 	Vtx *vertices = segmented_to_virtual(jrb_dl_MetalSlide_004_mesh_vtx_0);
 
-	deltaY = (int)(0.6000000238418579 * 0x20) % height;
+	deltaY = (int)(0.8999999761581421 * 0x20) % height;
 
 	if (absi(currentY) > height) {
 		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
