@@ -42,3 +42,9 @@
 #include "levels/jrb/leveldata.inc.c"
 
 #include "levels/jrb/colored_cube/model.inc.c"
+#include "levels/jrb/sc_gate1/collision.inc.c"
+#include "levels/jrb/sc_gate1/model.inc.c"
+#include "levels/jrb/sc_truck/collision.inc.c"
+#include "levels/jrb/sc_truck/model.inc.c"
+#include "levels/jrb/sc_big_truck/collision.inc.c"
+#include "levels/jrb/sc_big_truck/model.inc.c"

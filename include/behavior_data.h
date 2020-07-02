@@ -585,5 +585,9 @@ extern const BehaviorScript bhvCubeStar[];
 extern const BehaviorScript bhvColoredBoo[];
 extern const BehaviorScript bhvColoredDashBoo[];
 extern const BehaviorScript bhvDashBooSpawner[];
+extern const BehaviorScript bhvTimedCarSwitch[];
+extern const BehaviorScript bhvTimedGate[];
+extern const BehaviorScript bhvSimpTruck[];
+extern const BehaviorScript bhvSimpBigTruck[];
 
 #endif /* _BEHAVIOR_DATA_H */

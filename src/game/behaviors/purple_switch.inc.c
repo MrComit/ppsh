@@ -70,7 +70,18 @@ void bhv_purple_switch_loop(void) {
                     o->oAction = 5;
 
             }
-            if (o->oBehParams2ndByte != 0) {
+
+            if (obj_has_behavior(bhvTimedCarSwitch)) {
+                if (o->oTimer < 750) {
+                    if (o->oTimer > 60)
+                        play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gDefaultSoundArgs);
+                } else {
+                    play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gDefaultSoundArgs);
+                }
+                if (o->oTimer > 810) {
+                    o->oAction = PURPLE_SWITCH_WAIT_FOR_MARIO_TO_GET_OFF;
+                }
+            } else if (o->oBehParams2ndByte != 0) {
                 if (o->oBehParams2ndByte == 1 && gMarioObject->platform != o) {
                     o->oAction++;
                 } else {

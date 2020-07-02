@@ -19,6 +19,7 @@
 #include "engine/surface_load.h"
 #include "object_list_processor.h"
 #include "mario.h"
+#include "game.h"
 
 
 /**
@@ -261,6 +262,15 @@ void spawn_particle(u32 activeParticleFlag, s16 model, const BehaviorScript *beh
     }
 }
 
+static void mario_moon_jump(void) {
+    if (gMarioState->controller->buttonDown & L_TRIG) {
+        gMarioState->vel[1] = 40.0f;
+        gMarioState->action = ACT_JUMP;
+        //set_mario_action(gMarioState, ACT_JUMP, 0);
+    }
+}
+
+
 /**
  * Mario's primary behavior update function.
  */
@@ -268,6 +278,7 @@ void bhv_mario_update(void) {
     u32 particleFlags = 0;
     s32 i;
 
+    mario_moon_jump(); //MOONJUMP HERE //MOON JUMP
     particleFlags = execute_mario_action(gCurrentObject);
     gCurrentObject->oMarioParticleFlags = particleFlags;
 

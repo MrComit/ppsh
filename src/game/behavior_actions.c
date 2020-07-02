@@ -306,3 +306,4 @@ void func_802B2328(s32 n, s32 a1, s32 a2, s32 r) {
 #include "behaviors/bomb_stuff.inc.c"
 #include "behaviors/colored_cube.inc.c"
 #include "behaviors/colored_boo.inc.c"
+#include "behaviors/sc_gates.inc.c"

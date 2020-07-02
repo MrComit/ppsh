@@ -6591,3 +6591,59 @@ const BehaviorScript bhvDashBooSpawner[] = {
         CALL_NATIVE(bhv_dash_boo_spawner_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvTimedCarSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_INT(oAnimState, 1),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x600),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_purple_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvTimedGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(sc_gate1_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0xC00),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_timed_gate_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSimpTruck[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(sc_truck_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0xC00),
+    CALL_NATIVE(bhv_simp_truck_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_simp_truck_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSimpBigTruck[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(sc_big_truck_collision),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ -100, /*Bounciness*/ -50, /*Drag*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x3000),
+    SET_FLOAT(oCollisionDistance, 0xC00),
+    CALL_NATIVE(bhv_simp_big_truck_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_simp_big_truck_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

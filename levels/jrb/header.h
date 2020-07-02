@@ -69,4 +69,16 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/colored_cube/geo_header.h"
 
+#include "levels/jrb/sc_gate1/collision_header.h"
+
+#include "levels/jrb/sc_gate1/geo_header.h"
+
+#include "levels/jrb/sc_truck/collision_header.h"
+
+#include "levels/jrb/sc_truck/geo_header.h"
+
+#include "levels/jrb/sc_big_truck/collision_header.h"
+
+#include "levels/jrb/sc_big_truck/geo_header.h"
+
 #endif

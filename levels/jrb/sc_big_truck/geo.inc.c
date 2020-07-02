@@ -1,0 +1,25 @@
+#include "src/game/envfx_snow.h"
+
+const GeoLayout sc_big_truck_geo[] = {
+	GEO_CULLING_RADIUS(0x800),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(4, sc_big_truck_alphaDL_mesh),
+		GEO_DISPLAY_LIST(2, sc_big_truck_decalDL_mesh),
+		GEO_SWITCH_CASE(4, geo_switch_anim_state),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(1, sc_big_truck_solidDL_mesh),
+			GEO_DISPLAY_LIST(1, sc_big_truck_solidDL_mesh_2),
+			GEO_DISPLAY_LIST(1, sc_big_truck_solidDL_mesh_3),
+			GEO_DISPLAY_LIST(1, sc_big_truck_solidDL_mesh_4),
+			GEO_CLOSE_NODE(),
+	GEO_CLOSE_NODE(),
+	GEO_DISPLAY_LIST(0, sc_big_truck_material_revert_render_settings),
+	GEO_DISPLAY_LIST(1, sc_big_truck_material_revert_render_settings),
+	GEO_DISPLAY_LIST(2, sc_big_truck_material_revert_render_settings),
+	GEO_DISPLAY_LIST(3, sc_big_truck_material_revert_render_settings),
+	GEO_DISPLAY_LIST(4, sc_big_truck_material_revert_render_settings),
+	GEO_DISPLAY_LIST(5, sc_big_truck_material_revert_render_settings),
+	GEO_DISPLAY_LIST(6, sc_big_truck_material_revert_render_settings),
+	GEO_DISPLAY_LIST(7, sc_big_truck_material_revert_render_settings),
+	GEO_END(),
+};
