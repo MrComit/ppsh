@@ -16,7 +16,7 @@ void bhv_timed_gate_loop(void) {
             if (o->oTimer < 70) {
                 o->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
             } else if (o->oTimer == 71) {
-                spawn_object(o, MODEL_TRUCK, bhvSimpTruck);
+                spawn_object(o, MODEL_SC_TRUCK, bhvSimpTruck);
             }
             if (bswitch->oAction != PURPLE_SWITCH_TICKING)
                 o->oAction = 0;
