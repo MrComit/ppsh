@@ -782,6 +782,7 @@ extern void SetComitCutscene(s16 timer, u16 stopMario, u16 index);
 
 extern s8 gUnderwaterCam;
 
+extern u16 gComitSpecialCutscene;
 extern u16 gComitCutsceneActive;
 extern u8 gComitCutsceneStopMario;
 extern s16 gComitCutsceneTimer;

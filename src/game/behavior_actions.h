@@ -614,6 +614,8 @@ void bhv_simp_truck_loop(void);
 void bhv_simp_truck_init(void);
 void bhv_simp_big_truck_loop(void);
 void bhv_simp_big_truck_init(void);
+void bhv_simp_mine_loop(void);
+void bhv_simp_mg_toad_loop(void);
 
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);

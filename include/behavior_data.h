@@ -589,5 +589,7 @@ extern const BehaviorScript bhvTimedCarSwitch[];
 extern const BehaviorScript bhvTimedGate[];
 extern const BehaviorScript bhvSimpTruck[];
 extern const BehaviorScript bhvSimpBigTruck[];
+extern const BehaviorScript bhvSimpBomb[];
+extern const BehaviorScript bhvSimpMGToad[];
 
 #endif /* _BEHAVIOR_DATA_H */

@@ -274,6 +274,7 @@ const LevelScript script_func_global_10[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BOOKEND_PART,            bookend_part_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOOKEND,                 bookend_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HAUNTED_CAGE,            haunted_cage_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_TOAD,                    toad_geo),
     RETURN(),
 };
 
@@ -335,7 +336,7 @@ const LevelScript script_func_global_16[] = {
     LOAD_MODEL_FROM_GEO(MODEL_MIPS,                    mips_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOO_CASTLE,              boo_castle_geo),
     LOAD_MODEL_FROM_GEO(MODEL_LAKITU,                  lakitu_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_TOAD,                    toad_geo),
+    //LOAD_MODEL_FROM_GEO(MODEL_TOAD,                    toad_geo),
     RETURN(),
 };
 

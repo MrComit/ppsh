@@ -81,4 +81,6 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/sc_big_truck/geo_header.h"
 
+#include "levels/jrb/sc_mine/geo_header.h"
+
 #endif

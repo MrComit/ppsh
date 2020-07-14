@@ -48,3 +48,4 @@
 #include "levels/jrb/sc_truck/model.inc.c"
 #include "levels/jrb/sc_big_truck/collision.inc.c"
 #include "levels/jrb/sc_big_truck/model.inc.c"
+#include "levels/jrb/sc_mine/model.inc.c"

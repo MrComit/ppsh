@@ -105,11 +105,13 @@ struct Object *star;
         mark_object_for_deletion(o);
     }
 
-    if (o->parentObj != NULL) {
+    if (o->parentObj != NULL && virtual_to_segmented(0x13, o->parentObj->behavior) == bhvSPlat) {
         o->oPosX = o->parentObj->oPosX;
         o->oPosY = o->parentObj->oPosY + 100.0f;
         o->oPosZ = o->parentObj->oPosZ;
-
+    } else if (o->oBehParams2ndByte == 1) {
+        o->oPosY = o->oHomeY + (sins(o->oBobombBlinkTimer) * 150.0f);
+        o->oBobombBlinkTimer += 0x400;
     }
 
     o->oFaceAngleYaw += 0x600;

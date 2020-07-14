@@ -620,5 +620,6 @@
 #define MODEL_GATE 0xFE
 #define MODEL_SC_TRUCK 0xFD
 #define MODEL_BIG_TRUCK 0xFC
+#define MODEL_SIMP_MINE 0xFB
 
 #endif

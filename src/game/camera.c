@@ -498,6 +498,7 @@ extern u8 sZoomOutAreaMasks[];
 
 /* CUTSCENE VARIABLES */
 
+u16 gComitSpecialCutscene = 0;
 u16 gComitCutsceneActive = 0;
 u8 gComitCutsceneStopMario = FALSE;
 s16 gComitCutsceneTimer = 0;
@@ -1256,6 +1257,10 @@ void mode_8_directions_camera(struct Camera *c) {
     UNUSED u8 unused[8];
     s16 oldAreaYaw = sAreaYaw;
 
+    if (gComitSpecialCutscene) {
+        gComitSpecialCutscene = 0;
+        return;
+    }
 
     /* CUTSCENE STUFF*/
     if (gComitCutsceneActive) {
@@ -10936,7 +10941,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
-	ZOOMOUT_AREA_MASK(1, 1, 1, 0, 1, 1, 0, 0), // JRB            | THI
+	ZOOMOUT_AREA_MASK(1, 1, 1, 1, 1, 1, 0, 0), // JRB            | THI
 	ZOOMOUT_AREA_MASK(1, 1, 0, 0, 1, 1, 0, 0), // JRB            | THI
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // CASTLE_GROUNDS | BITDW

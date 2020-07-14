@@ -25,3 +25,4 @@
 #include "levels/jrb/sc_gate1/geo.inc.c"
 #include "levels/jrb/sc_truck/geo.inc.c"
 #include "levels/jrb/sc_big_truck/geo.inc.c"
+#include "levels/jrb/sc_mine/geo.inc.c"

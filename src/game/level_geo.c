@@ -165,3 +165,47 @@ Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
     }
     return NULL;
 }
+
+
+
+
+
+/*Gfx *geo_sc_cam_pos(s32 callContext, struct GraphNode *node) {
+    struct GraphNodeGenerated *sp30;
+    sp30 = (struct GraphNodeGenerated *) node;
+
+    switch (sp30->parameter) {
+        case 0:
+            if (gMarioState->pos[2] > -20361.1f && gMarioState->pos[1] < -7500.0f) {
+                gComitSpecialCutscene = 1;
+                gLakituState.curPos[2] = -18800.0f;
+                gLakituState.curPos[1] = -8000.0f;
+                //gLakituState.curFocus[2] = -20000.0f;
+                //gLakituState.curFocus[1] = -9382.0f;
+                gLakituState.goalPos[2] = -18800.0f;
+                gLakituState.goalPos[1] = -8000.0f;
+                gLakituState.goalFocus[2] = -20000.0f;
+                gLakituState.goalFocus[1] = -9382.0f;
+            }
+            break;
+        case 1:
+            if (gMarioState->pos[2] > -20361.1f && gMarioState->pos[1] < -7500.0f) {
+                gComitSpecialCutscene = 1;
+                gLakituState.pos[2] = -18800.0f;
+                gLakituState.pos[1] = -8000.0f;
+                gLakituState.focus[2] = -20000.0f;
+                gLakituState.focus[1] = -9382.0f;  
+            }
+            break;
+        case 2:
+            if (gMarioState->pos[2] > -20361.1f && gMarioState->pos[1] < -7500.0f) {
+                gComitSpecialCutscene = 1;
+                gLakituState.pos[2] = -18800.0f;
+                gLakituState.pos[1] = -8000.0f;
+                gLakituState.focus[2] = -20000.0f;
+                gLakituState.focus[1] = -9382.0f;  
+            }
+            break;
+    }
+    return NULL;
+}*/
