@@ -13,4 +13,7 @@
 #include "levels/jrb/area_4/room.inc.c"
 #include "levels/jrb/area_4/macro.inc.c"
 #include "levels/jrb/area_4/spline.inc.c"
+#include "levels/jrb/area_5/collision.inc.c"
+#include "levels/jrb/area_5/macro.inc.c"
+#include "levels/jrb/area_5/spline.inc.c"
 #include "levels/jrb/model.inc.c"

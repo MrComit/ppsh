@@ -49,3 +49,6 @@
 #include "levels/jrb/sc_big_truck/collision.inc.c"
 #include "levels/jrb/sc_big_truck/model.inc.c"
 #include "levels/jrb/sc_mine/model.inc.c"
+#include "levels/jrb/SC_Elevator/model.inc.c"
+#include "levels/jrb/SC_Elevator/collision.inc.c"
+#include "levels/jrb/spotlight/model.inc.c"

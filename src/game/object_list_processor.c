@@ -266,6 +266,8 @@ static void mario_moon_jump(void) {
     if (gMarioState->controller->buttonDown & L_TRIG) {
         gMarioState->vel[1] = 40.0f;
         gMarioState->action = ACT_JUMP;
+        //gMarioState->faceAngle[1] = atan2s(gMarioState->controller->stickX, gMarioState->controller->stickY);
+        gMarioState->faceAngle[1] -= gMarioState->controller->stickX * 32.0f;
         //set_mario_action(gMarioState, ACT_JUMP, 0);
     }
 }

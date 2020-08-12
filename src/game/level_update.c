@@ -121,6 +121,10 @@ const char *credits19[] = { "1PRODUCER", "SHIGERU MIYAMOTO" };
 const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
 #endif
 
+//ostime
+OSTime oldTime = 0;
+OSTime deltaTime = 0;
+
 
 struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_CASTLE_GROUNDS, 1, 1, -128, { 0, 8000, 0 }, NULL },
@@ -971,6 +975,7 @@ void basic_update(UNUSED s16 *arg) {
 }
 
 s32 play_mode_normal(void) {
+    OSTime newTime = osGetTime();
     uv_update_scroll();
     if (gCurrDemoInput != NULL) {
         print_intro_text();
@@ -989,8 +994,23 @@ s32 play_mode_normal(void) {
     if (sTimerRunning && gHudDisplay.timer < 17999) {
         gHudDisplay.timer += 1;
     }
-
     area_update_objects();
+    /*deltaTime += newTime - oldTime; //1562744
+    oldTime = newTime;
+    while (deltaTime > 1562744) {
+        deltaTime -= 1562744;
+        if (sTimerRunning && gHudDisplay.timer < 17999) {
+            gHudDisplay.timer += 1;
+        }
+        area_update_objects();
+        if (deltaTime > 1562744) {
+            // reset buttonPressed
+                struct Controller *controller = &gControllers[0];
+                if (controller->controllerData != NULL) {
+                    controller->buttonPressed = 0;
+                }
+        }
+    }*/
     update_hud_values();
 
     if (gCurrentArea != NULL) {
@@ -1147,15 +1167,23 @@ s32 update_level(void) {
             break;
         case PLAY_MODE_PAUSED:
             changeLevel = play_mode_paused();
+            deltaTime = 0;
+            oldTime = osGetTime();
             break;
         case PLAY_MODE_CHANGE_AREA:
             changeLevel = play_mode_change_area();
+            deltaTime = 0;
+            oldTime = osGetTime();
             break;
         case PLAY_MODE_CHANGE_LEVEL:
             changeLevel = play_mode_change_level();
+            deltaTime = 0;
+            oldTime = osGetTime();
             break;
         case PLAY_MODE_FRAME_ADVANCE:
             changeLevel = play_mode_frame_advance();
+            deltaTime = 0;
+            oldTime = osGetTime();
             break;
     }
 

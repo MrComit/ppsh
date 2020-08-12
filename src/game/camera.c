@@ -785,17 +785,17 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
         marioCeilHeight = sMarioGeometry.currCeilHeight;
         marioFloorHeight = sMarioGeometry.currFloorHeight;
 
-        if (marioFloorHeight < marioCeilHeight - 400.f) {
-            marioFloorHeight = marioCeilHeight - 400.f;
+        if (marioFloorHeight < marioCeilHeight - 1000.f) {
+            marioFloorHeight = marioCeilHeight - 1000.f;
         }
 
-        goalHeight = marioFloorHeight + (marioCeilHeight - marioFloorHeight) * 0.4f;
+        goalHeight = marioFloorHeight + (marioCeilHeight - marioFloorHeight) * 0.6f;
 
         if (sMarioCamState->pos[1] - 400 > goalHeight) {
             goalHeight = sMarioCamState->pos[1] - 400;
         }
 
-        approach_camera_height(c, goalHeight, 5.f);
+        approach_camera_height(c, goalHeight, 10.f);
     } else {
         camFloorHeight = find_floor(c->pos[0], c->pos[1] + 100.f, c->pos[2], &surface) + baseOff;
         marioFloorHeight = baseOff + sMarioGeometry.currFloorHeight;

@@ -6679,3 +6679,30 @@ const BehaviorScript bhvSimpMGToad[] = {
         CALL_NATIVE(bhv_simp_mg_toad_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvSCElevator[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(SC_Elevator_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x3000),
+    SET_FLOAT(oCollisionDistance, 0xF00),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_simp_elevator_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+
+const BehaviorScript bhvSpotlight[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    SCALE(55),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_spotlight_loop),
+    END_LOOP(),
+};

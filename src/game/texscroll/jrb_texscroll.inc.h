@@ -1,3 +1,5 @@
+#include "levels/jrb/spotlight/texscroll.inc.h"
+#include "levels/jrb/SC_Elevator/texscroll.inc.h"
 #include "levels/jrb/sc_mine/texscroll.inc.h"
 #include "levels/jrb/sc_big_truck/texscroll.inc.h"
 #include "levels/jrb/sc_truck/texscroll.inc.h"
