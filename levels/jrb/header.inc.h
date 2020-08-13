@@ -473,7 +473,7 @@ extern Vtx jrb_dl_Box_038_mesh_vtx_0[20];
 extern Gfx jrb_dl_Box_038_mesh_tri_0[];
 extern Vtx jrb_dl_Building_179_mesh_vtx_0[416];
 extern Gfx jrb_dl_Building_179_mesh_tri_0[];
-extern Vtx jrb_dl_Building_179_mesh_vtx_1[211];
+extern Vtx jrb_dl_Building_179_mesh_vtx_1[231];
 extern Gfx jrb_dl_Building_179_mesh_tri_1[];
 extern Vtx jrb_dl_Building_179_mesh_vtx_2[4];
 extern Gfx jrb_dl_Building_179_mesh_tri_2[];

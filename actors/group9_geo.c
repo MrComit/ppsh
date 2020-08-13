@@ -15,3 +15,5 @@
 #include "boo/geo.inc.c"
 #include "haunted_cage/geo.inc.c"
 #include "toad/geo.inc.c"
+
+#include "simp_toad/geo.inc.c"
