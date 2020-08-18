@@ -130,3 +130,25 @@ u32 CL_count_bits(u32 b) {
     }
     return k;
 }
+
+
+void CL_drop_to_floor(void) {
+    o->oPosY = find_floor_height(o->oPosX, o->oPosY + 200.0f, o->oPosZ);
+    //o->oMoveFlags |= OBJ_MOVE_ON_GROUND;
+}
+
+
+
+s32 CL_NPC_Dialog(s32 dialogId) {
+    if (set_mario_npc_dialog(1) == 2) {
+        o->activeFlags |= 0x20; /* bit 5 */
+        if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogId)
+            != 0) {
+            set_mario_npc_dialog(0);
+            o->activeFlags &= ~0x20; /* bit 5 */
+            o->oInteractStatus = 0;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}

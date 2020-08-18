@@ -13,5 +13,7 @@ void CL_set_camera_pos(Vec3f pos);
 struct Object *CL_obj_nearest_object_behavior_params(const BehaviorScript *behavior, u32 params);
 void CL_dist_between_points(Vec3f from, Vec3f to, f32 *dist);
 u32 CL_count_bits(u32 b);
+void CL_drop_to_floor(void);
+s32 CL_NPC_Dialog(s32 dialogId);
 
 #endif

@@ -593,5 +593,6 @@ extern const BehaviorScript bhvSimpBomb[];
 extern const BehaviorScript bhvSimpMGToad[];
 extern const BehaviorScript bhvSCElevator[];
 extern const BehaviorScript bhvSpotlight[];
+extern const BehaviorScript bhvGangToad[];
 
 #endif /* _BEHAVIOR_DATA_H */

@@ -1,8 +1,10 @@
 extern const GeoLayout simp_toad_geo[];
 extern Vtx simp_toad_000_offset_003_mesh_vtx_0[43];
 extern Gfx simp_toad_000_offset_003_mesh_tri_0[];
-extern Vtx simp_toad_000_offset_003_mesh_vtx_1[74];
+extern Vtx simp_toad_000_offset_003_mesh_vtx_1[53];
 extern Gfx simp_toad_000_offset_003_mesh_tri_1[];
+extern Vtx simp_toad_000_offset_003_mesh_vtx_2[46];
+extern Gfx simp_toad_000_offset_003_mesh_tri_2[];
 extern Vtx simp_toad_002_offset_mesh_vtx_0[20];
 extern Gfx simp_toad_002_offset_mesh_tri_0[];
 extern Vtx simp_toad_003_offset_mesh_vtx_0[20];

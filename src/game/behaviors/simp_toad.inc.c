@@ -16,6 +16,185 @@ Vec3f sMGMinePosHorizontal[2] = {
 {-25355.1f, -8568.35f, -11092.05f},
 };
 
+struct ShadowCopy {
+    Vec3f pos;
+    u16 faceAngle;
+    u16 filler;
+};
+
+struct ShadowCopy toadChase[45] = {
+0, /*{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
+{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},*/
+};
+
+
+void gang_toad_npc(void) {
+    switch (o->oAction) {
+        case 0:
+            BobombBuddyIdleLoop();
+            break;
+
+        case 2:
+            BobombBuddyTurnToTalkLoop();
+            break;
+
+        case 3:
+            if (CL_NPC_Dialog(o->oBehParams >> 24)) {
+                o->oAction = 4;   
+            }
+            break;
+
+        case 4:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 15);
+            if (o->oOpacity < 10)
+                o->activeFlags = 0;
+            break;
+    }
+}
+
+
+
+
+void gang_toad_introduction(void) {
+    struct MarioState *m = gMarioState;
+    u32 flags;
+    switch (o->oAction) {
+        case 0:
+            flags = save_file_get_flags();
+            if (flags & 0x100)
+                o->activeFlags = 0;
+            if (m->pos[2] < 12800.0f && mario_ready_to_speak()) {
+                save_file_set_flags(flags |= 0x100);
+                o->oAction = 1;
+                if (o->oDistanceToMario < 5000.0f)
+                    o->oForwardVel = 50.0f;
+                else
+                    o->oForwardVel = 150.0f;
+            }
+            break;
+        case 1:
+            o->oPosY = find_floor_height(o->oPosX, o->oPosY + 200.0f, o->oPosZ);
+            o->oMoveFlags |= OBJ_MOVE_ON_GROUND;
+            set_mario_npc_dialog(1);
+            CL_Move();
+            o->oFaceAngleYaw = (o->oMoveAngleYaw = o->oAngleToMario);
+            if (o->oDistanceToMario < 200.0f)  {
+                o->oForwardVel = 0;
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            if (set_mario_npc_dialog(1) == 2) {
+                o->activeFlags |= 0x20; /* bit 5 */
+                if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, DIALOG_065)
+                    != 0) {
+                    set_mario_npc_dialog(0);
+                    o->activeFlags &= ~0x20; /* bit 5 */
+                    o->oInteractStatus = 0;
+                    o->oAction = 3;
+                }
+            }
+            break;
+        case 3:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 25);
+            if (o->oOpacity < 10)
+                o->activeFlags = 0;
+            break;
+    }
+
+    
+}
+
+void gang_toad_perform_chase(void) {
+    vec3f_copy(toadChase[o->oF4].pos, gMarioState->pos);
+    toadChase[o->oF4].faceAngle = gMarioState->faceAngle[1];
+
+    if (o->oTimer > sizeof(toadChase) / sizeof(toadChase[0])) {
+        vec3f_copy(&o->oPosX, toadChase[o->oF8].pos);
+        o->oFaceAngleYaw = toadChase[o->oF8].faceAngle;
+    }
+
+    if (++o->oF4 > sizeof(toadChase) / sizeof(toadChase[0]))
+        o->oF4 = 0;
+    if (++o->oF8 > sizeof(toadChase) / sizeof(toadChase[0]))
+        o->oF8 = 0;
+
+}
+
+void gang_toad_chase(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 1000.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oMoveAngleYaw = (o->oFaceAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000));
+            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario)
+                o->oAction = 2;
+            break;
+        case 2:
+            if (CL_NPC_Dialog(o->oBehParams >> 24)) {
+                o->oAction = 3;
+                //vec3f_copy(toadChase[sizeof(toadChase)].pos, &o->oPosX);
+            }
+            break;
+        case 3:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 25);
+            if (o->oOpacity < 10) {
+                obj_disable();
+                o->oF4 = 0;
+                o->oF8 = 1;
+                o->oAction = 4;
+                vec3f_copy(&o->oPosX, gMarioState->pos);
+                o->oFaceAngleYaw = gMarioState->faceAngle[1];
+            }    
+            break;
+        case 4:
+            gang_toad_perform_chase();
+            if (o->oTimer > 30 && o->oOpacity < 255) {
+                obj_enable();
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 25);
+            }
+            break;
+    }
+}
+
+void bhv_gang_toad_init(void) {
+    o->oOpacity = 255;
+    o->oInteractionSubtype = INT_SUBTYPE_NPC;
+}
+
+
+void bhv_gang_toad_loop(void) {
+    switch (o->oBehParams2ndByte) {
+        case 0:
+            gang_toad_npc();
+            break;
+        case 1:
+            return;
+            gang_toad_introduction();
+            break;
+        case 2:
+            gang_toad_chase();
+            break;
+    }
+}
+
+
 void spawn_simp_mines(void) {
     s32 i;
     struct Object *mine;

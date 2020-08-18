@@ -105,6 +105,7 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_FLAG_CAP_ON_MR_BLIZZARD     /* 0x080000 */ (1 << 19)
 #define SAVE_FLAG_UNLOCKED_50_STAR_DOOR  /* 0x100000 */ (1 << 20)
 
+
 // Variable for setting a warp checkpoint.
 
 // possibly a WarpDest struct where arg is a union. TODO: Check?

@@ -1185,6 +1185,13 @@ void obj_disable(void) {
     obj_become_intangible();
 }
 
+
+void obj_enable(void) {
+    obj_enable_rendering();
+    obj_unhide();
+    obj_become_tangible();
+}
+
 void obj_become_intangible(void) {
     // When the timer is negative, the object is intangible and the timer
     // doesn't count down

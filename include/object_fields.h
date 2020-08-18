@@ -1175,4 +1175,10 @@
 #define /*0x1B0*/ oKoopaRunAngleX OBJECT_FIELD_S16(0x4A, 0)
 #define /*0x1B4*/ oKoopaRunAngleZ OBJECT_FIELD_U32(0x4B)
 
+
+/* everything else */
+#define /*0xF4*/ oF4 OBJECT_FIELD_S32(0x1B)
+#define /*0xF8*/ oF8 OBJECT_FIELD_S32(0x1C)
+#define /*0xFC*/ oFC OBJECT_FIELD_S32(0x1B)
+
 #endif

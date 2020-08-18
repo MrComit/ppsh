@@ -261,6 +261,7 @@ extern void obj_set_model(s32);
 s32 obj_clear_interact_status_flag(s32);
 extern void mark_object_for_deletion(struct Object *);
 void obj_disable(void);
+void obj_enable(void);
 extern void obj_become_intangible(void);
 extern void obj_become_tangible(void);
 void make_object_tangible(struct Object*);
