@@ -1,6 +1,18 @@
 #include "game/camera.h"
 #include "game/mario_actions_moving.h"
 
+struct ObjectHitbox sChaseHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 80,
+    /* height:            */ 100,
+    /* hurtboxRadius:     */ 80,
+    /* hurtboxHeight:     */ 100,
+};
+
 Vec3f sMGStartingPos = {-28152.0f, -9700.0f, -10980.0f};
 Vec3f sMGMinePos[7] = {
 {-31247.85f, -9743.7f, -15320.45f},
@@ -15,6 +27,9 @@ Vec3f sMGMinePosHorizontal[2] = {
 {-25172.85f, -9265.2f, -21821.45f},
 {-25355.1f, -8568.35f, -11092.05f},
 };
+
+Vec3f sChaseRespawn = {0, 0, 0};
+u16 sAngleTable[3] = {0x0000, 0x0000, 0x0000};
 
 struct ShadowCopy {
     Vec3f pos;
@@ -135,10 +150,15 @@ void gang_toad_perform_chase(void) {
 }
 
 void gang_toad_chase(void) {
+    struct Object *pswitch;
+    s32 respawn;
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 1000.0f) {
-                o->oAction = 1;
+            set_object_hitbox(o, &sChaseHitbox);
+            pswitch = obj_nearest_object_with_behavior(bhvChaseSwitch);
+            if (pswitch != NULL && pswitch->oAction == 1) {
+                o->oAction = 6;
+                SetComitCutscene(60, 1, 4);
             }
             break;
         case 1:
@@ -169,6 +189,38 @@ void gang_toad_chase(void) {
                 obj_enable();
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 25);
             }
+            if (o->oTimer > sizeof(toadChase) / sizeof(toadChase[0]) && o->oInteractStatus & 0x8000) {
+                o->oInteractStatus = 0;
+                o->oAction = 5;
+            }
+            break;
+        case 5:
+            if (gMarioState->health <= 0x280) {
+                level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR);
+                o->oAction = 0;
+            } else {
+                switch (o->oTimer) {
+                    case 0:
+                        play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0xC, 0x00, 0x00, 0x00);
+                        break;
+                    case 9:
+                        vec3f_copy(gMarioState->pos, sChaseRespawn);
+                        CL_set_camera_pos(sChaseRespawn);
+                        gMarioState->faceAngle[1] = sAngleTable[0];
+                        s8DirModeYawOffset = (s16)(sAngleTable[0] & 0xC000) - 0x4000;
+                        set_mario_action(gMarioState, ACT_JUMP_LAND_STOP, 0);
+                        break;
+                    case 12:
+                        play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 5, 0x00, 0x00, 0x00);
+                        gMarioState->hurtCounter = 8;
+                        o->oAction = 3;
+                        break;
+                }
+            }
+            break;
+        case 6:
+            if (CheckComitCutsceneEnd())
+                o->oAction = 1;
             break;
     }
 }

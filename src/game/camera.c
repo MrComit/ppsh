@@ -505,11 +505,13 @@ s16 gComitCutsceneTimer = 0;
 f32 gComitCutsceneOldPos[3];
 f32 gComitCutsceneOldFoc[3];
 
-f32 gCCPosTable[][3] = {
-    {-10891.0f, 1751.0f, 5684.0f}, {6739.0f, 4349.0f, 11585.0f}, {19723.8f, -8490.8f, -658.54f}
+Vec3f gCCPosTable[] = {
+    {-10891.0f, 1751.0f, 5684.0f}, {6739.0f, 4349.0f, 11585.0f}, {19723.8f, -8490.8f, -658.54f},
+    {-28311.15f, -8490.8f, -658.54f}
 };
-f32 gCCFocTable[][3] = {
-    {-13487.0f, 0.0f, 4561.0f}, {1410.0f, 1965.0f, 2435.0f}, {22516.75f, -9148.7f, -651.235f}
+Vec3f gCCFocTable[] = {
+    {-13487.0f, 0.0f, 4561.0f}, {1410.0f, 1965.0f, 2435.0f}, {22516.75f, -9148.7f, -651.235f},
+    {-31020.0f, -9243.3f, -658.54f}
 };
 
 
@@ -1232,6 +1234,9 @@ void mode_radial_camera(struct Camera *c) {
     gWarpTransBlue = 80;
 }*/
 
+s32 CheckComitCutsceneEnd(void) {
+    return !(gComitCutsceneActive);
+}
 
 
 void SetComitCutscene(s16 timer, u16 stopMario, u16 index) {

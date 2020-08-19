@@ -1,6 +1,6 @@
 Vec3f sTruckPos = {-12644.55f, -10000.0f, -11198.4f};
 
-void bhv_timed_gate_loop(void) {
+void bhv_car_gate(void) {
     struct Object *bswitch = obj_nearest_object_with_behavior(bhvTimedCarSwitch);
     if (bswitch == NULL)
         o->activeFlags = 0;
@@ -25,6 +25,42 @@ void bhv_timed_gate_loop(void) {
                 if (o->oPosY < -8500.0f)
                     PlaySound(SOUND_ENV_METAL_BOX_PUSH);
             }
+            break;
+    }
+}
+
+
+void bhv_end_gate(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oF4 >= 5) {
+                o->oAction = 1;
+                SetComitCutscene(60, 1, 4);
+            }
+            break;
+        case 1:
+            if (o->oTimer < 70)
+                o->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+            if (o->oTimer > 10) {
+                o->oPosY = approach_f32(o->oPosY, -8500.0f, 55.0f, 55.0f);
+                if (o->oPosY < -8500.0f)
+                    PlaySound(SOUND_ENV_METAL_BOX_PUSH);
+            }
+            if (o->oTimer > 150)
+                o->activeFlags = 0;
+            break;
+    }
+}
+
+
+
+void bhv_timed_gate_loop(void) {
+    switch (o->oBehParams2ndByte) {
+        case 0:
+            bhv_car_gate();
+            break;
+        case 1: 
+            bhv_end_gate();
             break;
     }
 }

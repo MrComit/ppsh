@@ -152,3 +152,32 @@ s32 CL_NPC_Dialog(s32 dialogId) {
     }
     return FALSE;
 }
+
+//0 = not done, 1 = done, 2 = died
+s32 CL_respawn(s16 *timer, Vec3f pos, s16 faceAngle, s16 damage) {
+    if (gMarioState->health <= 0x280) {
+        level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR);
+        return 2;
+    } else {
+        switch (*timer) {
+            case 0:
+                play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0xC, 0x00, 0x00, 0x00);
+                break;
+            case 9:
+                vec3f_copy(gMarioState->pos, pos);
+                CL_set_camera_pos(pos);
+                gMarioState->faceAngle[1] = faceAngle;
+                s8DirModeYawOffset = (s16)(faceAngle & 0xC000) - 0x4000;
+                set_mario_action(gMarioState, ACT_JUMP_LAND_STOP, 0);
+                break;
+            case 12:
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 5, 0x00, 0x00, 0x00);
+                gMarioState->hurtCounter = damage;
+                *timer = 0;
+                return 1;
+                break;
+        }
+    }
+    *timer++;
+    return 0;
+}

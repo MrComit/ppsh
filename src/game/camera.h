@@ -773,6 +773,7 @@ extern void obj_rotate_towards_point(struct Object *, Vec3f, s16, s16, s16, s16)
 extern Gfx *geo_camera_fov(s32 callContext, struct GraphNode *g, UNUSED void *context);
 
 extern void SetComitCutscene(s16 timer, u16 stopMario, u16 index);
+extern s32 CheckComitCutsceneEnd(void);
 
 
 
