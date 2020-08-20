@@ -1,4 +1,4 @@
-Vec3f sTruckPos = {-12644.55f, -10000.0f, -11198.4f};
+Vec3f sTruckPos = {-12644.55f, -10000.0f, -8602.74f};
 
 void bhv_car_gate(void) {
     struct Object *bswitch = obj_nearest_object_with_behavior(bhvTimedCarSwitch);

@@ -13,19 +13,19 @@ struct ObjectHitbox sChaseHitbox = {
     /* hurtboxHeight:     */ 100,
 };
 
-Vec3f sMGStartingPos = {-28152.0f, -9700.0f, -10980.0f};
+Vec3f sMGStartingPos = {-28152.0f, -9700.0f, -8384.34f};
 Vec3f sMGMinePos[7] = {
-{-31247.85f, -9743.7f, -15320.45f},
-{-31459.8f, -9743.7f, -17870.6f},
-{-28518.55f, -9768.7f, -21805.0f},
-{-22059.8f, -10002.5f, -20248.4f},
-{-22059.8f, -9289.6f, -17987.65f},
-{-22059.8f, -10002.5f, -15162.7f},
-{-22059.8f, -9569.65f, -12902.4f},
+{-31247.85f, -9743.7f, -12724.79f},
+{-31459.8f, -9743.7f, -15274.94f},
+{-28518.55f, -9768.7f, -19209.34f},
+{-22059.8f, -10002.5f, -17652.74f},
+{-22059.8f, -9289.6f, -15391.99f},
+{-22059.8f, -10002.5f, -12567.04f},
+{-22059.8f, -9569.65f, -10306.74f},
 };
 Vec3f sMGMinePosHorizontal[2] = {
-{-25172.85f, -9265.2f, -21821.45f},
-{-25355.1f, -8568.35f, -11092.05f},
+{-25172.85f, -9265.2f, -19225.79f},
+{-25355.1f, -8568.35f, -8496.39f},
 };
 
 Vec3f sChaseRespawn = {0, 0, 0};
@@ -154,7 +154,8 @@ void gang_toad_chase(void) {
     s32 respawn;
     switch (o->oAction) {
         case 0:
-            set_object_hitbox(o, &sChaseHitbox);
+            o->oInteractType = 0x40000000;
+            o->oInteractStatus = 0;
             pswitch = obj_nearest_object_with_behavior(bhvChaseSwitch);
             if (pswitch != NULL && pswitch->oAction == 1) {
                 o->oAction = 6;
@@ -162,6 +163,7 @@ void gang_toad_chase(void) {
             }
             break;
         case 1:
+            set_object_hitbox(o, &sChaseHitbox);
             o->oMoveAngleYaw = (o->oFaceAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000));
             if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario)
                 o->oAction = 2;

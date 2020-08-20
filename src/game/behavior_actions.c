@@ -310,3 +310,4 @@ void func_802B2328(s32 n, s32 a1, s32 a2, s32 r) {
 #include "behaviors/simp_toad.inc.c"
 #include "behaviors/sc_elevator.inc.c"
 #include "behaviors/sc_spotlight.inc.c"
+#include "behaviors/bounce_box.inc.c"
