@@ -28,3 +28,4 @@
 #include "levels/jrb/sc_mine/geo.inc.c"
 #include "levels/jrb/SC_Elevator/geo.inc.c"
 #include "levels/jrb/spotlight/geo.inc.c"
+#include "levels/jrb/box_spring/geo.inc.c"

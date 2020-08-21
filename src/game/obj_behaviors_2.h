@@ -30,5 +30,7 @@ extern void shelled_koopa_attack_handler(s32);
 extern void obj_spit_fire(s16, s16, s16, f32, s32, f32, f32, s16);
 extern void obj_set_speed_to_zero(void);
 extern s32 approach_f32_ptr(f32 *px, f32 target, f32 delta);
+extern s32 oscillate_toward(s32 *value, f32 *vel, s32 target, f32 velCloseToZero, f32 accel,
+                            f32 slowdown);
 
 #endif /* _OBJ_BEHAVIORS_2_H */

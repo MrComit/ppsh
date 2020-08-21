@@ -1,3 +1,4 @@
+#include "levels/jrb/box_spring/texscroll.inc.h"
 #include "levels/jrb/spotlight/texscroll.inc.h"
 #include "levels/jrb/SC_Elevator/texscroll.inc.h"
 #include "levels/jrb/sc_mine/texscroll.inc.h"

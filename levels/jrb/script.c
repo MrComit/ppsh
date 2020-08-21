@@ -41,6 +41,7 @@ const LevelScript level_jrb_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SIMP_MINE, sc_mine_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SIMP_ELEVATOR, SC_Elevator_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SIMP_SPOTLIGHT, spotlight_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SIMP_SPRING, box_spring_geo), 
 
 	AREA(1, jrb_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -82,6 +83,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_RED_COIN, -6107, 995, 6628, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -5583, -67, 14012, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, 14454, -1881, -3908, 0, 0, 0, 0x00000000, bhvRedCoin),
+		OBJECT(MODEL_SIMP_SPRING, -1784, -10000, 2571, 0, 0, 0, 0x00050000, bhvBounceBoxes),
 		OBJECT(MODEL_NONE, 7268, 1465, 2577, 0, 0, 0, 0x00000000, bhvHiddenRedCoinStar),
 		OBJECT(MODEL_STAR_PIECE, -24809, -9866, -12824, 0, 0, 0, 0x00010000, bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -25963, -9866, -10723, 0, 0, 0, 0x00010000, bhvStarPiece),

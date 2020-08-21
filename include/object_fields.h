@@ -1181,4 +1181,8 @@
 #define /*0xF8*/ oF8 OBJECT_FIELD_S32(0x1C)
 #define /*0xFC*/ oFC OBJECT_FIELD_S32(0x1B)
 
+#define /*0xF4*/ oFloatF4 OBJECT_FIELD_F32(0x1B)
+#define /*0xF8*/ oFloatF8 OBJECT_FIELD_F32(0x1C)
+#define /*0xFC*/ oFloatFC OBJECT_FIELD_F32(0x1B)
+
 #endif

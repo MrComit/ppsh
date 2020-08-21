@@ -89,4 +89,8 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/spotlight/geo_header.h"
 
+#include "levels/jrb/box_spring/geo_header.h"
+
+#include "levels/jrb/box_spring/collision_header.h"
+
 #endif

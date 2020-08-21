@@ -247,13 +247,22 @@ struct GrindPoints grind18[21] = {
     {{-25816.2f, -10103.7f, -10584.89f}, -2, -2, 0x0000},
 };
 
+
+struct GrindPoints grind19[3] = {
+    {{14439.75f, -3189.67f, 1283.145f}, 1, -1, 0x8000},
+    {{14439.75f, -1880.55f, -1012.75f}, 2, 0, 0x8000},
+    {{14439.75f, -1880.55f, -2586.15f}, -1, 1, 0x8000},
+
+};
+
+
 struct GrindPoints *grindTrajectories[] = {
     grind0, grind1, grind2, grind3, grind4, grind5, grind6, grind7, grind8, grind9, grindA, grindB, grindC, grindD, grindE,
-    grindF, grind10, grind11, grind12, grind13, grind14, grind15, grind16, grind17, grind18,
+    grindF, grind10, grind11, grind12, grind13, grind14, grind15, grind16, grind17, grind18, grind19,
 };
 
 u16 grindLengths[] = {
-    2, 6, 4, 2, 14, 2, 2, 4, 2, 2, 3, 3, 5, 2, 3, 2, 2, 3, 4, 5, 11, 5, 20, 6, 21,
+    2, 6, 4, 2, 14, 2, 2, 4, 2, 2, 3, 3, 5, 2, 3, 2, 2, 3, 4, 5, 11, 5, 20, 6, 21, 3,
 };
 
 struct LandingAction {

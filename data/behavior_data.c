@@ -6742,9 +6742,9 @@ const BehaviorScript bhvBounceBoxes[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_INT(oAnimState, 1),
-    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8), //CHANGE
+    LOAD_COLLISION_DATA(box_spring_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
-    SET_FLOAT(oCollisionDistance, 0x600),
+    SET_FLOAT(oCollisionDistance, 0x900),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bounce_box_loop),
         CALL_NATIVE(load_object_collision_model),
