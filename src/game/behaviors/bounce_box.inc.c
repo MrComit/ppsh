@@ -12,6 +12,7 @@
 }*/
 
 void bhv_bounce_box_loop(void) {
+    struct MarioState *m = gMarioState;
     switch (o->oAction) {
         case 0:
             if (gMarioObject->platform == o) {
@@ -20,8 +21,10 @@ void bhv_bounce_box_loop(void) {
             break;
         case 1:
             if (approach_f32_ptr(&o->header.gfx.scale[1], 0.5f, 0.25f)) {
-                set_mario_action(gMarioState, ACT_DOUBLE_JUMP, 0);
-                gMarioState->vel[1] = 20.0f * o->oBehParams2ndByte;
+                set_mario_action(m, ACT_CUTSCENE_JUMP, 1);
+                m->vel[1] = 10.0f * o->oBehParams2ndByte;
+                m->faceAngle[1] = (m->angleVel[1] = o->oFaceAngleYaw + 0xC000);
+                mario_set_forward_vel(m, 15.0f);
                 o->oAction = 2;
                 //o->oFloatF4 = 0.02f;
                 //o->oFloatF8 = 0.05f;

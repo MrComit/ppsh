@@ -2636,12 +2636,18 @@ static s32 check_for_instant_quicksand(struct MarioState *m) {
 
 
 static s32 act_cutscene_jump(struct MarioState *m) {
+    Vec3f camPos;
     set_mario_animation(m, MARIO_ANIM_SINGLE_JUMP);
     if (perform_air_step(m, 0) == AIR_STEP_LANDED) {
         set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
-        mario_set_forward_vel(m, 0.0f);
+        if (!m->actionArg)
+            mario_set_forward_vel(m, 0.0f);
         play_mario_landing_sound(m, SOUND_ACTION_TERRAIN_LANDING);
     }
+    camPos[0] = gLakituState.curPos[0];
+    camPos[1] = m->pos[1];
+    camPos[2] = gLakituState.curPos[2];
+    CL_set_camera_pos(camPos);
     return FALSE;
 }
 
