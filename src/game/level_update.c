@@ -27,6 +27,7 @@
 #include "eu_translation.h"
 #endif
 #include "level_table.h"
+#include "include/behavior_data.h"
 
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
@@ -554,14 +555,24 @@ s16 cameraAngle;
 }
 
 
+s32 can_instant_warp(void) {
+    struct Object *toad;
+    if (gMarioState->heldObj != NULL)
+        return FALSE;
+    toad = CL_obj_nearest_object_behavior_params(bhvGangToad, 0x00020000);
+    if (toad != NULL && (toad->oAction == 4 || toad->oAction == 5))
+        return FALSE;
+
+    return TRUE;
+}
+
+
 void check_instant_warp(void) {
     struct Surface *floor;
     struct Surface *ceil;
 
-    /*if (gCurrLevelNum == LEVEL_CASTLE
-        && save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 70) {
+    if(!can_instant_warp())
         return;
-    }*/
 
     if ((floor = gMarioState->floor) != NULL) {
         s32 index = floor->type - SURFACE_INSTANT_WARP_1B;

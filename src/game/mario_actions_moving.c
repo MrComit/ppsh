@@ -15,243 +15,245 @@
 #include "display.h"
 #include "obj_behaviors.h"
 #include "object_helpers2.h"
+#include "!COMIT_LIBRARY.h"
 
 s32 grindInitTriggered = 0;
 s32 grindForward;
 struct GrindPoints {
     Vec3f pos;
-    s16 pointNext;
-    s16 pointPrev;
-    u16 forwardAngle;
+    s32 flags;
+    //s16 pointNext;
+    //s16 pointPrev;
+    //u16 forwardAngle;
 };
 
-struct GrindPoints sCurrentPoint;
-
-//temp: offset = -7.17469 = -3587.345 on X
+struct GrindPoints *sCurrentTrajectory;
+u8 sCurrentPoint;
 
 struct GrindPoints grind0[2] = {
-    {{0, -9911.5f, 25040.95f}, -1, -1, 0x8000}, //0000
-    {{0, -9911.5f, 14399.2f}, -1, -1, 0x8000},  
+    {{0, -9911.5f, 25040.95f}, -1},
+    {{0, -9911.5f, 14399.2f}, -1},  
 };
 
 struct GrindPoints grind1[6] = {
-    {{4518.685f, -9911.5f, 1101.535f}, -1, -1, 0xC000},
-    {{1739.82f, -9363.175f, 1101.535f}, 2, 0, 0xC000},
-    {{1739.82f, -8452.27f, 4976.85f}, 3, 1, 0x0000},
-    {{4666.065f, -6836.99f, 4976.85f}, 4, 2, 0x4000},
-    {{4676.86f, -5667.82f, 2015.165f}, 5, 3, 0x8000},
-    {{4521.715f, -5643.425f, 2015.165f}, -2, -2, 0xC000},
+    {{4518.685f, -9911.5f, 1101.535f}, -1},
+    {{1739.82f, -9363.175f, 1101.535f}, 0},
+    {{1739.82f, -8452.27f, 4976.85f}, 0},
+    {{4666.065f, -6836.99f, 4976.85f}, 0},
+    {{4676.86f, -5667.82f, 2015.165f}, 0},
+    {{4521.715f, -5643.425f, 2015.165f}, -2},
 };
 
 struct GrindPoints grind2[4] = {
-    {{1834.385f, -5643.425f, 6614.85f}, -2, -2, 0xC000},
-    {{-600.0f, -5643.425f, 6614.85f}, -1, -1, 0xC000},
-    {{-1131.74f, -5397.285f, 6614.85f}, -1, -1, 0xC000},
-    {{-1834.395f, -5077.02f, 6614.85f}, -2, -2, 0xC000},
+    {{1834.385f, -5643.425f, 6614.85f}, -2},
+    {{-600.0f, -5643.425f, 6614.85f}, -1},
+    {{-1131.74f, -5397.285f, 6614.85f}, -1},
+    {{-1834.395f, -5077.02f, 6614.85f}, -2},
 };
 
 struct GrindPoints grind3[2] = {
-    {{-13814.1f, -10000.0f, 23253.05f}, -2, -2, 0xC000},
-    {{-14757.8f, -9474.905f, 23253.05f}, -1, -1, 0xC000},
+    {{-13814.1f, -10000.0f, 23253.05f}, -2},
+    {{-14757.8f, -9474.905f, 23253.05f}, -1},
 };
 
 struct GrindPoints grind4[14] = {
-    {{9561.855f, -9911.5f, 5281.65f}, 1, 1, 0xC000},
-    {{9720.705f, -9911.5f, 5281.65f}, 2, 2, 0xC000},
-    {{11944.355f, -8595.245f, 5281.65f}, 3, 3, 0xC000},
-    {{12149.205f, -8595.245f, 5281.65f}, -1, -1, 0xC000},
-    {{13149.205f, -8595.245f, 5281.65f}, 5, 5, 0xC000},
-    {{13308.055f, -8595.245f, 5281.65f}, 6, 6, 0xC000},
-    {{15791.505f, -7278.965f, 5281.65f}, 7, 7, 0x0000},
-    {{15791.505f, -5962.715f, 7762.6f}, 8, 8, 0x0000},
-    {{15791.505f, -5962.715f, 7967.45f}, -1, -1, 0x0000},
-    {{15791.505f, -6051.22f, 8921.45f}, 10, 10, 0x0000},
-    {{15791.505f, -6051.22f, 9080.3f}, 11, 11, 0x0000},
-    {{15791.505f, -4734.95f, 11561.2f}, 12, 12, 0x4000},
-    {{13308.055f, -3418.7f,  11561.2f}, 13, 13, 0x4000},
-    {{13103.205f, -3418.7f, 11561.2f}, -1, -1, 0x4000},
+    {{9561.855f, -9911.5f, 5281.65f}, -1},
+    {{9720.705f, -9911.5f, 5281.65f}, 0},
+    {{11944.355f, -8595.245f, 5281.65f}, 0},
+    {{12149.205f, -8595.245f, 5281.65f}, -1},
+    {{13149.205f, -8595.245f, 5281.65f}, 0},
+    {{13308.055f, -8595.245f, 5281.65f}, 0},
+    {{15791.505f, -7278.965f, 5281.65f}, 0},
+    {{15791.505f, -5962.715f, 7762.6f}, 0},
+    {{15791.505f, -5962.715f, 7967.45f}, -1},
+    {{15791.505f, -6051.22f, 8921.45f}, 0},
+    {{15791.505f, -6051.22f, 9080.3f}, 0},
+    {{15791.505f, -4734.95f, 11561.2f}, 0},
+    {{13308.055f, -3418.7f,  11561.2f}, 0},
+    {{13103.205f, -3418.7f, 11561.2f}, -1},
 };
 
 struct GrindPoints grind5[2] = {
-    {{10850.605f, -3189.65f, 12472.4f}, 1, -2, 0x0000},
-    {{10850.605f, -3189.65f, 15596.1f}, -2, 0, 0x0000},
+    {{10850.605f, -3189.65f, 12472.4f}, -2},
+    {{10850.605f, -3189.65f, 15596.1f}, -2},
 };
 
 struct GrindPoints grind6[2] = {
-    {{-3232.54f, 1780.9f, -180.4395f}, -2, -2, 0x8000},
-    {{-3232.54f, 1780.9f, -2585.625f}, -2, -2, 0x8000},
+    {{-3232.54f, 1780.9f, -180.4395f}, -2},
+    {{-3232.54f, 1780.9f, -2585.625f}, -2},
 };
 
 struct GrindPoints grind7[4] = {
-    {{-1934.4f, 1785.35f, -3897.255f}, -2, -2, 0x4000},
-    {{-644.805f, 1785.35f, -3897.255f}, -1, -1, 0x4000},
-    {{1934.4f, 1220.2f, -3897.255f}, -2, -2, 0xC000},
-    {{375.558f, 1220.2f, -3897.255f}, -1, -1, 0xC000},
+    {{-1934.4f, 1785.35f, -3897.255f}, -2},
+    {{-644.805f, 1785.35f, -3897.255f}, -1},
+    {{1934.4f, 1220.2f, -3897.255f}, -2},
+    {{375.558f, 1220.2f, -3897.255f}, -1},
 };
 
 struct GrindPoints grind8[2] = {
-    {{10575.055f, -3189.65, 8171.45f}, -1, -1, 0x8000},
-    {{10575.055f, -3189.65f, 4934.1f}, -1, -1, 0x8000},
+    {{10575.055f, -3189.65, 8171.45f}, -1},
+    {{10575.055f, -3189.65f, 4934.1f}, -1},
 };
 
 struct GrindPoints grind9[2] = {
-    {{11136.005f, -3189.65f, 8171.45f}, -1, -1, 0x8000},
-    {{11136.005f, -3189.65, 4934.1f}, -1, -1, 0x8000},
+    {{11136.005f, -3189.65f, 8171.45f}, -1},
+    {{11136.005f, -3189.65, 4934.1f}, -1},
 };
 
 struct GrindPoints grindA[3] = {
-    {{16062.555f, 4348.55f, 7976.4f}, 1, 1, 0xC000},
-    {{15736.555f, 4348.55f, 7976.4f}, 2, 2, 0xC000},
-    {{11211.105f, 6049.85f, 7976.4f}, -1, -1, 0xC000},
+    {{16062.555f, 4348.55f, 7976.4f}, -1},
+    {{15736.555f, 4348.55f, 7976.4f}, 0},
+    {{11211.105f, 6049.85f, 7976.4f}, -1},
 };
 
 struct GrindPoints grindB[3] = {
-    {{9506.95f, 8929.3f, 3898.02f}, 1, 1, 0x8000},
-    {{9506.95f, 8929.3f, 2571.32f}, 2, 2, 0x8000}, 
-    {{9149.7f, 8929.3f, 2571.32f}, -2, -2, 0xC000},
+    {{9506.95f, 8929.3f, 3898.02f}, -1},
+    {{9506.95f, 8929.3f, 2571.32f}, 0}, 
+    {{9149.7f, 8929.3f, 2571.32f}, -2},
 };
 
 struct GrindPoints grindC[5] = {
-    {{16681.6f, 4348.545f, 4502.34f}, 1, -1, 0x8000},
-    {{16681.6f, 4348.545f, 4176.34f}, 2, 0, 0x8000},
-    {{16681.6f, 6765.7f, -5227.75f}, 3, 1, 0x8000},
-    {{21575.95f, 6765.7f, -5227.75f}, 4, 2, 0xC000},
-    {{21575.95f, 6765.7f, -8801.95f}, -2, 3, 0x8000},
+    {{16681.6f, 4348.545f, 4502.34f}, -1},
+    {{16681.6f, 4348.545f, 4176.34f}, 0},
+    {{16681.6f, 6765.7f, -5227.75f}, 0},
+    {{21575.95f, 6765.7f, -5227.75f}, 0},
+    {{21575.95f, 6765.7f, -6206.3f}, -2},
 };
 
 struct GrindPoints grindD[2] = {
-    {{7263.55f, 1220.2f, -2585.62f}, 1, -2, 0x0000},
-    {{7263.55f, 1220.2f, 1283.16f}, -2, 0, 0x0000}, 
+    {{7263.55f, 1220.2f, -2585.62f}, -2},
+    {{7263.55f, 1220.2f, 1283.16f}, -2}, 
 };
 
 struct GrindPoints grindE[3] = {
-    {{9311.9f, 1308.71f, -2530.67f}, 1, -1, 0x4000},
-    {{12204.15f, 1437.87f, -2530.67f}, 2, 0, 0x4000},
-    {{12204.15f, 1641.515f, -5818.5f}, -1, 1, 0x8000},
+    {{9311.9f, 1308.71f, -2530.67f}, -1},
+    {{12204.15f, 1437.87f, -2530.67f}, 0},
+    {{12204.15f, 1641.515f, -5818.5f}, -1},
 };
 
 struct GrindPoints grindF[2] = {
-    {{-3218.09f, -5029.45f, 7921.45f}, 1, -2, 0x0000},
-    {{-3218.09f, -3184.18f, 12800.1f}, -2, 0, 0x0000},
+    {{-3218.09f, -5029.45f, 7921.45f}, -2},
+    {{-3218.09f, -3184.18f, 12800.1f}, -2},
 
 };
 
 struct GrindPoints grind10[2] = {
-    {{-16085.55f, -20.2725f, -2585.62f}, 1, -2, 0x0000},
-    {{-16085.55f, -20.2725f, 1283.16f}, -2, 0, 0x0000},
+    {{-16085.55f, -20.2725f, -2585.62f}, -2},
+    {{-16085.55f, -20.2725f, 1283.16f}, -2},
 };
 
 struct GrindPoints grind11[3] = {
-    {{-14650.45f, -1859.27f, 7969.35f}, 1, -1, 0x4000},
-    {{-10992.95f, -175.774f, 7969.35f}, 2, 0, 0x4000},
-    {{-10202.3f, -25.9445f, 7866.5f}, -1, 1, 0x4000},
+    {{-14650.45f, -1859.27f, 7969.35f}, -1},
+    {{-10992.95f, -175.774f, 7969.35f}, 0},
+    {{-10202.3f, -25.9445f, 7866.5f}, -1},
 };
 
 struct GrindPoints grind12[4] = {
-    {{12823.2f, -3101.19f, 8866.5f}, 1, -1, 0x4000},
-    {{13149.2f, -3101.19f, 8866.5f}, 2, 0, 0x4000},
-    {{22966.15f, 2490.455f, 8866.5f}, 3, 1, 0x4000},
-    {{22966.15f, 3470.665f, 10671.6f}, -2, 4, 0x0000},
+    {{12823.2f, -3101.19f, 8866.5f}, -1},
+    {{13149.2f, -3101.19f, 8866.5f}, 0},
+    {{22966.15f, 2490.455f, 8866.5f}, 0},
+    {{22966.15f, 3470.665f, 10671.6f}, -2},
 
 };
 
 
 struct GrindPoints grind13[5] = {
-    {{19915.5f, 543.4f, 24851.75f}, 1, -1, 0x8000},
-    {{19915.5f, 543.4f, 23627.85f}, 2, 0, 0x8000},
-    {{19915.5f, 2184.545f, 16544.7f}, 3, 1, 0x8000},
-    {{21251.05f, 2184.545f, 16544.7f}, 4, 2, 0x4000},
-    {{21251.05f, 3620.66f, 11508.9f}, -2, 3, 0x8000},
+    {{19915.5f, 543.4f, 24851.75f}, -1},
+    {{19915.5f, 543.4f, 23627.85f}, 0},
+    {{19915.5f, 2184.545f, 16544.7f}, 0},
+    {{21251.05f, 2184.545f, 16544.7f}, 0},
+    {{21251.05f, 3620.66f, 11508.9f}, -2},
 
 };
 
 struct GrindPoints grind14[11] = {
-    {{-27645.85f, -10177.65f, -8366.19f}, 1, 1, 0x0000},
-    {{-27886.6f, -10103.7f, -8375.04f}, 2, 2, 0x0000},
-    {{-29856.85f, -10103.7f, -8447.59f}, 3, 3, 0x0000},
-    {{-30745.0f, -10103.7f, -9817.79f}, 4, 4, 0x0000},
-    {{-31142.1f, -10103.7f, -11647.74f}, 5, 5, 0x0000},
-    {{-31422.3f, -10103.7f, -14455.34f}, 6, 6, 0x0000},
-    {{-31537.9f, -10103.7f, -16695.44f}, 7, 7, 0x0000},
-    {{-31019.05f, -10103.7f, -18698.19f}, 8, 8, 0x0000},
-    {{-29526.7f, -10103.7f, -19196.64f}, 9, 9, 0x0000},
-    {{-28997.2f, -10103.7f, -19196.64f}, 10, 10, 0x0000},
-    {{-28838.6f, -10152.65f, -19196.64f}, -2, -2, 0x0000},
+    {{-27645.85f, -10177.65f, -8366.19f}, -1},
+    {{-27886.6f, -10103.7f, -8375.04f}, 0},
+    {{-29856.85f, -10103.7f, -8447.59f}, 0},
+    {{-30745.0f, -10103.7f, -9817.79f}, 0},
+    {{-31142.1f, -10103.7f, -11647.74f}, 0},
+    {{-31422.3f, -10103.7f, -14455.34f}, 0},
+    {{-31537.9f, -10103.7f, -16695.44f}, 0},
+    {{-31019.05f, -10103.7f, -18698.19f}, 0},
+    {{-29526.7f, -10103.7f, -19196.64f}, 0},
+    {{-28997.2f, -10103.7f, -19196.64f}, 0},
+    //{{-28838.6f, -10152.65f, -19196.64f}, -2},
+    {{-28838.6f, -10103.7f, -19196.64f}, -2},
 };
 
 struct GrindPoints grind15[5] = {
-    {{-28316.3f, -10177.65f, -19196.64f}, 1, -2, 0x4000},
-    {{-28066.3f, -10103.7f, -19196.64f}, 2, 0, 0x4000},
-    {{-26639.85f, -9365.2f, -19196.64f}, 3, 1, 0x4000},
-    {{-24776.75f, -9365.2f, -19196.64f}, 4, 2, 0x4000},
-    {{-23350.3f, -10103.7f, -19196.64f}, -1, 3, 0x4000},
+    {{-28316.3f, -10177.65f, -19196.64f}, -2},
+    {{-28066.3f, -10103.7f, -19196.64f}, 0},
+    {{-26639.85f, -9365.2f, -19196.64f}, 0},
+    {{-24776.75f, -9365.2f, -19196.64f}, 0},
+    {{-23350.3f, -10103.7f, -19196.64f}, -1},
 };
 
 struct GrindPoints grind16[20] = {
-    {{-22546.25f, -10099.65f, -19197.09f}, 1, -1, 0x4000},
-    {{-22055.75f, -10099.65f, -19197.09f}, 2, 0, 0x4000},
-    {{-22055.75f, -10099.65f, -18782.89f}, 3, 1, 0x0000},
-    {{-22055.75f, -10362.5f, -17652.74f}, 4, 2, 0x0000},
-    {{-22055.75f, -10099.65f, -16522.59f}, 5, 3, 0x0000},
-    {{-22055.75f, -9827.45f, -15957.54f}, 6, 4, 0x0000},
-    {{-22055.75f, -9641.6f, -15392.44f}, 7, 5, 0x0000},
-    {{-22055.75f, -9782.8f, -14832.29f}, 8, 6, 0x0000},
-    {{-22055.75f, -10099.65f, -14262.29f}, 9, 7, 0x0000},
-    {{-22055.75f, -10265.2f, -13697.19f}, 10, 8, 0x0000},
-    {{-22055.75f, -10388.05f, -13132.14f}, 11, 9, 0x0000},
-    {{-22055.75f, -10456.0f, -12567.04f}, 12, 10, 0x0000},
-    {{-22055.75f, -10315.1f, -12001.99f}, 13, 11, 0x0000},
-    {{-22055.75f, -10099.65f, -11436.89f}, 14, 12, 0x0000},
-    {{-22055.75f, -9827.1f, -10871.84f}, 15, 13, 0x0000},
-    {{-22055.75f, -9900.85f, -10306.74f}, 16, 14, 0x0000},
-    {{-22055.75f, -10099.65f, -9308.99f}, 17, 15, 0x0000},
-    {{-22055.75f, -10099.65f, -8502.19f}, 18, 16, 0x0000},
-    {{-22386.0f, -10099.65f, -8502.19f}, 19, 17, 0xC000},
-    {{-23265.5f, -9507.9f, -8502.19f}, -1, 18, 0xC000},
+    {{-22546.25f, -10099.65f, -19197.09f}, -1},
+    {{-22055.75f, -10099.65f, -19197.09f}, 0},
+    {{-22055.75f, -10099.65f, -18782.89f}, 0},
+    {{-22055.75f, -10362.5f, -17652.74f}, 0},
+    {{-22055.75f, -10099.65f, -16522.59f}, 0},
+    {{-22055.75f, -9827.45f, -15957.54f}, 0},
+    {{-22055.75f, -9641.6f, -15392.44f}, 0},
+    {{-22055.75f, -9782.8f, -14832.29f}, 0},
+    {{-22055.75f, -10099.65f, -14262.29f}, 0},
+    {{-22055.75f, -10265.2f, -13697.19f}, 0},
+    {{-22055.75f, -10388.05f, -13132.14f}, 0},
+    {{-22055.75f, -10456.0f, -12567.04f}, 0},
+    {{-22055.75f, -10315.1f, -12001.99f}, 0},
+    {{-22055.75f, -10099.65f, -11436.89f}, 0},
+    {{-22055.75f, -9827.1f, -10871.84f}, 0},
+    {{-22055.75f, -9900.85f, -10306.74f}, 0},
+    {{-22055.75f, -10099.65f, -9308.99f}, 0},
+    {{-22055.75f, -10099.65f, -8502.19f}, 0},
+    {{-22386.0f, -10099.65f, -8502.19f}, 0},
+    {{-23265.5f, -9507.9f, -8502.19f}, -1},
 };
 
 struct GrindPoints grind17[6] = {
-    {{-24174.7f, -9035.15f, -8502.19f}, 1, -1, 0xC000},
-    {{-24562.65f, -9035.15f, -8502.19f}, 2, 0, 0xC000},
-    {{-25013.35f, -8668.35f, -8502.19f}, 3, 1, 0xC000},
-    {{-25464.1f, -8668.35f, -8502.19f}, 4, 2, 0xC000},
-    {{-25914.8f, -9035.15f, -8502.19f}, 5, 3, 0xC000},
-    {{-26302.75f, -9035.15f, -8502.19f}, -1, 4, 0xC000},
+    {{-24174.7f, -9035.15f, -8502.19f}, -1},
+    {{-24562.65f, -9035.15f, -8502.19f}, 0},
+    {{-25013.35f, -8668.35f, -8502.19f}, 0},
+    {{-25464.1f, -8668.35f, -8502.19f}, 0},
+    {{-25914.8f, -9035.15f, -8502.19f}, 0},
+    {{-26302.75f, -9035.15f, -8502.19f}, -1},
 };
 
 struct GrindPoints grind18[21] = {
-    {{-24807.95f, -10103.7f, -16365.14f}, 1, 1, 0x0000},
-    {{-24807.95f, -10103.7f, -15281.24f}, 2, 2, 0x0000},
-    {{-25191.75f, -10103.7f, -14561.69f}, -2, -2, 0x0000},
+    {{-24807.95f, -10103.7f, -16365.14f}, -2},
+    {{-24807.95f, -10103.7f, -15281.24f}, 0},
+    {{-25191.75f, -10103.7f, -14561.69f}, -2},
 
-    {{-25421.75f, -10103.7f, -14143.04f}, 4, 4, 0x0000},
-    {{-25638.55f, -10103.7f, -13917.99f}, 5, 5, 0x0000},
-    {{-25725.35f, -10103.7f, -13468.79f}, 6, 6, 0x0000},
-    {{-25547.2f, -10103.7f, -13130.99f}, 7, 7, 0x0000},
-    {{-25067.9f, -10103.7f, -12942.29f}, -2, -2, 0x0000},
+    {{-25421.75f, -10103.7f, -14143.04f}, -2},
+    {{-25638.55f, -10103.7f, -13917.99f}, 0},
+    {{-25725.35f, -10103.7f, -13468.79f}, 0},
+    {{-25547.2f, -10103.7f, -13130.99f}, 0},
+    {{-25067.9f, -10103.7f, -12942.29f}, -2},
 
-    {{-24653.55f, -10103.7f, -12798.54f}, 9, 9, 0x0000},
-    {{-24185.55f, -10103.7f, -12640.49f}, 10, 10, 0x0000},
-    {{-24070.6f, -10103.7f, -12068.54f}, 11, 11, 0x0000},
-    {{-24216.9f, -10103.7f, -11666.49f}, 12, 12, 0x0000},
-    {{-23955.3f, -10103.7f, -11403.54f}, -2, -2, 0x0000},
+    {{-24653.55f, -10103.7f, -12798.54f}, -2},
+    {{-24185.55f, -10103.7f, -12640.49f}, 0},
+    {{-24070.6f, -10103.7f, -12068.54f}, 0},
+    {{-24216.9f, -10103.7f, -11666.49f}, 0},
+    {{-23955.3f, -10103.7f, -11403.54f}, -2},
 
-    {{-23719.9f, -10103.7f, -11170.94f}, 14, 14, 0x0000},
-    {{-23106.25f, -10103.7f, -10763.69f}, 15, 15, 0x0000},
-    {{-23167.65f, -10103.7f, -10119.74f}, 16, 16, 0x0000},
-    {{-23877.95f, -10103.7f, -9917.14f}, 17, 17, 0x0000},
-    {{-24371.8f, -10103.7f, -9978.49f}, -2, -2, 0x0000},
+    {{-23719.9f, -10103.7f, -11170.94f}, -2},
+    {{-23106.25f, -10103.7f, -10763.69f}, 0},
+    {{-23167.65f, -10103.7f, -10119.74f}, 0},
+    {{-23877.95f, -10103.7f, -9917.14f}, 0},
+    {{-24371.8f, -10103.7f, -9978.49f}, -2},
 
-    {{-24715.45f, -10103.7f, -10011.99f}, 19, 19, 0x0000},
-    {{-25309.35f, -10103.7f, -10293.44f}, 20, 20, 0x0000},
-    {{-25816.2f, -10103.7f, -10584.89f}, -2, -2, 0x0000},
+    {{-24715.45f, -10103.7f, -10011.99f}, -2},
+    {{-25309.35f, -10103.7f, -10293.44f}, 0},
+    {{-25816.2f, -10103.7f, -10584.89f}, -2},
 };
 
 
 struct GrindPoints grind19[3] = {
-    {{14439.75f, -3189.67f, 1283.145f}, 1, -1, 0x8000},
-    {{14439.75f, -1880.55f, -1012.75f}, 2, 0, 0x8000},
-    {{14439.75f, -1880.55f, -2586.15f}, -1, 1, 0x8000},
+    {{14439.75f, -3189.67f, 1283.145f}, -1},
+    {{14439.75f, -1880.55f, -1012.75f}, 0},
+    {{14439.75f, -1880.55f, -2586.15f}, -1},
 
 };
 
@@ -2194,10 +2196,11 @@ void moveTowardsPoint(struct MarioState *m) {
     Vec3f startPos;
     s16 startYaw = m->faceAngle[1];
     f32 z1, z2, x1, x2;
-    z1 = m->pos[2]; z2 = sCurrentPoint.pos[2];
-    x1 = m->pos[0]; x2 = sCurrentPoint.pos[0];
-
+    z1 = m->pos[2]; z2 = sCurrentTrajectory[sCurrentPoint].pos[2];
+    x1 = m->pos[0]; x2 = sCurrentTrajectory[sCurrentPoint].pos[0];
     m->faceAngle[1] = atan2s(z2 - z1, x2 - x1);
+
+    //m->faceAngle[1] = CL_angle_between_points(m->pos, sCurrentTrajectory[sCurrentPoint].pos);
     m->intendedYaw = m->faceAngle[1];
     startYaw = m->faceAngle[1];
     m->intendedMag *= 1.0f;
@@ -2234,80 +2237,126 @@ void moveTowardsPoint(struct MarioState *m) {
     perform_ground_step(m);
 }
 
-void setNextPoint(struct MarioState *m, s16 currentPath) {
-    s16 grindTrajectoryRow;
-    s16 compareAngle;
-    f32 z1, z2, x1, x2;
-    f32 smallestDist = 64000.0;
-    sCurrentPoint = grindTrajectories[currentPath][0];
+void setNextPoint(struct MarioState *m, s16 curPath) {
+    u32 jumpAct;
+    s16 i, compareAngle;
+    s16 marioAngle, pointAngle, angleDiff;
+    s16 Check = FALSE;
+    s16 repeatCheck = FALSE;
+    f32 maxDist = 64000.0f;
+    f32 smallestDist = 100.0f;
+    f32 x1, x2, x3, z1, z2, z3;
+    sCurrentPoint = 0;
+    sCurrentTrajectory = grindTrajectories[curPath];
     
-    for (grindTrajectoryRow = 0; grindTrajectoryRow < grindLengths[currentPath]; grindTrajectoryRow++) {
-        f32 distBetweenTrajectories;
-            CL_dist_between_points(m->pos, grindTrajectories[currentPath][grindTrajectoryRow].pos, &distBetweenTrajectories);
-            if (distBetweenTrajectories < smallestDist && 
-            (f32)(absf_2(m->pos[1] - grindTrajectories[currentPath][grindTrajectoryRow].pos[1]) / distBetweenTrajectories) < 1.0f) {
-                f32 dx = grindTrajectories[currentPath][grindTrajectoryRow].pos[0] - m->pos[0];
-                f32 dz = grindTrajectories[currentPath][grindTrajectoryRow].pos[2] - m->pos[2];
-                compareAngle = atan2s(dz, dx);
-                compareAngle = compareAngle - m->faceAngle[1];
-                if (absi((s32)compareAngle) <= 0x6000) {
-                    sCurrentPoint = grindTrajectories[currentPath][grindTrajectoryRow];
-                    if (distBetweenTrajectories < 100.0f) {
-                        vec3f_copy(m->pos, grindTrajectories[currentPath][grindTrajectoryRow].pos);
-                        m->faceAngle[1] = grindTrajectories[currentPath][grindTrajectoryRow].forwardAngle;
-                    } else
-                        smallestDist = distBetweenTrajectories;
-                }
+    for (i = 0; i < grindLengths[curPath]; i++) {
+        f32 dist;
+        CL_dist_between_points(m->pos, sCurrentTrajectory[i].pos, &dist);
+        if (dist > smallestDist && dist < maxDist && (f32)(absf_2(m->pos[1] - sCurrentTrajectory[i].pos[1]) / dist) < 1.0f) {
+            f32 dx = sCurrentTrajectory[i].pos[0] - m->pos[0];
+            f32 dz = sCurrentTrajectory[i].pos[2] - m->pos[2];
+            compareAngle = atan2s(dz, dx);
+            compareAngle = compareAngle - m->faceAngle[1];
+            if (absi((s32)compareAngle) <= 0x4000) {
+                sCurrentPoint = i;
+                Check = TRUE;
+                maxDist = dist;
+            }
+        } else if (dist < smallestDist) {
+            vec3f_copy(m->pos, sCurrentTrajectory[i].pos);
+            if (!repeatCheck) {
+                i = 0;
+                repeatCheck = TRUE;
             }
         }
-    //moveTowardsPoint(m);
-    z1 = m->pos[2]; z2 = sCurrentPoint.pos[2];
-    x1 = m->pos[0]; x2 = sCurrentPoint.pos[0];
-    if (absi((s16)sCurrentPoint.forwardAngle - (s16)atan2s(z2 - z1, x2 - x1)) >= 0x2000)
-        grindForward = FALSE;
-    else
-        grindForward = TRUE;
-}
-
-s32 act_grind(struct MarioState *m) {
-    s16 grindTrajectoryRow;
-    f32 smallestDist;
-    if (grindInitTriggered == 0) {
-        setNextPoint(m, m->floor->force);
-        grindInitTriggered = 1;
+    }
+    if (!Check) {
+        m->forwardVel *= 2;
+        grindInitTriggered = 0;
+        if (m->input & INPUT_Z_DOWN && sCurrentTrajectory[sCurrentPoint].flags != -2)
+            jumpAct = ACT_TRIPLE_JUMP;
+        else
+            jumpAct = ACT_JUMP;
+        set_mario_action(m, jumpAct, 0);
+        return;
     }
 
-    CL_dist_between_points(m->pos, sCurrentPoint.pos, &smallestDist);
+    if (sCurrentPoint == 0) {
+        grindForward = FALSE;
+        return;
+    } else if (sCurrentPoint == grindLengths[curPath]) {
+        grindForward = TRUE;
+        return;
+    }
+    z1 = m->pos[2]; z2 = sCurrentTrajectory[sCurrentPoint].pos[2]; z3 = sCurrentTrajectory[sCurrentPoint - 1].pos[2];
+    x1 = m->pos[0]; x2 = sCurrentTrajectory[sCurrentPoint].pos[0]; x3 = sCurrentTrajectory[sCurrentPoint - 1].pos[0];
+    marioAngle = atan2s(z2 - z1, x2 - x1);
+    pointAngle = atan2s(z2 - z3, x2 - x3);
+    angleDiff = absi((s32)(pointAngle - marioAngle));
+
+    if (angleDiff >= 0xE000 || angleDiff <= 0x2000)
+        grindForward = TRUE;
+    else
+        grindForward = FALSE;
+}
+
+
+s32 act_grind(struct MarioState *m) {
+    u32 jumpAct;
+    f32 smallestDist;
+    if (grindInitTriggered == 0) {
+        grindInitTriggered = 1;
+        setNextPoint(m, m->floor->force);
+        if (grindInitTriggered == 0)
+            return;
+    }
+
+    CL_lateral_dist_between_points(m->pos, sCurrentTrajectory[sCurrentPoint].pos, &smallestDist);
     if (smallestDist < 50.0f) {
-            if(!grindForward) {
-                grindTrajectoryRow = sCurrentPoint.pointPrev;
-                if (sCurrentPoint.pointPrev < 0) {
-                    m->forwardVel *= 2;
-                    grindInitTriggered = 0;
-                    if (m->input & INPUT_Z_DOWN && sCurrentPoint.pointPrev != -2)
-                        return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
-                    else
-                        return set_mario_action(m, ACT_JUMP, 0);
-                }
-            } else {
-                grindTrajectoryRow = sCurrentPoint.pointNext;
-                if (sCurrentPoint.pointNext < 0) {
-                    m->forwardVel *= 2;
-                    grindInitTriggered = 0;
-                    if (m->input & INPUT_Z_DOWN && sCurrentPoint.pointNext != -2)
-                        return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
-                    else
-                        return set_mario_action(m, ACT_JUMP, 0);
-                }
+        vec3f_copy(m->pos, sCurrentTrajectory[sCurrentPoint].pos);
+        if (sCurrentTrajectory[sCurrentPoint].flags < 0) {
+            m->forwardVel *= 2;
+            grindInitTriggered = 0;
+            if (m->input & INPUT_Z_DOWN && sCurrentTrajectory[sCurrentPoint].flags != -2)
+                jumpAct = ACT_TRIPLE_JUMP;
+            else
+                jumpAct = ACT_JUMP;
+            return set_mario_action(m, jumpAct, 0);
+        }
+
+        if(!grindForward) {
+            if (--sCurrentPoint < 0) {
+                m->forwardVel *= 2;
+                grindInitTriggered = 0;
+                if (m->input & INPUT_Z_DOWN && sCurrentTrajectory[0].flags != -2)
+                    jumpAct = ACT_TRIPLE_JUMP;
+                else
+                    jumpAct = ACT_JUMP;
+                return set_mario_action(m, jumpAct, 0);   
             }
-        vec3f_copy(m->pos, sCurrentPoint.pos);
-        sCurrentPoint = grindTrajectories[m->floor->force][grindTrajectoryRow];
+        } else {
+            if (++sCurrentPoint > grindLengths[m->floor->force]) {
+                m->forwardVel *= 2;
+                grindInitTriggered = 0;
+                if (m->input & INPUT_Z_DOWN && sCurrentTrajectory[grindLengths[m->floor->force]].flags != -2)
+                    jumpAct = ACT_TRIPLE_JUMP;
+                else
+                    jumpAct = ACT_JUMP;
+                return set_mario_action(m, jumpAct, 0);
+            }
+        }
+    }
+
+    if (m->floor == NULL || m->floor->type != SURFACE_FLOWING_WATER) {
+        m->forwardVel *= 2;
+        grindInitTriggered = 0;
+        return set_mario_action(m, ACT_JUMP, 0);
     }
 
     if (m->input & INPUT_Z_DOWN) {
-        m->forwardVel = 35;
+        m->forwardVel = 35.0f;
     } else {
-        m->forwardVel = 25;
+        m->forwardVel = 25.0f;
     }
 
     moveTowardsPoint(m);
@@ -2364,7 +2413,7 @@ s32 mario_execute_moving_action(struct MarioState *m) {
         return TRUE;
     }
 
-    if (m->action != ACT_GRIND && m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
+    if (m->action != ACT_GRIND && m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1] && m->heldObj == NULL) {
         return set_mario_action(m, ACT_GRIND, 0);
     }
 

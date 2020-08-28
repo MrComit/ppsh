@@ -57,6 +57,13 @@ s16 CL_object_to_point(struct Object *o, Vec3f point) {
     return atan2s(dz, dx);
 }
 
+s16 CL_angle_between_points(Vec3f point1, Vec3f point2) {
+    f32 dx = point2[0] - point1[0];
+    f32 dz = point2[2] - point1[2];
+
+    return atan2s(dz, dx);
+}
+
 extern struct ModeTransitionInfo sModeInfo;
 
 void CL_set_camera_pos(Vec3f pos) {
@@ -117,6 +124,13 @@ void CL_dist_between_points(Vec3f from, Vec3f to, f32 *dist) {
     register f32 z = to[2] - from[2];
 
     *dist = sqrtf(x * x + y * y + z * z);
+}
+
+void CL_lateral_dist_between_points(Vec3f from, Vec3f to, f32 *dist) {
+    register f32 x = to[0] - from[0];
+    register f32 z = to[2] - from[2];
+
+    *dist = sqrtf(x * x + z * z);
 }
 
 

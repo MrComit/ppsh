@@ -1138,7 +1138,7 @@ s32 mario_execute_stationary_action(struct MarioState *m) {
         return 1;
     }
 
-    if (m->action != ACT_GRIND && m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1]) {
+    if (m->action != ACT_GRIND && m->floor->type == SURFACE_FLOWING_WATER && m->floorHeight == m->pos[1] && m->heldObj == NULL) {
         return set_mario_action(m, ACT_GRIND, 0);
     }
 

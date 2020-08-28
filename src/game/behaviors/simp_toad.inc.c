@@ -316,6 +316,7 @@ struct Object *star;
             }
             break;
         case 4:
+            grindForward = TRUE;
             switch (o->oKoopaAction) {
                 case 0:
                     if (m->floor != NULL && m->floor->force == 0x14 && m->action == ACT_GRIND) {
@@ -372,6 +373,7 @@ struct Object *star;
                     break;
                 case 9:
                     grindInitTriggered = 0;
+                    o->oKoopaAction = 1;
                     vec3f_copy(m->pos, sMGStartingPos);
                     s8DirModeYawOffset = 0x4000;
                     m->faceAngle[1] = 0xC000;
