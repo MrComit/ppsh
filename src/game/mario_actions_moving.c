@@ -2271,7 +2271,6 @@ void setNextPoint(struct MarioState *m, s16 curPath) {
         }
     }
     if (!Check) {
-        m->forwardVel *= 2;
         grindInitTriggered = 0;
         if (m->input & INPUT_Z_DOWN && sCurrentTrajectory[sCurrentPoint].flags != -2)
             jumpAct = ACT_TRIPLE_JUMP;
