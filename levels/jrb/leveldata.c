@@ -54,3 +54,5 @@
 #include "levels/jrb/spotlight/model.inc.c"
 #include "levels/jrb/box_spring/model.inc.c"
 #include "levels/jrb/box_spring/collision.inc.c"
+#include "levels/jrb/appearing_block/model.inc.c"
+#include "levels/jrb/appearing_block/collision.inc.c"

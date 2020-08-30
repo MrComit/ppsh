@@ -93,4 +93,8 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/box_spring/collision_header.h"
 
+#include "levels/jrb/appearing_block/geo_header.h"
+
+#include "levels/jrb/appearing_block/collision_header.h"
+
 #endif

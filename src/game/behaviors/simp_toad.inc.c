@@ -134,17 +134,18 @@ void gang_toad_introduction(void) {
 }
 
 void gang_toad_perform_chase(void) {
+    o->oFC = (sizeof(toadChase) / sizeof(toadChase[0])) - 0;
     vec3f_copy(toadChase[o->oF4].pos, gMarioState->pos);
     toadChase[o->oF4].faceAngle = gMarioState->faceAngle[1];
 
-    if (o->oTimer > sizeof(toadChase) / sizeof(toadChase[0])) {
+    if (o->oTimer > o->oFC) {
         vec3f_copy(&o->oPosX, toadChase[o->oF8].pos);
         o->oFaceAngleYaw = toadChase[o->oF8].faceAngle;
     }
 
-    if (++o->oF4 > sizeof(toadChase) / sizeof(toadChase[0]))
+    if (++o->oF4 > o->oFC)
         o->oF4 = 0;
-    if (++o->oF8 > sizeof(toadChase) / sizeof(toadChase[0]))
+    if (++o->oF8 > o->oFC)
         o->oF8 = 0;
 
 }

@@ -523,7 +523,7 @@ static void load_environmental_regions(s16 **data) {
 void alloc_surface_pools(void) {
     //sSurfacePoolSize = 2300;
     //sSurfacePoolSize = 4000;
-    sSurfacePoolSize = 4800;
+    sSurfacePoolSize = 5200;
     sSurfaceNodePool = main_pool_alloc(7000 * sizeof(struct SurfaceNode), MEMORY_POOL_LEFT);
     sSurfacePool = main_pool_alloc(sSurfacePoolSize * sizeof(struct Surface), MEMORY_POOL_LEFT);
 
