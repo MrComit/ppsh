@@ -155,16 +155,12 @@ void gang_toad_spawn_switches(void) {
 
 void gang_toad_perform_chase(void) {
     if (o->oFC != gRedSwitchesPushed) {
-        o->oF4 -= 7;
+        o->oF4 -= 9;
         if (o->oF4 < 0)
             o->oF4 += CHASE_SIZE;
     }
     o->oFC = gRedSwitchesPushed;
-    //s16 button = gRedSwitchesPushed * 7;
     vec3f_copy(toadChase[o->oF4].pos, gMarioState->pos);
-    //toadChase[o->oF4].pos[0] = gMarioState->pos[0];
-    //toadChase[o->oF4].pos[1] = gMarioState->pos[1];
-    //toadChase[o->oF4].pos[2] = gMarioState->pos[2];
     toadChase[o->oF4].faceAngle = gMarioState->faceAngle[1];
 
     if (o->oTimer > CHASE_SIZE) {
@@ -172,9 +168,9 @@ void gang_toad_perform_chase(void) {
         o->oFaceAngleYaw = toadChase[o->oF8].faceAngle;
     }
 
-    if (++o->oF4 > CHASE_SIZE)
+    if (++o->oF4 > CHASE_SIZE - 1)
         o->oF4 = 0;
-    if (++o->oF8 > CHASE_SIZE)
+    if (++o->oF8 > CHASE_SIZE - 1)
         o->oF8 = 0;
 
 }

@@ -622,7 +622,6 @@ void bhv_gang_toad_loop(void);
 void bhv_gang_toad_init(void);
 void bhv_bounce_box_loop(void);
 void bhv_appearing_block_loop(void);
-void bhv_appearing_block_init(void);
 void bhv_purple_switch_init(void);
 
 
