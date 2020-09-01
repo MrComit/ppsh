@@ -3,7 +3,6 @@
 const GeoLayout jrb_area_5_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, -8000, 0, jrb_dl_Bounds_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -19094, -4804, 12377, jrb_dl_Ground_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -6260, -4804, 7832, jrb_dl_Ground_001_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, -21706, -2086, 15684, jrb_dl_Hangable_mesh),

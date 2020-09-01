@@ -6415,6 +6415,7 @@ const BehaviorScript bhvRedCanyonButton[] = {
     LOAD_COLLISION_DATA(canyon_button_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oCollisionDistance, 0x400),
+    CALL_NATIVE(bhv_purple_switch_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_purple_switch_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -6758,8 +6759,25 @@ const BehaviorScript bhvAppearingBlock[] = {
     LOAD_COLLISION_DATA(appearing_block_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oCollisionDistance, 0x900),
+    CALL_NATIVE(bhv_appearing_block_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_appearing_block_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSimpSmallSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    //SET_INT(oAnimState, 2),
+    //SCALE(80),
+    LOAD_COLLISION_DATA(small_switch_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x600),
+    CALL_NATIVE(bhv_purple_switch_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_purple_switch_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

@@ -28,8 +28,18 @@ Vec3f sMGMinePosHorizontal[2] = {
 {-25355.1f, -8568.35f, -8496.39f},
 };
 
-Vec3f sChaseRespawn = {0, 0, 0};
-u16 sAngleTable[3] = {0x0000, 0x0000, 0x0000};
+Vec3f sChaseRespawn[6] = {
+{567.935f, 12834.6f, -15723.65f},
+{-18051.6f, 10343.95f, -6433.55f},
+{-19614.9f, 9468.2f, -16441.85f},
+{-22738.35f, 8566.7f, -16615.35f},
+{-24692.8f, 6866.9f, -8938.5f},
+{-25830.3f, 4295.285f, -2237.575f},
+};
+
+f32 sDeathHeights[5] = {7843.95f, 7825.2f, 7223.1f, 5528.8f, 1780.41f};
+
+u16 sAngleTable[5] = {0x0000, 0xC000, 0xC000, 0xC000, 0x0000};
 
 struct ShadowCopy {
     Vec3f pos;
@@ -37,7 +47,8 @@ struct ShadowCopy {
     u16 filler;
 };
 
-struct ShadowCopy toadChase[45] = {
+#define CHASE_SIZE 50
+struct ShadowCopy toadChase[CHASE_SIZE] = {
 0, /*{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
 {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
 {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
@@ -133,34 +144,52 @@ void gang_toad_introduction(void) {
     
 }
 
+void gang_toad_spawn_switches(void) {
+    struct Object *obj;
+    s32 i;
+    for (i = 1; i < 6; i++) {
+        obj = spawn_object(o, MODEL_SIMP_SMALL_SwITCH, bhvSimpSmallSwitch);
+        vec3f_copy(&obj->oPosX, sChaseRespawn[i]);
+    }
+}
+
 void gang_toad_perform_chase(void) {
-    o->oFC = (sizeof(toadChase) / sizeof(toadChase[0])) - 0;
+    if (o->oFC != gRedSwitchesPushed) {
+        o->oF4 -= 7;
+        if (o->oF4 < 0)
+            o->oF4 += CHASE_SIZE;
+    }
+    o->oFC = gRedSwitchesPushed;
+    //s16 button = gRedSwitchesPushed * 7;
     vec3f_copy(toadChase[o->oF4].pos, gMarioState->pos);
+    //toadChase[o->oF4].pos[0] = gMarioState->pos[0];
+    //toadChase[o->oF4].pos[1] = gMarioState->pos[1];
+    //toadChase[o->oF4].pos[2] = gMarioState->pos[2];
     toadChase[o->oF4].faceAngle = gMarioState->faceAngle[1];
 
-    if (o->oTimer > o->oFC) {
+    if (o->oTimer > CHASE_SIZE) {
         vec3f_copy(&o->oPosX, toadChase[o->oF8].pos);
         o->oFaceAngleYaw = toadChase[o->oF8].faceAngle;
     }
 
-    if (++o->oF4 > o->oFC)
+    if (++o->oF4 > CHASE_SIZE)
         o->oF4 = 0;
-    if (++o->oF8 > o->oFC)
+    if (++o->oF8 > CHASE_SIZE)
         o->oF8 = 0;
 
 }
 
 void gang_toad_chase(void) {
-    struct Object *pswitch;
+    struct Object *obj;
     s32 respawn;
     switch (o->oAction) {
         case 0:
             o->oInteractType = 0x40000000;
             o->oInteractStatus = 0;
-            pswitch = obj_nearest_object_with_behavior(bhvChaseSwitch);
-            if (pswitch != NULL && pswitch->oAction == 1) {
+            obj = obj_nearest_object_with_behavior(bhvChaseSwitch);
+            if (obj != NULL && obj->oAction == 1) {
                 o->oAction = 6;
-                SetComitCutscene(60, 1, 4);
+                SetComitCutscene(60, 1, 5);
             }
             break;
         case 1:
@@ -181,6 +210,7 @@ void gang_toad_chase(void) {
                 obj_disable();
                 o->oF4 = 0;
                 o->oF8 = 1;
+                o->oFC = gRedSwitchesPushed;
                 o->oAction = 4;
                 vec3f_copy(&o->oPosX, gMarioState->pos);
                 o->oFaceAngleYaw = gMarioState->faceAngle[1];
@@ -196,6 +226,9 @@ void gang_toad_chase(void) {
                 o->oInteractStatus = 0;
                 o->oAction = 5;
             }
+
+            if (gMarioState->pos[1] < sDeathHeights[gRedSwitchesPushed])
+                o->oAction = 5;
             break;
         case 5:
             if (gMarioState->health <= 0x280) {
@@ -207,10 +240,10 @@ void gang_toad_chase(void) {
                         play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0xC, 0x00, 0x00, 0x00);
                         break;
                     case 9:
-                        vec3f_copy(gMarioState->pos, sChaseRespawn);
-                        CL_set_camera_pos(sChaseRespawn);
-                        gMarioState->faceAngle[1] = sAngleTable[0];
-                        s8DirModeYawOffset = (s16)(sAngleTable[0] & 0xC000) - 0x4000;
+                        vec3f_copy(gMarioState->pos, sChaseRespawn[gRedSwitchesPushed]);
+                        CL_set_camera_pos(sChaseRespawn[gRedSwitchesPushed]);
+                        gMarioState->faceAngle[1] = sAngleTable[gRedSwitchesPushed];
+                        s8DirModeYawOffset = (s16)(sAngleTable[gRedSwitchesPushed] & 0xC000) - 0x8000;
                         set_mario_action(gMarioState, ACT_JUMP_LAND_STOP, 0);
                         break;
                     case 12:
@@ -224,7 +257,16 @@ void gang_toad_chase(void) {
         case 6:
             if (CheckComitCutsceneEnd())
                 o->oAction = 1;
+            if (o->oTimer == 30) {
+                gang_toad_spawn_switches();
+                play_puzzle_jingle();
+            }
             break;
+    }
+    if (gRedSwitchesPushed >= 5) {
+        o->activeFlags = 0;
+        obj = obj_nearest_object_with_behavior(bhvFadingWarp);
+        vec3f_copy(&obj->oPosX, gMarioState->pos);
     }
 }
 

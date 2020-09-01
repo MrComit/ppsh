@@ -30,3 +30,4 @@
 #include "levels/jrb/spotlight/geo.inc.c"
 #include "levels/jrb/box_spring/geo.inc.c"
 #include "levels/jrb/appearing_block/geo.inc.c"
+#include "levels/jrb/small_switch/geo.inc.c"

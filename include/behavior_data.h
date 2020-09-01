@@ -597,5 +597,6 @@ extern const BehaviorScript bhvGangToad[];
 extern const BehaviorScript bhvChaseSwitch[];
 extern const BehaviorScript bhvBounceBoxes[];
 extern const BehaviorScript bhvAppearingBlock[];
+extern const BehaviorScript bhvSimpSmallSwitch[];
 
 #endif /* _BEHAVIOR_DATA_H */

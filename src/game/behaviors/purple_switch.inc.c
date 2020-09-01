@@ -8,6 +8,11 @@
 
 u16 gRedSwitchesPushed = 0;
 
+void bhv_purple_switch_init(void) {
+    gRedSwitchesPushed = 0;
+}
+
+
 void bhv_purple_switch_loop(void) {
     switch (o->oAction) {
         /**
@@ -16,8 +21,8 @@ void bhv_purple_switch_loop(void) {
          */
         case PURPLE_SWITCH_IDLE:
             if (!obj_has_behavior(bhvCanyonButton) && !obj_has_behavior(bhvBlueCanyonButton) 
-                && !obj_has_behavior(bhvRedCanyonButton)) {
-                obj_set_model(MODEL_PURPLE_SWITCH);
+                && !obj_has_behavior(bhvRedCanyonButton) && !obj_has_behavior(bhvSimpSmallSwitch)) {
+                //obj_set_model(MODEL_PURPLE_SWITCH);
                 obj_scale(1.5f);
                 if (gMarioObject->platform == o && !(gMarioStates->action & MARIO_UNKNOWN_13)) {
                     if (lateral_dist_between_objects(o, gMarioObject) < 127.5) {
@@ -39,11 +44,15 @@ void bhv_purple_switch_loop(void) {
             if (o->oTimer == 3) {
                 if (obj_has_behavior(bhvCanyonButton))
                     SetComitCutscene(180, 1, 1);
-                if (obj_has_behavior(bhvRedCanyonButton)) {
+                if (obj_has_behavior(bhvRedCanyonButton) || obj_has_behavior(bhvSimpSmallSwitch)) {
                     gRedSwitchesPushed++;
                     play_sound(SOUND_MENU_COLLECT_SECRET + (((u8) gRedSwitchesPushed - 1) << 16), gDefaultSoundArgs);
-                    if (gRedSwitchesPushed >=5)
-                        SetComitCutscene(180, 1, 2);
+                    if (gRedSwitchesPushed >=5) {
+                        if (obj_has_behavior(bhvRedCanyonButton))
+                            SetComitCutscene(180, 1, 2);
+                        //else
+                        //    SetComitCutscene(60, 1, 4);
+                    }
                     else
                         spawn_orange_number(gRedSwitchesPushed, 0, 0, 0);
                 }
@@ -69,6 +78,11 @@ void bhv_purple_switch_loop(void) {
                 else
                     o->oAction = 5;
 
+            } else if (obj_has_behavior(bhvSimpSmallSwitch)) {
+                if (gRedSwitchesPushed >= 5) {
+                    gRedSwitchesPushed = 0;
+                }
+                    o->oAction = 5;
             }
 
             if (obj_has_behavior(bhvTimedCarSwitch)) {

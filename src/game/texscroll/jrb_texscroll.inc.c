@@ -8,6 +8,7 @@
 #include "levels/jrb/SC_Elevator/texscroll.inc.c"
 #include "levels/jrb/spotlight/texscroll.inc.c"
 #include "levels/jrb/box_spring/texscroll.inc.c"
+#include "levels/jrb/small_switch/texscroll.inc.c"
 void scroll_textures_jrb() {
 	scroll_jrb();
 
@@ -26,5 +27,7 @@ void scroll_textures_jrb() {
 	scroll_jrb_level_geo_spotlight();
 
 	scroll_jrb_level_geo_box_spring();
+
+	scroll_jrb_level_geo_small_switch();
 
 }

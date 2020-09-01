@@ -27,7 +27,9 @@ Vec3f sAppearingPos[] = {
 {-750.0f, 0.0f, 750.0f},
 };
 
-
+void bhv_appearing_block_init(void) {
+    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gDefaultSoundArgs);
+}
 
 void bhv_appearing_block_loop(void) {
     struct Object *block;
@@ -50,6 +52,12 @@ void bhv_appearing_block_loop(void) {
                     spawn_object_relative(o->oBehParams2ndByte + 1, array[o->oBehParams2ndByte][0], 
                     array[o->oBehParams2ndByte][1], array[o->oBehParams2ndByte][2], 
                     o, MODEL_SIMP_MAROON_BLOCK, bhvAppearingBlock);
+                    /*block = spawn_object(o, MODEL_SIMP_MAROON_BLOCK, bhvAppearingBlock);
+                    block->oBehParams = (o->oBehParams2ndByte + 1) << 16;
+                    block->oPosX = o->oPosX + array[o->oBehParams2ndByte][0];
+                    block->oPosY = o->oPosY + array[o->oBehParams2ndByte][1];
+                    block->oPosZ = o->oPosZ + array[o->oBehParams2ndByte][2];*/
+                    //play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gDefaultSoundArgs);
                 } else {
                     o->oAction = 2;
                     play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gDefaultSoundArgs);

@@ -520,11 +520,21 @@ static void load_environmental_regions(s16 **data) {
 /**
  * Allocate some of the main pool for surfaces (2300 surf) and for surface nodes (7000 nodes).
  */
-void alloc_surface_pools(void) {
-    //sSurfacePoolSize = 2300;
-    //sSurfacePoolSize = 4000;
+ //VANILLA: SURFACE - 2300. SURFACE NODE - 7000
+
+/*void alloc_surface_pools(void) {
     sSurfacePoolSize = 5200;
-    sSurfaceNodePool = main_pool_alloc(7000 * sizeof(struct SurfaceNode), MEMORY_POOL_LEFT);
+    sSurfaceNodePool = main_pool_alloc(10000 * sizeof(struct SurfaceNode), MEMORY_POOL_LEFT);
+    sSurfacePool = main_pool_alloc(sSurfacePoolSize * sizeof(struct Surface), MEMORY_POOL_LEFT);
+
+    gCCMEnteredSlide = 0;
+    reset_red_coins_collected();
+}*/
+
+
+void alloc_surface_pools(void) {
+    sSurfacePoolSize = 5200;
+    sSurfaceNodePool = main_pool_alloc(10000 * sizeof(struct SurfaceNode), MEMORY_POOL_LEFT);
     sSurfacePool = main_pool_alloc(sSurfacePoolSize * sizeof(struct Surface), MEMORY_POOL_LEFT);
 
     gCCMEnteredSlide = 0;

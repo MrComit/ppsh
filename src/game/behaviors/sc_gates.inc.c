@@ -33,7 +33,7 @@ void bhv_car_gate(void) {
 void bhv_end_gate(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oF4 >= 5) {
+            if (gRedSwitchesPushed >= 5) {
                 o->oAction = 1;
                 SetComitCutscene(60, 1, 4);
             }
