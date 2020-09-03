@@ -276,13 +276,84 @@ struct GrindPoints grind1A[14] = {
     {{-19432.65f, 9639.75f, -10190.0f}, -1},
 };
 
+
+struct GrindPoints grind1B[6] = {
+    {{-1934.42f, -9911.05f, 5256.2f}, -1},
+    {{-4521.745f, -9911.05f, 5256.2f}, -1},
+    {{-5521.75f, -9911.05f, 5256.2f}, -1},
+    {{-10202.3f, -9911.05f, 5256.2f}, -1},
+    {{-11202.3f, -9911.05f, 5256.2f}, -1},
+    {{-13789.65f, -9911.05f, 5256.2f}, -1},
+};
+
+
+struct GrindPoints grind1C[12] = {
+    {{15736.5f, -9911.05f, -2534.37f}, -1},
+    {{13149.2f, -9911.05f, -2534.37f}, -1},
+    {{12149.2f, -9911.05f, -2534.37f}, -1},
+    {{9561.85f, -9911.05f, -2534.37f}, -1},
+    {{8561.85f, -9911.05f, -2534.37f}, -1},
+    {{1934.365f, -9911.05f, -2534.37f}, -1},
+    {{-1934.425f, -9911.05f, -2534.37f}, -1},
+    {{-4521.75f, -9911.05f, -2534.37f}, -1},
+    {{-8113.65f, -9911.05f, -2534.37f}, -1},
+    {{-10700.95f, -9911.05f, -2534.37f}, -1},
+    {{-14789.65f, -9911.05f, -2534.37f}, -1},
+    {{-18670.65f, -9911.05f, -2534.37f}, -1},
+};
+
+struct GrindPoints grind1D[6] = {
+    {{-13789.65f, -9911.05f, 1216.275f}, -1},
+    {{-9109.05f, -9911.05f, 1216.275f}, -1},
+    {{-8109.05f, -9911.05f, 1216.275f}, -1},
+    {{-5521.75f, -9911.05f, 1216.275f}, -1},
+    {{-4521.74f, -9911.05f, 1216.275f}, -1},
+    {{-1934.395f, -9911.05f, 1216.275f}, -1},
+};
+
+
+
+struct GrindPoints grind1E[8] = {
+    {{5974.5f, -9911.05f, 1216.275f}, -1},
+    {{8561.85f, -9911.05f, 1216.275f}, -1},
+    {{9561.85f, -9911.05f, 1216.275f}, -1},
+    {{12149.2f, -9911.05f, 1216.275f}, -1},
+    {{13149.2f, -9911.05f, 1216.275f}, -1},
+    {{15736.55f, -9911.05f, 1216.275f}, -1},
+    {{16736.5f, -9911.05f, 1216.275f}, -1},
+    {{19323.85f, -9911.05f, 1216.275f}, -1},
+};
+
+struct GrindPoints grind1F[2] = {
+    {{-19159.45f, -9911.05f, 1216.275f}, -1},
+    {{-27170.3f, -9911.05f, 1216.275f}, -1},
+};
+
+struct GrindPoints grind20[4] = {
+    {{-17428.2f, -9911.05f, 7921.45f}, -1},
+    {{-17428.2f, -9911.05f, 5334.1f}, -1},
+    {{-17428.2f, -9911.05f, 3870.55f}, -1},
+    {{-17428.2f, -9911.05f, 1283.2f}, -1},
+};
+
+struct GrindPoints grind21[2] = {
+    {{-1934.405f, -9911.05f, 12748.85f}, -1},
+    {{-14871.05f, -9911.05f, 12748.85f}, -1},
+};
+
+struct GrindPoints grind22[2] = {
+    {{-1934.405f, -9911.05f, 15438.65f}, -1},
+    {{-14871.05f, -9911.05f, 15438.65f}, -1},
+};
+
 struct GrindPoints *grindTrajectories[] = {
     grind0, grind1, grind2, grind3, grind4, grind5, grind6, grind7, grind8, grind9, grindA, grindB, grindC, grindD, grindE,
-    grindF, grind10, grind11, grind12, grind13, grind14, grind15, grind16, grind17, grind18, grind19, grind1A,
+    grindF, grind10, grind11, grind12, grind13, grind14, grind15, grind16, grind17, grind18, grind19, grind1A, grind1B, 
+    grind1C, grind1D, grind1E, grind1F, grind20, grind21, grind22,
 };
 
 u16 grindLengths[] = {
-    2, 6, 4, 2, 14, 2, 2, 4, 2, 2, 3, 3, 5, 2, 3, 2, 2, 3, 4, 5, 11, 5, 20, 6, 21, 3, 14,
+    2, 6, 4, 2, 14, 2, 2, 4, 2, 2, 3, 3, 5, 2, 3, 2, 2, 3, 4, 5, 11, 5, 20, 6, 21, 3, 14, 6, 12, 6, 8, 2, 4, 2, 2,
 };
 
 struct LandingAction {
@@ -2329,7 +2400,7 @@ s32 act_grind(struct MarioState *m) {
     }
 
     CL_lateral_dist_between_points(m->pos, sCurrentTrajectory[sCurrentPoint].pos, &smallestDist);
-    if (smallestDist < 50.0f) {
+    if (smallestDist < 75.0f) {
         vec3f_copy(m->pos, sCurrentTrajectory[sCurrentPoint].pos);
         if (sCurrentTrajectory[sCurrentPoint].flags < 0) {
             m->forwardVel *= 2;

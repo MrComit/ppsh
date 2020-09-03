@@ -531,10 +531,10 @@ static void load_environmental_regions(s16 **data) {
     reset_red_coins_collected();
 }*/
 
-
+#define MAX_TRI_COUNT 5200
 void alloc_surface_pools(void) {
-    sSurfacePoolSize = 5200;
-    sSurfaceNodePool = main_pool_alloc(10000 * sizeof(struct SurfaceNode), MEMORY_POOL_LEFT);
+    sSurfacePoolSize = MAX_TRI_COUNT;
+    sSurfaceNodePool = main_pool_alloc((MAX_TRI_COUNT * 2) * sizeof(struct SurfaceNode), MEMORY_POOL_LEFT);
     sSurfacePool = main_pool_alloc(sSurfacePoolSize * sizeof(struct Surface), MEMORY_POOL_LEFT);
 
     gCCMEnteredSlide = 0;

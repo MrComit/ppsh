@@ -101,4 +101,8 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/small_switch/collision_header.h"
 
+#include "levels/jrb/big_switch/geo_header.h"
+
+#include "levels/jrb/big_switch/collision_header.h"
+
 #endif
