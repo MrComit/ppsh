@@ -32,7 +32,7 @@ void bhv_yellow_coin_init(void) {
     obj_update_floor_height();
     if (500.0f < absf(o->oPosY - o->oFloorHeight))
         obj_set_model(MODEL_YELLOW_COIN_NO_SHADOW);
-    if (o->oFloorHeight < -10000.0f)
+    if (o->oFloorHeight < -20000.0f)
         mark_object_for_deletion(o);
 }
 
@@ -126,7 +126,7 @@ void bhv_coin_formation_spawn_loop(void) {
         if (o->oCoinUnkF8) {
             o->oPosY += 300.0f;
             obj_update_floor_height();
-            if (o->oPosY < o->oFloorHeight || o->oFloorHeight < -10000.0f)
+            if (o->oPosY < o->oFloorHeight || o->oFloorHeight < -15000.0f)
                 mark_object_for_deletion(o);
             else
                 o->oPosY = o->oFloorHeight;
