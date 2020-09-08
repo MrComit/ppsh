@@ -15,7 +15,7 @@ void bhv_bounce_box_loop(void) {
     struct MarioState *m = gMarioState;
     switch (o->oAction) {
         case 0:
-            if (gMarioObject->platform == o) {
+            if (gMarioObject->platform == o && gMarioState->heldObj == NULL) {
                 o->oAction = 1;
             }
             break;

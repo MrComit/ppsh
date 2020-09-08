@@ -278,7 +278,6 @@ void bhv_gang_toad_loop(void) {
             gang_toad_npc();
             break;
         case 1:
-            return;
             gang_toad_introduction();
             break;
         case 2:
@@ -389,6 +388,7 @@ struct Object *star;
             o->oKoopaRunAngleX = 0;
             m->healCounter = 32;
             star = create_star(-29950.6f, -10421.55f, -16314.35f);
+            star->oBehParams = 0x1F << 24;
             o->oAction = 6;
             break;
         case 6:

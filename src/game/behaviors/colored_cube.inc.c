@@ -21,6 +21,16 @@ void bhv_colored_cube_init(void) {
     o->oBuoyancy = 1.4f;
     set_object_hitbox(o, &sCubeHitbox);
     o->activeFlags |= 0x200;
+
+    if (sCubesActive & (1 << o->oBehParams2ndByte)) {
+        o->oInteractType = 0x00000000;
+        o->oPosX = sCubeXPos[o->oBehParams2ndByte];
+        o->oPosY = -10064.7f;
+        o->oPosZ = 5975.8f;
+        o->oFaceAngleYaw = 0;
+        o->oMoveAngleYaw = 0;
+        o->oAction = 1;
+    }
 }
 
 void handle_boos(void) {
@@ -111,7 +121,7 @@ void cube_dropped_loop(void) {
                 spawn_orange_number(bits, 0, 0, 0);
             } else {
                 star = create_star(-198.3855f, -9695.4f, 5639.65f);
-                star->oBehParams = 0x00 << 24;
+                star->oBehParams = 0x18 << 24;
             }
 
         }
@@ -127,7 +137,8 @@ void cube_dropped_loop(void) {
 void bhv_colored_cube_loop(void) {
     switch (o->oHeldState) {
         case HELD_FREE:
-            wrench_idle_loop();
+            //wrench_idle_loop();
+            cube_idle_loop();
             break;
 
         case HELD_HELD:

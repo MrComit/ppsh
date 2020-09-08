@@ -56,8 +56,11 @@ void bhv_appearing_block_loop(void) {
                 && object_has_behavior(o->parentObj, bhvAppearingBlock))
                     o->parentObj->activeFlags = 0;
             }
-            if (o->oTimer > 150 && o->oBehParams2ndByte != 0 && o->oBehParams2ndByte != SECOND_PATH)
+            if (o->oTimer > 150 && o->oBehParams2ndByte != 0 && o->oBehParams2ndByte != SECOND_PATH) {
+                block = CL_obj_nearest_object_behavior_params(bhvAppearingBlock, o->oF4 << 16);
+                block->oAction = 0;
                 o->activeFlags = 0;
+            }
             break;
         case 1:
             if (o->oTimer > 150 && o->oBehParams2ndByte != 0 && o->oBehParams2ndByte != SECOND_PATH) {
