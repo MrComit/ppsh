@@ -10,8 +10,6 @@
 #include "surface_load.h"
 #include "game/object_list_processor.h"
 
-#define BOUNDS_EXTENSION 4.0f
-#define LEVEL_BOUNDARY_EXTENDED_MAX 0x7fff
 
 /**************************************************
  *                      WALLS                      *
@@ -27,11 +25,11 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode,
     UNUSED u8 pad;
 #endif
     register f32 offset;
-    register f32 radius = data->radius / BOUNDS_EXTENSION;
+    register f32 radius = data->radius;
     register struct Surface *surf;
-    register f32 x = data->x / BOUNDS_EXTENSION;
-    register f32 y = (data->y + data->offsetY) / BOUNDS_EXTENSION;
-    register f32 z = data->z / BOUNDS_EXTENSION;
+    register f32 x = data->x;
+    register f32 y = (data->y + data->offsetY);
+    register f32 z = data->z;
     register f32 px, pz;
     register f32 w1, w2, w3;
     register f32 y1, y2, y3;
@@ -145,8 +143,8 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode,
 
         //! (Wall Overlaps) Because this doesn't update the x and z local variables,
         //  multiple walls can push mario more than is required.
-        data->x += surf->normal.x * (radius - offset) * BOUNDS_EXTENSION;
-        data->z += surf->normal.z * (radius - offset) * BOUNDS_EXTENSION;
+        data->x += surf->normal.x * (radius - offset);
+        data->z += surf->normal.z * (radius - offset);
 
         //! (Unreferenced Walls) Since this only returns the first four walls,
         //  this can lead to wall interaction being missed. Typically unreferenced walls
@@ -193,8 +191,8 @@ s32 find_wall_collisions(struct WallCollisionData *colData) {
     struct SurfaceNode *node;
     s16 cellX, cellZ;
     s32 numCollisions = 0;
-    s16 x = colData->x / BOUNDS_EXTENSION;
-    s16 z = colData->z / BOUNDS_EXTENSION;
+    s16 x = colData->x;
+    s16 z = colData->z;
 
     colData->numWalls = 0;
 
@@ -288,7 +286,7 @@ static struct Surface *find_ceil_from_list(struct SurfaceNode *surfaceNode, s32 
             }
 
             // Find the ceil height at the specific point.
-            height = -(x * nx + nz * z + oo) / ny * BOUNDS_EXTENSION;
+            height = -(x * nx + nz * z + oo) / ny;
 
             // Checks for ceiling interaction with a 78 unit buffer.
             //! (Exposed Ceilings) Because any point above a ceiling counts
@@ -323,15 +321,15 @@ f32 find_ceil(f32 posX, f32 posY, f32 posZ, struct Surface **pceil) {
     //! (Parallel Universes) Because position is casted to an s16, reaching higher
     // float locations  can return ceilings despite them not existing there.
     //(Dynamic ceilings will unload due to the range.)
-    x = (s16) posX / BOUNDS_EXTENSION;
+    x = (s16) posX;
     y = (s16) posY;
-    z = (s16) posZ / BOUNDS_EXTENSION;
+    z = (s16) posZ;
     *pceil = NULL;
 
-    if (x <= -LEVEL_BOUNDARY_EXTENDED_MAX || x >= LEVEL_BOUNDARY_EXTENDED_MAX) {
+    if (x <= -LEVEL_BOUNDARY_MAX || x >= LEVEL_BOUNDARY_MAX) {
         return height;
     }
-    if (z <= -LEVEL_BOUNDARY_EXTENDED_MAX || z >= LEVEL_BOUNDARY_EXTENDED_MAX) {
+    if (z <= -LEVEL_BOUNDARY_MAX || z >= LEVEL_BOUNDARY_MAX) {
         return height;
     }
 
@@ -395,7 +393,7 @@ f32 find_floor_height_and_data(f32 xPos, f32 yPos, f32 zPos, struct FloorGeometr
         sFloorGeo.normalX = floor->normal.x;
         sFloorGeo.normalY = floor->normal.y;
         sFloorGeo.normalZ = floor->normal.z;
-        sFloorGeo.originOffset = floor->originOffset * BOUNDS_EXTENSION;
+        sFloorGeo.originOffset = floor->originOffset;
 
         *floorGeo = &sFloorGeo;
     }
@@ -464,7 +462,7 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
         }
 
         // Find the height of the floor at a given location.
-        height = -(x * nx + nz * z + oo) / ny * BOUNDS_EXTENSION;
+        height = -(x * nx + nz * z + oo) / ny;
         // Checks for floor interaction with a 78 unit buffer.
         if (height < slopeFix) {
             continue;
@@ -537,16 +535,16 @@ f32 find_floor(f32 xPos, f32 yPos, f32 zPos, struct Surface **pfloor) {
     //! (Parallel Universes) Because position is casted to an s16, reaching higher
     // float locations  can return floors despite them not existing there.
     //(Dynamic floors will unload due to the range.)
-    s16 x = (s16) xPos / BOUNDS_EXTENSION;
+    s16 x = (s16) xPos;
     s16 y = (s16) yPos;
-    s16 z = (s16) zPos / BOUNDS_EXTENSION;
+    s16 z = (s16) zPos;
 
     *pfloor = NULL;
 
-    if (x <= -LEVEL_BOUNDARY_MAX || x >= LEVEL_BOUNDARY_EXTENDED_MAX) {
+    if (x <= -LEVEL_BOUNDARY_MAX || x >= LEVEL_BOUNDARY_MAX) {
         return height;
     }
-    if (z <= -LEVEL_BOUNDARY_MAX || z >= LEVEL_BOUNDARY_EXTENDED_MAX) {
+    if (z <= -LEVEL_BOUNDARY_MAX || z >= LEVEL_BOUNDARY_MAX) {
         return height;
     }
 
