@@ -267,7 +267,7 @@ static void mario_moon_jump(void) {
         gMarioState->vel[1] = 40.0f;
         gMarioState->action = ACT_JUMP;
         gMarioState->faceAngle[1] -= gMarioState->controller->stickX * 32.0f;
-        //print_text_fmt_int(120, 110, "listal %d", gNumStaticSurfaces);
+        print_text_fmt_int(120, 110, "%d tris", gNumStaticSurfaces);
     }
 }
 
