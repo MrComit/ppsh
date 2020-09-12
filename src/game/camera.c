@@ -31,6 +31,8 @@
 
 #include "segment2.h"
 
+#define BOUNDS_EXTENSION 4.0f
+
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
 /**
@@ -905,6 +907,9 @@ void pan_ahead_of_player(struct Camera *c) {
 }
 
 s16 find_in_bounds_yaw_wdw_bob_thi(Vec3f pos, Vec3f origin, s16 yaw) {
+#ifdef BOUNDS_EXTENSION
+    return yaw;
+#endif
     switch (gCurrLevelArea) {
         case AREA_WDW_MAIN:
             yaw = clamp_positions_and_find_yaw(pos, origin, 4508.f, -3739.f, 4508.f, -3739.f);
@@ -4558,9 +4563,9 @@ s32 is_behind_surface(Vec3f pos, struct Surface *surf) {
                 (surf->vertex3[2] - surf->vertex2[2]) * (surf->vertex2[0] - surf->vertex1[0]);
     f32 normZ = (surf->vertex2[0] - surf->vertex1[0]) * (surf->vertex3[1] - surf->vertex2[1]) -
                 (surf->vertex3[0] - surf->vertex2[0]) * (surf->vertex2[1] - surf->vertex1[1]);
-    f32 dirX = surf->vertex1[0] - pos[0];
-    f32 dirY = surf->vertex1[1] - pos[1];
-    f32 dirZ = surf->vertex1[2] - pos[2];
+    f32 dirX = surf->vertex1[0] - pos[0] / BOUNDS_EXTENSION;
+    f32 dirY = surf->vertex1[1] - pos[1] / BOUNDS_EXTENSION;
+    f32 dirZ = surf->vertex1[2] - pos[2] / BOUNDS_EXTENSION;
 
     if (dirX * normX + dirY * normY + dirZ * normZ < 0) {
         behindSurface = 1;
