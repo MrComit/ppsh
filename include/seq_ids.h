@@ -40,9 +40,10 @@ enum SeqId {
     SEQ_MENU_FILE_SELECT,             // 0x21
     SEQ_EVENT_CUTSCENE_LAKITU,        // 0x22 (not in JP)
     SEQ_FLASHBLACK,                   // 0x23
-    SEQ_REJECT,                   // 0x24
-    SEQ_FEAR,
-    SEQ_FEAR_BOSS,
+    SEQ_REJECT,                       // 0x24
+    SEQ_FEAR,                         // 0x25
+    SEQ_FEAR_BOSS,                    // 0x26
+    SEQ_EMBRACE,                      // 0x27
     SEQ_COUNT
 };
 

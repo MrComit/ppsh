@@ -58,6 +58,8 @@ void audio_set_sound_mode(u8 arg0);
 
 void audio_init(void); // in load.c
 
+extern u8 sPlayer0CurSeqId;
+
 #ifdef VERSION_EU
 struct SPTask *unused_80321460();
 #endif

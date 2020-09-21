@@ -20,6 +20,8 @@
 #include "object_list_processor.h"
 #include "mario.h"
 #include "game.h"
+#include "audio/external.h"
+#include "!COMIT_LIBRARY.h"
 
 
 /**

@@ -320,7 +320,7 @@ u8 sSoundRequestCount = 0;
 #define MARIO_Y_LT 4
 #define MARIO_Z_LT 5
 #define MARIO_IS_IN_AREA 6
-#define MARIO_IS_IN_ROOM 7
+#define MARIO_WATER_DISTRICT 7
 
 #define DYN1(cond1, val1, res) (s16)(1 << (15 - cond1) | res), val1
 #define DYN2(cond1, val1, cond2, val2, res)                                                            \
@@ -330,8 +330,8 @@ u8 sSoundRequestCount = 0;
 
 s16 sDynBbh[] = {
     SEQ_LEVEL_SPOOKY,
-    DYN1(MARIO_IS_IN_ROOM, BBH_OUTSIDE_ROOM, 6),
-    DYN1(MARIO_IS_IN_ROOM, BBH_NEAR_MERRY_GO_ROUND_ROOM, 6),
+    DYN1(MARIO_WATER_DISTRICT, BBH_OUTSIDE_ROOM, 6),
+    DYN1(MARIO_WATER_DISTRICT, BBH_NEAR_MERRY_GO_ROUND_ROOM, 6),
     5,
 };
 s16 sDynDdd[] = {
@@ -373,7 +373,7 @@ s16 sDynUnk38[] = {
 s16 sDynII[] = {
     SEQ_REJECT,
     DYN1(MARIO_IS_IN_AREA, 3, 8),
-    DYN1(MARIO_Y_LT, -1000, 10),
+    DYN1(MARIO_WATER_DISTRICT, 6, 10),
     //DYN1(MARIO_IS_IN_AREA, 1, 9),
     //DYN1(MARIO_IS_IN_AREA, 2, 9),
     9,
@@ -384,6 +384,17 @@ s16 sDynCC[] = {
     DYN1(MARIO_IS_IN_AREA, 2, 11),
     DYN1(MARIO_IS_IN_AREA, 3, 11),
     12,
+};
+
+s16 sDynSC[] = {
+    SEQ_EMBRACE,
+    DYN1(MARIO_WATER_DISTRICT, 0, 13),
+    DYN1(MARIO_WATER_DISTRICT, 1, 14),
+    DYN1(MARIO_WATER_DISTRICT, 2, 15),
+    DYN1(MARIO_WATER_DISTRICT, 3, 16),
+    DYN1(MARIO_WATER_DISTRICT, 4, 17),
+    DYN1(MARIO_WATER_DISTRICT, 5, 18),
+    13,
 };
 
 s16 sDynNone[] = { SEQ_SOUND_PLAYER, 0 };
@@ -412,10 +423,12 @@ struct MusicDynamic {
     /*0xA*/ s16 dur2;
 }; // size = 0xC
 
-struct MusicDynamic sMusicDynamics[13] = {
-    { 0x0000, 127, 100, 0x0e43, 0, 100 }, // SEQ_LEVEL_WATER
-    { 0x0003, 127, 100, 0x0e40, 0, 100 }, // SEQ_LEVEL_WATER
+struct MusicDynamic sMusicDynamics[19] = {
+    //{ 0x0000, 127, 100, 0x0e43, 0, 100 }, // SEQ_LEVEL_WATER
+    //{ 0x0003, 127, 100, 0x0e40, 0, 100 }, // SEQ_LEVEL_WATER
     { 0x0e43, 127, 200, 0x0000, 0, 200 }, // SEQ_LEVEL_WATER
+    { 0x003E, 127, 10, 0x00C1, 0, 10 }, // SEQ_EMBRACE BEGINNING AREA
+    { 0x00FF, 77, 10, 0x0000, 0, 10 }, // SEQ_EMBRACE ALLEY
     { 0x02ff, 127, 100, 0x0100, 0, 100 }, // SEQ_LEVEL_UNDERGROUND
     { 0x03f7, 127, 100, 0x0008, 0, 100 }, // SEQ_LEVEL_UNDERGROUND
     { 0x0070, 127, 10, 0x0000, 0, 100 },  // SEQ_LEVEL_SPOOKY
@@ -426,6 +439,12 @@ struct MusicDynamic sMusicDynamics[13] = {
     { 0x1C00, 127, 20, 0x0031, 0, 20 }, // SEQ_REJECT WATER
     { 0x0080, 127, 20, 0x007E, 0, 20 }, // SEQ_FEAR CAVE
     { 0x007E, 127, 20, 0x0180, 0, 20 }, // SEQ_FEAR DEFAULT
+    { 0x00FF, 127, 10, 0x0000, 0, 10 }, // SEQ_EMBRACE DEFAULT
+    { 0x003E, 127, 10, 0x00C1, 0, 10 }, // SEQ_EMBRACE BEGINNING AREA
+    { 0x00FF, 77, 10, 0x0000, 0, 10 }, // SEQ_EMBRACE ALLEY
+    { 0x00FF, 127, 10, 0x0000, 0, 10 }, // SEQ_EMBRACE DEFAULT
+    { 0x00FF, 127, 10, 0x0000, 0, 10 }, // SEQ_EMBRACE DEFAULT
+    { 0x00FF, 127, 10, 0x0000, 0, 10 }, // SEQ_EMBRACE DEFAULT
 };
 
 #define STUB_LEVEL(_0, _1, _2, _3, echo1, echo2, echo3, _7, _8) { echo1, echo2, echo3 },
@@ -492,6 +511,7 @@ u8 sBackgroundMusicDefaultVolume[] = {
     75, // reject society
     75, // fear society
     75, // fear society boss
+    75, // embrace society
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,
@@ -1315,6 +1335,38 @@ void audio_signal_game_loop_tick(void) {
     noop_8031EEC8();
 }
 
+
+struct MusicDynamic sSimpDyn[7] = {
+    { 0x00FF, 127, 10, 0xFF00, 0, 10 }, // SEQ_EMBRACE DEFAULT
+    { 0x003E, 127, 10, 0xFFC1, 0, 10 }, // SEQ_EMBRACE BEGINNING AREA
+    { 0x003F, 77, 10, 0xFFC0, 0, 10 }, // SEQ_EMBRACE ALLEY
+    { 0x08FD, 127, 10, 0xF702, 0, 10 }, // SEQ_EMBRACE SKATE
+    { 0x05FF, 127, 10, 0xFA00, 0, 10 }, // SEQ_EMBRACE RESIDENT
+    { 0x006A, 127, 10, 0xFD95, 0, 10 }, // SEQ_EMBRACE SHOPS
+    { 0x00F1, 80, 10, 0xFF00, 0, 10 }, // SEQ_EMBRACE BUILDINGS
+};
+
+
+
+static void mario_simp_dynamics(void) {
+    s32 i;
+    s16 district;
+    u16 bit = 1;
+    if (gCurrLevelNum != LEVEL_JRB || sPlayer0CurSeqId != 0x27)
+        return;
+    district = check_district(gMarioState);
+    for (i = 0; i < 16; i++) {
+        if (sSimpDyn[district].bits1 & bit) {
+            fade_channel_volume_scale(0, i, sSimpDyn[district].volScale1, sSimpDyn[district].dur1);
+        }
+        if (sSimpDyn[district].bits2 & bit) {
+            fade_channel_volume_scale(0, i, sSimpDyn[district].volScale2, sSimpDyn[district].dur2);
+        }
+        bit <<= 1;
+    }
+}
+
+
 #ifdef VERSION_JP
 #define ARG2_VAL1 0.8f
 #define ARG2_VAL2 1.0f
@@ -1336,6 +1388,7 @@ void update_game_sound(void) {
 
     process_all_sound_requests();
     process_level_music_dynamics();
+    mario_simp_dynamics();
     if (gSequencePlayers[2].channels[0] == &gSequenceChannelNone) {
         return;
     }
@@ -1765,7 +1818,36 @@ void func_8031F96C(u8 player) {
     }
 }
 
-#ifdef NON_MATCHING
+//#ifdef NON_MATCHING
+#define DISTRICT_MAIN 0
+#define DISTRICT_OPENING 1
+#define DISTRICT_ALLEY 2
+#define DISTRICT_SKATE 3
+#define DISTRICT_RESIDENT 4
+#define DISTRICT_SHOP 5
+#define DISTRICT_BUILDINGS 6
+
+s32 check_district(struct MarioState *m) {
+    if (gCurrAreaIndex == 4)
+        return DISTRICT_SHOP;
+    if (m->pos[2] < 16787.45f) {
+        if (m->pos[2] > -6400.0f || m->pos[0] >= -19400.0f) {
+            if (m->pos[1] > -5700.0f)
+                return DISTRICT_BUILDINGS;
+            else
+                return DISTRICT_MAIN;
+        }
+        else
+            return DISTRICT_SKATE;
+    } else {
+        if (m->pos[0] < -7000.0f)
+            return DISTRICT_ALLEY;
+        else if (m->pos[0] > 4600.0f && m->pos[1] > -3400.0f)
+            return DISTRICT_RESIDENT;
+        else
+            return DISTRICT_OPENING;
+    }
+}
 
 void process_level_music_dynamics(void) {
     s32 conditionBits;      // s0
@@ -1850,16 +1932,19 @@ void process_level_music_dynamics(void) {
                         j = condIndex + 1;
                     break;
                 }
-                case MARIO_IS_IN_ROOM: {
-                    // s16 temp = gMarioCurrentRoom;
-                    if (gCurrLevelNum == AREA_BOB) {
-                        if (gUnderwaterCam == TRUE) {
+                case MARIO_WATER_DISTRICT: {
+                    s16 temp;
+                    if (conditionValues[j] > 5) {
+                        temp = gUnderwaterCam;
+                        if (temp == FALSE) {
                             j = condIndex + 1;
                         }
                         break;
+                    } else {
+                        if (check_district(gMarioState) == conditionValues[j])
+                            j = condIndex + 1;
+                        break;
                     }
-                    if (gMarioCurrentRoom != conditionValues[j])
-                        j = condIndex + 1;
                     break;
                 }
             }
@@ -1901,9 +1986,9 @@ void process_level_music_dynamics(void) {
     }
 }
 
-#else
-GLOBAL_ASM("asm/non_matchings/process_level_music_dynamics.s")
-#endif
+//#else
+//GLOBAL_ASM("asm/non_matchings/process_level_music_dynamics.s")
+//#endif
 
 void unused_8031FED0(u8 player, u32 bits, s8 arg2) {
     u8 i;

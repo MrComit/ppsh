@@ -3523,7 +3523,11 @@ const BehaviorScript bhvWarps80[] = {
 };
 
 const BehaviorScript bhvWarps84[] = {
-    BREAK(),
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_deathwarp_loop),
+    END_LOOP(),
 };
 
 const BehaviorScript bhvWarps88[] = {

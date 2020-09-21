@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "object_list_processor.h"
 #include "include/behavior_data.h"
+#include "audio/internal.h"
 #define o gCurrentObject
 
 //returns random number between min and max inclusive
@@ -194,4 +195,47 @@ s32 CL_respawn(s16 *timer, Vec3f pos, s16 faceAngle, s16 damage) {
     }
     *timer++;
     return 0;
+}
+
+Vec3f *CL_nearest_point(Vec3f *list, Vec3f source, s16 listcount) {
+    s16 i;
+    f32 smallestDist = 64000.0f;
+    Vec3f *point;
+    
+    for (i = 0; i < listcount; i++) {
+        f32 dist;
+        CL_dist_between_points(source, list[i], &dist);
+        if (dist < smallestDist) {
+            smallestDist = dist;
+            point = list[i];
+        }
+    }
+    return *point;
+}
+
+struct MusicDynamic {
+    /*0x0*/ s16 bits1;
+    /*0x2*/ u16 volScale1;
+    /*0x4*/ s16 dur1;
+    /*0x6*/ s16 bits2;
+    /*0x8*/ u16 volScale2;
+    /*0xA*/ s16 dur2;
+}; // size = 0xC
+
+//dynamic = { bits1, volume for bits1, transition time1, bits2, volume for bits2, transition time2 }
+void CL_dynamic_music(struct MusicDynamic *dyn) {
+    s32 i;
+    s16 dur1 = dyn->dur1;
+    s16 dur2 = dyn->dur2;
+    u16 bit = 1;
+
+    for (i = 0; i < CHANNELS_MAX; i++) {
+        if (dyn->bits1 & bit) {
+            fade_channel_volume_scale(0, i, dyn->volScale1, dur1);
+        }
+        if (dyn->bits2 & bit) {
+            fade_channel_volume_scale(0, i, dyn->volScale2, dur2);
+        }
+        bit <<= 1;
+    }
 }

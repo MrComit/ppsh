@@ -623,6 +623,7 @@ void bhv_gang_toad_init(void);
 void bhv_bounce_box_loop(void);
 void bhv_appearing_block_loop(void);
 void bhv_purple_switch_init(void);
+void bhv_deathwarp_loop(void);
 
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
