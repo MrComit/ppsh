@@ -249,7 +249,7 @@ const LevelScript level_wf_entry[] = {
 		TERRAIN(wf_area_4_collision),
 		ROOMS(wf_area_4_collision_rooms),
 		MACRO_OBJECTS(wf_area_4_Area4_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_FEAR),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_GANGNAM),
 		TERRAIN_TYPE(TERRAIN_STONE),
 	END_AREA(),
 

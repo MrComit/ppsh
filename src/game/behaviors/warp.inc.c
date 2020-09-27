@@ -1,51 +1,83 @@
 // warp.c.inc
 #define INCEL_1 0
-#define INCEL_2 1
-#define INCEL_3 2
-#define INCEL_4 3
 
-#define CUCK_1 4
-#define CUCK_2 5
-#define CUCK_3 6
-#define CUCK_4 7
+#define CUCK_1 1
+#define CUCK_2 2
+#define CUCK_3 3
+#define CUCK_4 4
 
-#define SIMP_1 8
-#define SIMP_2 9
-#define SIMP_3 10
-#define SIMP_4 11
-#define SIMP_5 12
+#define SIMP_1 5
+#define SIMP_2 6
+#define SIMP_3 7
+#define SIMP_4 8
+#define SIMP_5 9
 
 
-Vec3f sDeathCC1[2] = {
+Vec3f sDeathII1[3] = {
+{-5270.55f, -400.0f, -8138.85f},
+{6788.95f, -123.058f, -10970.35f},
+{13184.85f, -331.8695f, -6299.35f},
+};
+
+Vec3f sDeathCC1[3] = {
 {-12488.0f, 680.0f, 12345.0f},
 {9443.1f, 680.0f, -4789.11f},
+{-14252.05f, 680.0f, -8461.6f},
+};
+
+Vec3f sDeathCC2[5] = {
+{-15270.3f, 2514.51f, 2636.835f},
+{-9002.0f, 2514.51f, -12019.7f},
+{-811.485f, 2514.51f, 11894.55f},
+{153.1105f, 2514.51f, 1173.525f},
+{10932.7f, 2514.51f, 6671.9f},
+};
+
+Vec3f sDeathCC3[2] = {
+{1822.81f, 4496.175f, 8413.2f},
+{768.32f, 4496.175f, -6436.3f},
 };
 
 Vec3f *sDeaths[] = {
-sDeathCC1, sDeathCC1, sDeathCC1, sDeathCC1, sDeathCC1, sDeathCC1, sDeathCC1, 
-sDeathCC1, sDeathCC1, sDeathCC1, sDeathCC1, sDeathCC1, sDeathCC1,
+sDeathII1, sDeathCC1, sDeathCC2, sDeathCC3, sDeathCC1, sDeathCC1, sDeathCC1, sDeathCC1, sDeathCC1, sDeathCC1,
 };
 
 s16 sDeathCounts[] = {
-2, 2, 2, 2, 2, 2, 2,
-2, 2, 2, 2, 2, 2,
+3, 3, 5, 2, 2, 2, 2, 2, 2, 2,
 };
 
 s8 deathwarp_get_list(void) {
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
+            if (gCurrAreaIndex == 1)
+                return INCEL_1;
             return -1;
             break;
         case LEVEL_WF:
             switch (gCurrAreaIndex) {
                 case 1:
-                    return CUCK_1;
+                    if (gMarioState->pos[1] < 1800.0f)
+                        return CUCK_1;
+                    if (gMarioState->pos[1] < 3650.0f)
+                        return CUCK_2;
+                    return CUCK_3;
+                case 2:
+                    return -1; //MAKE ROOM BASED
                 default:
                     return -1;
             }
             break;
         case LEVEL_JRB:
-            return -1;
+            switch (gCurrAreaIndex) {
+                case 1:
+                    return -1;
+                case 2:
+                    return -1;
+                case 3:
+                    return -1;
+                default:
+                    return -1;
+            }
             break;
         default:
             return -1;

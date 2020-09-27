@@ -512,6 +512,8 @@ u8 sBackgroundMusicDefaultVolume[] = {
     75, // fear society
     75, // fear society boss
     75, // embrace society
+    75, // dark area
+    75, // before gangnam style
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,

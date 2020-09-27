@@ -134,7 +134,7 @@ Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
             case 0:
                 gLightApproach = 0xB;
                 gLightSpeed = 0x4;
-                if (gLightTimer > 74) {
+                if (gLightTimer > 60) { //74 at 120 BPM, 60 at 144 BPM
                     gLightAction++;
                     gLightTimer = 0;
                     play_sound(SOUND_LIGHT_TICK, gDefaultSoundArgs);
@@ -143,7 +143,7 @@ Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
             case 1:
             case 2:
             case 3:
-                if (gLightTimer > 14) {
+                if (gLightTimer > 12) { // 14 at 120 BPM, 12 at 144 BPM
                     play_sound(SOUND_LIGHT_TICK, gDefaultSoundArgs);
                     gLightTimer = 0;
                     gLightAction++;

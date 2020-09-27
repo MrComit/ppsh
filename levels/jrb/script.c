@@ -256,7 +256,7 @@ const LevelScript level_jrb_entry[] = {
 		TERRAIN(jrb_area_3_collision),
 		ROOMS(jrb_area_3_collision_rooms),
 		MACRO_OBJECTS(jrb_area_3_Area3_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_UNDERGROUND),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_DARK),
 		TERRAIN_TYPE(TERRAIN_STONE),
 	END_AREA(),
 
@@ -307,7 +307,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_SIMP_SPOTLIGHT, -3733, -1732, 8064, 180, -90, 0, 0x1CC00000, bhvSpotlight),
 		TERRAIN(jrb_area_5_collision),
 		MACRO_OBJECTS(jrb_area_5_Area5_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_UNDERGROUND),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_DARK),
 		TERRAIN_TYPE(TERRAIN_STONE),
 	END_AREA(),
 

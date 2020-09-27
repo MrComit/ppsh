@@ -494,7 +494,7 @@
 #define SOUND_MENU_CAMERA_TURN                              SOUND_ARG_LOAD(7, 0, 0x0F, 0x00, 8)
 /* not verified */ #define SOUND_MENU_UNK10                 0x7010
 #define SOUND_MENU_CLICK_FILE_SELECT                        SOUND_ARG_LOAD(7, 0, 0x11, 0x00, 8)
-#define SOUND_LIGHT_TICK                                    SOUND_ARG_LOAD(7, 0, 0x11, 0xFE, 8)
+#define SOUND_LIGHT_TICK                                    SOUND_ARG_LOAD(7, 0, 0x11, 0xFF, 8)
 /* not verified */ #define SOUND_MENU_MESSAGE_NEXT_PAGE     SOUND_ARG_LOAD(7, 0, 0x13, 0x00, 8)
 #define SOUND_MENU_COIN_ITS_A_ME_MARIO                      SOUND_ARG_LOAD(7, 0, 0x14, 0x00, 8)
 #define SOUND_MENU_YOSHI_GAIN_LIVES                         SOUND_ARG_LOAD(7, 0, 0x15, 0x00, 8)
@@ -517,7 +517,7 @@
 // US/EU only; an index between 0-7 or 0-4 is added to the sound ID before
 // playing, producing the same sound with different pitch.
 #define SOUND_MENU_COLLECT_RED_COIN             SOUND_ARG_LOAD(7, 8, 0x28, 0x90, 8)
-#define SOUND_MENU_COLLECT_SECRET               SOUND_ARG_LOAD(7, 0, 0x32, 0xFF, 8)
+#define SOUND_MENU_COLLECT_SECRET               SOUND_ARG_LOAD(7, 0, 0x32, 0xFE, 8)
 
 // Channel 8 loads sounds from the same place as channel 3, making it possible
 // to play two channel 3 sounds at once (since just one sound from each channel
