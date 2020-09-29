@@ -839,20 +839,15 @@ Sorry,\n\
 the yellow rotating star\n\
 isn't for sale."))
 
-DEFINE_DIALOG(DIALOG_089, 1, 5, 95, 200, _("\
-Both ways fraught with\n\
-danger! Watch your feet!\n\
-Those who can't do the\n\
-Long Jump, tsk, tsk. Make\n\
-your way to the right.\n\
-Right: Work Elevator\n\
-/// Cloudy Maze\n\
-Left: Black Hole\n\
-///Underground Lake\n\
+DEFINE_DIALOG(DIALOG_089, 1, 4, 95, 200, _("\
+This right here is the\n\
+ROFLCOPTER!\n\
 \n\
-Red Circle: Elevator 2\n\
-//// Underground Lake\n\
-Arrow: You are here"))
+\n\
+Unfortunately, its pilot\n\
+has been taken hostage\n\
+by the queen, so it is\n\
+currently unable to fly."))
 
 DEFINE_DIALOG(DIALOG_090, 1, 6, 30, 200, _("\
 Bwa ha ha ha!\n\
@@ -863,10 +858,8 @@ you would! I warn you,\n\
 step!"))
 
 DEFINE_DIALOG(DIALOG_091, 2, 2, 30, 200, _("\
-Danger!\n\
-Strong Gusts!\n\
-But the wind makes a\n\
-comfy ride."))
+Ready to fly?\n\
+//Yes////No"))
 
 DEFINE_DIALOG(DIALOG_092, 1, 5, 30, 200, _("\
 Pestering me again, are\n\

@@ -1,6 +1,49 @@
+void mole_npc_act7(void) {
+    if (o->oTimer == 0) {
+        sDelayedWarpOp = 0x10;
+        sDelayedWarpTimer = 12;
+        sSourceWarpNodeId = 0xAB;
+        func_8024A48C(sSourceWarpNodeId);
+        play_transition(1, 0xC, 0x00, 0x00, 0x00);
+    }
+}
+
+
+void mole_npc_act5_alt(void) {
+    s32 response;
+    if (set_mario_npc_dialog(1) == 2) {
+        o->activeFlags |= 0x20; /* bit 5 */
+        response = cutscene_object_with_dialog(CUTSCENE_RACE_DIALOG, o, o->oBehParams2ndByte);
+        if (response != 0)
+            set_mario_npc_dialog(0);
+        if (response == 1) {
+            o->oAction = 7;
+            o->activeFlags &= ~0x20; /* bit 5 */
+            o->oInteractStatus = 0;
+        }
+        if (response == 2) {
+            o->oAction = 2;
+            o->activeFlags &= ~0x20; /* bit 5 */
+            o->oInteractStatus = 0;
+        }
+    }
+}
+
+
+
 void bhv_mole_npc_loop(void) {
 
     switch (o->oBehParams >> 24) {
+        case 3:
+            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) & 0x10/* queen mole fight id*/)
+                o->activeFlags = 0;
+        case 4:
+            if (o->oBehParams >> 24 == 4) {
+                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) & 0x10/* queen mole fight id*/)
+                    obj_enable();
+                else
+                    obj_disable();
+            }
         case 0:
         case 1:
         case 2:
@@ -57,10 +100,16 @@ void mole_npc_default_loop(void) {
             mole_npc_act4();
             break;
         case 5:
-            mole_npc_act5();
+            if (o->oBehParams >> 24 == 4)
+                mole_npc_act5_alt();
+            else
+                mole_npc_act5();
             break;
         case 6:
             mole_npc_act6();
+            break;
+        case 7:
+            mole_npc_act7();
             break;
     }
 }
