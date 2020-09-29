@@ -17,6 +17,11 @@
 
 #define object_and_int(object, offset, value) object->OBJECT_FIELD_S32(offset) &= (s32)(value)
 
+
+#define random_float() RandomFloat()
+#define random_sign() RandomSign()
+
+
 u16 RandomU16(void);
 float RandomFloat(void);
 s32 RandomSign(void);

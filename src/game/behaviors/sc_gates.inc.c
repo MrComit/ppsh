@@ -31,6 +31,8 @@ void bhv_car_gate(void) {
 
 
 void bhv_end_gate(void) {
+    if (save_file_get_star_flags(gCurrSaveFileNum - 1, 4) & 0x8)
+        o->activeFlags = 0;
     switch (o->oAction) {
         case 0:
             if (gRedSwitchesPushed >= 5) {

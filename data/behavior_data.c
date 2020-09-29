@@ -6784,3 +6784,13 @@ const BehaviorScript bhvSimpSmallSwitch[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBonusStar[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SPAWN_CHILD(/*Model*/ MODEL_TRANSPARENT_STAR, /*Behavior*/ bhvRedCoinStarMarker),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bonus_star_loop),
+    END_LOOP(),
+};

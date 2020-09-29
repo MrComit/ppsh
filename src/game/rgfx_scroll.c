@@ -189,8 +189,8 @@ static void shift_uv(u8 scrolltype, Vtx *vert, u16 vertcount, s16 u, s16 v) {
  */
 
 
-extern bob_a1_Sandfloor_001_mesh_vtx;
-extern bob_A3_Water_mesh_vtx;
+//extern bob_a1_Sandfloor_001_mesh_vtx;
+//extern bob_A3_Water_mesh_vtx;
 
 void rgfx_update_scroll() {
     switch(gCurrLevelNum) {
@@ -198,10 +198,10 @@ void rgfx_update_scroll() {
             switch(gCurrAreaIndex) {
                 case 1:
                     //shift_st(&mat_bob_sm64_material_water, 19, 0.25, 0.75);
-                    shift_uv(SCROLL_UV, &bob_a1_Sandfloor_001_mesh_vtx, 4, 5, 0);
+                    //shift_uv(SCROLL_UV, &bob_a1_Sandfloor_001_mesh_vtx, 4, 5, 0);
                     break;
                 case 3:
-                    shift_uv(SCROLL_UV, &bob_A3_Water_mesh_vtx, 8, -5, 0);
+                    //shift_uv(SCROLL_UV, &bob_A3_Water_mesh_vtx, 8, -5, 0);
                     break;
         }
         break;

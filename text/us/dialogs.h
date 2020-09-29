@@ -473,6 +473,11 @@ tyrannical, we're not \n\
 even allowed to go beyond \n\
 the confines of the town \n\
 without permission! \n\
+She's also kidnapped\n\
+the pilot to the\n\
+ROFLCOPTER, the only\n\
+known way to get\n\
+into Simp City\n\
 You have to make your \n\
 way up to her and take \n\
 her on. I know you can \n\
@@ -887,10 +892,10 @@ Princess again!\n\
 Bwa ha ha ha!"))
 
 DEFINE_DIALOG(DIALOG_094, 1, 4, 30, 200, _("\
-Get a good run up the\n\
-slope! Do you remember\n\
-the Long Jump? Run, press\n\
-[Z], then jump!"))
+A star will spawn for\n\
+the player who has\n\
+collected every star\n\
+in the previous world"))
 
 DEFINE_DIALOG(DIALOG_095, 1, 4, 30, 200, _("\
 To read a sign, stand in\n\

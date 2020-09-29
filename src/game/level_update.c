@@ -1374,7 +1374,7 @@ s32 lvl_set_current_level(UNUSED s16 arg0, s32 levelNum) {
         return 0;
     }
 
-    if (gCurrLevelNum == LEVEL_WF || gCurrLevelNum == LEVEL_JRB)
+    if (gCurrLevelNum != LEVEL_BOB)
         return 0;
 
     return 1;

@@ -102,9 +102,9 @@ Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
         newLight.a.l.col[0] = gLightColor;
         newLight.a.l.col[1] = gLightColor;
         newLight.a.l.col[2] = gLightColor;
-        light = segmented_to_virtual(&bob_Rocks_lights);
+        light = segmented_to_virtual(&bob_dl_Rocks_v2_lights);
         *light = newLight;
-        light2 = segmented_to_virtual(&bob_Rocks2_lights);
+        light2 = segmented_to_virtual(&bob_dl_Rocks2_v2_lights);
         *light2 = newLight;
 
         gLightColor = approach_s16_symmetric(gLightColor, gLightApproach, gLightSpeed);

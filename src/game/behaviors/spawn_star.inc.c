@@ -229,3 +229,43 @@ void bhv_hidden_red_coin_star_loop(void) {
             break;
     }
 }
+
+
+
+void bhv_bonus_star_loop(void) {
+    switch (o->oBehParams2ndByte) {
+        case 0:
+            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 0) == 0xFF) {
+                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 1) & 0xF == 0xF) {
+                    create_star(o->oPosX, o->oPosY, o->oPosZ);
+                }
+            }
+            break;
+        case 1:
+            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 1) & 0xF0 == 0xF0) {
+                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) == 0xFF) {
+                    create_star(o->oPosX, o->oPosY, o->oPosZ);
+                }
+            }
+            break;
+        case 2:
+            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 3) == 0xFF) {
+                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 4) & 0xF == 0xF) {
+                    create_star(o->oPosX, o->oPosY, o->oPosZ);
+                }
+            }
+            break;
+        case 3:
+            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 1) == 0xFF) {
+                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) == 0xFF) {
+                    if (save_file_get_star_flags(gCurrSaveFileNum - 1, 3) == 0xFF) {
+                        if (save_file_get_star_flags(gCurrSaveFileNum - 1, 4) & 0xF == 0xF) {
+                            create_star(o->oPosX, o->oPosY, o->oPosZ);
+                        }
+                    }
+                }
+            }
+            break;
+    }
+    o->activeFlags = 0;
+}

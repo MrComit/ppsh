@@ -142,8 +142,8 @@ static void shift_uv(u8 scrolltype, Vtx *vert, u16 vertcount, u16 width, u16 hei
     }
 }
 
-extern bob_a1_Sandfloor_001_mesh_vtx;
-extern bob_A3_Water_mesh_vtx;
+//extern bob_a1_Sandfloor_001_mesh_vtx;
+//extern bob_A3_Water_mesh_vtx;
 extern wf_Quicksand_mesh_vtx;
 extern wf_dl_Clouds1_mesh_vtx_0;
 extern wf_dl_Clouds2_mesh_vtx_0;
@@ -156,10 +156,10 @@ void uv_update_scroll() {
         case LEVEL_BOB:
             switch(gCurrAreaIndex) {
                 case 1:
-                    shift_uv(SCROLL_UV, &bob_a1_Sandfloor_001_mesh_vtx, 4, 32, 32, 5, 0);
+                    //shift_uv(SCROLL_UV, &bob_a1_Sandfloor_001_mesh_vtx, 4, 32, 32, 5, 0);
                     break;
                 case 3:
-                    shift_uv(SCROLL_UV, &bob_A3_Water_mesh_vtx, 8, 32, 32, -5, 0);
+                    //shift_uv(SCROLL_UV, &bob_A3_Water_mesh_vtx, 8, 32, 32, -5, 0);
                     break;
         }   
             break;
