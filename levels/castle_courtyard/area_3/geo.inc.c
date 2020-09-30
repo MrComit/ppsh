@@ -1,13 +1,13 @@
 #include "src/game/envfx_snow.h"
 
-const GeoLayout castle_courtyard_area_1_geo[] = {
+const GeoLayout castle_courtyard_area_3_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -5827, 0, 0, castle_courtyard_dl_WhiteRoom_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4944, 0, 0, castle_courtyard_dl_WhiteRoom_006_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout castle_courtyard_area_1[] = {
+const GeoLayout castle_courtyard_area_3[] = {
 	GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
 	GEO_OPEN_NODE(),
 		GEO_ZBUFFER(0),
@@ -23,7 +23,7 @@ const GeoLayout castle_courtyard_area_1[] = {
 			GEO_OPEN_NODE(),
 				GEO_CAMERA(1, 0, 0, 0, 0, -100, 0, geo_camera_main),
 				GEO_OPEN_NODE(),
-					GEO_BRANCH(1, castle_courtyard_area_1_geo),
+					GEO_BRANCH(1, castle_courtyard_area_3_geo),
 					GEO_RENDER_OBJ(),
 					GEO_ASM(ENVFX_MODE_NONE, geo_enfvx_main),
 				GEO_CLOSE_NODE(),

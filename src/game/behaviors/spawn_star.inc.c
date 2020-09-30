@@ -233,37 +233,30 @@ void bhv_hidden_red_coin_star_loop(void) {
 
 
 void bhv_bonus_star_loop(void) {
+    u8 course0 = save_file_get_star_flags(gCurrSaveFileNum - 1, 0);
+    u8 course1 = save_file_get_star_flags(gCurrSaveFileNum - 1, 1);
+    u8 course2 = save_file_get_star_flags(gCurrSaveFileNum - 1, 2);
+    u8 course3 = save_file_get_star_flags(gCurrSaveFileNum - 1, 3);
+    u8 course4 = save_file_get_star_flags(gCurrSaveFileNum - 1, 4);
     switch (o->oBehParams2ndByte) {
         case 0:
-            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 0) == 0xFF) {
-                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 1) & 0xF == 0xF) {
-                    create_star(o->oPosX, o->oPosY, o->oPosZ);
-                }
+            if (course0 == 0xFF && course1 & 0xF == 0xF) {
+                create_star(o->oPosX, o->oPosY, o->oPosZ);
             }
             break;
         case 1:
-            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 1) & 0xF0 == 0xF0) {
-                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) == 0xFF) {
-                    create_star(o->oPosX, o->oPosY, o->oPosZ);
-                }
+            if (course1 & 0xF0 == 0xF0 && course2 == 0xFF) {
+                create_star(o->oPosX, o->oPosY, o->oPosZ);
             }
             break;
         case 2:
-            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 3) == 0xFF) {
-                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 4) & 0xF == 0xF) {
+            if (course3 & 0xFF == 0xFF && course4 & 0xF == 0xF) {
                     create_star(o->oPosX, o->oPosY, o->oPosZ);
-                }
             }
             break;
         case 3:
-            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 1) == 0xFF) {
-                if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) == 0xFF) {
-                    if (save_file_get_star_flags(gCurrSaveFileNum - 1, 3) == 0xFF) {
-                        if (save_file_get_star_flags(gCurrSaveFileNum - 1, 4) & 0xF == 0xF) {
-                            create_star(o->oPosX, o->oPosY, o->oPosZ);
-                        }
-                    }
-                }
+            if (course0 == 0xFF && course1 == 0xFF && course2 == 0xFF && course3 == 0xFF && course4 & 0xF == 0xF) {
+                create_star(o->oPosX, o->oPosY, o->oPosZ);
             }
             break;
     }

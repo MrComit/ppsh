@@ -59,10 +59,10 @@ void bhv_mole_npc_loop(void) {
 
 void mole_spawn_star(f32 x, f32 y, f32 z, s16 param) {
     o->oBehParams = (o->oBehParams << 8) >> 8;
-    o->oBehParams |= o->oBehParams2ndByte << 24;
+    o->oBehParams |= param << 24;
     create_star(x, y, z);
     o->oBehParams = (o->oBehParams << 8) >> 8;
-    o->oBehParams |= param << 24;
+    o->oBehParams |= 0x10 << 24;
     o->oInteractType = 0x40000000;
     o->oAction = 2;
 }

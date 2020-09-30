@@ -898,17 +898,10 @@ collected every star\n\
 in the previous world"))
 
 DEFINE_DIALOG(DIALOG_095, 1, 4, 30, 200, _("\
-To read a sign, stand in\n\
-front of it and press [B],\n\
-like you did just now.\n\
-\n\
-When you want to talk to\n\
-a Koopa Troopa or other\n\
-animal, stand right in\n\
-front of it.\n\
-Please recover the Stars\n\
-that were stolen by\n\
-Bowser in this course."))
+A star will spawn for\n\
+the player who has\n\
+collected every star\n\
+in all the worlds"))
 
 DEFINE_DIALOG(DIALOG_096, 1, 4, 30, 200, _("\
 The path is narrow here.\n\

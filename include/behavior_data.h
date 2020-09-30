@@ -599,5 +599,6 @@ extern const BehaviorScript bhvBounceBoxes[];
 extern const BehaviorScript bhvAppearingBlock[];
 extern const BehaviorScript bhvSimpSmallSwitch[];
 extern const BehaviorScript bhvBonusStar[];
+extern const BehaviorScript bhvMagicDoor[];
 
 #endif /* _BEHAVIOR_DATA_H */

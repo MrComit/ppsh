@@ -174,6 +174,38 @@ Gfx *geo_switch_anim_state(s32 run, struct GraphNode *node) {
     return NULL;
 }
 
+#ifdef AVOID_UB
+Gfx *geo_switch_param_two(s32 run, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_param_two(s32 run, struct GraphNode *node) {
+#endif
+    struct Object *obj;
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (run == TRUE) {
+        obj = (struct Object *) gCurGraphNodeObject; // TODO: change global type to Object pointer
+
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        if (gCurGraphNodeHeldObject != NULL) {
+            obj = gCurGraphNodeHeldObject->objNode;
+        }
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        if (obj->oBehParams2ndByte >= switchCase->numCases) {
+            obj->oBehParams2ndByte = 0;
+        }
+
+        // assign the case number for execution.
+        switchCase->selectedCase = obj->oBehParams2ndByte;
+    }
+
+    return NULL;
+}
+
 //! @bug Same issue as geo_switch_anim_state.
 #ifdef AVOID_UB
 Gfx *geo_switch_area(s32 run, struct GraphNode *node, UNUSED void *context) {

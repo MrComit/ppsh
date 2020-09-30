@@ -629,4 +629,9 @@
 #define MODEL_SIMP_SMALL_SwITCH 0xF6
 #define MODEL_SIMP_BIG_SWITCH 0xF5
 
+
+//custon white rooms
+#define MODEL_MAGIC_DOOR 0xFF
+
+
 #endif

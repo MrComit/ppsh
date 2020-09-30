@@ -14,3 +14,5 @@
 #include "levels/castle_courtyard/areas/1/spire/geo.inc.c"
 #include "levels/castle_courtyard/areas/1/geo.inc.c"
 #include "levels/castle_courtyard/geo.inc.c"
+
+#include "levels/castle_courtyard/magic_door/geo.inc.c"
