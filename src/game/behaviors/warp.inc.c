@@ -12,7 +12,6 @@
 #define SIMP_2 8
 #define SIMP_3 9
 #define SIMP_4 10
-#define SIMP_5 11
 
 
 Vec3f sDeathII1[3] = {
@@ -46,13 +45,31 @@ Vec3f sDeathCC5 = {-10127.3f, 300.0f, -7320.6f};
 
 Vec3f sDeathCC6 = {13788.05f, 300.0f, 4825.755f};
 
+Vec3f sDeathSC1[10] = {
+{0.0f, -9040.85f, 26663.3f},
+{0.0f, -9596.6f, 12792.9f},
+{0.0f, -9596.6f, -4116.185f},
+{-7080.05f, -9596.6f, 10365.55f},
+{7299.05f, -9596.6f, 13629.25f},
+{-21637.45f, -9596.6f, -4277.165f},
+{17902.6f, -9057.9f, -8308.05f},
+{15364.9f, -2640.305f, 21893.15f},
+{-11427.95f, 441.284f, 2449.365f},
+{5380.0f, 1430.255f, -4067.47f},
+};
+
+Vec3f sDeathSC2 = {-12326.1f, 16339.35f, 22082.35f};
+
+Vec3f sDeathSC3 = {-25153.45f, -5709.25f, -17227.8f};
+
+Vec3f sDeathSC4 = {576.245f, 13322.1f, -14205.7f};
 
 Vec3f *sDeaths[] = {
-sDeathII1, sDeathCC1, sDeathCC2, sDeathCC3, sDeathCC4, sDeathCC5, sDeathCC6, sDeathCC1, sDeathCC1, sDeathCC1,
+sDeathII1, sDeathCC1, sDeathCC2, sDeathCC3, sDeathCC4, sDeathCC5, sDeathCC6, sDeathSC1, sDeathSC2, sDeathSC3, sDeathSC4,
 };
 
 s16 sDeathCounts[] = {
-3, 3, 5, 2, 1, 1, 1, 2, 2, 2,
+3, 3, 5, 2, 1, 1, 1, 10, 1, 1, 1,
 };
 
 s8 deathwarp_get_list(void) {
@@ -79,11 +96,12 @@ s8 deathwarp_get_list(void) {
         case LEVEL_JRB:
             switch (gCurrAreaIndex) {
                 case 1:
-                    return -1;
-                case 2:
-                    return -1;
+                    if (gMarioState->pos[1] < 4200.0f)
+                        return SIMP_1;
+                    else
+                        return SIMP_4;
                 case 3:
-                    return -1;
+                    return SIMP_1 + gMarioCurrentRoom;
                 default:
                     return -1;
             }

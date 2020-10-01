@@ -6723,6 +6723,7 @@ const BehaviorScript bhvGangToad[] = {
     SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
     SET_INT(oIntangibleTimer, 0),
     CALL_NATIVE(bhv_init_room),
+    SET_HOME(),
     //CALL_NATIVE(bhvToadMessage_init),
     CALL_NATIVE(bhv_gang_toad_init),
     BEGIN_LOOP(),

@@ -230,6 +230,13 @@ void gang_toad_chase(void) {
             if (gMarioState->health <= 0x280) {
                 level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR);
                 o->oAction = 0;
+                vec3f_copy(&o->oPosX, &o->oHomeX);
+                o->oFaceAngleYaw = 0x4000;
+                obj = obj_nearest_object_with_behavior(bhvChaseSwitch);
+                obj->header.gfx.scale[1] = 1.5f;
+                obj->oAction = 0;
+                while ((obj = obj_nearest_object_with_behavior(bhvSimpSmallSwitch)) != NULL)
+                    obj->activeFlags = 0;
             } else {
                 switch (o->oTimer) {
                     case 0:
@@ -398,6 +405,7 @@ struct Object *star;
             if (m->health <= 0x180) {
                 level_trigger_warp(m, WARP_OP_WARP_FLOOR);
                 o->oAction = 0;
+                o->oInteractType = 0x00800000;
                 o->oKoopaRunAngleX = 0;
                 o->oKoopaAction = 0;
             } else {
@@ -445,7 +453,7 @@ void bhv_simp_mine_loop(void) {
         spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
         o->activeFlags = 0;
     }
-    if (toad->oAction == 6)
+    if (toad->oAction == 6 || toad->oAction == 0)
         o->activeFlags = 0;
 
     if (o->oBehParams2ndByte == 0)

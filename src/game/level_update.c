@@ -766,10 +766,9 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 break;
 
             case WARP_OP_WARP_FLOOR:
-                if (m->floor->type != SURFACE_DEATH_PLANE) {
+                if (m->floor->type == SURFACE_WARP) {
                     sSourceWarpNodeId = m->floor->force;
-                }
-                else {
+                } else {
                     sSourceWarpNodeId = WARP_NODE_WARP_FLOOR;
                     if (area_get_warp_node(sSourceWarpNodeId) == NULL) {
                         if (m->numLives == 0) {
