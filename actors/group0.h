@@ -347,6 +347,8 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "star_piece_switch/geo_declarations.h"
 #include "star_piece_switch/collision_declarations.h"
+#include "simp_toad/geo_header.h"
+extern const struct Animation *const simptoad_seg6_anims_0600FB58[];
 
 
 

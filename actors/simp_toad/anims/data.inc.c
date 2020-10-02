@@ -1,0 +1,8 @@
+#include "sanim_06008F7C.inc.c"
+#include "sanim_06009310.inc.c"
+#include "sanim_060099F0.inc.c"
+#include "sanim_0600A0D0.inc.c"
+#include "sanim_0600B66C.inc.c"
+#include "sanim_0600CE78.inc.c"
+#include "sanim_0600E414.inc.c"
+#include "sanim_0600FB40.inc.c"

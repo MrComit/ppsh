@@ -115,6 +115,7 @@ const LevelScript level_main_scripts_entry[] = {
 
     LOAD_MODEL_FROM_GEO(MODEL_STAR_PIECE, star_piece_geo),
     LOAD_MODEL_FROM_GEO(MODEL_STAR_PIECE_SWITCH, star_piece_switch_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_SIMP_TOAD,               simp_toad_geo),
 
     FREE_LEVEL_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),
@@ -275,7 +276,6 @@ const LevelScript script_func_global_10[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BOOKEND,                 bookend_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HAUNTED_CAGE,            haunted_cage_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TOAD,                    toad_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_SIMP_TOAD,               simp_toad_geo),
     RETURN(),
 };
 

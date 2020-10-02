@@ -6673,7 +6673,7 @@ const BehaviorScript bhvSimpBomb[] = {
 const BehaviorScript bhvSimpMGToad[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, toad_seg6_anims_0600FB58),
+    LOAD_ANIMATIONS(oAnimations, simptoad_seg6_anims_0600FB58),
     ANIMATE(6),
     SET_INTERACT_TYPE(INTERACT_TEXT),
     SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
@@ -6717,7 +6717,7 @@ const BehaviorScript bhvSpotlight[] = {
 const BehaviorScript bhvGangToad[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO /*| OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW*/ | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, toad_seg6_anims_0600FB58),
+    LOAD_ANIMATIONS(oAnimations, simptoad_seg6_anims_0600FB58),
     ANIMATE(6),
     SET_INTERACT_TYPE(INTERACT_TEXT),
     SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
