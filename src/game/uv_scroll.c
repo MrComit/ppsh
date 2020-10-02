@@ -149,6 +149,7 @@ extern wf_dl_Clouds1_mesh_vtx_0;
 extern wf_dl_Clouds2_mesh_vtx_0;
 extern wf_dl_Clouds3_mesh_vtx_0;
 extern wf_dl_Clouds4_mesh_vtx_0;
+//extern ccm_dl_Mist_mesh_vtx_0;
 
 // Call this function inside play_mode_normal() in level_update.c
 void uv_update_scroll() {
@@ -170,6 +171,9 @@ void uv_update_scroll() {
                 shift_uv(SCROLL_X, &wf_dl_Clouds3_mesh_vtx_0, 24, 64, 32, -20, -32000);
                 shift_uv(SCROLL_X, &wf_dl_Clouds4_mesh_vtx_0, 24, 64, 32, -20, -32000);
             }
+        case LEVEL_CCM:
+            //shift_uv(SCROLL_Y_SINE, &ccm_dl_Mist_mesh_vtx_0, 22, 64, 64, 20, 50);
+            break;
         /*case LEVEL_WF:
             if (gCurrAreaIndex == 1)
                 shift_uv(SCROLL_UV, &wf_Quicksand_mesh_vtx, 24, 32, 32, 0, -16);
