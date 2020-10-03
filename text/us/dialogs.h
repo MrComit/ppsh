@@ -862,8 +862,10 @@ you would! I warn you,\n\
 『Friend,』 watch your\n\
 step!"))
 
-DEFINE_DIALOG(DIALOG_091, 2, 2, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_091, 2, 4, 30, 200, _("\
 Ready to fly?\n\
+The ride should be about\n\
+4 minutes and 13 seconds\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_092, 1, 5, 30, 200, _("\
@@ -961,11 +963,13 @@ them when they're fading\n\
 away. Instead, sneak up\n\
 behind them and punch."))
 
-DEFINE_DIALOG(DIALOG_103, 1, 4, 95, 200, _("\
-Upon four towers\n\
-one must alight...\n\
-Then at the peak\n\
-shall shine the light..."))
+DEFINE_DIALOG(DIALOG_103, 1, 3, 95, 200, _("\
+Ha! We're always 1 step\n\
+ahead of you, Mario!\n\
+\n\
+With the powers of us\n\
+all, Tier 1, 2, and 3,\n\
+we will destroy you!"))
 
 DEFINE_DIALOG(DIALOG_104, 1, 5, 30, 200, _("\
 The shadowy star in front\n\

@@ -352,4 +352,6 @@ extern const struct Animation *const simptoad_seg6_anims_0600FB58[];
 
 
 
+
+//#include "simp_toad_2/anim_header.h"
 #endif

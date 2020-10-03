@@ -3,8 +3,8 @@ u32 sDoorUnlocks[3] = {SAVE_FLAG_UNLOCKED_PSS_DOOR, SAVE_FLAG_UNLOCKED_WF_DOOR, 
 
 void bhv_magic_door_init(void) {
     u32 flags = save_file_get_flags();
-    //if (flags & sDoorUnlocks[o->oBehParams2ndByte])
-        //o->activeFlags = 0;
+    if (flags & sDoorUnlocks[o->oBehParams2ndByte])
+        o->activeFlags = 0;
     o->oOpacity = 0xFF;
     o->oF4 = sDoorStarCounts[o->oBehParams2ndByte];
 }

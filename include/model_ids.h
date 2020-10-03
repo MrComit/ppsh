@@ -630,8 +630,10 @@
 #define MODEL_SIMP_BIG_SWITCH 0xF5
 
 
-//custon white rooms
+//custom white rooms
 #define MODEL_MAGIC_DOOR 0xFF
 
+//custom boss
+#define MODEL_BOSS_GATE 0xFF
 
 #endif

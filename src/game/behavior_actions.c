@@ -313,3 +313,4 @@ void func_802B2328(s32 n, s32 a1, s32 a2, s32 r) {
 #include "behaviors/bounce_box.inc.c"
 #include "behaviors/appearing_block.inc.c"
 #include "behaviors/magic_door.inc.c"
+#include "behaviors/final_boss.inc.c"

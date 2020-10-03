@@ -8,4 +8,5 @@ const struct Animation *const simptoad_seg6_anims_0600FB58[] = {
     &simptoad_seg6_anim_0600A0D0,
     &simptoad_seg6_anim_06008F7C,
     &simptoad_seg6_anim_06009310,
+    &simp_toad_anim_sm64_anim_004,
 };

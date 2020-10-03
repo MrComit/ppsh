@@ -627,6 +627,13 @@ void bhv_deathwarp_loop(void);
 void bhv_bonus_star_loop(void);
 void bhv_magic_door_init(void);
 void bhv_magic_door_loop(void);
+void bhv_peach_boss_loop(void);
+void bhv_peach_boss_init(void);
+void bhv_toad_minion_loop(void);
+void bhv_toad_minion_init(void);
+void bhv_boss_gate_loop(void);
+void bhv_boss_flame_loop(void);
+void bhv_boss_flame_init(void);
 
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);

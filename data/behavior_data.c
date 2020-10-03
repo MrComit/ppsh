@@ -39,6 +39,7 @@
 #include "levels/hmc/header.h"
 #include "levels/ssl/header.h"
 #include "levels/bob/header.h"
+#include "levels/ccm/header.h"
 #include "levels/sl/header.h"
 #include "levels/wdw/header.h"
 #include "levels/jrb/header.h"
@@ -6808,5 +6809,65 @@ const BehaviorScript bhvMagicDoor[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_magic_door_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvPeachBoss[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO| OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW| OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, peach_seg5_anims_0501C41C),
+    SET_INTERACT_TYPE(INTERACT_DAMAGE),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    ANIMATE(11), // 4 is good too
+    CALL_NATIVE(bhv_peach_boss_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_peach_boss_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSimpToadMinion[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, simptoad_seg6_anims_0600FB58),
+    ANIMATE(8),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_INTERACT_TYPE(INTERACT_DAMAGE),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_toad_minion_init),
+    //CALL_NATIVE(bhv_peach_boss_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_toad_minion_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBossGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(boss_gate_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0xC00),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_boss_gate_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBossFlame[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    SCALE(350),
+    //SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_boss_flame_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_boss_flame_loop),
+        ADD_INT(oAnimState, 1),
     END_LOOP(),
 };

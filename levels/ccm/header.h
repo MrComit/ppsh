@@ -59,4 +59,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/header.inc.h"
 
+#include "levels/ccm/boss_gate/geo_header.h"
+
+#include "levels/ccm/boss_gate/collision_header.h"
+
 #endif

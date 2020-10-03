@@ -31,3 +31,5 @@
 #include "simp_toad/model.inc.c"
 #include "simp_toad/anims/data.inc.c"
 #include "simp_toad/anims/table.inc.c"
+//#include "simp_toad_2/anims/data.inc.c"
+//#include "simp_toad_2/anims/table.inc.c"

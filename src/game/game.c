@@ -375,6 +375,6 @@ void thread5_game_loop(UNUSED void *arg) {
             print_text_fmt_int(180, 20, "BUF %d", gGfxPoolEnd - (u8 *) gDisplayListHead);
         }
 
-        //render_fps();
+        render_fps();
     }
 }

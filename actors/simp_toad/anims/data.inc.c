@@ -6,3 +6,4 @@
 #include "sanim_0600CE78.inc.c"
 #include "sanim_0600E414.inc.c"
 #include "sanim_0600FB40.inc.c"
+#include "anim_sm64_anim_004.inc.c"

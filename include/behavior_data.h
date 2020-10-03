@@ -600,5 +600,9 @@ extern const BehaviorScript bhvAppearingBlock[];
 extern const BehaviorScript bhvSimpSmallSwitch[];
 extern const BehaviorScript bhvBonusStar[];
 extern const BehaviorScript bhvMagicDoor[];
+extern const BehaviorScript bhvPeachBoss[];
+extern const BehaviorScript bhvSimpToadMinion[];
+extern const BehaviorScript bhvBossGate[];
+extern const BehaviorScript bhvBossFlame[];
 
 #endif /* _BEHAVIOR_DATA_H */

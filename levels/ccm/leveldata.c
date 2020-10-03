@@ -46,3 +46,6 @@
 #include "levels/ccm/areas/2/macro.inc.c"
 #include "levels/ccm/areas/2/trajectory.inc.c"
 #include "levels/ccm/leveldata.inc.c"
+
+#include "levels/ccm/boss_gate/model.inc.c"
+#include "levels/ccm/boss_gate/collision.inc.c"

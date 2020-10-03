@@ -22,3 +22,5 @@
 #include "levels/ccm/areas/1/geo.inc.c"
 #include "levels/ccm/areas/2/geo.inc.c"
 #include "levels/ccm/geo.inc.c"
+
+#include "levels/ccm/boss_gate/geo.inc.c"
