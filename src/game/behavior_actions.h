@@ -634,6 +634,8 @@ void bhv_toad_minion_init(void);
 void bhv_boss_gate_loop(void);
 void bhv_boss_flame_loop(void);
 void bhv_boss_flame_init(void);
+void bhv_boss_bomb_init(void);
+void bhv_boss_bomb_loop(void);
 
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);

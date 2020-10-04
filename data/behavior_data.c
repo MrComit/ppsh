@@ -6847,13 +6847,14 @@ const BehaviorScript bhvSimpToadMinion[] = {
 
 
 const BehaviorScript bhvBossGate[] = {
-    BEGIN(OBJ_LIST_SURFACE),
+    //BEGIN(OBJ_LIST_SURFACE),
+    BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    LOAD_COLLISION_DATA(boss_gate_collision),
+    //LOAD_COLLISION_DATA(boss_gate_collision),
     SET_FLOAT(oDrawingDistance, 0x7FFF),
     SET_FLOAT(oCollisionDistance, 0xC00),
     BEGIN_LOOP(),
-        CALL_NATIVE(load_object_collision_model),
+        //CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_boss_gate_loop),
     END_LOOP(),
 };
@@ -6865,9 +6866,24 @@ const BehaviorScript bhvBossFlame[] = {
     BILLBOARD(),
     SCALE(350),
     //SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 25, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_boss_flame_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_boss_flame_loop),
         ADD_INT(oAnimState, 1),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBossBomb[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, bobomb_seg8_anims_0802396C),
+    ANIMATE(0),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_boss_bomb_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_boss_bomb_loop),
     END_LOOP(),
 };

@@ -1,3 +1,25 @@
+void scroll_ccm_dl_Arena_mesh_vtx_0() {
+	int i = 0;
+	int count = 44;
+	int width = 64 * 0x20;
+	int height = 64 * 0x20;
+
+	static int currentX = 0;
+	int deltaX;
+	Vtx *vertices = segmented_to_virtual(ccm_dl_Arena_mesh_vtx_0);
+
+	deltaX = (int)(1.2000000476837158 * 0x20) % width;
+
+	if (absi(currentX) > width) {
+		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[0] += deltaX;
+	}
+	currentX += deltaX;
+
+}
 void scroll_ccm_dl_Decal_mesh_vtx_0() {
 	int i = 0;
 	int count = 48;
@@ -42,31 +64,9 @@ void scroll_ccm_dl_Ground_mesh_vtx_2() {
 	currentY += deltaY;
 
 }
-void scroll_ccm_dl_Ground_001_mesh_vtx_2() {
-	int i = 0;
-	int count = 42;
-	int width = 64 * 0x20;
-	int height = 64 * 0x20;
-
-	static int currentX = 0;
-	int deltaX;
-	Vtx *vertices = segmented_to_virtual(ccm_dl_Ground_001_mesh_vtx_2);
-
-	deltaX = (int)(1.2000000476837158 * 0x20) % width;
-
-	if (absi(currentX) > width) {
-		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
-	}
-
-	for (i = 0; i < count; i++) {
-		vertices[i].n.tc[0] += deltaX;
-	}
-	currentX += deltaX;
-
-}
 void scroll_ccm() {
+	scroll_ccm_dl_Arena_mesh_vtx_0();
 	scroll_ccm_dl_Decal_mesh_vtx_0();
 	scroll_ccm_dl_Ground_mesh_vtx_2();
-	scroll_ccm_dl_Ground_001_mesh_vtx_2();
 
 }

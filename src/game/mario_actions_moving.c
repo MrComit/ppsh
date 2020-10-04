@@ -1694,7 +1694,12 @@ s32 act_burning_ground(struct MarioState *m) {
     set_mario_anim_with_accel(m, MARIO_ANIM_RUNNING, (s32)(m->forwardVel / 2.0f * 0x10000));
     func_80263AD4(m, 9, 45);
 
-    m->particleFlags |= PARTICLE_11;
+    if (gCurrLevelNum != 5) {
+        m->particleFlags |= PARTICLE_11;
+    } else if (m->actionTimer++ > 4) {
+        m->particleFlags |= PARTICLE_11;
+        m->actionTimer = 0;
+    }
     play_sound(SOUND_MOVING_LAVA_BURN, m->marioObj->header.gfx.cameraToObject);
 
     m->health -= 10;
