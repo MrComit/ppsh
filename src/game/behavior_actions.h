@@ -638,6 +638,9 @@ void bhv_boss_bomb_init(void);
 void bhv_boss_bomb_loop(void);
 
 
+extern s32 gBossReset;
+
+
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
 
 // Bowser

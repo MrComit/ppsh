@@ -52,7 +52,7 @@ const LevelScript level_ccm_entry[] = {
 		WARP_NODE(0x1D, LEVEL_CASTLE_COURTYARD, 0x03, 0x0B, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -9, 1916, 17268, 0, -180, 0, 0x000F0000, bhvWarps84),
 		OBJECT(MODEL_BOSS_GATE, 0, 417, 4535, 0, 0, 0, 0x00000000, bhvBossGate),
-		OBJECT(MODEL_NONE, -10, -20, 4492, 0, -180, 0, 0x000A0000, bhvWarps78),
+		OBJECT(MODEL_NONE, -9, 1780, 17268, 0, -180, 0, 0x000A0000, bhvWarps78),
 		OBJECT(MODEL_PEACH, 0, -1, 273, 0, 0, 0, 0x00000000, bhvPeachBoss),
 		TERRAIN(ccm_area_1_collision),
 		MACRO_OBJECTS(ccm_area_1_Area_1_macro_objs),
