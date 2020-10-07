@@ -591,6 +591,7 @@
 #define MODEL_STAR_PIECE 0x30
 #define MODEL_STAR_PIECE_SWITCH 0x31
 #define MODEL_SIMP_TOAD 0x32
+#define MODEL_SUBWAY_KOOPA 0x33
 
 
 // custom incel islands

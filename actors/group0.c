@@ -33,3 +33,6 @@
 #include "simp_toad/anims/table.inc.c"
 //#include "simp_toad_2/anims/data.inc.c"
 //#include "simp_toad_2/anims/table.inc.c"
+#include "subway_k/model.inc.c"
+#include "subway_k/anims/data.inc.c"
+#include "subway_k/anims/table.inc.c"

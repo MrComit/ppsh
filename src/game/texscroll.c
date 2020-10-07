@@ -19,6 +19,7 @@
 #include "src/game/texscroll/castle_courtyard_texscroll.inc.c"
 #include "src/game/texscroll/bob_texscroll.inc.c"
 #include "src/game/texscroll/ccm_texscroll.inc.c"
+#include "src/game/texscroll/group0_texscroll.inc.c"
 void scroll_textures() {
 	
 	
@@ -44,6 +45,10 @@ void scroll_textures() {
 
 	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_ccm_segment_7SegmentRomStart)) {
 		scroll_textures_ccm();
+	}
+
+	if(SCROLL_CONDITION(sSegmentROMTable[0x4] == (uintptr_t)_group0_mio0SegmentRomStart)) {
+		scroll_textures_group0();
 	}
 
 }

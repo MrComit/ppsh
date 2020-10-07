@@ -20,3 +20,4 @@
 #include "star_piece_switch/geo.inc.c"
 
 #include "simp_toad/geo.inc.c"
+#include "subway_k/geo.inc.c"

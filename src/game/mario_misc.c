@@ -25,13 +25,13 @@
 #include "object_list_processor.h"
 #include "dialog_ids.h"
 
-#define TOAD_STAR_1_REQUIREMENT 12
+#define TOAD_STAR_1_REQUIREMENT 38
 #define TOAD_STAR_2_REQUIREMENT 25
 #define TOAD_STAR_3_REQUIREMENT 35
 
-#define TOAD_STAR_1_DIALOG DIALOG_082
+#define TOAD_STAR_1_DIALOG DIALOG_083
 #define TOAD_STAR_2_DIALOG DIALOG_076
-#define TOAD_STAR_3_DIALOG DIALOG_083
+#define TOAD_STAR_3_DIALOG DIALOG_084
 
 #define TOAD_STAR_1_DIALOG_AFTER DIALOG_154
 #define TOAD_STAR_2_DIALOG_AFTER DIALOG_155
@@ -132,7 +132,7 @@ static void bhvToadMessage_talking(void) {
         switch (gCurrentObject->oToadMessageDialogId) {
             case TOAD_STAR_1_DIALOG:
                 gCurrentObject->oToadMessageDialogId = TOAD_STAR_1_DIALOG_AFTER;
-                bhv_spawn_star_no_level_exit(0);
+                bhv_spawn_star_no_level_exit(39);
                 break;
             case TOAD_STAR_2_DIALOG:
                 gCurrentObject->oToadMessageDialogId = TOAD_STAR_2_DIALOG_AFTER;
@@ -183,6 +183,7 @@ void bhvToadMessage_loop(void) {
 
 void bhvToadMessage_init(void) {
     s32 saveFlags = save_file_get_flags();
+    s32 starFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, 4);
     s32 starCount = save_file_get_total_star_count(gCurrSaveFileNum - 1, 0, 24);
     s32 dialogId = (gCurrentObject->oBehParams >> 24) & 0xFF;
     s32 enoughStars = TRUE;
@@ -190,7 +191,7 @@ void bhvToadMessage_init(void) {
     switch (dialogId) {
         case TOAD_STAR_1_DIALOG:
             enoughStars = (starCount >= TOAD_STAR_1_REQUIREMENT);
-            if (saveFlags & (1 << 24)) {
+            if (starFlags & 0x80) {
                 dialogId = TOAD_STAR_1_DIALOG_AFTER;
             }
             break;

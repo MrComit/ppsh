@@ -238,6 +238,10 @@ void bhv_bonus_star_loop(void) {
     u8 course2 = save_file_get_star_flags(gCurrSaveFileNum - 1, 2);
     u8 course3 = save_file_get_star_flags(gCurrSaveFileNum - 1, 3);
     u8 course4 = save_file_get_star_flags(gCurrSaveFileNum - 1, 4);
+    if (course4 & 1 << ((o->oBehParams >> 24) - 32)) {
+        o->activeFlags = 0;
+        return;
+    }
     switch (o->oBehParams2ndByte) {
         case 0:
             if (course0 == 0xFF && course1 & 0xF == 0xF) {

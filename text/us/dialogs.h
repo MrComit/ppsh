@@ -796,13 +796,12 @@ Sorry,\n\
 the yellow rotating star\n\
 isn't for sale."))
 
-DEFINE_DIALOG(DIALOG_083, 1, 6, 30, 200, _("\
-There's something strange\n\
-about that clock. As you\n\
-jump inside, watch the\n\
-position of the big hand.\n\
-Oh, look what I found!\n\
-Here, Mario, catch!"))
+DEFINE_DIALOG(DIALOG_083, 1, 3, 30, 200, _("\
+Hey, just a quick word\n\
+of advice - don't take\n\
+those guys too seriously.\n\
+Its what they want.\n\
+They feed off that"))
 
 DEFINE_DIALOG(DIALOG_084, 1, 3, 30, 200, _("\
 Yeeoww! Unhand me,\n\
@@ -1217,28 +1216,33 @@ honor! It is against the\n\
 royal rules to throw the\n\
 king out of the ring!"))
 
-DEFINE_DIALOG(DIALOG_129, 1, 5, 30, 200, _("\
-Welcome to the Vanish\n\
-Cap Switch Course! All of\n\
-the blue blocks you find\n\
-will become solid once you\n\
-step on the Cap Switch.\n\
-You'll disappear when you\n\
-put on the Vanish Cap, so\n\
-you'll be able to elude\n\
-enemies and walk through\n\
-many things. Try it out!"))
+DEFINE_DIALOG(DIALOG_129, 1, 6, 30, 200, _("\
+PLACEHOLDER DIALOG\n\
+-Introduce Subway Koopa\n\
+-Explain how peach has\n\
+been captured by a gang\n\
+of evil toads, named\n\
+'The Rejects'\n\
+-Basic backstory 'they\n\
+got so desperate for\n\
+pussy that they turned\n\
+to crime and started a\n\
+gang'\n\
+\n\
+-Explain how mario has\n\
+to find their hideout\n\
+in Simp City to save\n\
+peach"))
 
-DEFINE_DIALOG(DIALOG_130, 1, 5, 30, 200, _("\
-Welcome to the Metal Cap\n\
-Switch Course! Once you\n\
-step on the Cap Switch,\n\
-the green blocks will\n\
-become solid.\n\
-When you turn your body\n\
-into metal with the Metal\n\
-Cap, you can walk\n\
-underwater! Try it!"))
+DEFINE_DIALOG(DIALOG_130, 1, 4, 30, 200, _("\
+PLACEHOLDER DIALOG\n\
+-just talk about how\n\
+this land wasn't\n\
+always flashing, but\n\
+one day something\n\
+wacky happened that\n\
+caused it to be like\n\
+this"))
 
 DEFINE_DIALOG(DIALOG_131, 1, 5, 30, 200, _("\
 Welcome to the Wing Cap\n\
@@ -1391,21 +1395,28 @@ Down: Underground Lake\n\
 Left: Black Hole\n\
 Right: Hazy Maze (Closed)"))
 
-DEFINE_DIALOG(DIALOG_139, 1, 6, 30, 200, _("\
-Above: Automatic Elevator\n\
-Elevator begins\n\
-automatically and follows\n\
-pre-set course.\n\
-It disappears\n\
-automatically, too."))
+DEFINE_DIALOG(DIALOG_139, 1, 5, 30, 200, _("\
+PLACEHOLDER DIALOG\n\
+-subway koopa just rants\n\
+to himself about the time\n\
+he visited cuck canyon\n\
+years ago "))
 
-DEFINE_DIALOG(DIALOG_140, 1, 6, 30, 200, _("\
-Elevator Area\n\
-Right: Hazy Maze\n\
-/// Entrance\n\
-Left: Black Hole\n\
-///Elevator 1\n\
-Arrow: You are here"))
+DEFINE_DIALOG(DIALOG_140, 1, 5, 30, 200, _("\
+PLACEHOLDER DIALOG\n\
+-'aha, i see youve\n\
+found my place of\n\
+work' or smth like\n\
+that as an intro\n\
+-tell mario he's\n\
+close to finding\n\
+the secret hideout,\n\
+and come up with a\n\
+really stupid story\n\
+behind how subway\n\
+koopa found their\n\
+hideout in the first\n\
+place"))
 
 DEFINE_DIALOG(DIALOG_141, 1, 5, 150, 200, _("\
 You've recovered one of\n\
@@ -1585,21 +1596,8 @@ Whatever it is, it's\n\
 bugging me! I think I'll\n\
 blow it away!"))
 
-DEFINE_DIALOG(DIALOG_154, 1, 5, 30, 200, _("\
-Hold on to your hat! If\n\
-you lose it, you'll be\n\
-easily injured. If you\n\
-lose it, look for it in the\n\
-course where you lost it.\n\
-Speaking of lost, the\n\
-Princess is still stuck in\n\
-the walls somewhere.\n\
-Please help, Mario!\n\
-\n\
-Oh, you know that there\n\
-are secret worlds in the\n\
-walls as well as in the\n\
-paintings, right?"))
+DEFINE_DIALOG(DIALOG_154, 1, 1, 30, 200, _("\
+..."))
 
 DEFINE_DIALOG(DIALOG_155, 1, 6, 30, 200, _("\
 Thanks to the power of\n\

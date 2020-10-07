@@ -163,6 +163,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_NONE, 5554, 2265, 5141, 0, 0, 0, 0x17000000, bhvHiddenRedCoinStar),
 		OBJECT(MODEL_NONE, -9186, 640, 9850, 0, 0, 0, 0x0D000000, bhvWrenchStar),
 		OBJECT(MODEL_STAR_PIECE_SWITCH, 9416, -573, -9309, 0, 0, 0, 0x0B020000, bhvStarPieceSwitch),
+		OBJECT(MODEL_SUBWAY_KOOPA, -779, 1965, 3417, 0, -141, 0, 0x008B0000, bhvSubwayKoopa),
 		OBJECT(MODEL_TRUCK, -3541, 2258, -2603, 0, 106, 0, 0x00000000, bhvStaticObject),
 		OBJECT(MODEL_TRUCK, 2032, 2258, 5066, 0, -122, 0, 0x00000000, bhvStaticObject),
 		OBJECT(MODEL_TRUCK, -1980, 4228, -6711, 0, -167, 0, 0x00000000, bhvStaticObject),

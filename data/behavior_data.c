@@ -6886,3 +6886,32 @@ const BehaviorScript bhvBossBomb[] = {
         CALL_NATIVE(bhv_boss_bomb_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvStarSimpToad[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, simptoad_seg6_anims_0600FB58),
+    GOTO(bhvToadMessage + 1 + 1 + 2),
+};
+
+
+const BehaviorScript bhvSubwayKoopa[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, skoopa_seg6_anims_06011364),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    DROP_TO_FLOOR(),
+    SET_HITBOX(/*Radius*/ 120, /*Height*/ 130),
+    ANIMATE(7),
+    SCALE(250),
+    SET_INT(oBobombBuddyRole, 0),
+    SET_FLOAT(oDrawingDistance, 0x3000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_bobomb_buddy_init),
+    CALL_NATIVE(bhv_koopa_npc_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_koopa_npc_loop),
+    END_LOOP(),
+};
