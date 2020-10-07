@@ -12,7 +12,7 @@
     "09_level_slide": [ "0D" ],
     "0A_level_spooky": [ "10", "21" ],
     "0B_event_piranha_plant": [ "14_piranha_music_box" ],
-    "0C_level_underground": [ "15" ],
+    "0C_level_underground": [ "15_final_boss" ],
     "0D_menu_star_select": [ "16_course_start" ],
     "0E_event_powerup": [ "17" ],
     "0F_event_metal_cap": [ "18" ],
@@ -44,5 +44,6 @@
     "26_fear_boss":   [ "26_cuck" ],
     "27_embrace_society": [ "27_simp" ],
     "28_dark_area":  [ "28_subarea"],
-    "29_before_gangnam_style": [ "28_subarea"]
+    "29_before_gangnam_style": [ "28_subarea"],
+    "2A_final_boss": [ "15_final_boss"]
 }

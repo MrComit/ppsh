@@ -36,6 +36,9 @@ struct ObjectHitbox sBossFlameHitbox = {
     /* hurtboxHeight:     */ 30,
 };
 
+
+
+
 s32 gBossReset = 0;
 
 f32 sGatePosition[2] = {1462.11f, 417.249f};
@@ -47,6 +50,39 @@ s32 sToadsDead = 0;
 extern Vtx ccm_dl_ArenaRedCircle_001_mesh_vtx_0;
 
 s16 sVertexList[] = {0, 3, 6, 9, 12, 15, 16, 17, 18, 19, 20, 21, 24, 25, 28, 29, 32, 33, 36, 37};
+
+//struct MusicDynamic {
+//    /*0x0*/ s16 bits1;
+//    /*0x2*/ u16 volScale1;
+//    /*0x4*/ s16 dur1;
+//    /*0x6*/ s16 bits2;
+//    /*0x8*/ u16 volScale2;
+//    /*0xA*/ s16 dur2;
+//}; // size = 0xC
+
+struct MusicDynamic sFinalBossDynamics[6] = {
+    { 0x009B, 127, 5, 0x0064, 0, 5 }, // phase 3
+    { 0x00FB, 127, 5, 0x0004, 0, 5 }, // phase 3 (chaos)
+};
+
+
+void final_boss_dynamics(s16 number) {
+    s32 i;
+    u16 bit = 1;
+    for (i = 0; i < 16; i++) {
+        if (sFinalBossDynamics[number].bits1 & bit) {
+            fade_channel_volume_scale(0, i, sFinalBossDynamics[number].volScale1, sFinalBossDynamics[number].dur1);
+        }
+        if (sFinalBossDynamics[number].bits2 & bit) {
+            fade_channel_volume_scale(0, i, sFinalBossDynamics[number].volScale2, sFinalBossDynamics[number].dur2);
+        }
+        bit <<= 1;
+    }
+}
+
+
+
+
 
 void boss_change_circle_color(u8 r, u8 g, u8 b, s16 speed) {
     s16 i;
@@ -147,16 +183,20 @@ void bhv_peach_boss_loop(void) {
             }
             break;
         case 4:
+            sequence_player_unlower(0, 60);
+            play_music(0, SEQUENCE_ARGS(4, SEQ_FINAL), 0);
+            final_boss_dynamics(0);
             if (o->oTimer > 30) {
                 o->oAction = 5;
                 o->oF8 = CL_RandomMinMaxU16(60, 120);
-                o->o100 = CL_RandomMinMaxU16(2, 3);
+                o->o100 = CL_RandomMinMaxU16(1, 3);
                 o->oFC = 0;
                 o->oForwardVel = 20.0f;
                 o->o104 = 0x200;
             }
             break;
         case 5:
+            final_boss_dynamics(0);
             boss_change_circle_color(0, 0, 255, 0x20);
             obj_update_floor_and_walls();
             obj_move_standard(-78);
@@ -204,6 +244,7 @@ void bhv_peach_boss_loop(void) {
         case 7:
             if (sToadsDead == 15)
                 o->oAction = 9;
+            final_boss_dynamics(1);
             boss_change_circle_color(0, 255, 0, 0x10);
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 30, 20);
             if (o->oTimer > o->o108) {
@@ -214,6 +255,7 @@ void bhv_peach_boss_loop(void) {
         case 8:
             if (sToadsDead == 15)
                 o->oAction = 9;
+            final_boss_dynamics(0);
             boss_change_circle_color(0, 0, 255, 0x10);
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 20);
             if (o->oTimer > 60) {
@@ -224,6 +266,7 @@ void bhv_peach_boss_loop(void) {
             }
             break;
         case 9:
+            stop_background_music(SEQUENCE_ARGS(4, SEQ_FINAL));
             boss_change_circle_color(0, 255, 220, 0x18);
             break;
     }
@@ -383,11 +426,13 @@ void bhv_toad_minion_loop(void) {
             break;
         case 7:
             if (o->oTimer < o->oFC) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 80, 20);
                 o->oF8 += o->oF4;
                 o->oMoveAngleYaw = o->oF8 + 0x6AAB;
                 o->oPosX = 2550.0f * sins(o->oF8);
                 o->oPosZ = 274.0f + (2550.0f * coss(o->oF8));
             } else {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 200, 20);
                 obj_become_tangible();
                 o->o100 += 0x200;
                 o->oPosY = 30.0f + (330.0f * absf(coss(o->o100)));

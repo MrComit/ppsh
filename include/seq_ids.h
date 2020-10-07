@@ -46,6 +46,7 @@ enum SeqId {
     SEQ_EMBRACE,                      // 0x27
     SEQ_DARK,
     SEQ_GANGNAM,
+    SEQ_FINAL,
     SEQ_COUNT
 };
 
