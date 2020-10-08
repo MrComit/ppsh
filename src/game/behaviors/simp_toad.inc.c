@@ -91,6 +91,32 @@ void gang_toad_npc(void) {
     }
 }
 
+void gang_toad_npc_2(void) {
+    if (gMarioCurrentRoom == 2) {
+        stop_background_music(SEQUENCE_ARGS(4, SEQ_EMBRACE));
+    }
+    switch (o->oAction) {
+        case 0:
+            BobombBuddyIdleLoop();
+            break;
+
+        case 2:
+            BobombBuddyTurnToTalkLoop();
+            break;
+
+        case 3:
+            if (CL_NPC_Dialog(DIALOG_159)) {
+                o->oAction = 4;
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x20, 0x00, 0x00, 0x00);
+            }
+            break;
+
+        case 4:
+            set_mario_npc_dialog(1);
+            break;
+    }
+}
+
 
 
 
@@ -290,6 +316,9 @@ void bhv_gang_toad_loop(void) {
         case 2:
             gang_toad_chase();
             break;
+        case 4:
+            gang_toad_npc_2();
+            break;
     }
 }
 
@@ -477,4 +506,18 @@ void bhv_simp_mine_loop(void) {
                 o->oAction = 0;
             break;
     }
+}
+
+
+
+void bhv_secret_door_init(void) {
+    struct Object *obj;
+    if (save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 44 ||
+        save_file_get_flags() & SAVE_FLAG_UNLOCKED_BASEMENT_DOOR) {
+        o->activeFlags = 0;
+        obj = obj_nearest_object_with_behavior(bhvMessagePanel);
+        if (obj != NULL)
+            obj->activeFlags = 0;
+        }
+
 }

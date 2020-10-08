@@ -629,6 +629,7 @@
 #define MODEL_SIMP_MAROON_BLOCK 0xF7
 #define MODEL_SIMP_SMALL_SwITCH 0xF6
 #define MODEL_SIMP_BIG_SWITCH 0xF5
+#define MODEL_SIMP_DOOR 0xF4
 
 
 //custom white rooms

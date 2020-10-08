@@ -1,3 +1,4 @@
+#include "levels/jrb/simp_door/texscroll.inc.h"
 #include "levels/jrb/big_switch/texscroll.inc.h"
 #include "levels/jrb/small_switch/texscroll.inc.h"
 #include "levels/jrb/box_spring/texscroll.inc.h"

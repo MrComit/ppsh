@@ -329,7 +329,7 @@ DEFINE_DIALOG(DIALOG_033, 1, 3, 30, 200, _("\
 It's a computer. It's \n\
 showing a website you've\n\
 never heard of - 4Chan.\n\
-07/15/12 02:41\n\
+07-15-12 02:41\n\
 >tfw no koopa gf"))
 
 DEFINE_DIALOG(DIALOG_034, 1, 5, 30, 200, _("\
@@ -663,7 +663,7 @@ and don't get any stupid\n\
 fucking ideas, plumber boy"))
 
 DEFINE_DIALOG(DIALOG_066, 1, 5, 30, 200, _("\
-07/15/12 14:16\n\
+07-15-12 14:16\n\
 Your Tier 3 Sub to \n\
 pokimane has expired.\n\
 Click here to go to the\n\
@@ -1637,26 +1637,15 @@ smothered.\n\
 The dark areas are\n\
 bottomless pits."))
 
-DEFINE_DIALOG(DIALOG_158, 1, 6, 30, 200, _("\
-1. If you jump repeatedly\n\
-and time it right, you'll\n\
-jump higher and higher.\n\
-If you run really fast and\n\
-time three jumps right,\n\
-you can do a Triple Jump.\n\
-2. Jump into a solid wall,\n\
-then jump again when you\n\
-hit the wall. You can\n\
-bounce to a higher level\n\
-using this Wall Kick."))
+DEFINE_DIALOG(DIALOG_158, 1, 2, 30, 200, _("\
+I'm not home right now.\n\
+Come back later!"))
 
-DEFINE_DIALOG(DIALOG_159, 1, 6, 30, 200, _("\
-3. If you stop, press [Z]\n\
-to crouch, then jump, you\n\
-can perform a Backward\n\
-Somersault. To do a Long\n\
-Jump, run fast, press [Z],\n\
-then jump."))
+DEFINE_DIALOG(DIALOG_159, 1, 4, 30, 200, _("\
+The fabric that holds\n\
+this land together is\n\
+fading. Will you go along\n\
+with it? "))
 
 DEFINE_DIALOG(DIALOG_160, 1, 4, 30, 200, _("\
 Press [B] while running\n\

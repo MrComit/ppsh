@@ -3,9 +3,10 @@
 const GeoLayout jrb_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(10, geo_switch_area),
+		GEO_SWITCH_CASE(11, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, jrb_dl_Room10B_geo),
+			GEO_BRANCH(1, jrb_dl_Room11B_geo),
 			GEO_BRANCH(1, jrb_dl_Room1B_geo),
 			GEO_BRANCH(1, jrb_dl_Room2B_geo),
 			GEO_BRANCH(1, jrb_dl_Room3B_geo),
@@ -63,6 +64,13 @@ const GeoLayout jrb_dl_Room10B_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2268, -949, -18514, jrb_dl_material_0_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2799, -1020, -18528, jrb_dl_material_0_002_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, -2799, -1019, -18528, jrb_dl_material_0_003_mesh),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout jrb_dl_Room11B_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, 26025, -3190, 19110, jrb_dl_Building_073_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

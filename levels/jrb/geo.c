@@ -32,3 +32,4 @@
 #include "levels/jrb/appearing_block/geo.inc.c"
 #include "levels/jrb/small_switch/geo.inc.c"
 #include "levels/jrb/big_switch/geo.inc.c"
+#include "levels/jrb/simp_door/geo.inc.c"

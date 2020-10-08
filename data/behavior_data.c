@@ -6915,3 +6915,16 @@ const BehaviorScript bhvSubwayKoopa[] = {
         CALL_NATIVE(bhv_koopa_npc_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvSecretDoor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(simp_door_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0xA00),
+    CALL_NATIVE(bhv_secret_door_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

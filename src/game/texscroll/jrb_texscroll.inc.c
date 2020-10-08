@@ -10,6 +10,7 @@
 #include "levels/jrb/box_spring/texscroll.inc.c"
 #include "levels/jrb/small_switch/texscroll.inc.c"
 #include "levels/jrb/big_switch/texscroll.inc.c"
+#include "levels/jrb/simp_door/texscroll.inc.c"
 void scroll_textures_jrb() {
 	scroll_jrb();
 
@@ -32,5 +33,7 @@ void scroll_textures_jrb() {
 	scroll_jrb_level_geo_small_switch();
 
 	scroll_jrb_level_geo_big_switch();
+
+	scroll_jrb_level_geo_simp_door();
 
 }

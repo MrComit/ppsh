@@ -60,3 +60,5 @@
 #include "levels/jrb/small_switch/collision.inc.c"
 #include "levels/jrb/big_switch/model.inc.c"
 #include "levels/jrb/big_switch/collision.inc.c"
+#include "levels/jrb/simp_door/model.inc.c"
+#include "levels/jrb/simp_door/collision.inc.c"
