@@ -1961,7 +1961,7 @@ static s32 act_jumbo_star_cutscene(struct MarioState *m) {
 }
 
 // TODO: (Scrub C) This function almost certainly has a version that matches for both -g and -O2
-static void generate_yellow_sparkles(s16 x, s16 y, s16 z, f32 radius) {
+void generate_yellow_sparkles(s16 x, s16 y, s16 z, f32 radius) {
     s16 offsetX = radius * coss(sSparkleGenTheta) * sins(sSparkleGenPhi);
     s16 offsetY = radius * sins(sSparkleGenTheta);
     s16 offsetZ = radius * coss(sSparkleGenTheta) * coss(sSparkleGenPhi);

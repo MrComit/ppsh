@@ -446,7 +446,7 @@ extern Vtx wf_dl_Computer_004_mesh_vtx_0[28];
 extern Gfx wf_dl_Computer_004_mesh_tri_0[];
 extern Vtx wf_dl_Computer_004_mesh_vtx_1[4];
 extern Gfx wf_dl_Computer_004_mesh_tri_1[];
-extern Vtx wf_dl_Indoors2_mesh_vtx_0[41];
+extern Vtx wf_dl_Indoors2_mesh_vtx_0[49];
 extern Gfx wf_dl_Indoors2_mesh_tri_0[];
 extern Vtx wf_dl_Indoors2_mesh_vtx_1[8];
 extern Gfx wf_dl_Indoors2_mesh_tri_1[];

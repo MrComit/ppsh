@@ -329,6 +329,7 @@ DEFINE_DIALOG(DIALOG_033, 1, 3, 30, 200, _("\
 It's a computer. It's \n\
 showing a website you've\n\
 never heard of - 4Chan.\n\
+07/15/12 02:41\n\
 >tfw no koopa gf"))
 
 DEFINE_DIALOG(DIALOG_034, 1, 5, 30, 200, _("\
@@ -661,7 +662,8 @@ Stay out of our way,\n\
 and don't get any stupid\n\
 fucking ideas, plumber boy"))
 
-DEFINE_DIALOG(DIALOG_066, 1, 4, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_066, 1, 5, 30, 200, _("\
+07/15/12 14:16\n\
 Your Tier 3 Sub to \n\
 pokimane has expired.\n\
 Click here to go to the\n\
@@ -1035,30 +1037,26 @@ new body! Here--this is a\n\
 present for you. It's sure\n\
 to warm you up."))
 
-DEFINE_DIALOG(DIALOG_112, 1, 4, 30, 200, _("\
-Collect as many coins as\n\
-possible! They'll refill\n\
-your Power Meter.\n\
+DEFINE_DIALOG(DIALOG_112, 1, 3, 30, 200, _("\
+This land is nothing\n\
+without us, just you\n\
+wait and see.\n\
+...\n\
 \n\
-You can check to see how\n\
-many coins you've\n\
-collected in each of the\n\
-15 enemy worlds.\n\
-You can also recover\n\
-power by touching the\n\
-Spinning Heart.\n\
 \n\
-The faster you run\n\
-through the heart, the\n\
-more power you'll recover."))
+...how am i here you\n\
+ask?...\n\
+\n\
+...\n\
+\n\
+\n\
+...isn't it all nonsense\n\
+anyway?..."))
 
-DEFINE_DIALOG(DIALOG_113, 1, 6, 30, 200, _("\
-There are special Caps in\n\
-the red, green and blue\n\
-blocks. Step on the\n\
-switches in the hidden\n\
-courses to activate the\n\
-Cap Blocks."))
+DEFINE_DIALOG(DIALOG_113, 1, 3, 30, 200, _("\
+Wouldn't the world be\n\
+better off if we took\n\
+nonsense more seriously?"))
 
 DEFINE_DIALOG(DIALOG_114, 1, 5, 95, 200, _("\
 It makes me so mad! We\n\
@@ -1170,16 +1168,17 @@ C'mon troops! Let's watch\n\
 the ending together!\n\
 Bwa ha ha!"))
 
-DEFINE_DIALOG(DIALOG_122, 1, 4, 30, 200, _("\
-The Black Hole\n\
-Right: Work Elevator\n\
-/// Cloudy Maze\n\
-Left: Underground Lake"))
+DEFINE_DIALOG(DIALOG_122, 1, 2, 30, 200, _("\
+Without reason I fester,\n\
+unclear and unapparent.\n\
+Corroding on contact,\n\
+muddled and incoherent.\n\
+What am I?"))
 
-DEFINE_DIALOG(DIALOG_123, 1, 4, 30, 200, _("\
-Metal Cavern\n\
-Right: To Waterfall\n\
-Left: Metal Cap Switch"))
+DEFINE_DIALOG(DIALOG_123, 1, 3, 30, 200, _("\
+Its fun watching you\n\
+delude yourself into\n\
+thinking I care."))
 
 DEFINE_DIALOG(DIALOG_124, 1, 4, 30, 200, _("\
 Work Elevator\n\
@@ -1763,23 +1762,25 @@ get dizzy and pass out\n\
 from running around\n\
 this post."))
 
-DEFINE_DIALOG(DIALOG_166, 1, 4, 30, 200, _("\
-I'll be back soon.\n\
-I'm out training now,\n\
-so come back later.\n\
-//--Koopa the Quick"))
+DEFINE_DIALOG(DIALOG_166, 1, 3, 30, 200, _("\
+Oh Mario! Thank you so\n\
+much for saving me.\n\
+\n\
+Wha- you want me to\n\
+have sex with you!?!?\n\
+That's disgusting!\n\
+You're... You're no\n\
+better than those\n\
+evil simp toads!"))
 
 DEFINE_DIALOG(DIALOG_167, 1, 4, 30, 200, _("\
-Princess Toadstool's\n\
-castle is just ahead.\n\
-\n\
-\n\
-Press [A] to jump, [Z] to\n\
-crouch, and [B] to punch,\n\
-read a sign, or grab\n\
-something.\n\
-Press [B] again to throw\n\
-something you're holding."))
+Oh Mario! Thank you so\n\
+much for saving me.\n\
+How could I ever repay\n\
+you?\n\
+Sex? Of course! I would\n\
+do anything for a man as\n\
+handsom as yourself..."))
 
 DEFINE_DIALOG(DIALOG_168, 1, 5, 30, 200, _("\
 Hey! Knock it off! That's\n\

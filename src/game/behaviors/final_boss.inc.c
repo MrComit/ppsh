@@ -1,4 +1,5 @@
 //#include "game/object_helpers2.h"
+void generate_yellow_sparkles(s16 x, s16 y, s16 z, f32 radius);
 
 struct ObjectHitbox sPeachBossHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
@@ -146,6 +147,7 @@ void bhv_peach_boss_init(void) {
 
 void bhv_peach_boss_loop(void) {
     struct Object *obj;
+    s32 dialogId;
     switch (o->oAction) {
         case 0:
             boss_change_circle_color(255, 0, 35, 0x10);
@@ -268,6 +270,53 @@ void bhv_peach_boss_loop(void) {
         case 9:
             stop_background_music(SEQUENCE_ARGS(4, SEQ_FINAL));
             boss_change_circle_color(0, 255, 220, 0x18);
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 30);
+            if (o->oTimer > 60) {
+                o->oAction = 10;
+                o->oMoveAngleYaw = 0;
+                o->oPosX = o->oHomeX;
+                o->oPosZ = o->oHomeZ;
+                o->oPosY = 1000.0f;
+                SetComitCutscene(45, 1, 6);
+            }
+            break;
+        case 10:
+            generate_yellow_sparkles(o->oHomeX, o->oPosY, o->oHomeZ, 150.0f);
+            PlaySound2(SOUND_AIR_PEACH_TWINKLE);
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 5);
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY, 12.0f, 12.0f);
+            if (o->oTimer > 100 && o->oDistanceToMario < 300.0f) {
+                o->oAction = 11;
+            }
+            break;
+        case 11:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
+            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+                if (save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 40)
+                    o->oAction = 12;
+                else
+                    o->oAction = 13;
+            }
+            break;
+        case 12: //good ending
+            if(CL_NPC_Dialog(DIALOG_167)) {
+                o->oAction = 14;
+                level_trigger_warp(gMarioState, WARP_OP_CREDITS_END);
+                /*sDelayedWarpOp = 0x10;
+                sDelayedWarpTimer = 12;
+                sSourceWarpNodeId = 0xAB;
+                func_8024A48C(sSourceWarpNodeId);
+                play_transition(0xB, 0xC, 0x00, 0x00, 0x00);*/
+            }
+            break;
+        case 13: //bad ending
+            if(CL_NPC_Dialog(DIALOG_166)) {
+                o->oAction = 15;
+            }
+            break;
+        case 14:
+            break;
+        case 15:
             break;
     }
     o->oInteractStatus = 0;
