@@ -1,6 +1,20 @@
 //#include "game/object_helpers2.h"
 void generate_yellow_sparkles(s16 x, s16 y, s16 z, f32 radius);
 
+struct ObjectHitbox sSubwayKoopaHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 8,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 80,
+    /* height:            */ 100,
+    /* hurtboxRadius:     */ 80,
+    /* hurtboxHeight:     */ 100,
+};
+
+
+
 struct ObjectHitbox sPeachBossHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
@@ -150,6 +164,7 @@ void bhv_peach_boss_loop(void) {
     s32 dialogId;
     switch (o->oAction) {
         case 0:
+            o->oAction = 9;
             boss_change_circle_color(255, 0, 35, 0x10);
             if (o->oDistanceToMario < 500.0f) {
                 o->oAction = 1;
@@ -268,6 +283,7 @@ void bhv_peach_boss_loop(void) {
             }
             break;
         case 9:
+            o->oInteractType = 0x40000000;
             stop_background_music(SEQUENCE_ARGS(4, SEQ_FINAL));
             boss_change_circle_color(0, 255, 220, 0x18);
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 30);
@@ -293,7 +309,7 @@ void bhv_peach_boss_loop(void) {
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
             if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
                 if (save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 40)
-                    o->oAction = 12;
+                    o->oAction = 13;//12;
                 else
                     o->oAction = 13;
             }
@@ -312,6 +328,12 @@ void bhv_peach_boss_loop(void) {
         case 13: //bad ending
             if(CL_NPC_Dialog(DIALOG_166)) {
                 o->oAction = 15;
+                obj = spawn_object(o, MODEL_SUBWAY_KOOPA, bhvEndingSubwayKoopa);
+                obj->oPosX = 0;
+                obj->oPosY = 1000.0f;
+                obj->oPosZ = 3000.0f;
+                SetComitCutscene(45, 1, 7);
+                set_mario_npc_dialog(1);
             }
             break;
         case 14:
@@ -321,7 +343,7 @@ void bhv_peach_boss_loop(void) {
     }
     o->oInteractStatus = 0;
 
-    if (gBossReset) {
+    if (gBossReset == 1) {
         o->oAction = 0;
         vec3f_copy(&o->oPosX, &o->oHomeX);
         o->oF4 = 0;
@@ -353,7 +375,7 @@ void bhv_toad_minion_init(void) {
 
 
 void bhv_toad_minion_loop(void) {
-    if (gBossReset)
+    if (gBossReset == 1)
         o->activeFlags = 0;
     if (sToadsDead == 15)
         o->activeFlags = 0;
@@ -517,7 +539,7 @@ void bhv_toad_minion_loop(void) {
 void bhv_boss_gate_loop(void) {
     o->oPosY = approach_f32(o->oPosY, sGatePosition[o->oAction], 50.0f, 50.0f);
 
-    if (gBossReset)
+    if (gBossReset == 1)
         o->oAction = 0;
 }
 
@@ -569,4 +591,49 @@ void bhv_boss_bomb_loop(void) {
         BossBombExplode();
     }
 
+}
+
+s32 subway_anim_ended(s32 arg0) {
+    set_obj_animation_and_sound_state(arg0);
+    return func_8029F788();
+}
+
+
+void bhv_subway_ending_init(void) {
+    set_object_hitbox(o, &sSubwayKoopaHitbox);
+    o->oMoveAngleYaw = 0x8000;
+}
+
+
+
+void bhv_subway_ending_loop(void) {
+    switch(o->oAction) {
+        case 0:
+            o->oPosY = approach_f32(o->oPosY, 0, 35.0f, 35.0f);
+            if (o->oPosY <= 60.0f) {
+                if(subway_anim_ended(13)) {
+                    set_obj_animation_and_sound_state(7);
+                    o->oPosY = 0;
+                    o->oAction = 1;
+                }
+            }
+            break;
+        case 1:
+            if (o->oTimer > 25) {
+                if (CL_NPC_Dialog(DIALOG_126)) {
+                    o->oAction = 2;
+                    o->oForwardVel = 55.0f;
+                    set_obj_animation_and_sound_state(1);
+                    sequence_player_unlower(0, 60);
+                    play_music(0, SEQUENCE_ARGS(4, SEQ_EVENT_BOSS), 0);
+                    gBossReset = 2;
+                }
+            }
+            break;
+        case 2:
+            CL_Move();
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
+            break;
+    }
+    o->oInteractStatus = 0;
 }

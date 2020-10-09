@@ -6928,3 +6928,19 @@ const BehaviorScript bhvSecretDoor[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvEndingSubwayKoopa[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, skoopa_seg6_anims_06011364),
+    ANIMATE(12),
+    SCALE(250),
+    SET_FLOAT(oDrawingDistance, 0x3000),
+    //SET_HOME(),
+    CALL_NATIVE(bhv_subway_ending_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_subway_ending_loop),
+    END_LOOP(),
+};

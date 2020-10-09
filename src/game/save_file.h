@@ -89,7 +89,7 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_FLAG_HAVE_VANISH_CAP        /* 0x000008 */ (1 << 3)
 #define SAVE_FLAG_HAVE_KEY_1             /* 0x000010 */ (1 << 4)
 #define SAVE_FLAG_HAVE_KEY_2             /* 0x000020 */ (1 << 5)
-#define SAVE_FLAG_UNLOCKED_BASEMENT_DOOR /* 0x000040 */ (1 << 6)
+#define SAVE_FLAG_UNLOCKED_BASEMENT_DOOR /* 0x000040 */ (1 << 6)// COOCHIE QUEST FLAG
 #define SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR /* 0x000080 */ (1 << 7)
 #define SAVE_FLAG_DDD_MOVED_BACK         /* 0x000100 */ (1 << 8)
 #define SAVE_FLAG_MOAT_DRAINED           /* 0x000200 */ (1 << 9)

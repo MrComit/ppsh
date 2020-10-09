@@ -1195,9 +1195,9 @@ Danger! Closed.\n\
 Turn back now."))
 
 DEFINE_DIALOG(DIALOG_126, 2, 3, 30, 200, _("\
-Up: Black Hole\n\
-Right: Work Elevator\n\
-/// Hazy Maze"))
+Don't worry Peach!\n\
+I'll save you from\n\
+this dangerous pervert!"))
 
 DEFINE_DIALOG(DIALOG_127, 3, 4, 30, 200, _("\
 Underground Lake\n\

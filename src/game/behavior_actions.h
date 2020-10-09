@@ -637,6 +637,8 @@ void bhv_boss_flame_init(void);
 void bhv_boss_bomb_init(void);
 void bhv_boss_bomb_loop(void);
 void bhv_secret_door_init(void);
+void bhv_subway_ending_loop(void);
+void bhv_subway_ending_init(void);
 
 extern s32 gBossReset;
 

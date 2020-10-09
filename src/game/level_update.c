@@ -763,10 +763,14 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                     sDelayedWarpOp = WARP_OP_GAME_OVER;
                 }
                 sDelayedWarpTimer = 48;
-                sSourceWarpNodeId = WARP_NODE_DEATH;
+                if (gBossReset == 2)
+                    sSourceWarpNodeId = 0xAB;
+                else 
+                    sSourceWarpNodeId = WARP_NODE_DEATH;
                 play_transition(WARP_TRANSITION_FADE_INTO_BOWSER, 0x30, 0x00, 0x00, 0x00);
                 play_sound(SOUND_MENU_BOWSER_LAUGH, gDefaultSoundArgs);
-                gBossReset = 1;
+                if (gBossReset != 2)
+                    gBossReset = 1;
                 break;
 
             case WARP_OP_WARP_FLOOR:
