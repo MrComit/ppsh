@@ -164,7 +164,6 @@ void bhv_peach_boss_loop(void) {
     s32 dialogId;
     switch (o->oAction) {
         case 0:
-            o->oAction = 9;
             boss_change_circle_color(255, 0, 35, 0x10);
             if (o->oDistanceToMario < 500.0f) {
                 o->oAction = 1;
@@ -309,7 +308,7 @@ void bhv_peach_boss_loop(void) {
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
             if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
                 if (save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 40)
-                    o->oAction = 13;//12;
+                    o->oAction = 12;//12;
                 else
                     o->oAction = 13;
             }
@@ -318,11 +317,6 @@ void bhv_peach_boss_loop(void) {
             if(CL_NPC_Dialog(DIALOG_167)) {
                 o->oAction = 14;
                 level_trigger_warp(gMarioState, WARP_OP_CREDITS_END);
-                /*sDelayedWarpOp = 0x10;
-                sDelayedWarpTimer = 12;
-                sSourceWarpNodeId = 0xAB;
-                func_8024A48C(sSourceWarpNodeId);
-                play_transition(0xB, 0xC, 0x00, 0x00, 0x00);*/
             }
             break;
         case 13: //bad ending

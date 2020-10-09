@@ -169,11 +169,13 @@ extern Gfx *Geo18_8029D924(s32 run, struct GraphNode *node, UNUSED void *context
 #ifdef AVOID_UB
 extern Gfx *geo_switch_anim_state(s32 run, struct GraphNode *node, void *context);
 extern Gfx *geo_switch_param_two(s32 run, struct GraphNode *node, void *context);
+extern Gfx *geo_switch_area_real(s32 run, struct GraphNode *node, void *context);
 extern Gfx *geo_switch_area(s32 run, struct GraphNode *node, void *context);
 extern Gfx *geo_switch_console_mode(s32 run, struct GraphNode *node, UNUSED void *context);
 #else
 extern Gfx *geo_switch_anim_state(s32 run, struct GraphNode *node);
 extern Gfx *geo_switch_param_two(s32 run, struct GraphNode *node);
+extern Gfx *geo_switch_area_real(s32 run, struct GraphNode *node);
 extern Gfx *geo_switch_area(s32 run, struct GraphNode *node);
 extern Gfx *geo_switch_console_mode(s32 run, struct GraphNode *node);
 #endif

@@ -22,7 +22,11 @@ const GeoLayout ending_geo_000050[] = {
 #ifdef VERSION_EU
             GEO_BACKGROUND_COLOR(0x0001),
 #endif
-            GEO_ASM(0, geo_exec_cake_end_screen),
+            GEO_SWITCH_CASE(2, geo_switch_area_real),
+            GEO_OPEN_NODE(),
+               GEO_ASM(0, geo_exec_cake_end_screen),
+               GEO_ASM(0, geo_exec_bad_cake_end_screen),
+               GEO_CLOSE_NODE(),
          GEO_CLOSE_NODE(),
       GEO_CLOSE_NODE(),
       GEO_ZBUFFER(1),
@@ -35,4 +39,3 @@ const GeoLayout ending_geo_000050[] = {
    GEO_CLOSE_NODE(),
    GEO_END(),
 };
-

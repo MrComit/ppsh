@@ -206,6 +206,27 @@ Gfx *geo_switch_param_two(s32 run, struct GraphNode *node) {
     return NULL;
 }
 
+extern s32 gBossReset;
+
+#ifdef AVOID_UB
+Gfx *geo_switch_area_real(s32 run, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_area_real(s32 run, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (run == TRUE) {
+        switchCase = (struct GraphNodeSwitchCase *) node;
+        if (gBossReset == 2) {
+           switchCase->selectedCase = 1; 
+        } else {
+            switchCase->selectedCase = 0;
+        }
+    }
+
+    return NULL;
+}
+
 //! @bug Same issue as geo_switch_anim_state.
 #ifdef AVOID_UB
 Gfx *geo_switch_area(s32 run, struct GraphNode *node, UNUSED void *context) {

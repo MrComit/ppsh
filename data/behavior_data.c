@@ -6820,7 +6820,7 @@ const BehaviorScript bhvPeachBoss[] = {
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     SET_INT(oIntangibleTimer, 0),
     SET_FLOAT(oDrawingDistance, 0x7FFF),
-    ANIMATE(11), // 4 is good too
+    ANIMATE(11), // 4 is good too //11
     SET_HOME(),
     CALL_NATIVE(bhv_peach_boss_init),
     BEGIN_LOOP(),
@@ -6847,13 +6847,13 @@ const BehaviorScript bhvSimpToadMinion[] = {
 
 
 const BehaviorScript bhvBossGate[] = {
-    BEGIN(OBJ_LIST_SURFACE),
+    BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(boss_gate_collision),
     SET_FLOAT(oDrawingDistance, 0x7FFF),
     SET_FLOAT(oCollisionDistance, 0x7FFF),
     BEGIN_LOOP(),
-        CALL_NATIVE(load_object_collision_model),
+        //CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_boss_gate_loop),
     END_LOOP(),
 };
