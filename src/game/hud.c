@@ -42,7 +42,7 @@ static s16 sPowerMeterStoredHealth;
 
 static struct PowerMeterHUD sPowerMeterHUD = {
     POWER_METER_HIDDEN,
-    140,
+    36,//140,
     166,
     1.0,
 };
@@ -51,6 +51,8 @@ static struct PowerMeterHUD sPowerMeterHUD = {
 // Gets reset when the health is filled and stops counting
 // when the power meter is hidden.
 s32 sPowerMeterVisibleTimer = 0;
+
+s32 gHudTopY = 209; // default 209, high is 225
 
 static struct UnusedStruct803314F0 unused803314F0 = { 0x00000000, 0x000A, 0x0000 };
 
@@ -255,28 +257,33 @@ void render_hud_power_meter(void) {
     sPowerMeterVisibleTimer += 1;
 }
 
-#ifdef VERSION_JP
-#define HUD_TOP_Y 210
+/*#ifdef VERSION_JP
+#define gHudTopY 210
 #else
-#define HUD_TOP_Y 209
-#endif
+#define gHudTopY 209
+#endif*/
 
 /**
  * Renders the amount of lives Mario has.
  */
 void render_hud_mario_lives(void) {
-    print_text(22, HUD_TOP_Y, ","); // 'Mario Head' glyph
-    print_text(38, HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(54, HUD_TOP_Y, "%d", gHudDisplay.lives);
+    print_text(22, gHudTopY, ","); // 'Mario Head' glyph
+    print_text(38, gHudTopY, "*"); // 'X' glyph
+    print_text_fmt_int(54, gHudTopY, "%d", gHudDisplay.lives);
 }
 
 /**
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    print_text(168, HUD_TOP_Y, "+"); // 'Coin' glyph
-    print_text(184, HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(198, HUD_TOP_Y, "%d", gHudDisplay.coins);
+    s32 hudY;
+    if (sCurrPlayMode == 2)
+        hudY = 209;
+    else
+        hudY = gHudTopY;
+    print_text(168, gHudTopY, "+"); // 'Coin' glyph
+    print_text(184, gHudTopY, "*"); // 'X' glyph
+    print_text_fmt_int(198, gHudTopY, "%d", gHudDisplay.coins);
 }
 
 #ifdef VERSION_JP
@@ -300,11 +307,11 @@ void render_hud_stars(void) {
         showX = 1;
     }
 
-    print_text(HUD_STARS_X, HUD_TOP_Y, "-"); // 'Star' glyph
+    print_text(HUD_STARS_X, gHudTopY, "-"); // 'Star' glyph
     if (showX == 1) {
-        print_text((HUD_STARS_X + 16), HUD_TOP_Y, "*"); // 'X' glyph
+        print_text((HUD_STARS_X + 16), gHudTopY, "*"); // 'X' glyph
     }
-    print_text_fmt_int(((showX * 14) + (HUD_STARS_X + 16)), HUD_TOP_Y, "%d", gHudDisplay.stars);
+    print_text_fmt_int(((showX * 14) + (HUD_STARS_X + 16)), gHudTopY, "%d", gHudDisplay.stars);
 }
 
 /**
@@ -449,9 +456,9 @@ void render_hud(void) {
             render_hud_cannon_reticle();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
-            render_hud_mario_lives();
-        }
+        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
+        //    render_hud_mario_lives();
+        //}
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
             render_hud_coins();
@@ -461,9 +468,9 @@ void render_hud(void) {
             render_hud_stars();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
-            render_hud_keys();
-        }
+        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
+        //    render_hud_keys();
+        //}
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_CAMERA_AND_POWER) {
             render_hud_power_meter();

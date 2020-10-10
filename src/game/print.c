@@ -395,7 +395,7 @@ void render_textrect(s32 x, s32 y, s32 pos) {
     s32 rectX;
     s32 rectY;
 
-    clip_to_bounds(&rectBaseX, &rectBaseY);
+    //clip_to_bounds(&rectBaseX, &rectBaseY);
     rectX = rectBaseX;
     rectY = rectBaseY;
     gSPTextureRectangle(gDisplayListHead++, rectX << 2, rectY << 2, (rectX + 15) << 2,

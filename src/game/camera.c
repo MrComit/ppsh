@@ -957,7 +957,48 @@ s32 update_radial_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
 
 
 
+/**
+ * Cause lakitu to fly to the next Camera position and focus over a number of frames.
+ *
+ * At the end of each frame, lakitu's position and focus ("state") are stored.
+ * Calling this function makes next_lakitu_state() fly from the last frame's state to the
+ * current frame's calculated state.
+ *
+ * @see next_lakitu_state()
+ */
+void transition_next_state(UNUSED struct Camera *c, s16 frames) {
+    if (!(sStatusFlags & CAM_FLAG_FRAME_AFTER_CAM_INIT)) {
+        sStatusFlags |= (CAM_FLAG_START_TRANSITION | CAM_FLAG_TRANSITION_OUT_OF_C_UP);
+        sModeTransition.framesLeft = frames;
+    }
+}
 
+/**
+ * Sets the camera mode to `newMode` and initializes sModeTransition with `numFrames` frames
+ *
+ * Used to change the camera mode to 'level-oriented' modes
+ *      namely: RADIAL/OUTWARD_RADIAL, 8_DIRECTIONS, FREE_ROAM, CLOSE, SPIRAL_STAIRS, and SLIDE_HOOT
+ */
+void transition_to_camera_mode(struct Camera *c, s16 newMode, s16 numFrames) {
+    if (c->mode != newMode) {
+        sModeInfo.newMode = (newMode != -1) ? newMode : sModeInfo.lastMode;
+        sModeInfo.lastMode = c->mode;
+        c->mode = sModeInfo.newMode;
+
+        // Clear movement flags that would affect the transition
+        gCameraMovementFlags &= (u16)~(CAM_MOVE_RESTRICT | CAM_MOVE_ROTATE);
+        if (!(sStatusFlags & CAM_FLAG_FRAME_AFTER_CAM_INIT)) {
+            transition_next_state(c, numFrames);
+            sCUpCameraPitch = 0;
+            sModeOffsetYaw = 0;
+            sLakituDist = 0;
+            sLakituPitch = 0;
+            sAreaYawChange = 0;
+            sPanDistance = 0.f;
+            sCannonYOffset = 0.f;
+        }
+    }
+}
 
 
 
@@ -966,17 +1007,18 @@ s32 update_radial_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
  * Update the camera during 8 directional mode
  */
 s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
-    UNUSED f32 cenDistX = sMarioCamState->pos[0] - c->areaCenX;
-    UNUSED f32 cenDistZ = sMarioCamState->pos[2] - c->areaCenZ;
     s16 camYaw = s8DirModeBaseYaw + s8DirModeYawOffset;
     s16 pitch = look_down_slopes(camYaw);
     f32 posY;
     f32 focusY;
-    UNUSED f32 unused1;
-    UNUSED f32 unused2;
-    UNUSED f32 unused3;
     f32 yOff = 125.f;
-    f32 baseDist = 1000.f;
+    f32 baseDist = 1000.f; //vanilla is 1000
+
+    if (gMarioState->action & ACT_FLAG_BUTT_OR_STOMACH_SLIDE) {
+        transition_to_camera_mode(c, CAMERA_MODE_SLIDE_HOOT, 60);
+        return;
+    }
+
 
     sAreaYaw = camYaw;
     calc_y_to_curr_floor(&posY, 1.f, 200.f, &focusY, 0.9f, 200.f);
@@ -2086,15 +2128,15 @@ s16 update_slide_camera(struct Camera *c) {
     s16 camPitch;
     s16 camYaw;
     UNUSED struct MarioState *marioState = &gMarioStates[0];
-    s16 goalPitch = 0x1555;
+    s16 goalPitch = 0x3000;//0x1555;
     s16 goalYaw = sMarioCamState->faceAngle[1] + DEGREES(180);
 
-    // Zoom in when inside the CCM shortcut
-    if (sStatusFlags & CAM_FLAG_CCM_SLIDE_SHORTCUT) {
-        sLakituDist = approach_f32(sLakituDist, -600.f, 20.f, 20.f);
-    } else {
-        sLakituDist = approach_f32(sLakituDist, 0.f, 20.f, 20.f);
+    if (!(gMarioState->action & ACT_FLAG_BUTT_OR_STOMACH_SLIDE) && gMarioState->floorHeight >= gMarioState->pos[1]) {
+        transition_to_camera_mode(c, 1, 60);
+        return;
     }
+
+    sLakituDist = approach_f32(sLakituDist, 0.f, 20.f, 20.f);
 
     // No C-Button input in this mode, notify the player with a buzzer
     play_camera_buzz_if_cbutton();
@@ -2104,34 +2146,12 @@ s16 update_slide_camera(struct Camera *c) {
     c->focus[1] += 50.f;
 
     vec3f_get_dist_and_angle(c->focus, c->pos, &distCamToFocus, &camPitch, &camYaw);
-    maxCamDist = 800.f;
+    maxCamDist = 1500.f;
 
-    // In hoot mode, zoom further out and rotate faster
-    if (sMarioCamState->action == ACT_RIDING_HOOT) {
-        maxCamDist = 1000.f;
-        goalPitch = 0x2800;
-        camera_approach_s16_symmetric_bool(&camYaw, goalYaw, 0x100);
-    } else {
-        camera_approach_s16_symmetric_bool(&camYaw, goalYaw, 0x80);
-    }
+
+    //camera_approach_s16_symmetric_bool(&camYaw, goalYaw, 0x80);
     camera_approach_s16_symmetric_bool(&camPitch, goalPitch, 0x100);
 
-    // Hoot mode
-    if (sMarioCamState->action != ACT_RIDING_HOOT && sMarioGeometry.currFloorType == SURFACE_DEATH_PLANE) {
-        vec3f_set_dist_and_angle(c->focus, pos, maxCamDist + sLakituDist, camPitch, camYaw);
-        c->pos[0] = pos[0];
-        c->pos[2] = pos[2];
-        camera_approach_f32_symmetric_bool(&c->pos[1], c->focus[1], 30.f);
-        vec3f_get_dist_and_angle(c->pos, c->focus, &distCamToFocus, &camPitch, &camYaw);
-        pitchScale = (distCamToFocus - maxCamDist + sLakituDist) / 10000.f;
-        if (pitchScale > 1.f) {
-            pitchScale = 1.f;
-        }
-        camPitch += 0x1000 * pitchScale;
-        vec3f_set_dist_and_angle(c->pos, c->focus, distCamToFocus, camPitch, camYaw);
-
-    // Slide mode
-    } else {
         vec3f_set_dist_and_angle(c->focus, c->pos, maxCamDist + sLakituDist, camPitch, camYaw);
         sStatusFlags |= CAM_FLAG_BLOCK_SMOOTH_MOVEMENT;
 
@@ -2146,7 +2166,6 @@ s16 update_slide_camera(struct Camera *c) {
             distCamToFocus = maxCamDist + sLakituDist;
             vec3f_set_dist_and_angle(c->focus, c->pos, distCamToFocus, camPitch, camYaw);
         }
-    }
 
     camYaw = calculate_yaw(c->focus, c->pos);
     return camYaw;
@@ -2923,48 +2942,6 @@ void mode_cannon_camera(struct Camera *c) {
     }
 }
 
-/**
- * Cause lakitu to fly to the next Camera position and focus over a number of frames.
- *
- * At the end of each frame, lakitu's position and focus ("state") are stored.
- * Calling this function makes next_lakitu_state() fly from the last frame's state to the
- * current frame's calculated state.
- *
- * @see next_lakitu_state()
- */
-void transition_next_state(UNUSED struct Camera *c, s16 frames) {
-    if (!(sStatusFlags & CAM_FLAG_FRAME_AFTER_CAM_INIT)) {
-        sStatusFlags |= (CAM_FLAG_START_TRANSITION | CAM_FLAG_TRANSITION_OUT_OF_C_UP);
-        sModeTransition.framesLeft = frames;
-    }
-}
-
-/**
- * Sets the camera mode to `newMode` and initializes sModeTransition with `numFrames` frames
- *
- * Used to change the camera mode to 'level-oriented' modes
- *      namely: RADIAL/OUTWARD_RADIAL, 8_DIRECTIONS, FREE_ROAM, CLOSE, SPIRAL_STAIRS, and SLIDE_HOOT
- */
-void transition_to_camera_mode(struct Camera *c, s16 newMode, s16 numFrames) {
-    if (c->mode != newMode) {
-        sModeInfo.newMode = (newMode != -1) ? newMode : sModeInfo.lastMode;
-        sModeInfo.lastMode = c->mode;
-        c->mode = sModeInfo.newMode;
-
-        // Clear movement flags that would affect the transition
-        gCameraMovementFlags &= (u16)~(CAM_MOVE_RESTRICT | CAM_MOVE_ROTATE);
-        if (!(sStatusFlags & CAM_FLAG_FRAME_AFTER_CAM_INIT)) {
-            transition_next_state(c, numFrames);
-            sCUpCameraPitch = 0;
-            sModeOffsetYaw = 0;
-            sLakituDist = 0;
-            sLakituPitch = 0;
-            sAreaYawChange = 0;
-            sPanDistance = 0.f;
-            sCannonYOffset = 0.f;
-        }
-    }
-}
 
 /**
  * Used to change the camera mode between its default/previous and certain mario-oriented modes,

@@ -5,7 +5,7 @@ void bhv_1up_interact(void) {
 
     if (are_objects_collided(o, gMarioObject) == 1) {
         play_sound(SOUND_GENERAL_COLLECT_1UP, gDefaultSoundArgs);
-        gMarioState->numLives++;
+        //gMarioState->numLives++;
         o->activeFlags = 0;
     }
 }

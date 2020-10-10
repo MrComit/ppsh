@@ -759,9 +759,9 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 break;
 
             case WARP_OP_DEATH:
-                if (m->numLives == 0) {
-                    sDelayedWarpOp = WARP_OP_GAME_OVER;
-                }
+                //if (m->numLives == 0) {
+                //    sDelayedWarpOp = WARP_OP_GAME_OVER;
+                //}
                 sDelayedWarpTimer = 48;
                 if (gBossReset == 2)
                     sSourceWarpNodeId = 0xAB;
@@ -779,11 +779,11 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 } else {
                     sSourceWarpNodeId = WARP_NODE_WARP_FLOOR;
                     if (area_get_warp_node(sSourceWarpNodeId) == NULL) {
-                        if (m->numLives == 0) {
-                            sDelayedWarpOp = WARP_OP_GAME_OVER;
-                        } else {
+                        //if (m->numLives == 0) {
+                            //sDelayedWarpOp = WARP_OP_GAME_OVER;
+                        //} else {
                             sSourceWarpNodeId = WARP_NODE_DEATH;
-                        }
+                        //}
                     }
                 }
                 sDelayedWarpTimer = 20;
@@ -923,14 +923,37 @@ void initiate_delayed_warp(void) {
     }
 }
 
+extern s32 gHudTopY;
+s32 gHudLowerTimer = 0;
+s32 sTimer2 = 0;
+
 void update_hud_values(void) {
     if (gCurrCreditsEntry == NULL) {
         s16 numHealthWedges = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
-        if (gCurrCourseNum > 0) {
-            gHudDisplay.flags |= HUD_DISPLAY_FLAG_COIN_COUNT;
+        //if (gCurrCourseNum > 0) {
+        //    gHudDisplay.flags |= HUD_DISPLAY_FLAG_COIN_COUNT;
+        //} else {
+        //    gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_COIN_COUNT;
+        //}
+        if (gMarioState->action & ACT_FLAG_STATIONARY) {
+            if (sTimer2++ > 45) {
+                gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
+            }
         } else {
-            gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_COIN_COUNT;
+            sTimer2 = 0;
+        }
+
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_LOWER) {
+            gHudLowerTimer++;
+            gHudTopY = approach_s16_symmetric(gHudTopY, 209, 2);
+        } else {
+            gHudTopY = approach_s16_symmetric(gHudTopY, 225, 2);
+        }
+
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_LOWER && gHudLowerTimer > 150) {
+            gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_LOWER;
+            gHudLowerTimer = 0;
         }
 
         if (gHudDisplay.coins < gMarioState->numCoins) {
@@ -942,6 +965,8 @@ void update_hud_values(void) {
                     coinSound = SOUND_GENERAL_COIN;
                 }
 
+                gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
+                gHudLowerTimer = 0;
                 gHudDisplay.coins += 1;
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
             }
@@ -1384,7 +1409,7 @@ s32 lvl_set_current_level(UNUSED s16 arg0, s32 levelNum) {
     if (gCurrLevelNum != LEVEL_BOB)
         return 0;
 
-    return 1;
+    return 0;
 }
 
 /**
