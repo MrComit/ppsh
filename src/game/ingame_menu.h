@@ -114,6 +114,13 @@ extern s16 gCutsceneMsgXOffset;
 extern s16 gCutsceneMsgYOffset;
 extern s8 gRedCoinsCollected;
 
+extern s16 gCurrSwimTutorial;
+extern s16 gLastSwimTutorial;
+extern s16 sTextAlpha;
+extern s8 sTextState;
+extern u16 sTextTimer;
+extern u16 sTextAFKTimer;
+
 extern void create_dl_identity_matrix(void);
 extern void create_dl_translation_matrix(s8 pushOp, f32 x, f32 y, f32 z);
 extern void create_dl_ortho_matrix(void);
@@ -149,5 +156,6 @@ extern void do_cutscene_handler(void);
 extern void render_hud_cannon_reticle(void);
 extern void reset_red_coins_collected(void);
 extern s16 render_menus_and_dialogs(void);
+extern void handle_tutorials(void);
 
 #endif /* INGAME_MENU_H */

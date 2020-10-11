@@ -94,7 +94,7 @@ static s16 sClickPos[] = {-10000, -10000};
 static s8 sSelectedFileIndex = -1;
 
 // Whether to fade out text or not.
-static s8 sFadeOutText = FALSE;
+s8 sFadeOutText = FALSE;
 
 // The message currently being displayed at the top of a menu.
 static s8 sStatusMessageID = 0;

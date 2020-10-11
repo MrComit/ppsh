@@ -855,7 +855,6 @@ s16 look_down_slopes(s16 camYaw) {
             }
         }
     }
-
     return pitch;
 }
 
@@ -1001,7 +1000,19 @@ void transition_to_camera_mode(struct Camera *c, s16 newMode, s16 numFrames) {
 }
 
 
-
+void set_r_button_camera(struct Camera *c) {
+    Vec3f marioOffset;
+    marioOffset[0] = 0.f;
+    if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT)
+        marioOffset[1] = 625.0f;
+    else
+        marioOffset[1] = 240.0f;
+    marioOffset[2] = 1310.0f;
+    offset_rotated(c->pos, gMarioState->pos, marioOffset, gMarioState->faceAngle);
+    vec3f_copy(c->focus, gMarioState->pos);
+    vec3f_copy(gLakituState.goalPos, c->pos);
+    vec3f_copy(gLakituState.goalFocus, c->focus);
+}
 
 /**
  * Update the camera during 8 directional mode
@@ -1031,11 +1042,6 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     } else {
         sequence_abovewater(0, 60);
     }
-
-    if (gCurrLevelArea == AREA_DDD_SUB) {
-        camYaw = clamp_positions_and_find_yaw(pos, focus, 6839.f, 995.f, 5994.f, -3945.f);
-    }
-
     return camYaw;
 }
 
@@ -3311,6 +3317,24 @@ void update_camera(struct Camera *c) {
         gUnderwaterCam = FALSE;
     }
 
+    if (gPlayer1Controller->buttonPressed & R_TRIG) {
+        s8DirModeYawOffset = gMarioState->faceAngle[1] + 0x8000;
+        set_r_button_camera(c);
+    }
+
+    if (gPlayer1Controller->buttonDown & L_JPAD) {
+        s8DirModeYawOffset -= 0x80;
+    }
+    if (gPlayer1Controller->buttonDown & R_JPAD) {
+        s8DirModeYawOffset += 0x80;
+    }
+    if (gPlayer1Controller->buttonPressed & U_JPAD) {
+        s8DirModeYawOffset = gMarioState->faceAngle[1] + 0x8000;
+    }
+    if (gPlayer1Controller->buttonPressed & D_JPAD) {
+        s8DirModeYawOffset = (gMarioState->faceAngle[1] + 0x8000) & 0xE000;
+    }
+
 }
 
 /**
@@ -3799,6 +3823,7 @@ s32 move_point_along_spline(Vec3f p, struct CutsceneSplinePoint spline[], s16 *s
  */
 s32 cam_select_alt_mode(s32 selection) {
     s32 mode = CAM_SELECTION_FIXED;
+    return 0;
 
     if (selection == CAM_SELECTION_MARIO) {
         if (!(sSelectionFlags & CAM_MODE_MARIO_SELECTED)) {

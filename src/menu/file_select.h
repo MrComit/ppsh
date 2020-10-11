@@ -131,6 +131,7 @@ enum Languages {
 };
 
 extern u32 gGlobalTimer;
+extern s8 sFadeOutText;
 
 extern void beh_yellow_background_menu_init(void);
 extern void beh_yellow_background_menu_loop(void);
@@ -142,5 +143,8 @@ extern Gfx *geo_file_select_strings_and_menu_cursor(s32 callContext, struct Grap
                                                     f32 mtx[4][4]);
 extern s32 lvl_init_menu_values_and_cursor_pos(s32 arg, s32 unused);
 extern s32 lvl_update_obj_and_load_file_selected(s32 arg, s32 unused);
+
+extern s32 update_text_fade_out(void);
+extern void print_generic_string_fade(s16 x, s16 y, const unsigned char *text);
 
 #endif /* FILE_SELECT_H */

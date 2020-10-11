@@ -22,6 +22,9 @@
 #include "camera.h"
 #include "level_geo.h"
 #include "seq_ids.h"
+#include "segment2.h"
+#include "include/text_strings.h.in"
+#include "dialog_ids.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *D_8033A160[0x100];
@@ -218,6 +221,9 @@ void load_area(s32 index) {
     gLightApproach = 0x00;
     gLightSpeed = 0x00;
     gLightTimer = 0x00;
+    sTextAlpha = 0;
+    sTextState = 0;
+    gCurrSwimTutorial = 0;
     if (gCurrentArea == NULL && gAreaData[index].unk04 != NULL) {
         gCurrentArea = &gAreaData[index];
         gCurrAreaIndex = gCurrentArea->index;
@@ -372,12 +378,25 @@ void render_game(void) {
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                       SCREEN_HEIGHT - BORDER_HEIGHT);
+        if (!gWarpTransition.isActive && gUnderwaterCam == TRUE) {
+            shade_screen_underwater();
+            render_screen_transition(0, WARP_TRANSITION_FADE_FROM_COLOR, 10,
+                                                          &gWarpTransition.data);
+                //if (!gWarpTransition.isActive) {
+                //    if (gWarpTransition.type & 1) {
+                //        gWarpTransition.pauseRendering = TRUE;
+                //    } else {
+                        set_warp_transition_rgb(0, 0, 0);
+                //    }
+                //}
+        }
         render_hud();
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         render_text_labels();
         do_cutscene_handler();
         print_displaying_credits_entry();
+        handle_tutorials();
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                       SCREEN_HEIGHT - BORDER_HEIGHT);
         gPauseScreenMode = render_menus_and_dialogs();
@@ -392,18 +411,6 @@ void render_game(void) {
             gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                           SCREEN_HEIGHT - BORDER_HEIGHT);
 
-        if (!gWarpTransition.isActive && gUnderwaterCam == TRUE) {
-            shade_screen_underwater();
-            render_screen_transition(0, WARP_TRANSITION_FADE_FROM_COLOR, 10,
-                                                          &gWarpTransition.data);
-                //if (!gWarpTransition.isActive) {
-                //    if (gWarpTransition.type & 1) {
-                //        gWarpTransition.pauseRendering = TRUE;
-                //    } else {
-                        set_warp_transition_rgb(0, 0, 0);
-                //    }
-                //}
-        }
 
         if (gWarpTransition.isActive) {
             if (gWarpTransDelay == 0) {
@@ -428,7 +435,7 @@ void render_game(void) {
             clear_frame_buffer(gWarpTransFBSetColor);
         }
     }
-
+    //handle_tutorials();
     D_8032CE74 = NULL;
     D_8032CE78 = 0;
 }

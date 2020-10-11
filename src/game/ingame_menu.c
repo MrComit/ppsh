@@ -943,6 +943,7 @@ void reset_dialog_render_state(void) {
 #define Y_VAL2 5.0f
 #endif
 
+
 void render_dialog_box_type(struct DialogEntry *dialog, s8 linesPerBox) {
     UNUSED s32 unused;
 
@@ -3059,4 +3060,195 @@ s16 render_menus_and_dialogs() {
         gDialogColorFadeTimer = (s16) gDialogColorFadeTimer + 0x1000;
     }
     return mode;
+}
+
+
+
+/*void render_tutorial_dialog(struct DialogEntry *dialog) {
+    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, ensure_nonnegative(dialog->leftOffset),
+    ensure_nonnegative(DIAG_VAL2 - dialog->width),
+    ensure_nonnegative(DIAG_VAL3 + dialog->leftOffset),
+    ensure_nonnegative(240 + ((dialog->linesPerBox * 80) / DIAG_VAL4) - dialog->width));
+    handle_dialog_text_and_pages(0, dialog, 1);
+    gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 2, 2, SCREEN_WIDTH - BORDER_HEIGHT/2, SCREEN_HEIGHT - BORDER_HEIGHT/2);
+}*/
+
+s16 gCurrSwimTutorial = 0;
+s16 gLastSwimTutorial = 0;
+s16 sTextAlpha = 0;
+s8 sTextState = 0;
+u16 sTextTimer = 0;
+u16 sTextAFKTimer = 0;
+
+u8 gSwimmingTutorial0[] = { TEXT_SWIM0 };
+u8 gSwimmingTutorial1[] = { TEXT_SWIM1 };
+u8 gSwimmingTutorial2[] = { TEXT_SWIM2 };
+u8 gSwimmingTutorial3[] = { TEXT_SWIM3 };
+u8 gGrindTutorial[] = { TEXT_GRIND };
+u8 *gTutorials[] = {
+    gSwimmingTutorial0, gSwimmingTutorial1, gSwimmingTutorial2, gSwimmingTutorial3, gGrindTutorial,
+};
+
+void print_tutorial_string(s16 x, s16 y, const char *str) {
+    create_dl_ortho_matrix();
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextAlpha);
+    print_generic_string(x, y, str);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
+
+void handle_tutorial_strings(const char *str) {
+    s16 x = get_str_x_pos_from_center(0xA0, str, 10.0f);
+    switch (sTextState) {
+        case 0:
+            sTextAlpha = approach_s16_symmetric(sTextAlpha, 255, 8);
+            break;
+        case 1:
+            sTextAlpha = approach_s16_symmetric(sTextAlpha, 0, 8);
+            if (sTextAlpha == 0) {
+                sTextState = 0;
+                sTextTimer = 0;
+                gCurrSwimTutorial++;
+                sTextAFKTimer = 0;
+            }
+            break;
+        case 2:
+            break;
+        case 3:
+            sTextAlpha = approach_s16_symmetric(sTextAlpha, 0, 12);
+            if (sTextAlpha == 0)
+                sTextState = 2;
+            break;
+    }
+    print_tutorial_string(x, 40, str);
+}
+
+void handle_tutorials(void) {
+    struct MarioState *m = gMarioState;
+    s32 flags = save_file_get_flags();
+    switch (gCurrLevelNum) {
+        case LEVEL_BOB:
+            if (flags & SAVE_FLAG_UNLOCKED_BITDW_DOOR)
+                return;
+            switch (gCurrSwimTutorial) {
+                case 0:
+                    if (m->action & ACT_FLAG_SWIMMING) {
+                        sTextState = 0;
+                        gCurrSwimTutorial = 1;
+                        if (gLastSwimTutorial)
+                            gCurrSwimTutorial = gLastSwimTutorial;
+                    }
+                    break;
+                case 1:
+                    if (m->input & INPUT_A_DOWN && m->action & ACT_FLAG_SWIMMING) {
+                        if (sTextTimer++ > 30)
+                            sTextState = 1;
+                    } else {
+                        sTextTimer = 0;
+                    }
+                    if (!(m->action & ACT_FLAG_SWIMMING)) {
+                        if (sTextAFKTimer++ > 60) {
+                            sTextState = 3;
+                            if (sTextAFKTimer > 90) {
+                                gLastSwimTutorial = gCurrSwimTutorial;
+                                gCurrSwimTutorial = 0;
+                            }
+                        }
+                    } else {
+                        sTextAFKTimer = 0;
+                    }
+                    handle_tutorial_strings(gTutorials[0]);
+                    break;
+                case 2:
+                    if (m->input & INPUT_Z_DOWN && m->action & ACT_FLAG_SWIMMING) {
+                        if (sTextTimer++ > 30)
+                            sTextState = 1;
+                    } else {
+                        sTextTimer = 0;
+                    }
+                    if (!(m->action & ACT_FLAG_SWIMMING)) {
+                        if (sTextAFKTimer++ > 60) {
+                            sTextState = 3;
+                            if (sTextAFKTimer > 90) {
+                                gLastSwimTutorial = gCurrSwimTutorial;
+                                gCurrSwimTutorial = 0;
+                            }
+                        }
+                    } else {
+                        sTextAFKTimer = 0;
+                    }
+                    handle_tutorial_strings(gTutorials[1]);
+                    break;
+                case 3:
+                    if (m->action == ACT_DOLPHIN_JUMP) {
+                        sTextState = 1;
+                    }
+                    if (!(m->action & ACT_FLAG_SWIMMING) && m->action != ACT_DOLPHIN_JUMP) {
+                        if (sTextAFKTimer++ > 120) {
+                            sTextState = 3;
+                            if (sTextAFKTimer > 150) {
+                                gLastSwimTutorial = gCurrSwimTutorial;
+                                gCurrSwimTutorial = 0;
+                            }
+                        }
+                    } else {
+                        sTextAFKTimer = 0;
+                    }
+                    handle_tutorial_strings(gTutorials[2]);
+                    break;
+                case 4:
+                    if (m->action & ACT_FLAG_METAL_WATER) {
+                        sTextState = 1;
+                    }
+                    if (!(m->action & ACT_FLAG_SWIMMING) && !(m->action & ACT_FLAG_METAL_WATER)) {
+                        if (sTextAFKTimer++ > 60) {
+                            sTextState = 3;
+                            if (sTextAFKTimer > 90) {
+                                gLastSwimTutorial = gCurrSwimTutorial;
+                                gCurrSwimTutorial = 0;
+                            }
+                        }
+                    } else {
+                        sTextAFKTimer = 0;
+                    }
+                    handle_tutorial_strings(gTutorials[3]);
+                    break;
+                case 5:
+                    save_file_set_flags(SAVE_FLAG_UNLOCKED_BITDW_DOOR);
+                    break;
+            }
+            break;
+        case LEVEL_JRB:
+            if (flags & SAVE_FLAG_UNLOCKED_BITFS_DOOR)
+                return;
+            switch (gCurrSwimTutorial) {
+                case 0:
+                    if (m->action == ACT_GRIND) {
+                        sTextState = 0;
+                        gCurrSwimTutorial = 1;
+                    }
+                    break;
+                case 1:
+                    if (m->input & INPUT_Z_DOWN && m->action == ACT_GRIND) {
+                        sTextState = 1;
+                    }
+                    if (m->action != ACT_GRIND) {
+                        if (sTextAFKTimer++ > 60) {
+                            sTextState = 3;
+                            if (sTextAFKTimer > 90) {
+                                gCurrSwimTutorial = 0;
+                            }
+                        }
+                    } else {
+                        sTextAFKTimer = 0;
+                    }
+                    handle_tutorial_strings(gTutorials[4]);
+                    break;
+                case 2:
+                    save_file_set_flags(SAVE_FLAG_UNLOCKED_BITFS_DOOR);
+                    break;
+            }
+            break;
+    }
 }

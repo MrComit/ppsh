@@ -472,4 +472,14 @@
 #define TEXT_MENU_STARS_DE _("   GEHEIME STERNE")
 #endif
 
+
+/*
+ *  Tutorials
+ */
+#define TEXT_SWIM0 _("Hold A to swim")
+#define TEXT_SWIM1 _("Hold Z to dash")
+#define TEXT_SWIM2 _("Tilt up while swimming to jump out of the water")
+#define TEXT_SWIM3 _("Press Z and B to sink to the ocean floor")
+#define TEXT_GRIND _("Hold Z to move faster")
+
 #endif

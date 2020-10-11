@@ -22,6 +22,7 @@
 #include "game.h"
 #include "audio/external.h"
 #include "!COMIT_LIBRARY.h"
+#include "save_file.h"
 
 
 /**
@@ -164,6 +165,10 @@ s16 gNumRoomedObjectsNotInMarioRoom;
 s16 gWDWWaterLevelChanging;
 s16 gMarioOnMerryGoRound;
 
+
+
+
+
 /**
  * Nodes used to represent the doubly linked object lists.
  */
@@ -272,7 +277,6 @@ static void mario_moon_jump(void) {
         //print_text_fmt_int(120, 110, "%d tris", gNumStaticSurfaces);
     }
 }
-
 
 /**
  * Mario's primary behavior update function.
