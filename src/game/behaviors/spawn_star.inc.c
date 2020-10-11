@@ -197,7 +197,7 @@ void bhv_hidden_red_coin_star_loop(void) {
         return;
     }
 
-    /*if (gRedCoinsCollected != 8) {
+    /*if (gRedCoinsCollected != 6) {
         o->oTimer = 0;
     }
     if (o->oTimer > 2) {
@@ -210,7 +210,7 @@ void bhv_hidden_red_coin_star_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (gRedCoinsCollected == 8)
+            if (gRedCoinsCollected == 6)
                 o->oAction = 1;
             break;
 

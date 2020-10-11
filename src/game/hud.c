@@ -12,6 +12,10 @@
 #include "area.h"
 #include "save_file.h"
 #include "print.h"
+#include "game/mario.h"
+#include "game/object_list_processor.h"
+#include "game/object_helpers.h"
+#include "include/behavior_data.h"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -53,6 +57,11 @@ static struct PowerMeterHUD sPowerMeterHUD = {
 s32 sPowerMeterVisibleTimer = 0;
 
 s32 gHudTopY = 209; // default 209, high is 225
+s32 gHudBottomY = 20;
+s32 gHudBottomX = 242;
+
+f32 sRedDistTable[3] = {5000.0f, 7500.0f, 10000.0f};
+f32 sRedDivideTable[3] = {50.0f, 75.0f, 100.0f};
 
 static struct UnusedStruct803314F0 unused803314F0 = { 0x00000000, 0x000A, 0x0000 };
 
@@ -419,6 +428,60 @@ void render_hud_camera_status(void) {
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
+
+f32 red_coin_distance(void) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(bhvRedCoin);
+    uintptr_t *behaviorAddr2 = segmented_to_virtual(bhvSpinningRCoin);
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    f32 minDist = 0x20000;
+
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr || obj->behavior == behaviorAddr2) {
+            if (obj->activeFlags != ACTIVE_FLAGS_DEACTIVATED && obj != gMarioObject) {
+                f32 objDist = dist_between_objects(gMarioObject, obj);
+                if (objDist < minDist) {
+                    minDist = objDist;
+                }
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+    return minDist;
+}
+
+void render_hud_red_coin_distance(void) {
+    u8 *(*cameraLUT)[6];
+    f32 dist = red_coin_distance();
+    if (dist < sRedDistTable[gCurrCourseNum - 1]) {
+        gHudBottomX = approach_s16_symmetric(gHudBottomX, 242, 10);
+    } else {
+        dist = 0;
+        gHudBottomX = approach_s16_symmetric(gHudBottomX, 320, 10);
+    }
+    cameraLUT = segmented_to_virtual(&main_hud_camera_lut);
+    gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
+    render_hud_tex_lut(gHudBottomX, 184, (*cameraLUT)[GLYPH_CAM_CAMERA]);
+    print_text_fmt_int(gHudBottomX + 16, 40, "%d", (s32)(dist / sRedDivideTable[gCurrCourseNum - 1]));
+    gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
+}
+
+void render_hud_red_coins(void) {
+    u8 *(*cameraLUT)[6];
+    cameraLUT = segmented_to_virtual(&main_hud_camera_lut);
+    //print_animated_red_coin(HUD_STARS_X + 8, 40);
+    //print_text(HUD_STARS_X, 40, "?");
+    gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
+    render_hud_tex_lut(HUD_STARS_X, 224 - gHudBottomY, (*cameraLUT)[GLYPH_CAM_LAKITU_HEAD]);
+    print_text(HUD_STARS_X + 16, gHudBottomY, "*"); // 'X' glyph
+    print_text_fmt_int(HUD_STARS_X + 30, gHudBottomY, "%d", gRedCoinsCollected);
+    gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
+}
+
+
 /**
  * Render HUD strings using hudDisplayFlags with it's render functions,
  * excluding the cannon reticle which detects a camera preset for it.
@@ -468,13 +531,23 @@ void render_hud(void) {
             render_hud_stars();
         }
 
+        if (gRedCoinsCollected > 0 && 6 > gRedCoinsCollected) {
+            render_hud_red_coin_distance();
+            render_hud_red_coins();
+            gHudBottomY = approach_s16_symmetric(gHudBottomY, 20, 2);
+            //gHudBottomX = approach_s16_symmetric(gHudBottomX, 320, 4);
+        } else {
+            gHudBottomX = approach_s16_symmetric(gHudBottomX, 320, 10);
+            gHudBottomY = approach_s16_symmetric(gHudBottomY, -20, 2);
+        }
+
         //if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
         //    render_hud_keys();
         //}
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_CAMERA_AND_POWER) {
             render_hud_power_meter();
-            render_hud_camera_status();
+            //render_hud_camera_status();
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER) {

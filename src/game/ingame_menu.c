@@ -2124,7 +2124,7 @@ void print_animated_red_coin(s16 x, s16 y) {
     create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.2f, 0.2f, 1.0f);
     gDPSetRenderMode(gDisplayListHead++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
 
-    switch (timer & 6) {
+    /*switch (timer & 6) {
         case 0:
             gSPDisplayList(gDisplayListHead++, coin_seg3_dl_03007940);
             break;
@@ -2137,7 +2137,8 @@ void print_animated_red_coin(s16 x, s16 y) {
         case 6:
             gSPDisplayList(gDisplayListHead++, coin_seg3_dl_030079B8);
             break;
-    }
+    }*/
+    gSPDisplayList(gDisplayListHead++, coin_seg3_dl_03007940);
 
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
@@ -2146,9 +2147,9 @@ void print_animated_red_coin(s16 x, s16 y) {
 void render_pause_red_coins(void) {
     s8 x;
 
-    for (x = 0; x < gRedCoinsCollected; x++) {
-        print_animated_red_coin(290 - x * 20, 16);
-    }
+    //for (x = 0; x < gRedCoinsCollected; x++) {
+    //    print_animated_red_coin(290 - x * 20, 16);
+    //}
 }
 
 #ifdef VERSION_EU

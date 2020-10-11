@@ -63,7 +63,7 @@ void bhv_red_coin_loop(void) {
             create_sound_spawner(SOUND_GENERAL_RED_COIN);
 #endif
             // Spawn the orange number counter, as long as it isn't the last coin.
-            if (gRedCoinsCollected != 8) {
+            if (gRedCoinsCollected != 6) {
                 spawn_orange_number(gRedCoinsCollected, 0, 0, 0);
             }
 
@@ -88,7 +88,7 @@ void bhv_spinning_rcoin_loop(void) {
         //if (o->parentObj != NULL) {
             //o->parentObj->oHiddenStarTriggerCounter++;
             gRedCoinsCollected++;
-            if (gRedCoinsCollected != 8) {
+            if (gRedCoinsCollected != 6) {
                 spawn_orange_number(gRedCoinsCollected, 0, 0, 0);
             }
             play_sound(SOUND_MENU_COLLECT_RED_COIN
