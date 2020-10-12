@@ -633,12 +633,17 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
                 break;
         }
     } else if (m->actionState == 3) {
-                if ((m->actionArg & 1) == 0) {
-                    level_trigger_warp(m, WARP_OP_STAR_EXIT);
-                } else if (m->health >= 0x800) {
-                    enable_time_stop();
-                    create_dialog_box_with_response(/*gLastCompletedStarNum == 7 ? DIALOG_013 : */DIALOG_014);
+                if (!(save_file_get_sound_mode() & SAVE_FLAG_MENU_STAR)) {
+                    if ((m->actionArg & 1) == 0) {
+                        level_trigger_warp(m, WARP_OP_STAR_EXIT);
+                    } else if (m->health >= 0x800) {
+                        enable_time_stop();
+                        create_dialog_box_with_response(/*gLastCompletedStarNum == 7 ? DIALOG_013 : */DIALOG_014);
+                        m->actionState = 1;
+                    }
+                } else {
                     m->actionState = 1;
+                    gDialogResponse = 1;
                 }
     } else if (m->actionState == 1 && gDialogResponse) {
         if (gDialogResponse == 1) {

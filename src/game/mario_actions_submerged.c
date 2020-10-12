@@ -1714,9 +1714,9 @@ s16 wallDYaw;
         }
     }
 
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
-        return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
-    }
+    //if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    //    return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
+    //}
 
     if (m->pos[1] > m->waterLevel - 100.0f && m->faceAngle[0] > 0x800 && (m->faceAngle[0] > 0x1800 || m->forwardVel > 40.0f)) {
         m->pos[1] = m->waterLevel - 50.0f;

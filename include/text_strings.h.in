@@ -190,7 +190,7 @@
 #define TEXT_CONTINUE _("CONTINUE")
 #define TEXT_EXIT_COURSE _("EXIT COURSE")
 #ifndef VERSION_EU // "R" text is different in EU
-#define TEXT_CAMERA_ANGLE_R _("SET CAMERA ANGLE WITH R")
+#define TEXT_CAMERA_ANGLE_R _("OPTIONS")
 #endif
 
 // Camera Options
@@ -327,7 +327,7 @@
  */
 // Main Courses
 // English, "R" text is different
-#define TEXT_CAMERA_ANGLE_R             _("SET CAMERA ANGLE WITH [R]")
+#define TEXT_CAMERA_ANGLE_R             _("SETTINGS")
 // French
 #define TEXT_COURSE_FR                  _("NIVEAU")
 #define TEXT_MY_SCORE_FR                _("MON SCORE")
@@ -478,8 +478,30 @@
  */
 #define TEXT_SWIM0 _("Hold A to swim")
 #define TEXT_SWIM1 _("Hold Z to dash")
-#define TEXT_SWIM2 _("Tilt up while swimming to jump out of the water")
+#define TEXT_SWIM2 _("Move up with speed to jump out of the water")
 #define TEXT_SWIM3 _("Press Z and B to sink to the ocean floor")
 #define TEXT_GRIND _("Hold Z to move faster")
+
+
+/*
+ *  Options Menu
+ */
+
+#define TEXT_MUSIC_Y _("MUSIC ENABLED")
+#define TEXT_MUSIC_N _("MUSIC DISABLED")
+#define TEXT_STAR_SAVE _("SAVE AFTER STAR COLLECT")
+#define TEXT_AUTO_SAVE _("AUTO SAVE")
+#define TEXT_PROMPT_ME _("PROMPT ME")
+#define TEXT_DPAD_SENSITIVITY _("DPAD SENSITIVITY")
+#define TEXT_10 _("10")
+#define TEXT_20 _("20")
+#define TEXT_30 _("30")
+#define TEXT_40 _("40")
+#define TEXT_50 _("50")
+#define TEXT_RED_COIN_RADAR_ON _("RED COIN RADAR ON")
+#define TEXT_RED_COIN_RADAR_OFF _("RED COIN RADAR OFF")
+#define TEXT_ON _("ON")
+#define TEXT_OFF _("OFF")
+#define TEXT_BACK _("BACK")
 
 #endif

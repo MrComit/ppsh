@@ -82,6 +82,15 @@ extern u8 gCurrCourseStarFlags;
 extern u8 gSpecialTripleJump;
 extern s8 gLevelToCourseNumTable[];
 
+
+//menu flags
+#define SAVE_FLAG_MENU_MUSIC             /* 0x000800 */ (1 << 11) // 0 - Music, 1 - No music
+#define SAVE_FLAG_MENU_STAR              /* 0x001000 */ (1 << 12) // 0 - Prompt Me, 1 - Always Save
+#define SAVE_FLAG_MENU_RADAR             /* 0x002000 */ (1 << 13) // 0 - On, 1 - Off
+
+
+
+
 // game progress flags
 #define SAVE_FLAG_FILE_EXISTS            /* 0x000001 */ (1 << 0)
 #define SAVE_FLAG_HAVE_WING_CAP          /* 0x000002 */ (1 << 1)
@@ -143,8 +152,10 @@ void save_file_set_cannon_unlocked(void);
 void save_file_set_cap_pos(s16 x, s16 y, s16 z);
 s32 save_file_get_cap_pos(Vec3s capPos);
 void save_file_set_sound_mode(u16 mode);
+void save_file_set_menu_data(u16 mode);
 u16 save_file_get_sound_mode(void);
 void save_file_move_cap_to_default_location(void);
+void save_main_menu_data(void);
 
 void disable_warp_checkpoint(void);
 void check_if_should_set_warp_checkpoint(struct WarpNode *a);

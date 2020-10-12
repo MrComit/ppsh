@@ -15,6 +15,7 @@
 #include "seq_ids.h"
 #include "dialog_ids.h"
 #include "level_table.h"
+#include "game/save_file.h"
 
 #ifdef VERSION_EU
 #define EU_FLOAT(x) x ## f
@@ -1377,6 +1378,8 @@ static void mario_simp_dynamics(void) {
 #define ARG2_VAL1 0.9f
 #define ARG2_VAL2 0.8f
 #endif
+
+void disable_all_sequence_players(void);
 
 void update_game_sound(void) {
     u8 soundStatus;

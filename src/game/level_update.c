@@ -1093,6 +1093,8 @@ s32 play_mode_paused(void) {
         func_80248CB8(1);
         gCameraMovementFlags &= ~CAM_MOVE_PAUSE_SCREEN;
         set_play_mode(PLAY_MODE_NORMAL);
+    } else if (gPauseScreenMode == 3) {
+        set_menu_mode(RENDER_OPTIONS_SCREEN);
     } else {
         // Exit level
 

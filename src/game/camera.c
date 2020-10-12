@@ -1008,7 +1008,7 @@ void set_r_button_camera(struct Camera *c) {
     else
         marioOffset[1] = 240.0f;
     marioOffset[2] = 1310.0f;
-    offset_rotated(c->pos, gMarioState->pos, marioOffset, gMarioState->faceAngle);
+    offset_rotated(c->pos, gMarioState->pos, marioOffset, &gMarioObject->oMoveAngleYaw);//gMarioState->faceAngle);
     vec3f_copy(c->focus, gMarioState->pos);
     vec3f_copy(gLakituState.goalPos, c->pos);
     vec3f_copy(gLakituState.goalFocus, c->focus);
@@ -3113,12 +3113,14 @@ void update_lakitu(struct Camera *c) {
 }
 
 
+s16 sDpadSens[6] = {0x80, 0x30, 0x58, 0x80, 0xA8, 0xD0, };
+
 /**
  * The main camera update function.
  * Gets controller input, checks for cutscenes, handles mode changes, and moves the camera
  */
 void update_camera(struct Camera *c) {
-    UNUSED u8 unused[24];
+    u16 dpadSens = (save_file_get_sound_mode() & 0x0700) >> 8;
 
     gCamera = c;
     update_camera_hud_status(c);
@@ -3323,10 +3325,10 @@ void update_camera(struct Camera *c) {
     }
 
     if (gPlayer1Controller->buttonDown & L_JPAD) {
-        s8DirModeYawOffset -= 0x80;
+        s8DirModeYawOffset -= sDpadSens[dpadSens];
     }
     if (gPlayer1Controller->buttonDown & R_JPAD) {
-        s8DirModeYawOffset += 0x80;
+        s8DirModeYawOffset += sDpadSens[dpadSens];
     }
     if (gPlayer1Controller->buttonPressed & U_JPAD) {
         s8DirModeYawOffset = gMarioState->faceAngle[1] + 0x8000;

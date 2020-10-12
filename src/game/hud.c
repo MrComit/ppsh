@@ -532,7 +532,8 @@ void render_hud(void) {
         }
 
         if (gRedCoinsCollected > 0 && 6 > gRedCoinsCollected) {
-            render_hud_red_coin_distance();
+            if (!(save_file_get_sound_mode() & SAVE_FLAG_MENU_RADAR))
+                render_hud_red_coin_distance();
             render_hud_red_coins();
             gHudBottomY = approach_s16_symmetric(gHudBottomY, 20, 2);
             //gHudBottomX = approach_s16_symmetric(gHudBottomX, 320, 4);

@@ -7,6 +7,7 @@
 #include "seqplayer.h"
 #include "external.h"
 #include "effects.h"
+#include "game/save_file.h"
 
 #define PORTAMENTO_IS_SPECIAL(x) ((x).mode & 0x80)
 #define PORTAMENTO_MODE(x) ((x).mode & ~0x80)
@@ -865,7 +866,7 @@ void seq_channel_layer_process_script(struct SequenceChannelLayer *layer) {
 #ifndef VERSION_EU
             || !seqChannel->hasInstrument
 #endif
-        ) {
+            || save_file_get_sound_mode() & SAVE_FLAG_MENU_MUSIC) {
             layer->stopSomething = TRUE;
         } else {
 #ifdef VERSION_EU
@@ -1144,7 +1145,7 @@ void sequence_channel_set_volume(struct SequenceChannel *seqChannel, u8 volume) 
     seqChannel->volume = FLOAT_CAST(volume) / US_FLOAT(127.0);
 }
 
-#ifdef NON_MATCHING
+//#ifdef NON_MATCHING
 void sequence_channel_process_script(struct SequenceChannel *seqChannel) {
     u16 sp5A;
     s8 value; // sp53
@@ -1176,7 +1177,7 @@ void sequence_channel_process_script(struct SequenceChannel *seqChannel) {
     }
 
     seqPlayer = seqChannel->seqPlayer;
-    if (seqPlayer->muted && (seqChannel->muteBehavior & MUTE_BEHAVIOR_STOP_SCRIPT) != 0) {
+    if ((seqPlayer->muted && (seqChannel->muteBehavior & MUTE_BEHAVIOR_STOP_SCRIPT) != 0)) {
         return;
     }
 
@@ -1681,13 +1682,13 @@ void sequence_channel_process_script(struct SequenceChannel *seqChannel) {
     }
 }
 
-#elif defined(VERSION_EU)
-GLOBAL_ASM("asm/non_matchings/eu/audio/sequence_channel_process_script.s")
-#elif defined(VERSION_JP)
-GLOBAL_ASM("asm/non_matchings/sequence_channel_process_script_jp.s")
-#else
-GLOBAL_ASM("asm/non_matchings/sequence_channel_process_script_us.s")
-#endif
+//#elif defined(VERSION_EU)
+//GLOBAL_ASM("asm/non_matchings/eu/audio/sequence_channel_process_script.s")
+//#elif defined(VERSION_JP)
+//GLOBAL_ASM("asm/non_matchings/sequence_channel_process_script_jp.s")
+//#else
+//GLOBAL_ASM("asm/non_matchings/sequence_channel_process_script_us.s")
+//#endif
 
 #if defined(VERSION_EU) && !defined(NON_MATCHING)
 GLOBAL_ASM("asm/non_matchings/eu/audio/sequence_player_process_sequence.s")
@@ -1778,7 +1779,11 @@ void sequence_player_process_sequence(struct SequencePlayer *seqPlayer) {
     gSeqLoadStatus[seqPlayer->seqId] = SOUND_LOAD_STATUS_COMPLETE;
     gBankLoadStatus[seqPlayer->defaultBank[0]] = SOUND_LOAD_STATUS_COMPLETE;
 
-    if (seqPlayer->muted && (seqPlayer->muteBehavior & MUTE_BEHAVIOR_STOP_SCRIPT) != 0) {
+    if (seqPlayer->seqId != 0 &&(save_file_get_sound_mode() & SAVE_FLAG_MENU_MUSIC)) {
+        return;
+    }
+
+    if ((seqPlayer->muted && (seqPlayer->muteBehavior & MUTE_BEHAVIOR_STOP_SCRIPT) != 0)) {
         return;
     }
 

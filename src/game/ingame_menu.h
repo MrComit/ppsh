@@ -29,6 +29,7 @@
 
 #define RENDER_PAUSE_SCREEN       1
 #define RENDER_COURSE_DONE_SCREEN 2
+#define RENDER_OPTIONS_SCREEN     5
 
 
 extern s8 gDialogCourseActNum;
