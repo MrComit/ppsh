@@ -367,13 +367,13 @@ void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
             sUnusedGotGlobalCoinHiScore = 1;
         }
 
-        if (coinScore > save_file_get_course_coin_score(fileIndex, courseIndex)) {
-            gSaveBuffer.files[fileIndex][0].courseCoinScores[courseIndex] = coinScore;
-            touch_coin_score_age(fileIndex, courseIndex);
+        //if (coinScore > save_file_get_course_coin_score(fileIndex, courseIndex)) {
+        //    gSaveBuffer.files[fileIndex][0].courseCoinScores[courseIndex] = coinScore;
+        //    touch_coin_score_age(fileIndex, courseIndex);
 
-            gGotFileCoinHiScore = 1;
-            gSaveFileModified = TRUE;
-        }
+        //    gGotFileCoinHiScore = 1;
+        //    gSaveFileModified = TRUE;
+        //}
     }
 
     switch (gCurrLevelNum) {

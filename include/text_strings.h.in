@@ -503,5 +503,6 @@
 #define TEXT_ON _("ON")
 #define TEXT_OFF _("OFF")
 #define TEXT_BACK _("BACK")
+#define TEXT_CONFUSION _("???")
 
 #endif

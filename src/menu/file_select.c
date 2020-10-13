@@ -2654,28 +2654,28 @@ void print_score_file_star_score(s8 fileIndex, s16 courseIndex, s16 x, s16 y) {
         print_score_file_course_coin_score(fileIndex, courseIndex - 1, 213, 23 + 12 * courseIndex);
 #endif
     // Course values are indexed, from Bob-omb Battlefield to Rainbow Ride
-    PRINT_COURSE_SCORES(COURSE_BOB, PADCHAR) // BOB
-    PRINT_COURSE_SCORES(COURSE_WF, PADCHAR) // WF
-    PRINT_COURSE_SCORES(COURSE_JRB, PADCHAR) // JRB
-    PRINT_COURSE_SCORES(COURSE_CCM, PADCHAR) // CCM
-    PRINT_COURSE_SCORES(COURSE_BBH, PADCHAR) // BBH
-    PRINT_COURSE_SCORES(COURSE_HMC, PADCHAR) // HMC
-    PRINT_COURSE_SCORES(COURSE_LLL, PADCHAR) // LLL
-    PRINT_COURSE_SCORES(COURSE_SSL, PADCHAR) // SSL
-    PRINT_COURSE_SCORES(COURSE_DDD, PADCHAR) // DDD
-    PRINT_COURSE_SCORES(COURSE_SL, 0)  // SL
-    PRINT_COURSE_SCORES(COURSE_WDW, 0) // WDW
-    PRINT_COURSE_SCORES(COURSE_TTM, 0) // TTM
-    PRINT_COURSE_SCORES(COURSE_THI, 0) // THI
-    PRINT_COURSE_SCORES(COURSE_TTC, 0) // TTC
-    PRINT_COURSE_SCORES(COURSE_RR, 0) // RR
+    //PRINT_COURSE_SCORES(COURSE_BOB, PADCHAR) // BOB
+    //PRINT_COURSE_SCORES(COURSE_WF, PADCHAR) // WF
+    //PRINT_COURSE_SCORES(COURSE_JRB, PADCHAR) // JRB
+    //PRINT_COURSE_SCORES(COURSE_CCM, PADCHAR) // CCM
+    //PRINT_COURSE_SCORES(COURSE_BBH, PADCHAR) // BBH
+    //PRINT_COURSE_SCORES(COURSE_HMC, PADCHAR) // HMC
+    //PRINT_COURSE_SCORES(COURSE_LLL, PADCHAR) // LLL
+    //PRINT_COURSE_SCORES(COURSE_SSL, PADCHAR) // SSL
+    //PRINT_COURSE_SCORES(COURSE_DDD, PADCHAR) // DDD
+    //PRINT_COURSE_SCORES(COURSE_SL, 0)  // SL
+    //PRINT_COURSE_SCORES(COURSE_WDW, 0) // WDW
+    //PRINT_COURSE_SCORES(COURSE_TTM, 0) // TTM
+    //PRINT_COURSE_SCORES(COURSE_THI, 0) // THI
+    //PRINT_COURSE_SCORES(COURSE_TTC, 0) // TTC
+    //PRINT_COURSE_SCORES(COURSE_RR, 0) // RR
 #undef PRINT_COURSE_SCORES
 #undef PADCHAR
 
     // Print level name
     print_menu_generic_string(LEVEL_NAME_X, 215, segmented_to_virtual(levelNameTable[25]));
     // Print castle secret stars
-    print_score_file_castle_secret_stars(fileIndex, SECRET_STARS_X, 215);
+    //print_score_file_castle_secret_stars(fileIndex, SECRET_STARS_X, 215);
 
 #ifdef VERSION_EU
     if (sScoreFileCoinScoreMode == 0) {
@@ -2693,11 +2693,11 @@ void print_score_file_star_score(s8 fileIndex, s16 courseIndex, s16 x, s16 y) {
     }
 #else
     // Print current coin score mode
-    if (sScoreFileCoinScoreMode == 0) {
-        print_menu_generic_string(MYSCORE_X, 24, textMyScore);
-    } else {
-        print_menu_generic_string(HISCORE_X, 24, textHiScore);
-    }
+    //if (sScoreFileCoinScoreMode == 0) {
+    //    print_menu_generic_string(MYSCORE_X, 24, textMyScore);
+    //} else {
+    //    print_menu_generic_string(HISCORE_X, 24, textHiScore);
+    //}
 #endif
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 }
