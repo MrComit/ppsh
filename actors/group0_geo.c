@@ -22,3 +22,4 @@
 #include "simp_toad/geo.inc.c"
 #include "subway_k/geo.inc.c"
 #include "hint_toad/geo.inc.c"
+#include "mario_lowpoly/geo.inc.c"

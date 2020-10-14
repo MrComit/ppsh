@@ -37,3 +37,4 @@
 #include "subway_k/anims/data.inc.c"
 #include "subway_k/anims/table.inc.c"
 #include "hint_toad/model.inc.c"
+#include "mario_lowpoly/model.inc.c"

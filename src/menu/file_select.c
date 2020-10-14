@@ -1827,10 +1827,14 @@ void print_main_menu_strings(void) {
     print_menu_generic_string(MARIOTEXT_X1, 105, textMarioC);
     print_menu_generic_string(MARIOTEXT_X2, 105, textMarioD);
 
-    print_file_coin_count(0, MARIOTEXT_X1 + 14, 65);
-    print_file_coin_count(1, MARIOTEXT_X2 + 14, 65);
-    print_file_coin_count(2, MARIOTEXT_X1 + 14, 105);
-    print_file_coin_count(3, MARIOTEXT_X2 + 14, 105);
+    if (save_file_exists(SAVE_FILE_A))
+        print_file_coin_count(0, MARIOTEXT_X1 + 14, 65);
+    if (save_file_exists(SAVE_FILE_B))
+        print_file_coin_count(1, MARIOTEXT_X2 + 14, 65);
+    if (save_file_exists(SAVE_FILE_C))
+        print_file_coin_count(2, MARIOTEXT_X1 + 14, 105);
+    if (save_file_exists(SAVE_FILE_D))
+        print_file_coin_count(3, MARIOTEXT_X2 + 14, 105);
 
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 }
