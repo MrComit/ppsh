@@ -78,7 +78,7 @@ enum DialogMark { DIALOG_MARK_NONE = 0, DIALOG_MARK_DAKUTEN = 1, DIALOG_MARK_HAN
 
 #ifndef VERSION_JP
 u8 gDialogCharWidths[256] = { // TODO: Is there a way to auto generate this?
-    7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  6,  6,  6,  6,  6,  6,
+    7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  6,  6,
     6,  6,  5,  6,  6,  5,  8,  8,  6,  6,  6,  6,  6,  5,  6,  6,
     8,  7,  6,  6,  6,  5,  5,  6,  5,  5,  6,  5,  4,  5,  5,  3,
     7,  5,  5,  5,  6,  5,  5,  5,  5,  5,  7,  7,  5,  5,  4,  4,
@@ -2365,7 +2365,7 @@ void render_pause_my_score_coins(void) {
     void **actNameTbl;
     u8 *actName;
     u8 courseIndex;
-    u16 starFlags;
+    u16 starFlags, hintFlags;
     courseNameTbl = segmented_to_virtual(seg2_course_name_table);
     actNameTbl = segmented_to_virtual(seg2_act_name_table);
 
@@ -2375,14 +2375,23 @@ void render_pause_my_score_coins(void) {
         case LEVEL_BOB:
             starFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, 0)
              + ((save_file_get_star_flags(gCurrSaveFileNum - 1, 1) & 0xF) << 8);
+
+            hintFlags = save_file_get_course_coin_score(gCurrSaveFileNum - 1, 2)
+             + ((save_file_get_course_coin_score(gCurrSaveFileNum - 1, 3) & 0xF) << 8);
             break;
         case LEVEL_WF:
             starFlags = ((save_file_get_star_flags(gCurrSaveFileNum - 1, 1) & 0xF0) >> 4)
              + (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) << 4);
+
+            hintFlags = ((save_file_get_course_coin_score(gCurrSaveFileNum - 1, 3) & 0xF0) >> 4)
+             + (save_file_get_course_coin_score(gCurrSaveFileNum - 1, 4) << 4);
             break;
         case LEVEL_JRB:
             starFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, 3)
              + ((save_file_get_star_flags(gCurrSaveFileNum - 1, 4) & 0xF) << 8);
+
+            hintFlags = save_file_get_course_coin_score(gCurrSaveFileNum - 1, 5)
+             + ((save_file_get_course_coin_score(gCurrSaveFileNum - 1, 6) & 0xF) << 8);
             break;
     }
 
@@ -2413,7 +2422,10 @@ void render_pause_my_score_coins(void) {
             if (starFlags & (1 << i)) {
                 print_generic_string(TEXT_STAR_X_COORD + 20*i, TEXT_STAR_Y, textStar);
             } else {
+                if (hintFlags & (1 << i))
+                    gDPSetEnvColor(gDisplayListHead++, 0, 230, 235, gDialogTextAlpha);
                 print_generic_string(TEXT_STAR_X_COORD + 20*i, TEXT_STAR_Y, textUnfilledStar);
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
             }
         }
 
@@ -2424,11 +2436,11 @@ void render_pause_my_score_coins(void) {
             handle_menu_scrolling_cringe(MENU_SCROLL_HORIZONTAL, &gDialogStarNum, 1, 12);
 
             if (starFlags & (1 << (gDialogStarNum - 1))) {
-                actName = segmented_to_virtual(actNameTbl[gDialogStarNum - 1]);
+                actName = segmented_to_virtual(actNameTbl[(gDialogStarNum - 1) + (12 * (gCurrCourseNum - 1))]);
                 print_generic_string(get_str_x_pos_from_center(0xA0, actName, 1.0f), 120, actName);
-            } else if (starFlags & (1 << (gDialogStarNum - 1))) {
+            } else if (hintFlags & (1 << (gDialogStarNum - 1))) {
                 gDPSetEnvColor(gDisplayListHead++, 0, 230, 235, gDialogTextAlpha);
-                actName = segmented_to_virtual(actNameTbl[gDialogStarNum - 1]);
+                actName = segmented_to_virtual(actNameTbl[(gDialogStarNum - 1) + (12 * (gCurrCourseNum - 1))]);
                 print_generic_string(get_str_x_pos_from_center(0xA0, actName, 1.0f), 120, actName);
                 gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
             } else {
@@ -2781,7 +2793,7 @@ s16 render_pause_courses_and_castle(void) {
 
             //if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
             render_pause_course_options(99, 93, &gDialogLineNum, 15);
-            if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX)
+            if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX && gCurrLevelNum != LEVEL_CCM)
                 render_pause_my_score_coins();
             //}
 

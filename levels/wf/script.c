@@ -108,6 +108,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_NONE, 5860, 1965, 9371, 0, 0, 0, 0x00040000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, -3135, 1965, 780, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, -16326, 1965, -342, 0, 0, 0, 0x00040000, bhvGoombaTripletSpawner),
+		OBJECT(MODEL_HINT_TOAD, -7623, 1965, 1851, 0, -114, 0, 0x00000000, bhvHintToad),
 		OBJECT(MODEL_HORIZONTAL_ROCK, -19889, -101, -4721, 0, -80, 0, 0x00000000, bhvHorizontalRock),
 		OBJECT(MODEL_HORIZONTAL_ROCK, -20155, -308, -3798, 0, -80, 0, 0x00800000, bhvHorizontalRock),
 		OBJECT(MODEL_HORIZONTAL_ROCK, -19660, -476, -2886, 0, -80, 0, 0x00000000, bhvHorizontalRock),

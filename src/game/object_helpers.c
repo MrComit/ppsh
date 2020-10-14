@@ -273,7 +273,11 @@ Gfx *geo_switch_console_mode(s32 run, struct GraphNode *node) {
 
     if (run == TRUE) {
         switchCase = (struct GraphNodeSwitchCase *) node;
-        switchCase->selectedCase = 0;
+        if (save_file_get_console_mode()) {
+            switchCase->selectedCase = 1;
+        } else {
+            switchCase->selectedCase = 0;
+        }
     }
 
     return NULL;

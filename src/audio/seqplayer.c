@@ -1181,6 +1181,9 @@ void sequence_channel_process_script(struct SequenceChannel *seqChannel) {
         return;
     }
 
+    if (seqPlayer->seqId != 0 && (save_file_get_sound_mode() & SAVE_FLAG_MENU_MUSIC))
+        return;
+
     if (seqChannel->delay != 0) {
         seqChannel->delay--;
     }

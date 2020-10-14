@@ -19,6 +19,7 @@
 #include "text_strings.h"
 #include "file_select.h"
 #include "dialog_ids.h"
+#include "buffers/buffers.h"
 
 /**
  * @file file_select.c
@@ -171,7 +172,7 @@ static unsigned char textEraseFileButton[][16] = { {TEXT_ERASE_FILE}, {TEXT_ERAS
 #endif
 
 #ifndef VERSION_EU
-static unsigned char textSoundModes[][8] = { { TEXT_STEREO }, { TEXT_MONO }, { TEXT_HEADSET } };
+static unsigned char textSoundModes[][9] = { { TEXT_STEREO }, { TEXT_MONO }, { TEXT_HEADSET } };
 #endif
 
 static unsigned char textMarioA[] = { TEXT_FILE_MARIO_A };
@@ -743,7 +744,7 @@ void render_copy_menu_buttons(struct Object *copyButton) {
     sMainMenuButtons[MENU_BUTTON_COPY_RETURN]->oMenuButtonScale = 0.11111111f;
     // Switch to scire menu button
     sMainMenuButtons[MENU_BUTTON_COPY_CHECK_SCORE] = spawn_object_rel_with_rot(
-        copyButton, MODEL_MAIN_MENU_GREEN_SCORE_BUTTON, bhvMenuButton, 0, -388, -100, 0, -0x8000, 0);
+        copyButton, MODEL_MAIN_MENU_GREEN_SCORE_BUTTON, bhvMenuButton, 15000, -388, -100, 0, -0x8000, 0);
     sMainMenuButtons[MENU_BUTTON_COPY_CHECK_SCORE]->oMenuButtonScale = 0.11111111f;
     // Switch to erase menu button
     sMainMenuButtons[MENU_BUTTON_COPY_ERASE_FILE] = spawn_object_rel_with_rot(
@@ -926,7 +927,7 @@ void render_erase_menu_buttons(struct Object *eraseButton) {
     sMainMenuButtons[MENU_BUTTON_ERASE_RETURN]->oMenuButtonScale = 0.11111111f;
     // Switch to score menu button
     sMainMenuButtons[MENU_BUTTON_ERASE_CHECK_SCORE] = spawn_object_rel_with_rot(
-        eraseButton, MODEL_MAIN_MENU_GREEN_SCORE_BUTTON, bhvMenuButton, 0, -388, -100, 0, -0x8000, 0);
+        eraseButton, MODEL_MAIN_MENU_GREEN_SCORE_BUTTON, bhvMenuButton, 15000, -388, -100, 0, -0x8000, 0);
     sMainMenuButtons[MENU_BUTTON_ERASE_CHECK_SCORE]->oMenuButtonScale = 0.11111111f;
     // Switch to copy menu button
     sMainMenuButtons[MENU_BUTTON_ERASE_COPY_FILE] = spawn_object_rel_with_rot(
@@ -1030,15 +1031,15 @@ void check_erase_menu_clicked_buttons(struct Object *eraseButton) {
 void render_sound_mode_menu_buttons(struct Object *soundModeButton) {
     // Stereo option button
     sMainMenuButtons[MENU_BUTTON_STEREO] = spawn_object_rel_with_rot(
-        soundModeButton, MODEL_MAIN_MENU_GENERIC_BUTTON, bhvMenuButton, 533, SOUND_Y, -100, 0, -0x8000, 0);
+        soundModeButton, MODEL_MAIN_MENU_GENERIC_BUTTON, bhvMenuButton, 350, SOUND_Y, -100, 0, -0x8000, 0);
     sMainMenuButtons[MENU_BUTTON_STEREO]->oMenuButtonScale = 0.11111111f;
     // Mono option button
     sMainMenuButtons[MENU_BUTTON_MONO] = spawn_object_rel_with_rot(
-        soundModeButton, MODEL_MAIN_MENU_GENERIC_BUTTON, bhvMenuButton, 0, SOUND_Y, -100, 0, -0x8000, 0);
+        soundModeButton, MODEL_MAIN_MENU_GENERIC_BUTTON, bhvMenuButton, -350, SOUND_Y, -100, 0, -0x8000, 0);
     sMainMenuButtons[MENU_BUTTON_MONO]->oMenuButtonScale = 0.11111111f;
     // Headset option button
     sMainMenuButtons[MENU_BUTTON_HEADSET] = spawn_object_rel_with_rot(
-        soundModeButton, MODEL_MAIN_MENU_GENERIC_BUTTON, bhvMenuButton, -533, SOUND_Y, -100, 0, -0x8000, 0);
+        soundModeButton, MODEL_MAIN_MENU_GENERIC_BUTTON, bhvMenuButton, 15000, SOUND_Y, -100, 0, -0x8000, 0);
     sMainMenuButtons[MENU_BUTTON_HEADSET]->oMenuButtonScale = 0.11111111f;
 
 #ifdef VERSION_EU
@@ -1089,7 +1090,7 @@ void check_sound_mode_menu_clicked_buttons(struct Object *soundModeButton) {
                         sSelectedButtonID = buttonID;
 #endif
                         sSoundMode = buttonID - MENU_BUTTON_OPTION_MIN;
-                        save_file_set_sound_mode(sSoundMode);
+                        save_file_set_console_mode(sSoundMode);
                     }
                 }
 #ifdef VERSION_EU
@@ -1340,7 +1341,7 @@ void bhv_menu_button_manager_init(void) {
     }
     sMainMenuButtons[MENU_BUTTON_PLAY_FILE_D]->oMenuButtonScale = 1.0f;
     // Score menu button
-    sMainMenuButtons[MENU_BUTTON_SCORE] = spawn_object_rel_with_rot(
+    /*sMainMenuButtons[MENU_BUTTON_SCORE] = spawn_object_rel_with_rot(
         gCurrentObject, MODEL_MAIN_MENU_GREEN_SCORE_BUTTON, bhvMenuButton, -6400, -3500, 0, 0, 0, 0);
     sMainMenuButtons[MENU_BUTTON_SCORE]->oMenuButtonScale = 1.0f;
     // Copy menu button
@@ -1354,7 +1355,23 @@ void bhv_menu_button_manager_init(void) {
     // Sound mode menu button
     sMainMenuButtons[MENU_BUTTON_SOUND_MODE] = spawn_object_rel_with_rot(
         gCurrentObject, MODEL_MAIN_MENU_PURPLE_SOUND_BUTTON, bhvMenuButton, 6400, -3500, 0, 0, 0, 0);
+    sMainMenuButtons[MENU_BUTTON_SOUND_MODE]->oMenuButtonScale = 1.0f;*/
+
+    sMainMenuButtons[MENU_BUTTON_SOUND_MODE] = spawn_object_rel_with_rot(
+        gCurrentObject, MODEL_MAIN_MENU_PURPLE_SOUND_BUTTON, bhvMenuButton, -6400, -3500, 0, 0, 0, 0);
     sMainMenuButtons[MENU_BUTTON_SOUND_MODE]->oMenuButtonScale = 1.0f;
+    // Copy menu button
+    sMainMenuButtons[MENU_BUTTON_COPY] = spawn_object_rel_with_rot(
+        gCurrentObject, MODEL_MAIN_MENU_BLUE_COPY_BUTTON, bhvMenuButton, 2134, -3500, 0, 0, 0, 0);
+    sMainMenuButtons[MENU_BUTTON_COPY]->oMenuButtonScale = 1.0f;
+    // Erase menu button
+    sMainMenuButtons[MENU_BUTTON_ERASE] = spawn_object_rel_with_rot(
+        gCurrentObject, MODEL_MAIN_MENU_RED_ERASE_BUTTON, bhvMenuButton, 6400, -3500, 0, 0, 0, 0);
+    sMainMenuButtons[MENU_BUTTON_ERASE]->oMenuButtonScale = 1.0f;
+    // Sound mode menu button
+    sMainMenuButtons[MENU_BUTTON_SCORE] = spawn_object_rel_with_rot(
+        gCurrentObject, MODEL_MAIN_MENU_GREEN_SCORE_BUTTON, bhvMenuButton, 15000, -3500, 0, 0, 0, 0);
+    sMainMenuButtons[MENU_BUTTON_SCORE]->oMenuButtonScale = 1.0f;
 
     sTextBaseAlpha = 0;
 }
@@ -1742,9 +1759,9 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
 #elif VERSION_US
     #define SELECT_FILE_X 93
     #define SCORE_X 52
-    #define COPY_X 117
-    #define ERASE_X 177
-    #define SOUNDMODE_X1 sSoundTextX
+    #define COPY_X 177
+    #define ERASE_X 237
+    #define SOUNDMODE_X1 340
     #define SAVEFILE_X1 92
     #define SAVEFILE_X2 209
     #define MARIOTEXT_X1 92
@@ -1760,6 +1777,17 @@ void print_save_file_star_count(s8 fileIndex, s16 x, s16 y) {
     #define MARIOTEXT_X1 97
     #define MARIOTEXT_X2 204
 #endif
+
+void print_file_coin_count(s8 fileIndex, s16 x, s16 y) {
+    unsigned char coinScoreText[20];
+    unsigned char textCoin[] = { TEXT_COIN };
+    // Print "[coin] x"
+    print_menu_generic_string(x + 25, y, textCoin);
+    // Print coin score
+    int_to_str(gSaveBuffer.files[fileIndex][0].courseCoinScores[1] + (gSaveBuffer.files[fileIndex][0].courseCoinScores[0] << 8), coinScoreText);
+    print_menu_generic_string(x + 33, y, coinScoreText);
+}
+
 
 /**
  * Prints main menu strings that shows on the yellow background menu screen.
@@ -1782,13 +1810,13 @@ void print_main_menu_strings(void) {
    // Print menu names
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
-    print_generic_string(SCORE_X, 39, textScore);
+    //print_generic_string(SCORE_X, 39, textScore);
     print_generic_string(COPY_X, 39, textCopy);
     print_generic_string(ERASE_X, 39, textErase);
 #ifndef VERSION_JP
-    sSoundTextX = get_str_x_pos_from_center(254, textSoundModes[sSoundMode], 10.0f);
+    sSoundTextX = get_str_x_pos_from_center(SCORE_X + 15, textSoundModes[sSoundMode], 10.0f);
 #endif
-    print_generic_string(SOUNDMODE_X1, 39, textSoundModes[sSoundMode]);
+    print_generic_string(sSoundTextX, 39, textSoundModes[sSoundMode]);
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 #endif
     // Print file names
@@ -1798,6 +1826,12 @@ void print_main_menu_strings(void) {
     print_menu_generic_string(MARIOTEXT_X2, 65, textMarioB);
     print_menu_generic_string(MARIOTEXT_X1, 105, textMarioC);
     print_menu_generic_string(MARIOTEXT_X2, 105, textMarioD);
+
+    print_file_coin_count(0, MARIOTEXT_X1 + 14, 65);
+    print_file_coin_count(1, MARIOTEXT_X2 + 14, 65);
+    print_file_coin_count(2, MARIOTEXT_X1 + 14, 105);
+    print_file_coin_count(3, MARIOTEXT_X2 + 14, 105);
+
     gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 }
 
@@ -2117,7 +2151,7 @@ void print_copy_menu_strings(void) {
 #ifdef VERSION_EU
     centeredX = get_str_x_pos_from_center(159, textViewScore[sLanguageMode], 10.0f);
 #endif
-    print_generic_string(VIEWSCORE_X1, 35, LANGUAGE_ARRAY(textViewScore));
+    //print_generic_string(VIEWSCORE_X1, 35, LANGUAGE_ARRAY(textViewScore));
 #ifdef VERSION_EU
     centeredX = get_str_x_pos_from_center(249, textEraseFileButton[sLanguageMode], 10.0f);
 #endif
@@ -2370,7 +2404,7 @@ void print_erase_menu_strings(void) {
     print_generic_string(centeredX, 35, textCopyFileButton[sLanguageMode]);
     #else
     print_generic_string(RETURN_X, 35, textReturn);
-    print_generic_string(VIEWSCORE_X2, 35, textViewScore);
+    //print_generic_string(VIEWSCORE_X2, 35, textViewScore);
     print_generic_string(COPYFILE_X2, 35, textCopyFileButton);
     #endif
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
@@ -2450,7 +2484,7 @@ void print_sound_mode_menu_strings(void) {
             72, textLanguage[mode]);
     }
 #else
-    for (mode = 0; mode < 3; mode++) {
+    for (mode = 0; mode < 2; mode++) {
         if (mode == sSoundMode) {
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sTextBaseAlpha);
         } else {
@@ -2458,7 +2492,7 @@ void print_sound_mode_menu_strings(void) {
         }
         #ifdef VERSION_US
             // Mode names are centered correctly on US
-            textX = get_str_x_pos_from_center(mode * 74 + 87, textSoundModes[mode], 10.0f);
+            textX = get_str_x_pos_from_center(mode * 97 + 112, textSoundModes[mode], 10.0f);
             print_generic_string(textX, 87, textSoundModes[mode]);
         #elif VERSION_JP
             print_generic_string(mode * 74 + 67, 87, textSoundModes[mode]);
@@ -2546,6 +2580,8 @@ void print_score_file_course_coin_score(s8 fileIndex, s16 courseIndex, s16 x, s1
 #endif
     }
 }
+
+
 
 /**
  * Prints stars collected in a score menu save file.
@@ -2816,7 +2852,7 @@ s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
     sTextFadeAlpha = 0;
     sMainMenuTimer = 0;
     sEraseYesNoHoverState = MENU_ERASE_HOVER_NONE;
-    sSoundMode = save_file_get_sound_mode() & 0xFF;
+    sSoundMode = save_file_get_console_mode() & 0xFF;
 
 #ifdef VERSION_EU
     sLanguageMode = eu_get_language();

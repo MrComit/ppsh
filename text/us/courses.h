@@ -1,26 +1,26 @@
-COURSE_ACTS(COURSE_BOB, _(" 1 INCEL ISLANDS"),
-       _("BIG BOB-OMB ON THE SUMMIT")     , _("FOOTRACE WITH KOOPA THE QUICK") , _("SHOOT TO THE ISLAND IN THE SKY"),
-       _("FIND THE 8 RED COINS")          , _("MARIO WINGS TO THE SKY")        , _("BEHIND CHAIN CHOMP'S GATE"))
+COURSE_ACTS(COURSE_BOB, _(" 1 Incel Islands"),
+       _("The Mechanic in the Tower")     , _("Hidden in the Sand") , _("Guarded by a Shark"),
+       _("Construction Site Peril")          , _("Star Pieces on Donut Island")        , _("Porcupuffer Extermination"))
 
-COURSE_ACTS(COURSE_WF, _(" 2 CUCK CANYON"),
-       _("CHIP OFF WHOMP'S BLOCK")        , _("TO THE TOP OF THE FORTRESS")    , _("SHOOT INTO THE WILD BLUE"),
-       _("RED COINS ON THE FLOATING ISLE"), _("FALL ONTO THE CAGED ISLAND")    , _("BLAST AWAY THE WALL"))
+COURSE_ACTS(COURSE_WF, _(" 2 Cuck Canyon"),
+       _("The Submerged Switch")        , _("Flashblack Pathway")    , _("The Secret of Flashblack"),
+       _("Koopa the Sick's Swim Test"), _("Under the Construction Site")    , _("Red Coins of Incel Islands"))
 
-COURSE_ACTS(COURSE_JRB, _(" 3 SIMP CITY"),
-       _("PLUNDER IN THE SUNKEN SHIP")    , _("CAN THE EEL COME OUT TO PLAY?") , _("TREASURE OF THE OCEAN CAVE"),
-       _("RED COINS ON THE SHIP AFLOAT")  , _("BLAST TO THE STONE PILLAR")     , _("THROUGH THE JET STREAM"))
+COURSE_ACTS(COURSE_JRB, _(" 3 Simp City"),
+       _("Wind Riding to the First Switch")    , _("Wrench Recovery") , _("Star Pieces in the Quicksand Pit"),
+       _("The Mole King in the Locked Cave")  , _("The Cliffside Mole")     , _("Switches in the Windy Canyon"))
 
-COURSE_ACTS(COURSE_CCM, _(" 4 THE EIRONEIA CORTEX"),
-       _("SLIP SLIDIN' AWAY")             , _("LI'L PENGUIN LOST")             , _("BIG PENGUIN RACE"),
-       _("FROSTY SLIDE FOR 8 RED COINS")  , _("SNOWMAN'S LOST HIS HEAD")       , _("WALL KICKS WILL WORK"))
+COURSE_ACTS(COURSE_CCM, _(" 4 The Eironeia Cortex"),
+       _("Mole Maze")             , _("An Incredible View")             , _("Fight the Mole Queen!"),
+       _("Expedition of the Fiery Cave")  , _("Secret of the Fiery Cave")       , _("Red Coins of Cuck Canyon"))
 
 COURSE_ACTS(COURSE_BBH, _(" 5 BIG BOO'S HAUNT"),
-       _("GO ON A GHOST HUNT")            , _("RIDE BIG BOO'S MERRY-GO-ROUND") , _("SECRET OF THE HAUNTED BOOKS"),
-       _("SEEK THE 8 RED COINS")          , _("BIG BOO'S BALCONY")             , _("EYE TO EYE IN THE SECRET ROOM"))
+       _("The Cubes of the Rainbow")            , _("Crater in the Residential District") , _("Scaling the Skycrapers"),
+       _("Stealing a Precious Metal")          , _("Dark Alley Platforming")             , _("Crater in the Alley"))
 
 COURSE_ACTS(COURSE_HMC, _(" 6 HAZY MAZE CAVE"),
-       _("SWIMMING BEAST IN THE CAVERN")  , _("ELEVATE FOR 8 RED COINS")       , _("METAL-HEAD MARIO CAN MOVE!"),
-       _("NAVIGATING THE TOXIC MAZE")     , _("A-MAZE-ING EMERGENCY EXIT")     , _("WATCH FOR ROLLING ROCKS"))
+       _("Car Ride Behind the Gate")  , _("Skatepark Obstacle Course")       , _("Star Pieces in the Skatepark"),
+       _("Red Coins of Simp City")     , _("Catching the Spying Toad")     , _("The Top of the Main Building"))
 
 COURSE_ACTS(COURSE_LLL, _(" 7 LETHAL LAVA LAND"),
        _("BOIL THE BIG BULLY")            , _("BULLY THE BULLIES")             , _("8-COIN PUZZLE WITH 15 PIECES"),

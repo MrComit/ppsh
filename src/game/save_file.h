@@ -87,6 +87,7 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_FLAG_MENU_MUSIC             /* 0x000800 */ (1 << 11) // 0 - Music, 1 - No music
 #define SAVE_FLAG_MENU_STAR              /* 0x001000 */ (1 << 12) // 0 - Prompt Me, 1 - Always Save
 #define SAVE_FLAG_MENU_RADAR             /* 0x002000 */ (1 << 13) // 0 - On, 1 - Off
+#define SAVE_FLAG_CONSOLE_MODE           /* 0x004000 */ (1 << 14) // 0 - emu, 1 - console
 
 
 
@@ -154,6 +155,10 @@ s32 save_file_get_cap_pos(Vec3s capPos);
 void save_file_set_sound_mode(u16 mode);
 void save_file_set_menu_data(u16 mode);
 u16 save_file_get_sound_mode(void);
+
+void save_file_set_console_mode(u16 mode);
+u16 save_file_get_console_mode(void);
+
 void save_file_move_cap_to_default_location(void);
 void save_main_menu_data(void);
 

@@ -644,6 +644,7 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
                 } else {
                     m->actionState = 1;
                     gDialogResponse = 1;
+                    play_sound(SOUND_MENU_STAR_SOUND, gDefaultSoundArgs);
                 }
     } else if (m->actionState == 1 && gDialogResponse) {
         if (gDialogResponse == 1) {

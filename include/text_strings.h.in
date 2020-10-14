@@ -135,11 +135,15 @@
 #define TEXT_CHECK_FILE _("CHECK FILE")
 #define TEXT_COPY_FILE _("COPY FILE")
 #define TEXT_ERASE_FILE _("ERASE FILE")
-#define TEXT_SOUND_SELECT _("SOUND SELECT")
-#define TEXT_FILE_MARIO_A _("MARIO A")
+#define TEXT_SOUND_SELECT _("MODE SELECT")
+/*#define TEXT_FILE_MARIO_A _("MARIO A")
 #define TEXT_FILE_MARIO_B _("MARIO B")
 #define TEXT_FILE_MARIO_C _("MARIO C")
-#define TEXT_FILE_MARIO_D _("MARIO D")
+#define TEXT_FILE_MARIO_D _("MARIO D")*/
+#define TEXT_FILE_MARIO_A _("FILE A")
+#define TEXT_FILE_MARIO_B _("FILE B")
+#define TEXT_FILE_MARIO_C _("FILE C")
+#define TEXT_FILE_MARIO_D _("FILE D")
 
 // Menu Options
 #define TEXT_SCORE _("SCORE")
@@ -147,8 +151,8 @@
 #define TEXT_ERASE _("ERASE")
 
 // Sound Options
-#define TEXT_STEREO _("STEREO")
-#define TEXT_MONO _("MONO")
+#define TEXT_STEREO _("EMULATOR")
+#define TEXT_MONO _("CONSOLE")
 #define TEXT_HEADSET _("HEADSET")
 
 // Misc Menu Text
@@ -187,10 +191,12 @@
 // Main Courses
 #define TEXT_COURSE _("COURSE")
 #define TEXT_MYSCORE _("MYSCORE")
-#define TEXT_CONTINUE _("CONTINUE")
-#define TEXT_EXIT_COURSE _("EXIT COURSE")
+/*#define TEXT_CONTINUE _("CONTINUE")
+#define TEXT_EXIT_COURSE _("EXIT COURSE")*/
+#define TEXT_CONTINUE _("Continue")
+#define TEXT_EXIT_COURSE _("Exit Course")
 #ifndef VERSION_EU // "R" text is different in EU
-#define TEXT_CAMERA_ANGLE_R _("OPTIONS")
+#define TEXT_CAMERA_ANGLE_R _("Options")
 #endif
 
 // Camera Options
@@ -487,7 +493,7 @@
  *  Options Menu
  */
 
-#define TEXT_MUSIC_Y _("MUSIC ENABLED")
+/*#define TEXT_MUSIC_Y _("MUSIC ENABLED")
 #define TEXT_MUSIC_N _("MUSIC DISABLED")
 #define TEXT_STAR_SAVE _("SAVE AFTER STAR COLLECT")
 #define TEXT_AUTO_SAVE _("AUTO SAVE")
@@ -503,6 +509,26 @@
 #define TEXT_ON _("ON")
 #define TEXT_OFF _("OFF")
 #define TEXT_BACK _("BACK")
+#define TEXT_CONFUSION _("???")*/
+
+
+
+#define TEXT_MUSIC_Y _("Music Enabled")
+#define TEXT_MUSIC_N _("Music Disabled")
+#define TEXT_STAR_SAVE _("Save After Star Collect")
+#define TEXT_AUTO_SAVE _("Auto Save")
+#define TEXT_PROMPT_ME _("Prompt Me")
+#define TEXT_DPAD_SENSITIVITY _("DPAD Sensitivity")
+#define TEXT_10 _("10")
+#define TEXT_20 _("20")
+#define TEXT_30 _("30")
+#define TEXT_40 _("40")
+#define TEXT_50 _("50")
+#define TEXT_RED_COIN_RADAR_ON _("Red Coin Radar On")
+#define TEXT_RED_COIN_RADAR_OFF _("Red Coin Radar Off")
+#define TEXT_ON _("On")
+#define TEXT_OFF _("Off")
+#define TEXT_BACK _("Back")
 #define TEXT_CONFUSION _("???")
 
 #endif

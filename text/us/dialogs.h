@@ -129,50 +129,32 @@ Ready?\n\
 \n\
 //Go//// Don't Go"))
 
-DEFINE_DIALOG(DIALOG_010, 1, 4, 30, 200, _("\
-You've stepped on the\n\
-Wing Cap Switch. Wearing\n\
-the Wing Cap, you can\n\
-soar through the sky.\n\
-Now Wing Caps will pop\n\
-out of all the red blocks\n\
-you find.\n\
-\n\
-Would you like to Save?\n\
-\n\
-//Yes////No"))
+DEFINE_DIALOG(DIALOG_010, 1, 3, 30, 200, _("\
+I'm sorry, you don't have\n\
+enough $ Coins to buy a\n\
+hint!"))
 
-DEFINE_DIALOG(DIALOG_011, 1, 4, 30, 200, _("\
-You've just stepped on\n\
-the Metal Cap Switch!\n\
-The Metal Cap makes\n\
-Mario invincible.\n\
-Now Metal Caps will\n\
-pop out of all of the\n\
-green blocks you find.\n\
-\n\
-Would you like to Save?\n\
-\n\
-//Yes////No"))
+DEFINE_DIALOG(DIALOG_011, 1, 3, 30, 200, _("\
+I'm sorry, there are no\n\
+more available hints to\n\
+buy in this world!"))
 
 DEFINE_DIALOG(DIALOG_012, 1, 4, 30, 200, _("\
-You've just stepped on\n\
-the Vanish Cap Switch.\n\
-The Vanish Cap makes\n\
-Mario disappear.\n\
-Now Vanish Caps will pop\n\
-from all of the blue\n\
-blocks you find.\n\
-\n\
-Would you like to Save?\n\
-\n\
-//Yes////No"))
+There we go! Your hint is\n\
+now visible, highlighted\n\
+in blue in the pause menu.\n\
+Enjoy!"))
 
 DEFINE_DIALOG(DIALOG_013, 1, 5, 30, 200, _("\
-You've collected 100\n\
-coins! Mario gains more\n\
-power from the castle.\n\
-Do you want to Save?\n\
+Hi, I'm the Hint Toad!\n\
+For 20 $ Coins I'll give\n\
+you a hint for a star\n\
+in this world you\n\
+haven't found yet!\n\
+Would you like to buy\n\
+a hint?\n\
+\n\
+\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_014, 1, 5, 30, 200, _("\

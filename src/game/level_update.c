@@ -28,6 +28,7 @@
 #endif
 #include "level_table.h"
 #include "include/behavior_data.h"
+#include "src/buffers/buffers.h"
 
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
@@ -969,6 +970,34 @@ void update_hud_values(void) {
                 gHudLowerTimer = 0;
                 gHudDisplay.coins += 1;
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
+
+
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseCoinScores[1] = gHudDisplay.coins & 0xFF;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseCoinScores[0] = gHudDisplay.coins & 0xFF00;
+                gGotFileCoinHiScore = 1;
+                gSaveFileModified = TRUE;
+            }
+        }
+
+        if (gHudDisplay.coins > gMarioState->numCoins) {
+            if (gGlobalTimer & 0x00000001) {
+                u32 coinSound;
+                if (gMarioState->action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) {
+                    coinSound = SOUND_GENERAL_COIN_WATER;
+                } else {
+                    coinSound = SOUND_GENERAL_COIN;
+                }
+
+                gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
+                gHudLowerTimer = 0;
+                gHudDisplay.coins -= 1;
+                play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
+
+
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseCoinScores[1] = gHudDisplay.coins & 0xFF;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseCoinScores[0] = gHudDisplay.coins & 0xFF00;
+                gGotFileCoinHiScore = 1;
+                gSaveFileModified = TRUE;
             }
         }
 
@@ -976,7 +1005,6 @@ void update_hud_values(void) {
             gMarioState->numLives = 100;
         }
 
-#if BUGFIX_MAX_LIVES
         if (gMarioState->numCoins > 999) {
             gMarioState->numCoins = 999;
         }
@@ -984,11 +1012,10 @@ void update_hud_values(void) {
         if (gHudDisplay.coins > 999) {
             gHudDisplay.coins = 999;
         }
-#else
-        if (gMarioState->numCoins > 999) {
-            gMarioState->numLives = (s8) 999; //! Wrong variable
-        }
-#endif
+
+        //if (gMarioState->numCoins > 999) {
+        //    gMarioState->numLives = (s8) 999; //! Wrong variable
+        //}
 
         gHudDisplay.stars = gMarioState->numStars;
         gHudDisplay.lives = gMarioState->numLives;
@@ -1389,8 +1416,8 @@ s32 lvl_set_current_level(UNUSED s16 arg0, s32 levelNum) {
 
     if (gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2
         && gCurrLevelNum != LEVEL_BOWSER_3) {
-        gMarioState->numCoins = 0;
-        gHudDisplay.coins = 0;
+        //gMarioState->numCoins = 0;
+        //gHudDisplay.coins = 0;
         gCurrCourseStarFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, gCurrCourseNum - 1);
     }
 

@@ -357,4 +357,6 @@ extern const struct Animation *const simptoad_seg6_anims_0600FB58[];
 #include "subway_k/geo_header.h"
 extern const struct Animation *const skoopa_seg6_anims_06011364[];
 
+#include "hint_toad/geo_header.h"
+
 #endif

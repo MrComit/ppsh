@@ -990,8 +990,8 @@ void reclaim_notes(void) {
             } else if (note->parentLayer->seqChannel->seqPlayer == NULL) {
                 sequence_channel_disable(note->parentLayer->seqChannel);
                 note->priority = NOTE_PRIORITY_STOPPING;
-            //} else if (save_file_get_sound_mode() & SAVE_FLAG_MENU_MUSIC) {
-            //        cond = TRUE;
+            } else if (note->parentLayer->seqChannel->seqPlayer->seqId != 0 &&(save_file_get_sound_mode() & SAVE_FLAG_MENU_MUSIC)) {
+                    cond = TRUE;
             } else if (note->parentLayer->seqChannel->seqPlayer->muted) {
                 if (note->parentLayer->seqChannel->muteBehavior
                     & (MUTE_BEHAVIOR_STOP_SCRIPT | MUTE_BEHAVIOR_STOP_NOTES)) {

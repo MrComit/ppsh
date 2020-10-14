@@ -448,7 +448,7 @@ s32 save_file_get_total_star_count(s32 fileIndex, s32 minCourse, s32 maxCourse) 
     s32 count = 0;
 
     // Get standard course star count.
-    for (; minCourse <= maxCourse; minCourse++) {
+    for (; minCourse <= 8; minCourse++) {
         count += save_file_get_course_star_count(fileIndex, minCourse);
     }
 
@@ -567,6 +567,24 @@ void save_file_set_menu_data(u16 mode) {
 u16 save_file_get_sound_mode(void) {
     return gSaveBuffer.menuData[0].soundMode;
 }
+
+
+
+u16 save_file_get_console_mode(void) {
+    return (gSaveBuffer.menuData[0].soundMode >> 14) & 1;
+}
+
+void save_file_set_console_mode(u16 mode) {
+    if (mode) {
+        gSaveBuffer.menuData[0].soundMode |= SAVE_FLAG_CONSOLE_MODE;
+    } else {
+        gSaveBuffer.menuData[0].soundMode &= ~SAVE_FLAG_CONSOLE_MODE;
+    }
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
+
 
 void save_file_move_cap_to_default_location(void) {
     if (save_file_get_flags() & SAVE_FLAG_CAP_ON_GROUND) {

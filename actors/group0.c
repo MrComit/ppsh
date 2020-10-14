@@ -36,3 +36,4 @@
 #include "subway_k/model.inc.c"
 #include "subway_k/anims/data.inc.c"
 #include "subway_k/anims/table.inc.c"
+#include "hint_toad/model.inc.c"
