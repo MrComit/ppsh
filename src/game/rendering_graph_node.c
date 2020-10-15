@@ -72,7 +72,7 @@ struct RenderModeContainer {
 };
 
 /* Rendermode settings for cycle 1 for all 8 layers. */
-struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
+/*struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
     G_RM_OPA_SURF,
     G_RM_AA_OPA_SURF,
     G_RM_AA_OPA_SURF,
@@ -83,7 +83,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
     G_RM_AA_XLU_SURF,
     } },
     { {
-    /* z-buffered */
+    // z-buffered
     G_RM_ZB_OPA_SURF,
     G_RM_AA_ZB_OPA_SURF,
     G_RM_AA_ZB_OPA_DECAL,
@@ -93,9 +93,25 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
     G_RM_AA_ZB_XLU_DECAL,
     G_RM_AA_ZB_XLU_INTER,
     } } };
+*/
+
+struct RenderModeContainer renderModeTable_1Cycle[2] = {
+    {{
+        G_RM_OPA_SURF,    G_RM_OPA_SURF,
+        G_RM_OPA_SURF, G_RM_OPA_SURF,
+        TEX_EDGE, G_RM_XLU_SURF,
+        G_RM_XLU_SURF, G_RM_XLU_SURF,
+    }},
+    {{ // z-buffered
+        G_RM_ZB_OPA_SURF,     G_RM_RA_ZB_OPA_SURF,
+        G_RM_ZB_OPA_DECAL, G_RM_RA_ZB_OPA_INTER,
+        G_AC_NONE,  G_RM_AA_ZB_XLU_SURF,
+        G_RM_ZB_XLU_DECAL, G_RM_AA_ZB_XLU_INTER,
+    }}
+};
 
 /* Rendermode settings for cycle 2 for all 8 layers. */
-struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
+/*struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
     G_RM_OPA_SURF2,
     G_RM_AA_OPA_SURF2,
     G_RM_AA_OPA_SURF2,
@@ -106,7 +122,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
     G_RM_AA_XLU_SURF2,
     } },
     { {
-    /* z-buffered */
+    // z-buffered
     G_RM_ZB_OPA_SURF2,
     G_RM_AA_ZB_OPA_SURF2,
     G_RM_AA_ZB_OPA_DECAL2,
@@ -116,6 +132,37 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
     G_RM_AA_ZB_XLU_DECAL2,
     G_RM_AA_ZB_XLU_INTER2,
     } } };
+*/
+
+struct RenderModeContainer renderModeTable_2Cycle[2] = {
+    {{
+        G_RM_OPA_SURF2, G_RM_OPA_SURF2,
+        G_RM_OPA_SURF2, G_RM_OPA_SURF2,
+        G_RM_TEX_EDGE2, G_RM_XLU_SURF2,
+        G_RM_XLU_SURF2, G_RM_XLU_SURF2,
+    }},
+    {{ // z-buffered
+        G_RM_ZB_OPA_SURF2,     G_RM_ZB_OPA_SURF2,
+        G_RM_ZB_OPA_DECAL2, G_RM_RA_ZB_OPA_INTER2,
+        G_AC_NONE,  G_RM_AA_ZB_XLU_SURF2,
+        G_RM_ZB_XLU_DECAL2, G_RM_AA_ZB_XLU_INTER2,
+    }}
+};
+
+struct RenderModeContainer renderModeTable_5Cycle[2] = {
+    {{
+        G_RM_OPA_SURF2,    G_RM_OPA_SURF2,
+        G_RM_OPA_SURF2, G_RM_OPA_SURF2,
+        G_RM_TEX_EDGE2, G_RM_XLU_SURF2,
+        G_RM_XLU_SURF2, G_RM_XLU_SURF2,
+    }},
+    {{ /* z-buffered */
+        G_RM_ZB_OPA_SURF2,     G_RM_ZB_OPA_SURF2,
+        G_RM_ZB_OPA_DECAL2, G_RM_RA_ZB_OPA_INTER2,
+        G_RM_AA_ZB_TEX_EDGE2,  G_RM_ZB_XLU_SURF2,
+        G_RM_ZB_XLU_DECAL2, G_RM_AA_ZB_XLU_INTER2,
+    }}
+};
 
 struct GraphNodeRoot *gCurGraphNodeRoot = NULL;
 struct GraphNodeMasterList *gCurGraphNodeMasterList = NULL;
@@ -138,6 +185,7 @@ static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     s32 enableZBuffer = (node->node.flags & GRAPH_RENDER_Z_BUFFER) != 0;
     struct RenderModeContainer *modeList = &renderModeTable_1Cycle[enableZBuffer];
     struct RenderModeContainer *mode2List = &renderModeTable_2Cycle[enableZBuffer];
+    struct RenderModeContainer *mode5List = &renderModeTable_5Cycle[enableZBuffer];
 
     // @bug This is where the LookAt values should be calculated but aren't.
     // As a result, environment mapping is broken on Fast3DEX2 without the
@@ -154,7 +202,11 @@ static void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
 
     for (i = 0; i < GFX_NUM_MASTER_LISTS; i++) {
         if ((currList = node->listHeads[i]) != NULL) {
-            gDPSetRenderMode(gDisplayListHead++, modeList->modes[i], mode2List->modes[i]);
+            if (i == 4) {
+                gDPSetRenderMode(gDisplayListHead++, modeList->modes[i], mode5List->modes[i]);
+            } else {
+                gDPSetRenderMode(gDisplayListHead++, modeList->modes[i], mode2List->modes[i]);
+            }
             while (currList != NULL) {
                 gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(currList->transform),
                           G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_LOAD);

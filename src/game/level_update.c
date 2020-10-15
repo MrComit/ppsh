@@ -1049,8 +1049,29 @@ void basic_update(UNUSED s16 *arg) {
     }
 }
 
-s32 play_mode_normal(void) {
+
+void run_frame_skip(void) {
     OSTime newTime = osGetTime();
+    deltaTime += newTime - oldTime; //1562744
+    oldTime = newTime;
+    while (deltaTime > 1562744) {
+        deltaTime -= 1562744;
+        if (sTimerRunning && gHudDisplay.timer < 17999) {
+            gHudDisplay.timer += 1;
+        }
+        area_update_objects();
+        if (deltaTime > 1562744) {
+            // reset buttonPressed
+                struct Controller *controller = &gControllers[0];
+                if (controller->controllerData != NULL) {
+                    controller->buttonPressed = 0;
+                }
+        }
+    }
+}
+
+
+s32 play_mode_normal(void) {
     uv_update_scroll();
     if (gCurrDemoInput != NULL) {
         print_intro_text();
@@ -1066,26 +1087,17 @@ s32 play_mode_normal(void) {
     func_8024A02C();
     check_instant_warp();
 
-    if (sTimerRunning && gHudDisplay.timer < 17999) {
-        gHudDisplay.timer += 1;
-    }
-    area_update_objects();
-    /*deltaTime += newTime - oldTime; //1562744
-    oldTime = newTime;
-    while (deltaTime > 1562744) {
-        deltaTime -= 1562744;
+    if (save_file_get_console_mode()) {
+        run_frame_skip();
+    } else {
         if (sTimerRunning && gHudDisplay.timer < 17999) {
             gHudDisplay.timer += 1;
         }
         area_update_objects();
-        if (deltaTime > 1562744) {
-            // reset buttonPressed
-                struct Controller *controller = &gControllers[0];
-                if (controller->controllerData != NULL) {
-                    controller->buttonPressed = 0;
-                }
-        }
-    }*/
+    }
+
+
+
     update_hud_values();
 
     if (gCurrentArea != NULL) {
@@ -1347,6 +1359,8 @@ s32 lvl_init_or_update(s16 initOrUpdate, UNUSED s32 unused) {
     switch (initOrUpdate) {
         case 0:
             result = init_level();
+            deltaTime = 0;
+            oldTime = osGetTime();
             break;
         case 1:
             result = update_level();

@@ -140,10 +140,10 @@
 #define TEXT_FILE_MARIO_B _("MARIO B")
 #define TEXT_FILE_MARIO_C _("MARIO C")
 #define TEXT_FILE_MARIO_D _("MARIO D")*/
-#define TEXT_FILE_MARIO_A _("FILE A")
-#define TEXT_FILE_MARIO_B _("FILE B")
-#define TEXT_FILE_MARIO_C _("FILE C")
-#define TEXT_FILE_MARIO_D _("FILE D")
+#define TEXT_FILE_MARIO_A _("GAME A")
+#define TEXT_FILE_MARIO_B _("GAME B")
+#define TEXT_FILE_MARIO_C _("GAME C")
+#define TEXT_FILE_MARIO_D _("GAME D")
 
 // Menu Options
 #define TEXT_SCORE _("SCORE")

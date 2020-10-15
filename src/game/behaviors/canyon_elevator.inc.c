@@ -40,8 +40,10 @@ struct Object *gswitch = obj_nearest_object_with_behavior(bhvCanyonButton);
             CL_Move();
             PlaySound(SOUND_ENV_METAL_BOX_PUSH);
             if (o->oTimer > 100) {
-                if (o->oBobombBlinkTimer)
+                if (o->oBobombBlinkTimer) {
                     play_puzzle_jingle();
+                    ShakeScreen(2);
+                }
                 o->oAction = 2;
                 o->oForwardVel = 0;
                 o->oVelX = 0;

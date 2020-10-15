@@ -2763,6 +2763,8 @@ s8 gHudFlash = 0;
 
 s16 render_pause_courses_and_castle(void) {
     s16 num;
+    void **courseNameTbl;
+    u8 *courseName;
 
 #ifdef VERSION_EU
     gInGameLanguage = eu_get_language();
@@ -2795,6 +2797,16 @@ s16 render_pause_courses_and_castle(void) {
             render_pause_course_options(99, 93, &gDialogLineNum, 15);
             if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX && gCurrLevelNum != LEVEL_CCM)
                 render_pause_my_score_coins();
+
+            if (gCurrLevelNum == LEVEL_CCM) {
+                gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+                courseNameTbl = segmented_to_virtual(seg2_course_name_table);
+                courseName = segmented_to_virtual(courseNameTbl[gCurrCourseNum - 1]);
+                print_generic_string(109, 157, &courseName[3]);
+                gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+
+            }
             //}
 
 #ifdef VERSION_EU
