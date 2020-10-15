@@ -519,7 +519,7 @@
 // US/EU only; an index between 0-7 or 0-4 is added to the sound ID before
 // playing, producing the same sound with different pitch.
 #define SOUND_MENU_COLLECT_RED_COIN             SOUND_ARG_LOAD(7, 8, 0x28, 0x90, 8)
-#define SOUND_MENU_COLLECT_SECRET               SOUND_ARG_LOAD(7, 0, 0x32, 0xFE, 8)
+#define SOUND_MENU_COLLECT_SECRET               SOUND_ARG_LOAD(7, 0, 0x30, 0xFE, 8)
 
 // Channel 8 loads sounds from the same place as channel 3, making it possible
 // to play two channel 3 sounds at once (since just one sound from each channel
