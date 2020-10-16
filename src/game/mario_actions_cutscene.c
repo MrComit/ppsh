@@ -1213,6 +1213,12 @@ s32 act_unused_death_exit(struct MarioState *m) {
         //m->numLives--;
         // restore 7.75 units of health
         m->healCounter = 31;
+
+        if (m->numCoins > 5)
+            m->numCoins -= 5;
+        else
+            m->numCoins = 0;
+
     }
     // one unit of health
     m->health = 0x0100;

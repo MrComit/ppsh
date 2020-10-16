@@ -6,6 +6,7 @@
 #include "game/segment2.h"
 #include "game/segment7.h"
 #include "intro_geo.h"
+#include "game/texscroll.h"
 
 // frame counts for the zoom in, hold, and zoom out of title model
 #define INTRO_STEPS_ZOOM_IN 20
@@ -206,10 +207,12 @@ Gfx *geo18_title_screen(s32 sp50, struct GraphNode *sp54, UNUSED void *context) 
         }
         guScale(scaleMat, scaleX, scaleY, scaleZ);
         gSPMatrix(displayListIter++, scaleMat, G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
-        gSPDisplayList(displayListIter++, &intro_seg7_dl_0700B3A0);
+        gSPDisplayList(displayListIter++, &mario_Circle_mesh);
         gSPPopMatrix(displayListIter++, G_MTX_MODELVIEW);
         gSPEndDisplayList(displayListIter);
         gTitleZoomCounter++;
+        if (gTitleZoomCounter < 91)
+            scroll_textures();
     }
     return displayList;
 }
@@ -236,7 +239,7 @@ Gfx *geo18_fade_transition(s32 sp40, struct GraphNode *sp44, UNUSED void *contex
             if (0) {
             }
         }
-        gSPDisplayList(displayListIter++, &intro_seg7_dl_0700C6A0);
+        //gSPDisplayList(displayListIter++, &intro_seg7_dl_0700C6A0);
         gSPEndDisplayList(displayListIter);
         if (gTitleZoomCounter >= 0x13) {
             gTitleFadeCounter += 0x1a;

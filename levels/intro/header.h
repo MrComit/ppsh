@@ -26,4 +26,32 @@ extern const LevelScript script_intro_L3[];
 extern const LevelScript script_intro_L4[];
 extern const LevelScript script_intro_L5[];
 
+
+
+
+
+
+
+
+extern Vtx mario_Circle_mesh_vtx_0[34];
+extern Gfx mario_Circle_mesh_tri_0[];
+extern Vtx mario_Circle_mesh_vtx_1[188];
+extern Gfx mario_Circle_mesh_tri_1[];
+extern Vtx mario_Circle_mesh_vtx_2[12];
+extern Gfx mario_Circle_mesh_tri_2[];
+extern Vtx mario_Circle_mesh_vtx_3[28];
+extern Gfx mario_Circle_mesh_tri_3[];
+extern Vtx mario_Circle_mesh_vtx_4[28];
+extern Gfx mario_Circle_mesh_tri_4[];
+extern Vtx mario_Circle_mesh_vtx_5[18];
+extern Gfx mario_Circle_mesh_tri_5[];
+
+extern Gfx mario_Circle_mesh[];
+
+
+
+
+
+
+
 #endif

@@ -28,4 +28,6 @@ extern Gfx *intro_seg7_dl_0700C6A0;
 extern f32 intro_seg7_table_0700C790[];
 extern f32 intro_seg7_table_0700C880[];
 
+extern Gfx mario_Circle_mesh[];
+
 #endif /* SEGMENT_7_H */

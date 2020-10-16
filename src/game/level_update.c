@@ -1009,6 +1009,10 @@ void update_hud_values(void) {
             gMarioState->numCoins = 999;
         }
 
+        if (gMarioState->numCoins < 0) {
+            gMarioState->numCoins = 0;
+        }
+
         if (gHudDisplay.coins > 999) {
             gHudDisplay.coins = 999;
         }
