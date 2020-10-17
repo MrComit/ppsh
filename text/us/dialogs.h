@@ -1617,8 +1617,10 @@ smothered.\n\
 The dark areas are\n\
 bottomless pits."))
 
-DEFINE_DIALOG(DIALOG_158, 1, 2, 30, 200, _("\
-I'm not home right now.\n\
+DEFINE_DIALOG(DIALOG_158, 1, 4, 30, 200, _("\
+I can't answer the door\n\
+right now, I'm too busy\n\
+playing Coochie Quest.\n\
 Come back later!"))
 
 DEFINE_DIALOG(DIALOG_159, 1, 4, 30, 200, _("\

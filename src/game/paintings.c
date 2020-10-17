@@ -395,6 +395,8 @@ void painting_update_floors(struct Painting *painting) {
         rightSideEnter = ENTER_RIGHT;
     }
 
+    middleStand = STAND_MIDDLE;
+
     painting->lastFloor = painting->currFloor;
     painting->currFloor = leftSideStand + middleStand + rightSideStand + leftSideEnter + middleEnter
                           + rightSideEnter; // at most 1 of these will be nonzero;

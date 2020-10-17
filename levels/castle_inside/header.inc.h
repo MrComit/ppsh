@@ -1,0 +1,30 @@
+extern const GeoLayout castle_inside_area_1_geo[];
+extern const GeoLayout castle_inside_area_1[];
+extern const Collision castle_inside_area_1_collision[];
+extern const MacroObject castle_inside_area_1_Area_macro_objs[];
+extern Vtx castle_inside_dl_node_mesh_vtx_0[24];
+extern Gfx castle_inside_dl_node_mesh_tri_0[];
+extern Vtx castle_inside_dl_node_mesh_vtx_1[52];
+extern Gfx castle_inside_dl_node_mesh_tri_1[];
+extern Vtx castle_inside_dl_node_mesh_vtx_2[36];
+extern Gfx castle_inside_dl_node_mesh_tri_2[];
+extern Vtx castle_inside_dl_node_mesh_vtx_3[24];
+extern Gfx castle_inside_dl_node_mesh_tri_3[];
+extern Vtx castle_inside_dl_node_mesh_vtx_4[8];
+extern Gfx castle_inside_dl_node_mesh_tri_4[];
+extern Vtx castle_inside_dl_node_001_mesh_vtx_0[10];
+extern Gfx castle_inside_dl_node_001_mesh_tri_0[];
+extern Vtx castle_inside_dl_node_002_mesh_vtx_0[10];
+extern Gfx castle_inside_dl_node_002_mesh_tri_0[];
+extern Vtx castle_inside_dl_node_003_mesh_vtx_0[10];
+extern Gfx castle_inside_dl_node_003_mesh_tri_0[];
+extern Vtx castle_inside_dl_node_004_mesh_vtx_0[10];
+extern Gfx castle_inside_dl_node_004_mesh_tri_0[];
+
+extern Gfx castle_inside_dl_node_mesh[];
+extern Gfx castle_inside_dl_node_001_mesh[];
+extern Gfx castle_inside_dl_node_002_mesh[];
+extern Gfx castle_inside_dl_node_003_mesh[];
+extern Gfx castle_inside_dl_node_004_mesh[];
+extern Gfx castle_inside_dl_material_revert_render_settings[];
+
