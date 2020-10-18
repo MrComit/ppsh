@@ -6962,3 +6962,33 @@ const BehaviorScript bhvHintToad[] = {
         CALL_NATIVE(bhv_hint_shop_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvLevelButtons[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(castle_button_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x600),
+    CALL_NATIVE(bhv_level_switch_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_level_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvHubToad[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, toad_seg6_anims_0600FB58),
+    ANIMATE(6),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
+    SET_INT(oIntangibleTimer, 0),
+    //CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_hub_toad_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_hub_toad_loop),
+    END_LOOP(),
+};

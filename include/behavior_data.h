@@ -610,5 +610,7 @@ extern const BehaviorScript bhvSubwayKoopa[];
 extern const BehaviorScript bhvSecretDoor[];
 extern const BehaviorScript bhvEndingSubwayKoopa[];
 extern const BehaviorScript bhvHintToad[];
+extern const BehaviorScript bhvLevelButtons[];
+extern const BehaviorScript bhvHubToad[];
 
 #endif /* _BEHAVIOR_DATA_H */

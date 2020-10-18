@@ -123,9 +123,12 @@ const char *credits19[] = { "1PRODUCER", "SHIGERU MIYAMOTO" };
 const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
 #endif
 
+extern s8 gCurrLevelButton;
 //ostime
 OSTime oldTime = 0;
 OSTime deltaTime = 0;
+
+s8 sLevelWarps[4] = {LEVEL_BOB, LEVEL_WF, LEVEL_JRB, LEVEL_CCM};
 
 
 struct CreditsEntry sCreditsSequence[] = {
@@ -683,6 +686,9 @@ struct WarpNode *get_painting_warp_node(void) {
     return warpNode;
 }
 
+
+
+
 /**
  * Check is mario has entered a painting, and if so, initiate a warp.
  */
@@ -701,7 +707,7 @@ void initiate_painting_warp(void) {
                     D_8032C9E0 = check_warp_checkpoint(&warpNode);
                 }
 
-                initiate_warp(warpNode.destLevel & 0x7F, warpNode.destArea, warpNode.destNode, 0);
+                initiate_warp(sLevelWarps[gCurrLevelButton] /*warpNode.destLevel & 0x7F*/, warpNode.destArea, warpNode.destNode, 0);
                 check_if_should_set_warp_checkpoint(&warpNode);
 
                 play_transition_after_delay(WARP_TRANSITION_FADE_INTO_COLOR, 30, 255, 255, 255, 45);

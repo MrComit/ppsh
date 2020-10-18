@@ -12,6 +12,8 @@
 #include "segment2.h"
 #include "paintings.h"
 
+extern s8 gCurrLevelButton;
+
 s16 gPaintingMarioFloorType;
 float gPaintingMarioXPos, gPaintingMarioYPos, gPaintingMarioZPos;
 struct Thing *D_8035FFA0;
@@ -724,7 +726,7 @@ Gfx *func_802D4874(struct Painting *painting) {
     sp5E = sp58[0];
     sp5C = sp58[sp5E * 3 + 1];
     gSPDisplayList(sp44++,
-                   func_802D3CF0(tArray[0], tWidth, tHeight, sp58, sp5E, sp5C, painting->brightness));
+                   func_802D3CF0(tArray[gCurrLevelButton + 1], tWidth, tHeight, sp58, sp5E, sp5C, painting->brightness));
     painting_update_ripple_status(painting);
     gSPPopMatrix(sp44++, G_MTX_MODELVIEW);
     gSPDisplayList(sp44++, dl_paintings_env_mapped_end);

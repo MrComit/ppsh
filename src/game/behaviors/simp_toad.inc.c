@@ -70,6 +70,9 @@ struct ShadowCopy toadChase[CHASE_SIZE] = {
 void gang_toad_npc(void) {
     switch (o->oAction) {
         case 0:
+            o->oOpacity = 30;
+            if (o->oBehParams >> 24 == 0x4B)
+                o->oOpacity = 255;
             BobombBuddyIdleLoop();
             break;
 
@@ -78,6 +81,7 @@ void gang_toad_npc(void) {
             break;
 
         case 3:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 15);
             if (CL_NPC_Dialog(o->oBehParams >> 24)) {
                 o->oAction = 4;   
             }

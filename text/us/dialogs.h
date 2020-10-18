@@ -898,12 +898,14 @@ sleeping!\n\
 Move slowly,\n\
 tread lightly."))
 
-DEFINE_DIALOG(DIALOG_097, 1, 5, 30, 200, _("\
-Don't be a pushover!\n\
-If anyone tries to shove\n\
-you around, push back!\n\
-It's one-on-one, with a\n\
-fiery finish for the loser!"))
+DEFINE_DIALOG(DIALOG_097, 1, 4, 30, 200, _("\
+Pushing these buttons\n\
+should change what\n\
+location the portal\n\
+leads to.\n\
+It makes navigating\n\
+so much more\n\
+convenient."))
 
 DEFINE_DIALOG(DIALOG_098, 1, 2, 95, 200, _("\
 Come on in here...\n\
@@ -934,15 +936,11 @@ me than it does on you,\n\
 though! Eeeee! Kee keee!"))
 
 DEFINE_DIALOG(DIALOG_102, 1, 5, 30, 200, _("\
-Pssst! The Boos are super\n\
-shy. If you look them\n\
-in the eyes, they fade\n\
-away, but if you turn\n\
-your back, they reappear.\n\
-It's no use trying to hit\n\
-them when they're fading\n\
-away. Instead, sneak up\n\
-behind them and punch."))
+Have you tried pressing\n\
+the pause button? There\n\
+are a lot of cool options\n\
+there that you can mess\n\
+around with."))
 
 DEFINE_DIALOG(DIALOG_103, 1, 3, 95, 200, _("\
 Ha! We're always 1 step\n\
@@ -952,12 +950,10 @@ With the powers of us\n\
 all, Tier 1, 2, and 3,\n\
 we will destroy you!"))
 
-DEFINE_DIALOG(DIALOG_104, 1, 5, 30, 200, _("\
-The shadowy star in front\n\
-of you is a 『Star\n\
-Marker.』 When you collect\n\
-all 8 Red Coins, the Star\n\
-will appear here."))
+DEFINE_DIALOG(DIALOG_104, 1, 3, 30, 200, _("\
+Woah! A 4th button?\n\
+I had no idea this was\n\
+gonna be here!"))
 
 DEFINE_DIALOG(DIALOG_105, 1, 3, 95, 200, _("\
 Ready for blastoff! Come\n\
@@ -1727,11 +1723,16 @@ Ready...set...\n\
 //Go//// Don't Go"))
 
 DEFINE_DIALOG(DIALOG_165, 1, 5, 30, 200, _("\
-I take no responsibility\n\
-whatsoever for those who\n\
-get dizzy and pass out\n\
-from running around\n\
-this post."))
+Oh Mario! I'm so glad \n\
+you're here! I was just\n\
+minding my own business,\n\
+then suddenly everything\n\
+went dark.\n\
+When I woke up, I saw \n\
+that everything was dark\n\
+and the Princess had\n\
+vanished!\n\
+Please help us!"))
 
 DEFINE_DIALOG(DIALOG_166, 1, 3, 30, 200, _("\
 Oh Mario! Thank you so\n\

@@ -86,3 +86,6 @@
 #include "levels/castle_inside/areas/3/trajectory.inc.c"
 #include "levels/castle_inside/areas/3/movtext.inc.c"
 #include "levels/castle_inside/leveldata.inc.c"
+
+#include "levels/castle_inside/castle_button/collision.inc.c"
+#include "levels/castle_inside/castle_button/model.inc.c"

@@ -3,6 +3,8 @@
 const GeoLayout castle_inside_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE_DECAL, -2573, 0, -337, castle_inside_dl_ButtonContainment_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 198, 178, -1719, castle_inside_dl_Couch_004_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -1023, 251, 195, castle_inside_dl_node_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2455, 501, 1084, castle_inside_dl_node_001_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 433, 479, 1059, castle_inside_dl_node_002_mesh),
@@ -36,6 +38,7 @@ const GeoLayout castle_inside_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, castle_inside_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

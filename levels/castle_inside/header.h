@@ -155,4 +155,8 @@ extern const LevelScript level_castle_inside_entry[];
 
 #include "levels/castle_inside/header.inc.h"
 
+#include "levels/castle_inside/castle_button/collision_header.h"
+
+#include "levels/castle_inside/castle_button/geo_header.h"
+
 #endif

@@ -37,6 +37,8 @@
 #define TOAD_STAR_2_DIALOG_AFTER DIALOG_155
 #define TOAD_STAR_3_DIALOG_AFTER DIALOG_156
 
+#define o gCurrentObject
+
 enum ToadMessageStates {
     TOAD_MESSAGE_FADED,
     TOAD_MESSAGE_OPAQUE,
@@ -51,6 +53,17 @@ enum UnlockDoorStarStates {
     UNLOCK_DOOR_STAR_SPAWNING_PARTICLES,
     UNLOCK_DOOR_STAR_DONE
 };
+
+//s16 sHubToadAngle[4] = {0x8000, 0x0, 0x1800, 0x0};
+u8 sHubToadDialog[4] = {DIALOG_165, DIALOG_097, DIALOG_102, DIALOG_104};
+u32 sHubToadStates[3] = {SAVE_FLAG_UNLOCKED_PSS_DOOR, SAVE_FLAG_UNLOCKED_WF_DOOR, SAVE_FLAG_UNLOCKED_CCM_DOOR};
+Vec3f sHubToadPos[4] = {
+{-700, 0, 1449.25},
+{-2253.71, 0, -100},
+{100, 131.028, -1737.93},
+{-2253.71, 0, -1000},
+};
+
 
 /**
  * The eye texture on succesive frames of Mario's blink animation.
@@ -672,4 +685,47 @@ Gfx *geo_mirror_mario_backface_culling(s32 callContext, struct GraphNode *node, 
         asGenerated->fnNode.node.flags = (asGenerated->fnNode.node.flags & 0xFF) | (LAYER_OPAQUE << 8);
     }
     return gfx;
+}
+
+void hub_toad_idle(void) {
+    o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oAngleToMario, 0x140);
+    if (o->oInteractStatus == INT_STATUS_INTERACTED)
+        o->oAction = 2;
+}
+
+void bhv_hub_toad_init(void) {
+    u32 flags = save_file_get_flags();
+    o->oInteractionSubtype = INT_SUBTYPE_NPC;
+    o->oOpacity = 0xFF;
+    if (flags & sHubToadStates[2]) {
+        o->oF4 = 3;
+    } else if (flags & sHubToadStates[1]) {
+        o->oF4 = 2;
+    } else if (flags & sHubToadStates[0]) {
+        o->oF4 = 1;
+    } else {
+        o->oF4 = 0;
+    }
+
+    o->oBehParams2ndByte = sHubToadDialog[o->oF4];
+    vec3f_copy(&o->oPosX, sHubToadPos[o->oF4]);
+}
+
+
+void bhv_hub_toad_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            hub_toad_idle();
+            break;
+
+        case 2:
+            BobombBuddyTurnToTalkLoop();
+            break;
+
+        case 3:
+            if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                o->oAction = 0;   
+            }
+            break;
+    }
 }

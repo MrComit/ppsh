@@ -639,4 +639,8 @@
 //custom boss
 #define MODEL_BOSS_GATE 0xFF
 
+//custom hub
+#define MODEL_LEVEL_BUTTON 0xFF
+
+
 #endif

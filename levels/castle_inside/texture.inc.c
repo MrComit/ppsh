@@ -160,6 +160,23 @@ ALIGNED8 static const u8 inside_castle_seg7_texture_07016800[] = {
 #include "levels/castle_inside/29.rgba16.inc.c"
 };
 
+ALIGNED8 static const u8 inside_castle_seg7_texture_c1[] = {
+#include "levels/castle_inside/c1.rgba16.inc.c"
+};
+
+ALIGNED8 static const u8 inside_castle_seg7_texture_c2[] = {
+#include "levels/castle_inside/c2.rgba16.inc.c"
+};
+
+ALIGNED8 static const u8 inside_castle_seg7_texture_c3[] = {
+#include "levels/castle_inside/c3.rgba16.inc.c"
+};
+
+ALIGNED8 static const u8 inside_castle_seg7_texture_c4[] = {
+#include "levels/castle_inside/c4.rgba16.inc.c"
+};
+
+
 // 0x07017000 - 0x07017800
 ALIGNED8 static const u8 inside_castle_seg7_texture_07017000[] = {
 #include "levels/castle_inside/30.rgba16.inc.c"

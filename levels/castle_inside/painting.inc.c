@@ -1316,6 +1316,10 @@ static const u8 *const inside_castle_seg7_painting_textures_070235E8[] = {
 
 static const u8 *const inside_castle_seg7_painting_textures_070235F0[] = {
     inside_castle_seg7_texture_07016800,
+    inside_castle_seg7_texture_c1,
+    inside_castle_seg7_texture_c2,
+    inside_castle_seg7_texture_c3,
+    inside_castle_seg7_texture_c4,
 };
 
 static const u8 *const inside_castle_seg7_painting_textures_070235F4[] = {

@@ -2812,15 +2812,19 @@ s16 render_pause_courses_and_castle(void) {
 #ifdef VERSION_EU
             if (gPlayer3Controller->buttonPressed & (A_BUTTON | Z_TRIG | START_BUTTON))
 #else
-            if (gPlayer3Controller->buttonPressed & A_BUTTON
-             || gPlayer3Controller->buttonPressed & START_BUTTON)
+            if (gPlayer3Controller->buttonPressed & A_BUTTON)
 #endif
             {
-                level_set_transition(0, 0);
-                play_sound(SOUND_MENU_PAUSE_2, gDefaultSoundArgs);
-                gMenuMode = -1;
+                if (gDialogLineNum != 2 || gCurrLevelNum != LEVEL_CASTLE) {
+                    level_set_transition(0, 0);
+                    play_sound(SOUND_MENU_PAUSE_2, gDefaultSoundArgs);
+                    gMenuMode = -1;
+                }
 
-                if (gDialogLineNum == 2 || gDialogLineNum == 3) {
+                if (gDialogLineNum == 2 && gCurrLevelNum == LEVEL_CASTLE) {
+                    num = 0;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gDefaultSoundArgs);
+                } else if (gDialogLineNum == 2 || gDialogLineNum == 3) {
                     num = gDialogLineNum;
                 } else {
                     num = 1;
@@ -2839,12 +2843,17 @@ s16 render_pause_courses_and_castle(void) {
                     gDialogLineNum = 5;
                     play_sound(SOUND_MENU_CHANGE_SELECT, gDefaultSoundArgs);
                     gDialogBoxState = DIALOG_STATE_VERTICAL;
-                }
-                else {
+                } else if (gDialogLineNum != 2 || gCurrLevelNum != LEVEL_CASTLE) {
                    gDialogBoxState = DIALOG_STATE_OPENING; 
                 }
 
                 return num;
+            } else if (gPlayer3Controller->buttonPressed & B_BUTTON || gPlayer3Controller->buttonPressed & START_BUTTON) {
+                level_set_transition(0, 0);
+                play_sound(SOUND_MENU_PAUSE_2, gDefaultSoundArgs);
+                gMenuMode = -1;
+                gDialogLineNum = 1;
+                return 1;
             }
             break;
         case DIALOG_STATE_HORIZONTAL:

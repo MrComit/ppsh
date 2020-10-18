@@ -6,7 +6,9 @@
  * the environment.
  */
 
+u32 sButtonUnlocks[3] = {SAVE_FLAG_UNLOCKED_PSS_DOOR, SAVE_FLAG_UNLOCKED_WF_DOOR, SAVE_FLAG_UNLOCKED_CCM_DOOR};
 u16 gRedSwitchesPushed = 0;
+s8 gCurrLevelButton = 0;
 
 void bhv_purple_switch_init(void) {
     gRedSwitchesPushed = 0;
@@ -137,6 +139,50 @@ void bhv_purple_switch_loop(void) {
                 create_star(o->oPosX, o->oPosY + 300.0f, o->oPosZ);
                 gRedSwitchesPushed = 0;
                 o->oAction = 5;
+            }
+            break;
+    }
+}
+
+void bhv_level_switch_init(void) {
+    if (o->oBehParams2ndByte) {
+        if (!(save_file_get_flags() & sButtonUnlocks[o->oBehParams2ndByte - 1]))
+            o->activeFlags = 0;
+    }
+}
+
+
+void bhv_level_switch_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o) {
+                o->oAction = 1;
+            }
+
+            if (gCurrLevelButton == o->oBehParams2ndByte) {
+                o->oAction = 1;
+                o->header.gfx.scale[1] = 0.05f;
+            }
+            break;
+        case 1:
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.05f, 0.2f);
+            if (o->header.gfx.scale[1] == 0.05f) {
+                PlaySound2(SOUND_GENERAL2_PURPLE_SWITCH);
+                o->oAction = 2;
+                ShakeScreen(SHAKE_POS_SMALL);
+                o->oAnimState = 1;
+                gCurrLevelButton = o->oBehParams2ndByte;
+            }
+            break;
+        case 2:
+            if (gCurrLevelButton != o->oBehParams2ndByte) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.0f, 0.2f);
+            if (o->header.gfx.scale[1] == 1.0f) {
+                o->oAction = 0;
             }
             break;
     }

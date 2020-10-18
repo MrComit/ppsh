@@ -641,8 +641,11 @@ void bhv_subway_ending_loop(void);
 void bhv_subway_ending_init(void);
 void bhv_hint_shop_init(void);
 void bhv_hint_shop_loop(void);
+void bhv_level_switch_loop(void);
+void bhv_level_switch_init(void);
 
 extern s32 gBossReset;
+extern s8 gCurrLevelButton;
 
 
 extern Gfx *Geo18_802B1BB0(s32 run, UNUSED struct GraphNode *node, Mat4 mtx);
