@@ -1330,7 +1330,7 @@ s32 act_air_hit_wall(struct MarioState *m) {
             return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
         }
     } else if (m->forwardVel >= 38.0f) {
-        m->wallKickTimer = 5;
+        m->wallKickTimer = 8;
         if (m->vel[1] > 0.0f) {
             m->vel[1] = 0.0f;
         }
@@ -1338,7 +1338,7 @@ s32 act_air_hit_wall(struct MarioState *m) {
         m->particleFlags |= PARTICLE_1;
         return set_mario_action(m, ACT_BACKWARD_AIR_KB, 0);
     } else {
-        m->wallKickTimer = 5;
+        m->wallKickTimer = 8;
         if (m->vel[1] > 0.0f) {
             m->vel[1] = 0.0f;
         }

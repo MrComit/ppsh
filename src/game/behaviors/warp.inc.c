@@ -101,7 +101,10 @@ s8 deathwarp_get_list(void) {
                     else
                         return SIMP_4;
                 case 3:
-                    return SIMP_1 + gMarioCurrentRoom;
+                    if (gMarioState->pos[1] > 0.0f)
+                        return SIMP_2;
+                    else
+                        return SIMP_3;
                 default:
                     return -1;
             }

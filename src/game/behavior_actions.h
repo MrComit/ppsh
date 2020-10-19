@@ -643,6 +643,7 @@ void bhv_hint_shop_init(void);
 void bhv_hint_shop_loop(void);
 void bhv_level_switch_loop(void);
 void bhv_level_switch_init(void);
+void bhv_black_smoke_object_loop(void);
 
 extern s32 gBossReset;
 extern s8 gCurrLevelButton;

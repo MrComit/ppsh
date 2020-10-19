@@ -1,5 +1,19 @@
 Vec3f sTruckPos = {-12644.55f, -10000.0f, -8602.74f};
 
+
+void spawn_truck_smoke(s16 model, const BehaviorScript *behavior) {
+    struct Object *particle;
+    particle = spawn_object_at_origin(o, 0, model, behavior);
+    copy_object_pos_and_angle(particle, o);
+    particle->oPosX -= 875.0f;
+    particle->oPosZ -= 200.0f;
+
+    particle = spawn_object_at_origin(o, 0, model, behavior);
+    copy_object_pos_and_angle(particle, o);
+    particle->oPosX -= 875.0f;
+    particle->oPosZ += 200.0f;
+}
+
 void bhv_car_gate(void) {
     struct Object *bswitch = obj_nearest_object_with_behavior(bhvTimedCarSwitch);
     if (bswitch == NULL)
@@ -114,12 +128,17 @@ void bhv_simp_truck_loop(void) {
 void bhv_simp_big_truck_init(void) {
     o->oBobombBlinkTimer = CL_RandomMinMaxU16(65, 115);
     o->oAnimState = CL_RandomMinMaxU16(0, 3);
+    o->oRoom = 2;
     if (o->oBehParams >> 24)
         o->oAction = 1;
 }
 
 void bhv_simp_big_truck_loop(void) {
     if (o->oBehParams2ndByte == 0) {
+        if (o->oTimer % 0x2D == 0) {
+            if (o->oDistanceToMario < 8000.0f)
+                spawn_truck_smoke(MODEL_BURN_SMOKE, bhvBlackSmokeObject);
+        }
         switch (o->oAction) {
             case 0:
                 o->oBobombBuddyPosXCopy = o->oPosX;

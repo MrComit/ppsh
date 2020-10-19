@@ -44,6 +44,7 @@ const GeoLayout wf_dl_Room2C_geo[] = {
 		GEO_ANIMATED_PART(LAYER_OPAQUE, -1731, -4249, 2575, wf_dl_WindMines_002_mesh),
 		GEO_ANIMATED_PART(LAYER_OPAQUE, 12557, -268, 8152, wf_dl_WindMines_003_mesh),
 		GEO_ANIMATED_PART(LAYER_OPAQUE, 13554, 1195, 6749, wf_dl_WindMines_004_mesh),
+		GEO_ANIMATED_PART(LAYER_OPAQUE_DECAL, 12557, -268, 8152, wf_dl_WindMines_006_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -70,6 +71,7 @@ const GeoLayout wf_area_2[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, wf_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),

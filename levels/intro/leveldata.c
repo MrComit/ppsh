@@ -4644,9 +4644,9 @@ Gfx mat_mario_H_f3d_v2[] = {
 
 Gfx mario_Circle_mesh[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(mario_Circle_mesh_vtx_cull + 0, 8, 0),
+	//gsSPVertex(mario_Circle_mesh_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
+	//gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_mario_Cone),
 	gsSPDisplayList(mario_Circle_mesh_tri_0),
 	gsSPDisplayList(mat_mario_Wood_f3d_v2),

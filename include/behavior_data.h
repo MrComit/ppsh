@@ -612,5 +612,6 @@ extern const BehaviorScript bhvEndingSubwayKoopa[];
 extern const BehaviorScript bhvHintToad[];
 extern const BehaviorScript bhvLevelButtons[];
 extern const BehaviorScript bhvHubToad[];
+extern const BehaviorScript bhvBlackSmokeObject[];
 
 #endif /* _BEHAVIOR_DATA_H */

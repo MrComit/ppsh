@@ -6649,6 +6649,7 @@ const BehaviorScript bhvSimpBigTruck[] = {
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 0x3000),
     SET_FLOAT(oCollisionDistance, 0xC00),
+    CALL_NATIVE(bhv_init_room),
     CALL_NATIVE(bhv_simp_big_truck_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_simp_big_truck_loop),
@@ -6991,4 +6992,25 @@ const BehaviorScript bhvHubToad[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hub_toad_loop),
     END_LOOP(),
+};
+
+
+const BehaviorScript bhvBlackSmokeObject[] = {
+    BEGIN(OBJ_LIST_UNIMPORTANT),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    SCALE(150),
+    SET_INT(oAnimState, 4),
+    SET_FLOAT(oGraphYOffset, 50),
+    SET_FLOAT(oDrawingDistance, 0x6000),
+    //BEGIN_REPEAT(1),
+        //CALL_NATIVE(bhv_black_smoke_object_loop),
+        //DELAY(1),
+        //CALL_NATIVE(bhv_black_smoke_object_loop),
+        //DELAY(1),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_black_smoke_object_loop),
+    END_LOOP(),
+    //END_REPEAT(),
+    //DEACTIVATE(),
 };

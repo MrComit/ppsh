@@ -94,14 +94,20 @@ u32 gLightTimer = 0x00;
 //#define gdSPChangeLights0(ar,ag,ab) gdSPDefLights0(ar, ag, ab);
 
 Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
-    Lights0 *light;
-    Lights0 *light2;
-    Lights0 newLight = gdSPDefLights0(0xEF, 0xEF, 0xEF);
+    Lights1 *light;
+    Lights1 *light2;
+    Lights1 newLight = gdSPDefLights1(
+        0xEF, 0xEF, 0xEF,
+        0xEF, 0xEF, 0xEF, 0x0, 0x0, 0x0
+    );
 
     if (sCurrPlayMode == 0) {
         newLight.a.l.col[0] = gLightColor;
         newLight.a.l.col[1] = gLightColor;
         newLight.a.l.col[2] = gLightColor;
+        newLight.l[0].l.col[0] = gLightColor;
+        newLight.l[0].l.col[1] = gLightColor;
+        newLight.l[0].l.col[2] = gLightColor;
         light = segmented_to_virtual(&bob_dl_Rocks_v2_lights);
         *light = newLight;
         light2 = segmented_to_virtual(&bob_dl_Rocks2_v2_lights);

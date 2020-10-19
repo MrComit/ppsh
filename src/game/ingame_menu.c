@@ -2812,7 +2812,7 @@ s16 render_pause_courses_and_castle(void) {
 #ifdef VERSION_EU
             if (gPlayer3Controller->buttonPressed & (A_BUTTON | Z_TRIG | START_BUTTON))
 #else
-            if (gPlayer3Controller->buttonPressed & A_BUTTON)
+            if (gPlayer3Controller->buttonPressed & A_BUTTON || gPlayer3Controller->buttonPressed & START_BUTTON)
 #endif
             {
                 if (gDialogLineNum != 2 || gCurrLevelNum != LEVEL_CASTLE) {
@@ -2848,7 +2848,7 @@ s16 render_pause_courses_and_castle(void) {
                 }
 
                 return num;
-            } else if (gPlayer3Controller->buttonPressed & B_BUTTON || gPlayer3Controller->buttonPressed & START_BUTTON) {
+            } else if (gPlayer3Controller->buttonPressed & B_BUTTON) {
                 level_set_transition(0, 0);
                 play_sound(SOUND_MENU_PAUSE_2, gDefaultSoundArgs);
                 gMenuMode = -1;

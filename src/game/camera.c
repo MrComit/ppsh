@@ -3487,7 +3487,7 @@ void init_camera(struct Camera *c) {
             break;
 
         //! Hardcoded position checks determine which cutscene to play when mario enters castle grounds.
-        case LEVEL_CASTLE_GROUNDS:
+        /*case LEVEL_CASTLE_GROUNDS:
             if (is_within_100_units_of_mario(-1328.f, 260.f, 4664.f) != 1) {
                 marioOffset[0] = -400.f;
                 marioOffset[2] = -800.f;
@@ -3499,7 +3499,7 @@ void init_camera(struct Camera *c) {
                 start_cutscene(c, CUTSCENE_EXIT_FALL_WMOTR);
             }
             gLakituState.mode = CAMERA_MODE_FREE_ROAM;
-            break;
+            break;*/
         case LEVEL_SA:
             marioOffset[2] = 200.f;
             break;
@@ -3516,9 +3516,11 @@ void init_camera(struct Camera *c) {
             vec3f_set(sFixedModeBasePosition, -2985.f, 478.f, -5568.f);
             break;
     }
-    if (c->mode == CAMERA_MODE_8_DIRECTIONS) {
+    if (c->mode == CAMERA_MODE_8_DIRECTIONS && gCurrLevelNum != LEVEL_CASTLE_GROUNDS) {
         gCameraMovementFlags |= CAM_MOVE_ZOOMED_OUT;
     }
+    if (gCurrLevelNum == LEVEL_CASTLE_GROUNDS)
+        gCameraMovementFlags & ~CAM_MOVE_ZOOMED_OUT;
     switch (gCurrLevelArea) {
         case AREA_SSL_EYEROK:
             vec3f_set(marioOffset, 0.f, 500.f, -100.f);
@@ -3538,7 +3540,7 @@ void init_camera(struct Camera *c) {
             }
             break;
         case AREA_CCM_OUTSIDE:
-            gCameraMovementFlags |= CAM_MOVE_ZOOMED_OUT;
+            //gCameraMovementFlags |= CAM_MOVE_ZOOMED_OUT;
             break;
         case AREA_TTM_OUTSIDE:
             gLakituState.mode = CAMERA_MODE_RADIAL;
@@ -9738,7 +9740,7 @@ BAD_RETURN(s32) cutscene_intro_peach_mario_appears(struct Camera *c) {
     cutscene_event(cutscene_intro_peach_reset_spline, c, 0, 0);
     cutscene_event(cutscene_intro_peach_follow_pipe_spline, c, 0, -1);
     cutscene_event(cutscene_intro_peach_handheld_shake_off, c, 70, 70);
-    cutscene_event(intro_pipe_exit_text, c, 250, 250);
+    //cutscene_event(intro_pipe_exit_text, c, 250, 250);
 
     approach_f32_asymptotic_bool(&sCutsceneVars[1].point[1], 80.f + sMarioGeometry.currFloorHeight +
                                  (sMarioCamState->pos[1] - sMarioGeometry.currFloorHeight) * 1.1f, 0.4f);
