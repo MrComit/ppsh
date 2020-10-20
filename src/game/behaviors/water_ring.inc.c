@@ -77,7 +77,7 @@ void CheckWaterRingCollection(f32 avgScale, struct Object *ringManager) {
                 ringSpawner->oWaterRingSpawnerRingsCollected = 0;
         }*/
 
-        if (o->oDistanceToMario < 300.0f) {
+        if (o->oDistanceToMario < 400.0f) {
             play_sound(SOUND_MENU_STAR_SOUND, gDefaultSoundArgs);
             o->oAction = WATER_RING_ACT_COLLECTED;
             o->parentObj->oKoopaRunAngleX++;
@@ -230,6 +230,7 @@ void MantaRayWaterRingNotCollectedLoop(void) {
 }
 
 void bhv_manta_ray_water_ring_loop(void) {
+    struct Object *arrow = obj_nearest_object_with_behavior(bhvArrowForWaterRings);
     if (o->parentObj->oKoopaAction == 0) {
         o->oAction = 0;
     }
@@ -249,6 +250,9 @@ void bhv_manta_ray_water_ring_loop(void) {
         case 2:
             MantaRayWaterRingNotCollectedLoop();
             o->oOpacity = 150;
+            if (arrow != NULL) {
+                arrow->parentObj = o;
+            }
             break;
 
         case 3:
@@ -267,4 +271,20 @@ void bhv_manta_ray_water_ring_loop(void) {
         case 4:
             break;
     }
+}
+
+
+
+void bhv_arrow_water_ring_loop(void) {
+    f32 dist;
+    s16 pitch, yaw;
+    o->oPosX = gMarioState->pos[0];
+    o->oPosY = gMarioState->pos[1] + 180.0f;
+    o->oPosZ = gMarioState->pos[2];
+    vec3f_get_dist_and_angle(&o->oPosX, &o->parentObj->oPosX, &dist, &pitch, &yaw);
+
+    if (absf(o->oPosY - o->parentObj->oPosY) < 250.0f)
+        pitch = 0;
+    o->oFaceAngleYaw = yaw + 0x8000;
+    o->oFaceAnglePitch = pitch;
 }

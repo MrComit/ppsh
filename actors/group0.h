@@ -363,4 +363,6 @@ extern const struct Animation *const skoopa_seg6_anims_06011364[];
 
 #include "mario/geo_header.h"
 
+#include "arrow_head/geo_header.h"
+
 #endif

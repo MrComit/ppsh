@@ -35,3 +35,5 @@
 #include "levels/bob/bridge/geo_header.h"
 #include "levels/bob/bridge/geo.inc.c"
 
+
+#include "levels/bob/pillar_switch/geo.inc.c"

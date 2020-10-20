@@ -363,7 +363,7 @@ void update_flying(struct MarioState *m) {
 }
 
 void check_water_dive(struct MarioState *m) {
-    if (m->floorHeight + 200.0f < (f32)m->waterLevel) {
+    if (m->forwardVel < 20.0f && m->floorHeight + 200.0f < (f32)m->waterLevel) {
         m->faceAngle[0] = -atan2s(/*m->forwardVel + */20.0f, m->vel[1]);
         vec3s_set(m->marioObj->header.gfx.angle, m->faceAngle[0], m->faceAngle[1], m->faceAngle[2]);
         set_mario_animation(m, MARIO_ANIM_FLUTTERKICK);

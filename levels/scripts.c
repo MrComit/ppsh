@@ -118,6 +118,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_SIMP_TOAD,               simp_toad_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SUBWAY_KOOPA, subway_k_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HINT_TOAD,            hint_toad_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_ARROW_HEAD, arrow_head_geo),
 
     FREE_LEVEL_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),

@@ -13,7 +13,7 @@ struct ObjectHitbox sChaseHitbox = {
     /* hurtboxHeight:     */ 100,
 };
 
-Vec3f sMGStartingPos = {-28152.0f, -9700.0f, -8384.34f};
+Vec3f sMGStartingPos = {-28152.0f, -9700.0f, -8521.45f};
 Vec3f sMGMinePos[7] = {
 {-31247.85f, -9743.7f, -12724.79f},
 {-31459.8f, -9743.7f, -15274.94f},
@@ -447,11 +447,14 @@ struct Object *star;
             break;
         case 8:
             print_text_fmt_int(20, 20, "LAP %d", o->oKoopaRunAngleX);
-            switch (o->oTimer) {
+            switch (o->oF4) {
                 case 0:
                     play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0xC, 0x00, 0x00, 0x00);
+                    if (o->oTimer > 8) {
+                        o->oF4 = 1;
+                    }
                     break;
-                case 9:
+                case 1:
                     grindInitTriggered = 0;
                     o->oKoopaAction = 1;
                     vec3f_copy(m->pos, sMGStartingPos);
@@ -462,11 +465,15 @@ struct Object *star;
                     m->vel[1] = 0;
                     m->vel[2] = 0;
                     set_mario_action(m, ACT_CUTSCENE_JUMP, 0);
+                    if (o->oTimer > 11) {
+                        o->oF4 = 2;
+                    }
                     break;
-                case 12:
+                case 2:
                     play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 5, 0x00, 0x00, 0x00);
                     m->hurtCounter = 4;
                     o->oAction = 4;
+                    o->oF4 = 0;
                     break;
             }
             break;

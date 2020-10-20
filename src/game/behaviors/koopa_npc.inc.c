@@ -96,7 +96,8 @@ s32 numPorcupuffers;
 }
 
 void koopa_the_sick_loop(void) {
-s32 dialogResponse;
+    s32 dialogResponse;
+    struct Object *arrow;
     ObjRandomBlink(&o->oBobombBuddyBlinkTimer);
 
     switch (o->oAction) {
@@ -135,6 +136,7 @@ s32 dialogResponse;
                 gMarioState->faceAngle[1] = 0;
                 gMarioState->action = ACT_WATER_IDLE;
                 //gCamera->pos[0] = 12866.0f;
+                set_r_button_camera(gCamera);
                 gCamera->pos[1] = -1754.0f;
                 //gCamera->pos[2] = 621.0f;
                 s8DirModeYawOffset = 0x7000;
@@ -142,6 +144,7 @@ s32 dialogResponse;
             }
             if (o->oTimer > 30) {
                 play_transition(0, 0x5, 0, 0, 0);
+                spawn_object(o, MODEL_ARROW_HEAD, bhvArrowForWaterRings);
                 //gUnderwaterCam = TRUE;
                 o->oAction = 4;
                 o->oInteractType = 0x40000000;
@@ -164,7 +167,6 @@ s32 dialogResponse;
 
         case 5:
             print_text_fmt_int(120, 210, "%d", o->oKoopaRunAngleZ / 30);
-
             if (o->oKoopaRunAngleZ < 1) {
                 gMarioState->hurtCounter = 0xFF;
                 //o->activeFlags = 0;
@@ -172,6 +174,9 @@ s32 dialogResponse;
                 o->oInteractType = 0x00800000;
                 o->oKoopaRunAngleZ = 930;
                 o->oKoopaRunAngleX = 0;
+                arrow = obj_nearest_object_with_behavior(bhvArrowForWaterRings);
+                if (arrow != NULL)
+                    arrow->activeFlags = 0;
                 break;
             }
             if (o->oKoopaRunAngleX > 19/*count_objects_with_behavior(bhvMantaRayWaterRing) == 0*/) {
@@ -182,6 +187,9 @@ s32 dialogResponse;
                 o->oBehParams |= 0x03 << 24;
                 o->oKoopaAction = 0;
                 o->oAction = 6;
+                arrow = obj_nearest_object_with_behavior(bhvArrowForWaterRings);
+                if (arrow != NULL)
+                    arrow->activeFlags = 0;
             }
             o->oKoopaRunAngleZ--;
             break;

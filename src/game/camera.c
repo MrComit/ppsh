@@ -1025,11 +1025,15 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     f32 yOff = 125.f;
     f32 baseDist = 1000.f; //vanilla is 1000
 
-    if (gMarioState->action & ACT_FLAG_BUTT_OR_STOMACH_SLIDE) {
-        transition_to_camera_mode(c, CAMERA_MODE_SLIDE_HOOT, 60);
-        return;
+    if (gCurrLevelNum == LEVEL_JRB && gCurrAreaIndex == 3) {
+        if (gMarioState->action & ACT_FLAG_BUTT_OR_STOMACH_SLIDE) {
+        //transition_to_camera_mode(c, CAMERA_MODE_SLIDE_HOOT, 60);
+        //return;
+        sLakituDist = 0;
+        pitch = 0x800;
+        c->pos[1] = gMarioState->pos[1] + 800.0f;
+        }
     }
-
 
     sAreaYaw = camYaw;
     calc_y_to_curr_floor(&posY, 1.f, 200.f, &focusY, 0.9f, 200.f);

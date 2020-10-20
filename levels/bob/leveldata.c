@@ -52,3 +52,5 @@
 #include "levels/bob/bridge/collision_header.h"
 #include "levels/bob/bridge/collision_up.inc.c"
 #include "levels/bob/bridge/collision_down.inc.c"
+#include "levels/bob/pillar_switch/model.inc.c"
+#include "levels/bob/pillar_switch/collision.inc.c"

@@ -1070,12 +1070,18 @@ void run_frame_skip(void) {
             gHudDisplay.timer += 1;
         }
         area_update_objects();
+        update_hud_values();
+
+        //basic_update(0);
         if (deltaTime > 1562744) {
             // reset buttonPressed
                 struct Controller *controller = &gControllers[0];
                 if (controller->controllerData != NULL) {
                     controller->buttonPressed = 0;
                 }
+        }
+        if (gCurrentArea != NULL) {
+            update_camera(gCurrentArea->camera);
         }
     }
 }
@@ -1104,14 +1110,11 @@ s32 play_mode_normal(void) {
             gHudDisplay.timer += 1;
         }
         area_update_objects();
-    }
+        update_hud_values();
 
-
-
-    update_hud_values();
-
-    if (gCurrentArea != NULL) {
-        update_camera(gCurrentArea->camera);
+        if (gCurrentArea != NULL) {
+            update_camera(gCurrentArea->camera);
+        }
     }
 
     initiate_painting_warp();

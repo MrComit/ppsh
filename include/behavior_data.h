@@ -613,5 +613,6 @@ extern const BehaviorScript bhvHintToad[];
 extern const BehaviorScript bhvLevelButtons[];
 extern const BehaviorScript bhvHubToad[];
 extern const BehaviorScript bhvBlackSmokeObject[];
+extern const BehaviorScript bhvArrowForWaterRings[];
 
 #endif /* _BEHAVIOR_DATA_H */

@@ -1679,7 +1679,9 @@ const BehaviorScript bhvFloorSwitchAnimatesObject[] = {
 
 const BehaviorScript bhvFloorSwitchGrills[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    GOTO(bhvFloorSwitchHardcodedModel + 1),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(pillar_switch_collision),
+    GOTO(bhvFloorSwitchHardcodedModel + 4),
 };
 
 const BehaviorScript bhvFloorSwitchHardcodedModel[] = {
@@ -6166,9 +6168,11 @@ const BehaviorScript bhvConstruction[] = {
 
 const BehaviorScript bhvFloorSwitchCannon[] = {
     BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oCollisionDistance, 0x4000),
-    GOTO(bhvFloorSwitchHardcodedModel + 1),
+    LOAD_COLLISION_DATA(pillar_switch_collision),
+    GOTO(bhvFloorSwitchHardcodedModel + 4),
 };
 
 const BehaviorScript bhvBarricade[] = {
@@ -7013,4 +7017,13 @@ const BehaviorScript bhvBlackSmokeObject[] = {
     END_LOOP(),
     //END_REPEAT(),
     //DEACTIVATE(),
+};
+
+
+const BehaviorScript bhvArrowForWaterRings[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_arrow_water_ring_loop),
+    END_LOOP(),
 };
