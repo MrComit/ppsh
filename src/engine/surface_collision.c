@@ -414,7 +414,7 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
     f32 height;
     struct Surface *floor = NULL;
 
-    f32 slopeFix = -9999999999999999.0f;
+    f32 slopeFix = -32768.0f;
 
     // Iterate through the list of floors until there are no more floors.
     while (surfaceNode != NULL) {

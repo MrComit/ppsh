@@ -6,7 +6,6 @@ const MacroObject bob_area_1_Area_macro_objs[] = {
 	MACRO_OBJECT(macro_yellow_coin, 0, -8664, -824, -6859),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_line_horizontal, 113, 4471, -289, -19773, 0x00000000),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_line_horizontal, -113, 8726, -289, -19765, 0x00000000),
-	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_line_horizontal, 90, 1115, -182, -9857, 0x00000000),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_line_horizontal, -175, 6724, -673, -12176, 0x00000000),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_line_horizontal, 62, 6385, -2125, -910, 0x00000000),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_line_horizontal, -155, 6782, 123, -5168, 0x00000000),

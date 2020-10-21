@@ -216,11 +216,11 @@ void bhv_bubba_loop(void) {
 
 void bhv_porcupuffer_init(void) {
     o->oSushiSharkUnkF4 = o->oFaceAngleYaw;
+    set_object_hitbox(o, &sBubbaHitbox2);
 }
 
 void bhv_porcupuffer_loop(void) {
     o->oAnimState = 1;
-    set_object_hitbox(o, &sBubbaHitbox2);
     if (o->oAction == 1) {
         if (o->oBubbaUnk104 > 12) {
             o->header.gfx.node.flags &= 0x0001;

@@ -125,7 +125,7 @@ struct GraphNodePerspective
     /*0x18*/ s32 unused;
     /*0x1C*/ f32 fov;   // horizontal field of view in degrees
     /*0x20*/ s16 near;  // near clipping plane
-    /*0x22*/ u16 far;   // far clipping plane
+    /*0x22*/ s16 far;   // far clipping plane
 };
 
 /** An entry in the master list. It is a linked list of display lists
@@ -369,7 +369,7 @@ struct GraphNodeRoot *init_graph_node_root(struct AllocOnlyPool *, struct GraphN
     s16, s16 x, s16 y, s16 width, s16 height);
 struct GraphNodeOrthoProjection *init_graph_node_ortho_projection(struct AllocOnlyPool *, struct GraphNodeOrthoProjection *, f32);
 struct GraphNodePerspective *init_graph_node_perspective(struct AllocOnlyPool *pool, struct GraphNodePerspective *sp1c,
-    f32 sp20, s16 sp26, u16 sp2a, GraphNodeFunc sp2c, s32 sp30);
+    f32 sp20, s16 sp26, s16 sp2a, GraphNodeFunc sp2c, s32 sp30);
 struct GraphNodeStart *init_graph_node_start(struct AllocOnlyPool *pool, struct GraphNodeStart *sp1c);
 struct GraphNodeMasterList *init_graph_node_master_list(struct AllocOnlyPool *pool, struct GraphNodeMasterList *, s16 sp22);
 struct GraphNodeLevelOfDetail *init_graph_node_render_range(struct AllocOnlyPool *pool, struct GraphNodeLevelOfDetail *graphNode,

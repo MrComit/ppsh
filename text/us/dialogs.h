@@ -611,15 +611,9 @@ this song takes place 10\n\
 minutes before gangnam\n\
 style"))
 
-DEFINE_DIALOG(DIALOG_063, 1, 5, 30, 200, _("\
-The Vanish Cap is inside\n\
-the blue block. Mr. I.\n\
-will be surprised, since\n\
-you'll be invisible when\n\
-you wear it!\n\
-Even the Big Boo will be\n\
-fooled--and you can walk\n\
-through secret walls, too."))
+DEFINE_DIALOG(DIALOG_063, 1, 2, 30, 200, _("\
+PLACEHOLDER DIALOG\n\
+Credits will go here"))
 
 DEFINE_DIALOG(DIALOG_064, 1, 5, 30, 200, _("\
 When you put on the Wing\n\

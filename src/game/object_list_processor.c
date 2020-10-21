@@ -285,7 +285,7 @@ void bhv_mario_update(void) {
     u32 particleFlags = 0;
     s32 i;
 
-    mario_moon_jump(); //MOONJUMP HERE //MOON JUMP
+    //mario_moon_jump(); //MOONJUMP HERE //MOON JUMP
     particleFlags = execute_mario_action(gCurrentObject);
     gCurrentObject->oMarioParticleFlags = particleFlags;
 

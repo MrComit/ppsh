@@ -1090,13 +1090,13 @@ void run_frame_skip(void) {
         // scroll_textures();
         update_hud_values();
 
-        if (gCurrentArea != NULL) {
-            update_camera(gCurrentArea->camera);
-        }
+        //if (gCurrentArea != NULL) {
+        //    update_camera(gCurrentArea->camera);
+        //}
         if (gGameLagged) {
-            if (gCurrentArea != NULL && gCurrentArea->camera->cutscene != 0) {
-                play_cutscene(gCurrentArea->camera);
-            }
+            //if (gCurrentArea != NULL && gCurrentArea->camera->cutscene != 0) {
+            //    play_cutscene(gCurrentArea->camera);
+            //}
             if (gWarpTransition.isActive) {
                 gWarpTransition.isActive == FALSE;
             }
@@ -1131,9 +1131,10 @@ s32 play_mode_normal(void) {
         area_update_objects();
         update_hud_values();
 
-        if (gCurrentArea != NULL) {
-            update_camera(gCurrentArea->camera);
-        }
+    }
+
+    if (gCurrentArea != NULL) {
+        update_camera(gCurrentArea->camera);
     }
 
     initiate_painting_warp();
