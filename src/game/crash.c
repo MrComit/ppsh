@@ -43,37 +43,6 @@ const char *szGPRegisters2[] = { "T7", "S0", "S1", "S2", "S3", "S4",
                                  "S5", "S6", "S7", "T8", "T9", /*"K0", "K1",*/
                                  "GP", "SP", "FP", "RA", NULL };
 
-/*
-    Generates new preamble code at the exception vectors (0x000, 0x180)
-
-    eg: generate_exception_preambles(crash_handler_entry);
-
-    000: lui   k0, hi(crash_handler_entry)
-    004: addiu k0, k0, lo(crash_handler_entry)
-    008: jr    k0
-    00C: nop
-*/
-void generate_exception_preambles(void *entryPoint) {
-    u8 *mem = (u8 *) 0xA0000000;
-    int offs = 0;
-    int i;
-
-    u16 hi = (u32) entryPoint >> 16;
-    u16 lo = (u32) entryPoint & 0xFFFF;
-
-    if (lo & 0x8000) {
-        hi++;
-    }
-
-    for (i = 0; i < 2; i++) {
-        *(u32 *) &mem[offs + 0x00] = 0x3C1A0000 | hi;
-        *(u32 *) &mem[offs + 0x04] = 0x275A0000 | lo;
-        *(u32 *) &mem[offs + 0x08] = 0x03400008;
-        *(u32 *) &mem[offs + 0x0C] = 0x00000000;
-        offs += 0x180;
-    }
-}
-
 int crash_strlen(char *str) {
     int len = 0;
     while (*str++) {
@@ -100,7 +69,7 @@ void show_crash_screen_and_hang(void) {
 
         fb_print_str(80, 20, "AN ERROR HAS OCCURRED!");
         fb_print_int_hex(80, 30, errno, 8);
-        fb_print_str(107, 30, szErrCodes[errno]);
+        fb_print_str(95, 30, szErrCodes[errno]);
 
         if (errno >= 2 && errno <= 5) {
             /*
@@ -111,8 +80,8 @@ void show_crash_screen_and_hang(void) {
             */
             u32 badvaddr = cop0_get_badvaddr();
 
-            fb_print_str(188, 50, "VA");
-            fb_print_int_hex(215, 50, badvaddr, 32);
+            fb_print_str(145, 50, "VA");
+            fb_print_int_hex(160, 50, badvaddr, 32);
         }
     } else {
         int afterFileX;
@@ -182,7 +151,7 @@ void fb_draw_char(int x, int y, u8 idx) {
         u8 curbyte = in[nbyte];
         for (nrow = 0; nrow < 2; nrow++) {
             for (ncol = 0; ncol < 4; ncol++) {
-                u8 px = curbyte & (1 << 7 - (nrow * 4 + ncol));
+                u8 px = curbyte & (1 << (7 - (nrow * 4 + ncol)));
                 if (px != 0) {
                     out[ncol] = fbFillColor;
                 }
