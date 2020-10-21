@@ -126,19 +126,11 @@ Lights1 bob_dl_FadingWarp_v2_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 bob_dl_Rocks_v2_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
-
 Lights1 bob_dl_VertColRocks_v2_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Lights1 bob_dl_LightGradient_v2_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
-
-Lights1 bob_dl_Rocks2_v2_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
@@ -20550,14 +20542,14 @@ Vtx bob_dl_FadingWarpIndicator_mesh_vtx_cull[8] = {
 };
 
 Vtx bob_dl_FadingWarpIndicator_mesh_vtx_0[8] = {
-	{{{0, 0, -256},0, {278, 1021},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-181, 0, -181},0, {714, 1021},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-256, 0, 0},0, {1021, 714},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{0, 0, 256},0, {714, -29},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-181, 0, 181},0, {1021, 278},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{256, 0, 0},0, {-29, 278},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{181, 0, 181},0, {278, -29},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{181, 0, -181},0, {-29, 714},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{0, 0, -256},0, {284, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{-181, 0, -181},0, {708, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{-256, 0, 0},0, {1008, 708},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{0, 0, 256},0, {708, -16},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{-181, 0, 181},0, {1008, 284},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{256, 0, 0},0, {-16, 284},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{181, 0, 181},0, {284, -16},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{181, 0, -181},0, {-16, 708},{0x0, 0x7F, 0x0, 0xFF}}},
 };
 
 Gfx bob_dl_FadingWarpIndicator_mesh_tri_0[] = {
@@ -23672,7 +23664,7 @@ Gfx mat_revert_bob_dl_TowerInside_v2[] = {
 
 Gfx mat_bob_dl_FadingWarp_v2[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPClearGeometryMode(G_CULL_BACK),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
@@ -23683,7 +23675,6 @@ Gfx mat_bob_dl_FadingWarp_v2[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_32b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsDPSetPrimColor(0, 0, 187, 187, 187, 255),
 	gsSPSetLights1(bob_dl_FadingWarp_v2_lights),
 	gsSPEndDisplayList(),
 };
@@ -23697,7 +23688,7 @@ Gfx mat_revert_bob_dl_FadingWarp_v2[] = {
 
 Gfx mat_bob_dl_Rocks_v2[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bob_dl_RMGP01_42c04f35_14_mip2_32x_ci8_pal_rgba16),
@@ -23714,7 +23705,7 @@ Gfx mat_bob_dl_Rocks_v2[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Rocks_v2_lights),
+	gsDPSetEnvColor(254, 254, 254, 255),
 	gsSPEndDisplayList(),
 };
 
@@ -23784,7 +23775,7 @@ Gfx mat_revert_bob_dl_LightGradient_v2[] = {
 
 Gfx mat_bob_dl_Rocks2_v2[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bob_dl_Glover_5197A30B_0_0_1EFBA6EA_ciByRGBAGray_32x_ci8_pal_rgba16),
@@ -23801,7 +23792,7 @@ Gfx mat_bob_dl_Rocks2_v2[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Rocks2_v2_lights),
+	gsDPSetEnvColor(254, 254, 254, 255),
 	gsSPEndDisplayList(),
 };
 

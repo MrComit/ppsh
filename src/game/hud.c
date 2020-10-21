@@ -524,11 +524,13 @@ void render_hud(void) {
         //}
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
-            render_hud_coins();
+            if (gHudTopY < 225)
+                render_hud_coins();
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
-            render_hud_stars();
+            if (gHudTopY < 225)
+                render_hud_stars();
         }
 
         if (gRedCoinsCollected > 0 && 6 > gRedCoinsCollected) {

@@ -56,6 +56,9 @@ extern const Lights1 bob_dl_Rocks_v2_lights;
 extern const Lights1 bob_dl_Rocks2_v2_lights;
 extern const Gfx mat_bob_sm64_material_water[];
 
+extern const Gfx mat_bob_dl_Rocks2_v2[];
+extern const Gfx mat_bob_dl_Rocks_v2[];
+
 #include "levels/bob/pillar_switch/geo_header.h"
 
 #include "levels/bob/pillar_switch/collision_header.h"

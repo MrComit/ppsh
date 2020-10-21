@@ -29,6 +29,7 @@
 #include "level_table.h"
 #include "include/behavior_data.h"
 #include "src/buffers/buffers.h"
+#include "game/level_geo.h"
 
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
@@ -124,9 +125,6 @@ const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
 #endif
 
 extern s8 gCurrLevelButton;
-//ostime
-OSTime oldTime = 0;
-OSTime deltaTime = 0;
 
 s8 sLevelWarps[4] = {LEVEL_BOB, LEVEL_WF, LEVEL_JRB, LEVEL_CCM};
 
@@ -181,6 +179,12 @@ s8 D_8032C9E0 = 0;
 u8 unused3[4];
 u8 unused4[2];
 u8 gCoinStarCollected = 0;
+
+
+// Frameskip
+s8 gGameLagged = 0;
+OSTime sOldTime = 0;
+OSTime sDeltaTime = 0;
 
 
 
@@ -360,6 +364,11 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
             set_mario_action(m, ACT_FALLING_EXIT_AIRBORNE, 0);
             break;
         case MARIO_SPAWN_UNKNOWN_23:
+            gLightColor = 0xEF;
+            gLightAction = 0x00;
+            gLightApproach = 0x00;
+            gLightSpeed = 0x00;
+            gLightTimer = 0x00;
             set_mario_action(m, ACT_UNUSED_DEATH_EXIT, 0);
             break;
         case MARIO_SPAWN_UNKNOWN_24:
@@ -769,6 +778,11 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 //if (m->numLives == 0) {
                 //    sDelayedWarpOp = WARP_OP_GAME_OVER;
                 //}
+                gLightColor = 0xEF;
+                gLightAction = 0x00;
+                gLightApproach = 0x00;
+                gLightSpeed = 0x00;
+                gLightTimer = 0x00;
                 sDelayedWarpTimer = 48;
                 if (gBossReset == 2)
                     sSourceWarpNodeId = 0xAB;
@@ -1062,28 +1076,33 @@ void basic_update(UNUSED s16 *arg) {
 
 void run_frame_skip(void) {
     OSTime newTime = osGetTime();
-    deltaTime += newTime - oldTime; //1562744
-    oldTime = newTime;
-    while (deltaTime > 1562744) {
-        deltaTime -= 1562744;
+    sDeltaTime += newTime - sOldTime;
+    sOldTime = newTime;
+    gGameLagged = -1;
+    while (sDeltaTime > 1562744) {
+        sDeltaTime -= 1562744;
         if (sTimerRunning && gHudDisplay.timer < 17999) {
             gHudDisplay.timer += 1;
         }
+        gGameLagged += 1;
         area_update_objects();
+        // put fast64's scroll_textures() function here
+        // scroll_textures();
         update_hud_values();
 
-        //basic_update(0);
-        if (deltaTime > 1562744) {
-            // reset buttonPressed
-                struct Controller *controller = &gControllers[0];
-                if (controller->controllerData != NULL) {
-                    controller->buttonPressed = 0;
-                }
-        }
         if (gCurrentArea != NULL) {
             update_camera(gCurrentArea->camera);
         }
+        if (gGameLagged) {
+            if (gCurrentArea != NULL && gCurrentArea->camera->cutscene != 0) {
+                play_cutscene(gCurrentArea->camera);
+            }
+            if (gWarpTransition.isActive) {
+                gWarpTransition.isActive == FALSE;
+            }
+        }
     }
+
 }
 
 
@@ -1269,23 +1288,23 @@ s32 update_level(void) {
             break;
         case PLAY_MODE_PAUSED:
             changeLevel = play_mode_paused();
-            deltaTime = 0;
-            oldTime = osGetTime();
+            sDeltaTime = 0;
+            sOldTime = osGetTime();
             break;
         case PLAY_MODE_CHANGE_AREA:
             changeLevel = play_mode_change_area();
-            deltaTime = 0;
-            oldTime = osGetTime();
+            sDeltaTime = 0;
+            sOldTime = osGetTime();
             break;
         case PLAY_MODE_CHANGE_LEVEL:
             changeLevel = play_mode_change_level();
-            deltaTime = 0;
-            oldTime = osGetTime();
+            sDeltaTime = 0;
+            sOldTime = osGetTime();
             break;
         case PLAY_MODE_FRAME_ADVANCE:
             changeLevel = play_mode_frame_advance();
-            deltaTime = 0;
-            oldTime = osGetTime();
+            sDeltaTime = 0;
+            sOldTime = osGetTime();
             break;
     }
 
@@ -1372,8 +1391,8 @@ s32 lvl_init_or_update(s16 initOrUpdate, UNUSED s32 unused) {
     switch (initOrUpdate) {
         case 0:
             result = init_level();
-            deltaTime = 0;
-            oldTime = osGetTime();
+            sDeltaTime = 0;
+            sOldTime = osGetTime();
             break;
         case 1:
             result = update_level();

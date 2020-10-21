@@ -14,6 +14,7 @@
 #include "game/mario.h"
 #include "game/object_list_processor.h"
 #include "surface_load.h"
+#include "game/save_file.h"
 
 #define BOUNDS_EXTENSION 4.0f
 
@@ -753,7 +754,8 @@ void load_object_collision_model(void) {
         }
     }
 
-    if (marioDist < gCurrentObject->oDrawingDistance) {
+
+    if (save_file_get_console_mode() == 0 || marioDist < gCurrentObject->oDrawingDistance) {
         gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
     } else {
         gCurrentObject->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;

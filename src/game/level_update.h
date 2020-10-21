@@ -69,6 +69,8 @@ extern s16 sTransitionTimer;
 extern void (*sTransitionUpdate)(s16 *);
 extern u8 unused3[4];
 
+extern s8 gGameLagged;
+
 struct WarpDest {
     u8 type;
     u8 levelNum;

@@ -10,6 +10,7 @@
 #include "geo_misc.h"
 #include "segment2.h"
 #include "camera.h"
+#include "game/save_file.h"
 
 
 #include "level_update.h"
@@ -22,7 +23,7 @@ s32 set_and_reset_transition_fade_timer(s8 fadeTimer, u8 transTime) {
 
     sTransitionColorFadeCount[fadeTimer]++;
 
-    if (sTransitionColorFadeCount[fadeTimer] == transTime) {
+    if (sTransitionColorFadeCount[fadeTimer] >= transTime) {
         sTransitionColorFadeCount[fadeTimer] = 0;
         sTransitionTextureFadeCount[fadeTimer] = 0;
         reset = TRUE;

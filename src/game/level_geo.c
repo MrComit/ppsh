@@ -88,54 +88,54 @@ u8 gLightApproach = 0x00;
 u8 gLightSpeed = 0x00;
 u32 gLightTimer = 0x00;
 
+typedef struct {
+    int cmd:8;
+    int pad:24;
+    int r:8;
+    int g:8;
+    int b:8;
+    int a:8;
+} SetEnvColor;
+
 
 //#define COL gColColor
 
 //#define gdSPChangeLights0(ar,ag,ab) gdSPDefLights0(ar, ag, ab);
 
 Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
-    Lights1 *light;
-    Lights1 *light2;
-    Lights1 newLight = gdSPDefLights1(
-        0xEF, 0xEF, 0xEF,
-        0xEF, 0xEF, 0xEF, 0x0, 0x0, 0x0
-    );
+    SetEnvColor *env1;
+    SetEnvColor *env2;
+    //Lights1 *light;
+    //Lights1 *light2;
+    //Lights1 newLight = gdSPDefLights1(
+    //    0xEF, 0xEF, 0xEF,
+    //    0xEF, 0xEF, 0xEF, 0x0, 0x0, 0x0
+    //);
 
     if (sCurrPlayMode == 0) {
-        newLight.a.l.col[0] = gLightColor;
-        newLight.a.l.col[1] = gLightColor;
-        newLight.a.l.col[2] = gLightColor;
-        newLight.l[0].l.col[0] = gLightColor;
-        newLight.l[0].l.col[1] = gLightColor;
-        newLight.l[0].l.col[2] = gLightColor;
-        light = segmented_to_virtual(&bob_dl_Rocks_v2_lights);
-        *light = newLight;
-        light2 = segmented_to_virtual(&bob_dl_Rocks2_v2_lights);
-        *light2 = newLight;
+        //newLight.a.l.col[0] = gLightColor;
+        //newLight.a.l.col[1] = gLightColor;
+        //newLight.a.l.col[2] = gLightColor;
+        //newLight.l[0].l.col[0] = gLightColor;
+        //newLight.l[0].l.col[1] = gLightColor;
+        //newLight.l[0].l.col[2] = gLightColor;
+        //light = segmented_to_virtual(&bob_dl_Rocks_v2_lights);
+        env1 = segmented_to_virtual(mat_bob_dl_Rocks_v2);
+        env2 = segmented_to_virtual(mat_bob_dl_Rocks2_v2);
+        env1 += 18;
+        env2 += 18;
+
+        env1->r = gLightColor;
+        env1->g = gLightColor;
+        env1->b = gLightColor;
+        env2->r = gLightColor;
+        env2->g = gLightColor;
+        env2->b = gLightColor;
+        //*light = newLight;
+        //light2 = segmented_to_virtual(&bob_dl_Rocks2_v2_lights);
+        //*light2 = newLight;
 
         gLightColor = approach_s16_symmetric(gLightColor, gLightApproach, gLightSpeed);
-        /*switch (gLightAction) {
-            case 0:
-                gLightApproach = 0xB;
-                gLightSpeed = 0x4;   
-                if ((gAudioFrameCount & 0xFF) % 240 == 0) {
-                    gLightAction = 1;
-                }
-                break;
-            case 1:
-                gLightApproach = 0xEF;
-                gLightSpeed = 0x40;
-            
-                if (gLightTimer > 2) {
-                    gLightTimer = 0;
-                    gLightAction = 0;
-                }
-                gLightTimer++;
-                break;
-        }*/
-
-
-
         switch (gLightAction) {
             case 0:
                 gLightApproach = 0xB;

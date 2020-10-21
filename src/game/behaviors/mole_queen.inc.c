@@ -1,6 +1,8 @@
 #include "audio/internal.h"
 #define QUEEN_DEATH 2
 
+extern s8 gGameLagged;
+
 static struct ObjectHitbox sMoleQueenHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
@@ -187,9 +189,9 @@ s16 angle;
                     set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
                     break;
                 case 12:
-                    play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 5, 0x00, 0x00, 0x00);
-                    m->hurtCounter = 8;
-                    o->oAction = 1;
+                        play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 5, 0x00, 0x00, 0x00);
+                        m->hurtCounter = 8;
+                        o->oAction = 1;
                     break;
             }
             break;

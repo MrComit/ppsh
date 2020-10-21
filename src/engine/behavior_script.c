@@ -12,6 +12,7 @@
 #include "game/obj_behaviors_2.h"
 #include "behavior_data.h"
 #include "game/object_list_processor.h"
+#include "game/level_update.h" // Frameskip
 
 static u16 gRandomSeed16;
 
@@ -748,6 +749,18 @@ void cur_object_exec_behavior(void) {
     f32 distanceFromMario;
     BehCommandProc behCmdFunc;
     s32 behProcResult;
+    s32 hasAnimation;
+
+    /*if (save_file_get_console_mode()) {
+        hasAnimation = (gCurrentObject->header.gfx.node.flags & GRAPH_RENDER_HAS_ANIMATION) != 0;
+
+        if (gGameLagged && hasAnimation && gCurrentObject->header.gfx.unk38.curAnim != NULL) {
+            struct GraphNodeObject_sub *node = &gCurrentObject->header.gfx.unk38;
+            node->animFrame = geo_update_animation_frame(node, &node->animFrameAccelAssist);
+        }
+    }*/
+
+
 
     if (flagsLo & OBJ_FLAG_COMPUTE_DIST_TO_MARIO) {
         gCurrentObject->oDistanceToMario = dist_between_objects(gCurrentObject, gMarioObject);
