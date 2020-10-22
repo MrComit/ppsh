@@ -17,7 +17,6 @@ const MacroObject bob_area_1_Area_macro_objs[] = {
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_ring_horizontal, -175, 4211, -757, -13283, 0x00000000),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_ring_horizontal, -175, 13583, -600, 8099, 0x00000000),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_ring_horizontal, -175, 14199, -722, -6711, 0x00000000),
-	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_ring_horizontal, -175, 73, -182, -11886, 0x00000000),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_ring_horizontal, -175, -16412, -2136, -5721, 0x00000000),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_ring_horizontal, -175, 17412, -2038, -13520, 0x00000000),
 	MACRO_OBJECT_WITH_BEH_PARAM(macro_coin_line_vertical, -88, -4767, -833, -15206, 0x00000000),

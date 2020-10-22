@@ -225,7 +225,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_FBblock, 10160, -2651, -166, 0, 0, 0, 0x01000000, bhvFBblock),
 		OBJECT(MODEL_NONE, -9735, -123, -173, 0, 0, 0, 0x00380000, bhvFadingWarp),
 		OBJECT(MODEL_NONE, -673, 23, 1841, 0, 0, 0, 0x00390000, bhvFadingWarp),
-		OBJECT(MODEL_FBblock, 1985, -621, -2651, 180, 0, 0, 0x00000000, bhvFBblock),
+		/*OBJECT(MODEL_FBblock, 1985, -621, -2651, 180, 0, 0, 0x00000000, bhvFBblock),
 		OBJECT(MODEL_FBblock, 4235, -621, -2651, 180, 0, 0, 0x00000000, bhvFBblock),
 		OBJECT(MODEL_FBblock, -265, -621, -2651, 180, 0, 0, 0x00000000, bhvFBblock),
 		OBJECT(MODEL_FBblock, -2515, -621, -2651, 180, 0, 0, 0x00000000, bhvFBblock),
@@ -239,7 +239,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_FBblock, 4132, 166, -2651, 180, 0, 0, 0x01000000, bhvFBblock),
 		OBJECT(MODEL_FBblock, 1160, 166, -2651, 180, 0, 0, 0x01000000, bhvFBblock),
 		OBJECT(MODEL_FBblock, -1090, 166, -2651, 180, 0, 0, 0x01000000, bhvFBblock),
-		OBJECT(MODEL_FBblock, -3340, 133, -2651, 180, 0, 0, 0x01000000, bhvFBblock),
+		OBJECT(MODEL_FBblock, -3340, 133, -2651, 180, 0, 0, 0x01000000, bhvFBblock),*/
 		OBJECT(MODEL_GOOMBA, 801, -234, 9889, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, -71, -234, 11323, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, 483, -234, 3468, 0, 0, 0, 0x00000000, bhvGoomba),
