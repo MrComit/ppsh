@@ -1681,8 +1681,10 @@ s16 wallDYaw;
     }
 
     //m->faceAngle[2] += 0x1A00;
-    m->particleFlags |= PARTICLE_DUST;
-    m->particleFlags |= PARTICLE_9;
+    if (save_file_get_console_mode() == 0) {
+        m->particleFlags |= PARTICLE_DUST;
+        m->particleFlags |= PARTICLE_9;
+    }
     if (m->actionArg == 0 || m->actionTimer > 1) {
         m->forwardVel = approach_f32(m->forwardVel, 70.0f, 10.0f, 5.0f);
     } else {

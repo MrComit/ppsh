@@ -1,4 +1,4 @@
-const MacroObject bob_area_4_Area_4_macro_objs[] = {
+const MacroObject bob_area_4_macro_objs[] = {
 	MACRO_OBJECT(macro_yellow_coin, -177, 2585, -309, 5738),
 	MACRO_OBJECT(macro_yellow_coin, -177, 1034, -234, 2957),
 	MACRO_OBJECT(macro_yellow_coin, -177, 655, -234, 2423),

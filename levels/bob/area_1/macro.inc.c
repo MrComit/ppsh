@@ -1,4 +1,4 @@
-const MacroObject bob_area_1_Area_macro_objs[] = {
+const MacroObject bob_area_1_macro_objs[] = {
 	MACRO_OBJECT(macro_breakable_box_no_coins, 164, 13042, -722, -4280),
 	MACRO_OBJECT(macro_breakable_box_no_coins, 164, 12657, -722, -4387),
 	MACRO_OBJECT(macro_breakable_box_no_coins, 164, 12849, -522, -4333),

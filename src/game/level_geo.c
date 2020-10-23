@@ -120,8 +120,8 @@ Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
         //newLight.l[0].l.col[1] = gLightColor;
         //newLight.l[0].l.col[2] = gLightColor;
         //light = segmented_to_virtual(&bob_dl_Rocks_v2_lights);
-        env1 = segmented_to_virtual(mat_bob_dl_Rocks_v2);
-        env2 = segmented_to_virtual(mat_bob_dl_Rocks2_v2);
+        env1 = segmented_to_virtual(mat_bob_dl_Rocks_v2_v2_v2);
+        env2 = segmented_to_virtual(mat_bob_dl_Rocks2_v2_v2_v2);
         env1 += 18;
         env2 += 18;
 

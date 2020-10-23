@@ -46,7 +46,7 @@ static s16 sPowerMeterStoredHealth;
 
 static struct PowerMeterHUD sPowerMeterHUD = {
     POWER_METER_HIDDEN,
-    36,//140,
+    40,//140, 36,
     166,
     1.0,
 };
@@ -465,8 +465,8 @@ void render_hud_red_coin_distance(void) {
     cameraLUT = segmented_to_virtual(&main_hud_camera_lut);
     gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
     render_hud_tex_lut(gHudBottomX, 184, (*cameraLUT)[GLYPH_CAM_CAMERA]);
-    print_text_fmt_int(gHudBottomX + 16, 40, "%d", (s32)(dist / sRedDivideTable[gCurrCourseNum - 1]));
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
+    print_text_fmt_int(gHudBottomX + 16, 40, "%d", (s32)(dist / sRedDivideTable[gCurrCourseNum - 1]));
 }
 
 void render_hud_red_coins(void) {
@@ -474,11 +474,11 @@ void render_hud_red_coins(void) {
     cameraLUT = segmented_to_virtual(&main_hud_camera_lut);
     //print_animated_red_coin(HUD_STARS_X + 8, 40);
     //print_text(HUD_STARS_X, 40, "?");
-    gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
+    gSPDisplayList(gDisplayListHead++, dl_hud_img_begin); // 224 - gHudBottomY, gHudBottomY
     render_hud_tex_lut(HUD_STARS_X, 224 - gHudBottomY, (*cameraLUT)[GLYPH_CAM_LAKITU_HEAD]);
+    gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
     print_text(HUD_STARS_X + 16, gHudBottomY, "*"); // 'X' glyph
     print_text_fmt_int(HUD_STARS_X + 30, gHudBottomY, "%d", gRedCoinsCollected);
-    gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
 
@@ -541,7 +541,7 @@ void render_hud(void) {
             //gHudBottomX = approach_s16_symmetric(gHudBottomX, 320, 4);
         } else {
             gHudBottomX = approach_s16_symmetric(gHudBottomX, 320, 10);
-            gHudBottomY = approach_s16_symmetric(gHudBottomY, -20, 2);
+            gHudBottomY = approach_s16_symmetric(gHudBottomY, 0, 2);
         }
 
         //if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
