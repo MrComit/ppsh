@@ -393,6 +393,8 @@ void turn_off_audio(void) {
     }
 }
 
+extern void crash_screen_init(void);
+
 /**
  * Initialize hardware, start main thread, then idle.
  */
@@ -417,6 +419,7 @@ void thread1_idle(UNUSED void *arg) {
     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
     osCreatePiManager(OS_PRIORITY_PIMGR, &gPIMesgQueue, gPIMesgBuf, ARRAY_COUNT(gPIMesgBuf));
+    crash_screen_init();
     create_thread(&gMainThread, 3, thread3_main, NULL, gThread3Stack + 0x2000, 100);
     if (D_8032C650 == 0) {
         osStartThread(&gMainThread);

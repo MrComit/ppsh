@@ -1,29 +1,22 @@
-const GeoLayout bridge_BridgeUp[] = {
+#include "src/game/envfx_snow.h"
+
+/*const GeoLayout bridge_BridgeUp[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(1, bridge_switchoption_BridgeUp_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bridge_switchoption_BridgeUp_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
-};
+};*/
 const GeoLayout bridge_geo[] = {
 	GEO_CULLING_RADIUS(0x2800),
 	GEO_OPEN_NODE(),
 		GEO_SWITCH_CASE(2, geo_switch_anim_state),
 		GEO_OPEN_NODE(),
-			GEO_NODE_START(),
-			GEO_OPEN_NODE(),
-				GEO_DISPLAY_LIST(1, bridge_BridgeDown_mesh),
-			GEO_CLOSE_NODE(),
-			GEO_BRANCH(1, bridge_BridgeUp),
+			GEO_DISPLAY_LIST(LAYER_OPAQUE, bridge_BridgeDown_mesh),
+			GEO_DISPLAY_LIST(LAYER_OPAQUE, bridge_switchoption_BridgeUp_mesh),
+			//GEO_BRANCH(1, bridge_BridgeUp),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(0, bridge_material_revert_render_settings),
-		GEO_DISPLAY_LIST(1, bridge_material_revert_render_settings),
-		GEO_DISPLAY_LIST(2, bridge_material_revert_render_settings),
-		GEO_DISPLAY_LIST(3, bridge_material_revert_render_settings),
-		GEO_DISPLAY_LIST(4, bridge_material_revert_render_settings),
-		GEO_DISPLAY_LIST(5, bridge_material_revert_render_settings),
-		GEO_DISPLAY_LIST(6, bridge_material_revert_render_settings),
-		GEO_DISPLAY_LIST(7, bridge_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bridge_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

@@ -112,7 +112,6 @@ SECTIONS
       BUILD_DIR/src/game/rendering_graph_node.o(.text);
       BUILD_DIR/src/game/profiler.o(.text);
       BUILD_DIR/asm/decompress.o(.text);
-      BUILD_DIR/asm/crash.o(.text);
       BUILD_DIR/src/game/camera.o(.text);
       BUILD_DIR/src/game/debug_course.o(.text);
       BUILD_DIR/src/game/object_list_processor.o(.text);
@@ -149,6 +148,8 @@ SECTIONS
       BUILD_DIR/src/audio/seqplayer.o(.text);
       BUILD_DIR/src/audio/external.o(.text);
       BUILD_DIR/src/audio/port_eu.o(.text);
+
+      BUILD_DIR/libultra.a:__osGetCurrFaultedThread.o(.text);
 #ifdef VERSION_EU
       BUILD_DIR/libultra.a:string.o(.text);
       BUILD_DIR/libultra.a:_Printf.o(.text);
@@ -159,7 +160,6 @@ SECTIONS
       BUILD_DIR/libultra.a:osWritebackDCacheAll.o(.text);
       BUILD_DIR/libultra.a:osViBlack.o(.text);
       BUILD_DIR/libultra.a:osViSwapBuffer.o(.text);
-      BUILD_DIR/libultra.a:__osGetCurrFaultedThread.o(.text);
       BUILD_DIR/libultra.a:osSetEventMesg.o(.text);
       BUILD_DIR/libultra.a:osRecvMesg.o(.text);
       BUILD_DIR/libultra.a:parameters.o(.text);

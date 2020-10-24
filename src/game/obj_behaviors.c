@@ -528,7 +528,7 @@ void set_object_visibility(struct Object *obj, s32 dist) {
     f32 objY = obj->oPosY;
     f32 objZ = obj->oPosZ;
 
-    if (is_point_within_radius_of_mario(objX, objY, objZ, dist) == TRUE) {
+    if (save_file_get_console_mode() == 0 || is_point_within_radius_of_mario(objX, objY, objZ, dist) == TRUE) {
         obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
     } else {
         obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;

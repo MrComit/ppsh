@@ -2659,7 +2659,8 @@ static s32 act_cutscene_jump(struct MarioState *m) {
     camPos[0] = gLakituState.curPos[0];
     camPos[1] = m->pos[1];
     camPos[2] = gLakituState.curPos[2];
-    CL_set_camera_pos(camPos);
+    if (gCamera->cutscene == 0)
+        CL_set_camera_pos(camPos);
     return FALSE;
 }
 

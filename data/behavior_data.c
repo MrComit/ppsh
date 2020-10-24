@@ -6253,7 +6253,7 @@ const BehaviorScript bhvFBblock[] = {
 const BehaviorScript bhvPalmTree[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oDrawingDistance, 0x3000),
     SET_FLOAT(oCollisionDistance, 0xF00),
     LOAD_COLLISION_DATA(palmtree_collision),
     BEGIN_LOOP(),
