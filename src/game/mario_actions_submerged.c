@@ -392,7 +392,7 @@ static s32 act_water_idle(struct MarioState *m) {
     u32 val = 0x10000;
 
     //if (m->flags & MARIO_METAL_CAP) {
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
@@ -419,7 +419,7 @@ static s32 act_water_idle(struct MarioState *m) {
 
 static s32 act_hold_water_idle(struct MarioState *m) {
     //if (m->flags & MARIO_METAL_CAP) {
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_HOLD_METAL_WATER_FALLING, 0);
     }
 
@@ -441,7 +441,7 @@ static s32 act_hold_water_idle(struct MarioState *m) {
 
 static s32 act_water_action_end(struct MarioState *m) {
     //if (m->flags & MARIO_METAL_CAP) {
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
@@ -467,7 +467,7 @@ static s32 act_water_action_end(struct MarioState *m) {
 
 static s32 act_hold_water_action_end(struct MarioState *m) {
     //if (m->flags & MARIO_METAL_CAP) {
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_HOLD_METAL_WATER_FALLING, 0);
     }
 
@@ -588,7 +588,7 @@ static s32 act_breaststroke(struct MarioState *m) {
     }
 
     //if (m->flags & MARIO_METAL_CAP) {
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
@@ -644,7 +644,7 @@ static s32 act_breaststroke(struct MarioState *m) {
 
 static s32 act_swimming_end(struct MarioState *m) {
     //if (m->flags & MARIO_METAL_CAP) {
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
@@ -687,7 +687,7 @@ static s32 act_swimming_end(struct MarioState *m) {
 
 static s32 act_flutter_kick(struct MarioState *m) {
     //if (m->flags & MARIO_METAL_CAP) {
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
@@ -738,7 +738,7 @@ static s32 act_flutter_kick(struct MarioState *m) {
 
 static s32 act_hold_breaststroke(struct MarioState *m) {
     //if (m->flags & MARIO_METAL_CAP) {
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_HOLD_METAL_WATER_FALLING, 0);
     }
 
@@ -790,7 +790,7 @@ static s32 act_hold_breaststroke(struct MarioState *m) {
 
 static s32 act_hold_swimming_end(struct MarioState *m) {
     //if (m->flags & MARIO_METAL_CAP) {
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_HOLD_METAL_WATER_FALLING, 0);
     }
 
@@ -824,7 +824,7 @@ static s32 act_hold_swimming_end(struct MarioState *m) {
 
 static s32 act_hold_flutter_kick(struct MarioState *m) {
     //if (m->flags & MARIO_METAL_CAP) {
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_HOLD_METAL_WATER_FALLING, 0);
     }
 
@@ -1471,7 +1471,7 @@ static s32 act_metal_water_falling(struct MarioState *m) {
 
     m->vel[1] = -18.0f;
 
-    if (m->input & INPUT_Z_PRESSED) {
+    if (m->actionTimer++ > 5 && m->input & INPUT_Z_PRESSED) {
         return set_mario_action(m, ACT_WATER_IDLE, 0);
     }
 
@@ -1665,7 +1665,7 @@ s16 wallDYaw;
     //    return set_mario_action(m, ACT_DASH_ATTACK_END, 0);
     //}
 
-    if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     }
 
@@ -1716,7 +1716,7 @@ s16 wallDYaw;
         }
     }
 
-    //if (m->input & INPUT_Z_DOWN && m->input & INPUT_B_PRESSED) {
+    //if (m->input & (INPUT_Z_DOWN | INPUT_Z_PRESSED) && m->input & INPUT_B_PRESSED) {
     //    return set_mario_action(m, ACT_METAL_WATER_FALLING, 1);
     //}
 

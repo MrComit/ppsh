@@ -48,7 +48,8 @@ s8 koopaType = o->oBehParams >> 24 & 0xFF;
 
 
 void koopa_the_wimp_loop(void) {
-s32 numPorcupuffers;
+    struct Object *obj;
+    s32 numPorcupuffers;
     switch (o->oKoopaAction) {
         case 0:
             o->oInteractType = 0x40000000;
@@ -65,25 +66,22 @@ s32 numPorcupuffers;
             if (numPorcupuffers == 0) {
                 gKoopaSaved = 1;
                 o->oKoopaAction = 1;
-                play_puzzle_jingle();
+                //play_puzzle_jingle();
+                obj = create_star(-775.0f, -2091.0f, -8958.0f);
+                obj->oBehParams = 0x05 << 24;
+                o->oInteractType = 0x00800000;
+                set_obj_animation_and_sound_state(7);
             }
             break;
         case 1:
-            o->oInteractType = 0x00800000;
-            set_obj_animation_and_sound_state(7);
             bhv_bobomb_buddy_loop();
-            if (o->oAction == 2) {
-                o->oKoopaAction = 2;
-            }
+            //if (o->oAction == 2) {
+            //    o->oKoopaAction = 2;
+            //}
 
             break;
         case 2:
             if (o->oAction == 0) {
-                o->oBehParams = (o->oBehParams << 8) >> 8;
-                o->oBehParams |= 0x05 << 24;
-                create_star(-775.0f, -2091.0f, -8958.0f);
-                o->oBehParams = (o->oBehParams << 8) >> 8;
-                o->oBehParams |= 0x02 << 24;
                 o->oInteractType = 0x40000000;
                 o->oKoopaAction = 3;
             }
