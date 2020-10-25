@@ -195,6 +195,7 @@
 #define TEXT_EXIT_COURSE _("EXIT COURSE")*/
 #define TEXT_CONTINUE _("Continue")
 #define TEXT_EXIT_COURSE _("Exit Course")
+#define TEXT_CANCEL _("Cancel")
 #ifndef VERSION_EU // "R" text is different in EU
 #define TEXT_CAMERA_ANGLE_R _("Options")
 #endif

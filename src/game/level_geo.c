@@ -105,6 +105,7 @@ typedef struct {
 Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
     SetEnvColor *env1;
     SetEnvColor *env2;
+    SetEnvColor *env3;
     //Lights1 *light;
     //Lights1 *light2;
     //Lights1 newLight = gdSPDefLights1(
@@ -122,8 +123,10 @@ Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
         //light = segmented_to_virtual(&bob_dl_Rocks_v2_lights);
         env1 = segmented_to_virtual(mat_bob_dl_Rocks_v2_v2_v2);
         env2 = segmented_to_virtual(mat_bob_dl_Rocks2_v2_v2_v2);
+        env3 = segmented_to_virtual(mat_FBblock_Rocks_002);
         env1 += 18;
         env2 += 18;
+        env3 += 3;
 
         env1->r = gLightColor;
         env1->g = gLightColor;
@@ -131,6 +134,9 @@ Gfx *geo_update_bob_light(s32 callContext, struct GraphNode *node) {
         env2->r = gLightColor;
         env2->g = gLightColor;
         env2->b = gLightColor;
+        env3->r = gLightColor + 0xC;
+        env3->g = gLightColor + 0xC;
+        env3->b = gLightColor + 0xC;
         //*light = newLight;
         //light2 = segmented_to_virtual(&bob_dl_Rocks2_v2_lights);
         //*light2 = newLight;

@@ -1,3 +1,5 @@
+extern s8 gSpinCoinCollected;
+
 void bhv_spinning_coins_init(void) {
 f32 mag;
 s16 dirAdd;
@@ -11,15 +13,21 @@ struct Object *coin;
 
     if ((o->oBehParams & 0xFF00) == 0) {
         coin = spawn_object(o, MODEL_YELLOW_COIN, bhvSpinningYCoin);
-    } else {
+        coin->oCoinMag = mag;
+        coin->oCoinDirAdd = dirAdd;
+        coin->oCoinDir = dir;
+        coin->oHomeX = o->oPosX;
+        coin->oHomeY = o->oPosY;
+        coin->oHomeZ = o->oPosZ;
+    } else if (!(gSpinCoinCollected)) {
         coin = spawn_object(o, MODEL_RED_COIN, bhvSpinningRCoin);
+        coin->oCoinMag = mag;
+        coin->oCoinDirAdd = dirAdd;
+        coin->oCoinDir = dir;
+        coin->oHomeX = o->oPosX;
+        coin->oHomeY = o->oPosY;
+        coin->oHomeZ = o->oPosZ;
     }
-    coin->oCoinMag = mag;
-    coin->oCoinDirAdd = dirAdd;
-    coin->oCoinDir = dir;
-    coin->oHomeX = o->oPosX;
-    coin->oHomeY = o->oPosY;
-    coin->oHomeZ = o->oPosZ;
 
     for (i = 0; i < 7; i++) {
         dir += 0x2000;

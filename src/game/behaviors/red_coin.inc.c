@@ -7,6 +7,9 @@
 /**
  * Red coin's hitbox details.
  */
+
+s8 gSpinCoinCollected = 0;
+
 static struct ObjectHitbox sRedCoinHitbox = {
     /* interactType:      */ INTERACT_COIN,
     /* downOffset:        */ 0,
@@ -84,7 +87,9 @@ void bhv_red_coin_loop(void) {
 
 void bhv_spinning_rcoin_loop(void) {
     obj_set_behavior(bhvRedCoin);
+
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+        gSpinCoinCollected = 1;
         //if (o->parentObj != NULL) {
             //o->parentObj->oHiddenStarTriggerCounter++;
             gRedCoinsCollected++;

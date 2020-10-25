@@ -13,11 +13,11 @@
 #define SIMP_3 9
 #define SIMP_4 10
 
-
-Vec3f sDeathII1[3] = {
+Vec3f sDeathII1[4] = {
 {-5270.55f, -400.0f, -8138.85f},
 {6788.95f, -123.058f, -10970.35f},
 {13184.85f, -331.8695f, -6299.35f},
+{11411.65f, -421.18f, 296.6155f},
 };
 
 Vec3f sDeathCC1[3] = {
@@ -69,14 +69,15 @@ sDeathII1, sDeathCC1, sDeathCC2, sDeathCC3, sDeathCC4, sDeathCC5, sDeathCC6, sDe
 };
 
 s16 sDeathCounts[] = {
-3, 3, 5, 2, 1, 1, 1, 10, 1, 1, 1,
+4, 3, 5, 2, 1, 1, 1, 10, 1, 1, 1,
 };
 
 s8 deathwarp_get_list(void) {
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
-            if (gCurrAreaIndex == 1)
+            if (gCurrAreaIndex == 1) {
                 return INCEL_1;
+            }
             return -1;
             break;
         case LEVEL_WF:

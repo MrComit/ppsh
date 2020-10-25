@@ -49,7 +49,6 @@ void bhv_spinning_ycoin_loop(void) {
     o->oCoinDir += o->oCoinDirAdd;
     o->oPosX = o->oHomeX + (sins((s16)o->oCoinDir) * o->oCoinMag);
     o->oPosZ = o->oHomeZ + (coss((s16)o->oCoinDir) * o->oCoinMag);
-
 }
 
 void bhv_temp_coin_loop(void) {

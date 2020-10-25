@@ -316,6 +316,8 @@ void set_mario_initial_cap_powerup(struct MarioState *m) {
     }
 }
 
+extern s8 gSickGameActive;
+
 void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg) {
     switch (spawnType) {
         case MARIO_SPAWN_UNKNOWN_01:
@@ -369,6 +371,7 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
             gLightApproach = 0x00;
             gLightSpeed = 0x00;
             gLightTimer = 0x00;
+            gSickGameActive = 0;
             set_mario_action(m, ACT_UNUSED_DEATH_EXIT, 0);
             break;
         case MARIO_SPAWN_UNKNOWN_24:
@@ -378,7 +381,7 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
             set_mario_action(m, ACT_SPECIAL_DEATH_EXIT, 0);
             break;
     }
-
+    gSickGameActive = 0;
     set_mario_initial_cap_powerup(m);
 }
 
@@ -734,7 +737,6 @@ void initiate_painting_warp(void) {
 }
 
 extern s32 gBossReset;
-
 
 /**
  * If there is not already a delayed warp, schedule one. The source node is

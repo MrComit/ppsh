@@ -2162,8 +2162,11 @@ void render_hud_cannon_reticle(void) {
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
+extern s8 gSpinCoinCollected;
+
 void reset_red_coins_collected(void) {
     gRedCoinsCollected = 0;
+    gSpinCoinCollected = 0;
 }
 
 void change_dialog_camera_angle(void) {
@@ -2527,6 +2530,8 @@ void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
 #define Y_VAL8 2
 #endif
 
+extern s8 gSickGameActive;
+
 void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
 #ifdef VERSION_EU
     u8 textContinue[][10] = {
@@ -2551,12 +2556,18 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     u8 textContinue[] = { TEXT_CONTINUE };
     u8 textExitCourse[] = { TEXT_EXIT_COURSE };
     u8 textCameraAngleR[] = { TEXT_CAMERA_ANGLE_R };
+    u8 textCancel[] = { TEXT_CANCEL };
+    u8 maxOptions = 3;
 #endif
     u8 minIndex = 1;
     if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX)
         minIndex = 0;
 
-    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, minIndex, 3);
+    if (gSickGameActive) {
+        maxOptions = 4;
+    }
+
+    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, minIndex, maxOptions);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
@@ -2565,6 +2576,11 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     print_generic_string(x + 10, y - 17, textExitCourse);
 
         print_generic_string(x + 10, y - 33, textCameraAngleR);
+
+    if (gSickGameActive) {
+        print_generic_string(x + 10, y - 49, textCancel);
+    }
+
         gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     if (gDialogLineNum) {
         create_dl_translation_matrix(MENU_MTX_PUSH, x - X_VAL8, (y - ((index[0] - 1) * yIndex)) - Y_VAL8, 0);
@@ -2829,6 +2845,12 @@ s16 render_pause_courses_and_castle(void) {
                 } else {
                     num = 1;
                 }
+
+                if (gDialogLineNum == 4) {
+                    CL_kill_mario();
+                    gSickGameActive = 1;
+                }
+
 
                 if (gDialogLineNum == 3) {
                     u16 menuFlags = save_file_get_sound_mode();

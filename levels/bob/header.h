@@ -58,6 +58,7 @@ extern const LevelScript level_bob_entry[];
 
 extern const Gfx mat_bob_dl_Rocks2_v2_v2_v2[];
 extern const Gfx mat_bob_dl_Rocks_v2_v2_v2[];
+extern const Gfx mat_FBblock_Rocks_002[];
 
 #include "levels/bob/pillar_switch/geo_header.h"
 

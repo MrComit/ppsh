@@ -133,8 +133,9 @@ ALIGNED8 static const u8 FBblock_RMGP01_42c04f35_14_mip2_32x_ci8_pal_rgba16[] = 
 
 const Gfx mat_FBblock_Rocks_002[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetEnvColor(255, 255, 255, 255),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, FBblock_RMGP01_42c04f35_14_mip2_32x_ci8_pal_rgba16),
 	gsDPTileSync(),

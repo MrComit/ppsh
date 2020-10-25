@@ -45,7 +45,10 @@ the same time, and you'll\n\
 sink to the bottom!\n\
 You might even be able\n\
 to activate underwater\n\
-switches by doing this!"))
+switches by doing this!\n\
+In fact, there might\n\
+actually be a switch\n\
+underneath us right now..."))
 
 DEFINE_DIALOG(DIALOG_002, 1, 3, 95, 200, _("\
 Wow that was crazy!\n\
@@ -1275,22 +1278,9 @@ able to open the door\n\
 with the big star. The\n\
 Princess must be inside!"))
 
-DEFINE_DIALOG(DIALOG_134, 1, 5, 30, 200, _("\
-The names of the Stars\n\
-are also hints for\n\
-finding them. They are\n\
-displayed at the beginning\n\
-of each course.\n\
-You can collect the Stars\n\
-in any order. You won't\n\
-find some Stars, enemies\n\
-or items unless you select\n\
-a specific Star.\n\
-After you collect some\n\
-Stars, you can try\n\
-another course.\n\
-We're all waiting for\n\
-your help!"))
+DEFINE_DIALOG(DIALOG_134, 1, 2, 30, 200, _("\
+The bridge is back! Thank\n\
+you for all your help!"))
 
 DEFINE_DIALOG(DIALOG_135, 1, 5, 30, 200, _("\
 It was Bowser who stole\n\

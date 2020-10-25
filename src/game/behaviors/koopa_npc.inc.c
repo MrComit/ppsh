@@ -1,12 +1,13 @@
 #include "game/camera.h"
 #include "include/sm64.h"
 
+s8 gSickGameActive = 0;
 s8 gKoopaSaved = 0;
 
 
 void bhv_koopa_npc_init(void) {
     if ((o->oBehParams >> 24 & 0xFF) == 3) {
-        o->oKoopaRunAngleZ = 930;
+        o->oKoopaRunAngleZ = 1380;
     }
     o->oKoopaAction = 0;
     o->oInteractType = 0x00800000;
@@ -17,7 +18,11 @@ void bhv_koopa_npc_init(void) {
 void bhv_koopa_npc_loop(void) {
 struct Object *pswitch;
 s8 koopaType = o->oBehParams >> 24 & 0xFF;
-
+    if (o->oBehParams2ndByte == 0x2B) {
+        if (save_file_get_star_flags(gCurrSaveFileNum - 1, 0) & 0x01 != 0) {
+            o->oBehParams2ndByte = DIALOG_134;
+        }
+    }
     switch(koopaType) {
         case 0:
             bhv_bobomb_buddy_loop();
@@ -100,6 +105,7 @@ void koopa_the_sick_loop(void) {
 
     switch (o->oAction) {
         case 0:
+            o->oKoopaRunAngleX = 0;
             BobombBuddyIdleLoop();
             o->oKoopaAction = 0;
             break;
@@ -160,17 +166,22 @@ void koopa_the_sick_loop(void) {
             if (o->oTimer > 100) {
                 play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gDefaultSoundArgs);
                 o->oAction = 5;
+                gSickGameActive = 1;
             }      
             break;
 
         case 5:
+            if (gMarioState->health == 0xFF) {
+                o->oKoopaRunAngleZ = 0;
+            }
             print_text_fmt_int(120, 210, "%d", o->oKoopaRunAngleZ / 30);
             if (o->oKoopaRunAngleZ < 1) {
-                gMarioState->hurtCounter = 0xFF;
+                if (gMarioState->health != 0xFF)
+                    gMarioState->hurtCounter = 0xFF;
                 //o->activeFlags = 0;
                 o->oAction = 0;
                 o->oInteractType = 0x00800000;
-                o->oKoopaRunAngleZ = 930;
+                o->oKoopaRunAngleZ = 1380;
                 o->oKoopaRunAngleX = 0;
                 arrow = obj_nearest_object_with_behavior(bhvArrowForWaterRings);
                 if (arrow != NULL)
@@ -181,6 +192,7 @@ void koopa_the_sick_loop(void) {
                 o->oBehParams = (o->oBehParams << 8) >> 8;
                 o->oBehParams |= 0x09 << 24;
                 create_star(11797.0f, -369.0f, 3952.0f);
+                gSickGameActive = 0;
                 o->oBehParams = (o->oBehParams << 8) >> 8;
                 o->oBehParams |= 0x03 << 24;
                 o->oKoopaAction = 0;
