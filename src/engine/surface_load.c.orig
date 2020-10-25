@@ -22,8 +22,8 @@ s32 unused8038BE90;
  * Partitions for course and object surfaces. The arrays represent
  * the 16x16 cells that each level is split into.
  */
-SpatialPartitionCell gStaticSurfacePartition[CELL_AMOUNT][CELL_AMOUNT];
-SpatialPartitionCell gDynamicSurfacePartition[CELL_AMOUNT][CELL_AMOUNT];
+SpatialPartitionCell gStaticSurfacePartition[16][16];
+SpatialPartitionCell gDynamicSurfacePartition[16][16];
 
 /**
  * Pools of data to contain either surface nodes or surfaces.
@@ -38,8 +38,6 @@ s16 sSurfacePoolSize;
 
 u8 unused8038EEA8[0x30];
 
-u8 gSurfacePoolError;
-
 /**
  * Allocate the part of the surface node pool to contain a surface node.
  */
@@ -52,8 +50,7 @@ static struct SurfaceNode *alloc_surface_node(void) {
     //! A bounds check! If there's more surface nodes than 7000 allowed,
     //  we, um...
     // Perhaps originally just debug feedback?
-    if (gSurfaceNodesAllocated >= SURFACE_NODE_POOL_SIZE) {
-        gSurfacePoolError |= NOT_ENOUGH_ROOM_FOR_NODES;
+    if (gSurfaceNodesAllocated >= 7000) {
     }
 
     return node;
@@ -72,7 +69,6 @@ static struct Surface *alloc_surface(void) {
     //  we, um...
     // Perhaps originally just debug feedback?
     if (gSurfacesAllocated >= sSurfacePoolSize) {
-        gSurfacePoolError |= NOT_ENOUGH_ROOM_FOR_SURFACES;
     }
 
     surface->type = 0;
@@ -88,7 +84,7 @@ static struct Surface *alloc_surface(void) {
  * Iterates through the entire partition, clearing the surfaces.
  */
 static void clear_spatial_partition(SpatialPartitionCell *cells) {
-    register s32 i = CELL_AMOUNT * CELL_AMOUNT;
+    register s32 i = 16 * 16;
 
     while (i--) {
         (*cells)[SPATIAL_PARTITION_FLOORS].next = NULL;
@@ -199,22 +195,22 @@ static s16 max_3(s16 a0, s16 a1, s16 a2) {
  * Every level is split into 16 * 16 cells of surfaces (to limit computing
  * time). This function determines the lower cell for a given x/z position.
  */
-static s16 lower_cell_index(s32 t) {
+static s16 lower_cell_index(s16 t) {
     s16 index;
 
-    // Move from range [-LEVEL_BOUNDARY_MAX, LEVEL_BOUNDARY_MAX) to [0, LEVEL_BOUNDARY_MAX * 2)
-    t += LEVEL_BOUNDARY_MAX;
+    // Move from range [-0x2000, 0x2000) to [0, 0x4000)
+    t += 0x2000;
     if (t < 0) {
         t = 0;
     }
 
-    // [0, CELL_AMOUNT)
-    index = t / CELL_SIZE;
+    // [0, 16)
+    index = t / 0x400;
 
     // Include extra cell if close to boundary
     //! Some wall checks are larger than the buffer, meaning wall checks can
     //  miss walls that are near a cell border.
-    if (t % CELL_SIZE < 50) {
+    if (t % 0x400 < 50) {
         index -= 1;
     }
 
@@ -230,27 +226,27 @@ static s16 lower_cell_index(s32 t) {
  * Every level is split into 16 * 16 cells of surfaces (to limit computing
  * time). This function determines the upper cell for a given x/z position.
  */
-static s16 upper_cell_index(s32 t) {
+static s16 upper_cell_index(s16 t) {
     s16 index;
 
-    // Move from range [-LEVEL_BOUNDARY_MAX, LEVEL_BOUNDARY_MAX) to [0, LEVEL_BOUNDARY_MAX * 2)
-    t += LEVEL_BOUNDARY_MAX;
+    // Move from range [-0x2000, 0x2000) to [0, 0x4000)
+    t += 0x2000;
     if (t < 0) {
         t = 0;
     }
 
-    // [0, CELL_AMOUNT)
-    index = t / CELL_SIZE;
+    // [0, 16)
+    index = t / 0x400;
 
     // Include extra cell if close to boundary
     //! Some wall checks are larger than the buffer, meaning wall checks can
     //  miss walls that are near a cell border.
-    if (t % CELL_SIZE > CELL_SIZE - 50) {
+    if (t % 0x400 > 0x400 - 50) {
         index += 1;
     }
 
-    if (index > CELL_AMOUNT_MINUS_ONE) {
-        index = CELL_AMOUNT_MINUS_ONE;
+    if (index > 15) {
+        index = 15;
     }
 
     // Potentially < 0, but since lower index is >= 0, not exploitable
@@ -537,10 +533,8 @@ static void load_environmental_regions(s16 **data) {
 
 #define MAX_TRI_COUNT 5000
 void alloc_surface_pools(void) {
-    //sSurfacePoolSize = MAX_TRI_COUNT;
-    //sSurfaceNodePool = main_pool_alloc((MAX_TRI_COUNT * 2) * sizeof(struct SurfaceNode), MEMORY_POOL_LEFT);
-    sSurfacePoolSize = SURFACE_POOL_SIZE;
-    sSurfaceNodePool = main_pool_alloc(SURFACE_NODE_POOL_SIZE * sizeof(struct SurfaceNode), MEMORY_POOL_LEFT);
+    sSurfacePoolSize = MAX_TRI_COUNT;
+    sSurfaceNodePool = main_pool_alloc((MAX_TRI_COUNT * 2) * sizeof(struct SurfaceNode), MEMORY_POOL_LEFT);
     sSurfacePool = main_pool_alloc(sSurfacePoolSize * sizeof(struct Surface), MEMORY_POOL_LEFT);
 
     gCCMEnteredSlide = 0;

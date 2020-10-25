@@ -1,7 +1,7 @@
 #ifndef TEXT_STRINGS_H
 #define TEXT_STRINGS_H
 
-#include "text_menu_strings.h"
+#include "text_menu_strings.h.in"
 
 /**
  * Global Symbols

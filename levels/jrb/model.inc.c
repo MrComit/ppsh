@@ -52838,17 +52838,6 @@ Gfx jrb_dl_X_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx jrb_dl_DeathPlane_001_mesh_vtx_cull[8] = {
-	{{{-32767, -500, -32767},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-32767, -500, -1108},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-32767, 45000, -1108},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-32767, 45000, -32767},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{32767, -500, -32767},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{32767, -500, -1108},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{32767, 45000, -1108},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{32767, 45000, -32767},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-};
-
 Vtx jrb_dl_DeathPlane_001_mesh_vtx_0[8] = {
 	{{{32767, -500, -32767},0, {-16, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{-32767, -500, -32767},0, {1008, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
@@ -72610,10 +72599,6 @@ Gfx jrb_dl_X_mesh[] = {
 
 
 Gfx jrb_dl_DeathPlane_001_mesh[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(jrb_dl_DeathPlane_001_mesh_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_jrb_dl_DeathBarrier_v2),
 	gsSPDisplayList(jrb_dl_DeathPlane_001_mesh_tri_0),
 	gsSPEndDisplayList(),
