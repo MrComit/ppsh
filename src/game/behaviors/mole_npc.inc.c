@@ -35,8 +35,9 @@ void bhv_mole_npc_loop(void) {
 
     switch (o->oBehParams >> 24) {
         case 3:
-            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) & 0x10/* queen mole fight id*/)
-                o->activeFlags = 0;
+            if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) & 0x10/* queen mole fight id*/) {
+                o->oBehParams2ndByte = DIALOG_105;
+            }
         case 4:
             if (o->oBehParams >> 24 == 4) {
                 if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) & 0x10/* queen mole fight id*/)

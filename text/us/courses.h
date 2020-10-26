@@ -12,7 +12,7 @@ COURSE_ACTS(COURSE_JRB, _(" 3 Simp City"),
 
 COURSE_ACTS(COURSE_CCM, _(" 4 The Eironeia Cortex"),
        _("Mole Maze")             , _("An Incredible View")             , _("Fight the Mole Queen!"),
-       _("Expedition of the Fiery Cave")  , _("Secret of the Fiery Cave")       , _("Red Coins of Cuck Canyon"))
+       _("Expedition of the Explosive Cave")  , _("Secret of the Explosive Cave")       , _("Red Coins of Cuck Canyon"))
 
 COURSE_ACTS(COURSE_BBH, _(" 5 Castle Grounds"),
        _("The Cubes of the Rainbow")            , _("Crater in the Residential District") , _("Scaling the Skycrapers"),

@@ -197,7 +197,7 @@ void bhv_coin_formation_loop(void) {
     if (save_file_get_console_mode()) {
         dist1 = 2000.0f;
     } else {
-        dist1 = 8000.0f;
+        dist1 = 4000.0f;
     }
     dist2 = dist1 + 100.0f;
 

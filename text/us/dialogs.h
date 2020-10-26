@@ -460,7 +460,7 @@ She's also kidnapped\n\
 the pilot to the\n\
 ROFLCOPTER, the only\n\
 known way to get\n\
-into Simp City\n\
+into Simp City.\n\
 You have to make your \n\
 way up to her and take \n\
 her on. I know you can \n\
@@ -523,7 +523,7 @@ while I'm not around?!"))
 DEFINE_DIALOG(DIALOG_053, 1, 3, 30, 200, _("\
 The view here is great. \n\
 It's the perfect angle \n\
-to worship my queen from"))
+to worship my queen from."))
 
 DEFINE_DIALOG(DIALOG_054, 1, 3, 30, 200, _("\
 I cant beleive this shiat\n\
@@ -951,19 +951,11 @@ Woah! A 4th button?\n\
 I had no idea this was\n\
 gonna be here!"))
 
-DEFINE_DIALOG(DIALOG_105, 1, 3, 95, 200, _("\
-Ready for blastoff! Come\n\
-on, hop into the cannon!\n\
-\n\
-You can reach the Star on\n\
-the floating island by\n\
-using the four cannons.\n\
-Use the Control Stick to\n\
-aim, then press [A] to fire.\n\
-\n\
-If you're handy, you can\n\
-grab on to trees or poles\n\
-to land."))
+DEFINE_DIALOG(DIALOG_105, 1, 4, 95, 200, _("\
+It's so nice having the\n\
+pilot back again. Thank\n\
+you for all your help\n\
+Mario!"))
 
 DEFINE_DIALOG(DIALOG_106, 1, 2, 95, 200, _("\
 Ready for blastoff! Come\n\

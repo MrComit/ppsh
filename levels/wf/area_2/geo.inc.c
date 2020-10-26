@@ -17,7 +17,6 @@ const GeoLayout wf_dl_Room2A_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_ANIMATED_PART(LAYER_OPAQUE, -1731, -4249, 2575, wf_dl_Mines1_mesh),
 		GEO_ANIMATED_PART(LAYER_OPAQUE, -1731, -4249, 2575, wf_dl_Mines1_001_mesh),
-		GEO_ANIMATED_PART(LAYER_TRANSPARENT_DECAL, -1731, -4249, 2575, wf_dl_Mines1_002_mesh),
 		GEO_ANIMATED_PART(LAYER_OPAQUE, 2571, -21, 950, wf_dl_Mines1_003_mesh),
 		GEO_ANIMATED_PART(LAYER_OPAQUE, -1731, -4249, 2575, wf_dl_Mines1_004_mesh),
 	GEO_CLOSE_NODE(),
@@ -39,9 +38,6 @@ const GeoLayout wf_dl_Room2B_geo[] = {
 const GeoLayout wf_dl_Room2C_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_ANIMATED_PART(LAYER_TRANSPARENT_DECAL, -1731, -4249, 2575, wf_dl_WindMines_mesh),
-		GEO_ANIMATED_PART(LAYER_OPAQUE, 15991, 607, 3188, wf_dl_WindMines_001_mesh),
-		GEO_ANIMATED_PART(LAYER_OPAQUE, -1731, -4249, 2575, wf_dl_WindMines_002_mesh),
 		GEO_ANIMATED_PART(LAYER_OPAQUE, 12557, -268, 8152, wf_dl_WindMines_003_mesh),
 		GEO_ANIMATED_PART(LAYER_OPAQUE, 13554, 1195, 6749, wf_dl_WindMines_004_mesh),
 		GEO_ANIMATED_PART(LAYER_OPAQUE_DECAL, 12557, -268, 8152, wf_dl_WindMines_006_mesh),

@@ -6,7 +6,7 @@ extern s8 gGameLagged;
 static struct ObjectHitbox sMoleQueenHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 1,
+    /* damageOrCoinValue: */ 0,
     /* health:            */ 3,
     /* numLootCoins:      */ 0,
     /* radius:            */ 30,
@@ -230,6 +230,9 @@ struct MarioState *m = gMarioState;
 struct Object *queen = obj_nearest_object_with_behavior(bhvQueenMole);
     if (queen == NULL)
         o->activeFlags = 0;
+    if (save_file_get_star_flags(gCurrSaveFileNum - 1, 2) & 0x10/* queen mole fight id*/) {
+        o->activeFlags = 0;
+    }
 
     if (obj_should_throw_wrench(m)) {
         switch (o->oAction) {

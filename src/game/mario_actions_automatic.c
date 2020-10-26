@@ -595,9 +595,9 @@ s32 act_ledge_climb_slow(struct MarioState *m) {
     }
 
     if (m->actionTimer >= 28) {
-        if (m->input & INPUT_NONZERO_ANALOG) {
-            return set_mario_action(m, ACT_IDLE, 0);
-        }
+        //if (m->input & INPUT_NONZERO_ANALOG) {
+        //    return set_mario_action(m, ACT_IDLE, 0);
+        //}
         if (m->input & (INPUT_NONZERO_ANALOG | INPUT_A_PRESSED | INPUT_OFF_FLOOR | INPUT_ABOVE_SLIDE)) {
             func_8025F0DC(m);
             return check_common_action_exits(m);
