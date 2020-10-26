@@ -17,12 +17,12 @@
 
 static const LevelScript script_func_local_1[] = {
     //OBJECT(/*model*/ MODEL_CASTLE_GROUNDS_WARP_PIPE, /*pos*/ -1828, 260, 3864, /*angle*/ 0, 180, 0, /*behParam*/ 0x00800000, /*beh*/ bhvWarpPipe),
-    //OBJECT(/*model*/ MODEL_CASTLE_GROUNDS_WARP_PIPE, /*pos*/ -928, 260, 3864, /*angle*/ 0, 180, 0, /*behParam*/ 0x00810000, /*beh*/ bhvWarpPipe),
-    //OBJECT(/*model*/ MODEL_CASTLE_GROUNDS_WARP_PIPE, /*pos*/ -1378, 260, 3964, /*angle*/ 0, 180, 0, /*behParam*/ 0x00820000, /*beh*/ bhvWarpPipe),
+    OBJECT(/*model*/ MODEL_CASTLE_GROUNDS_WARP_PIPE, /*pos*/ -928, 260, 3864, /*angle*/ 0, 180, 0, /*behParam*/ 0x00810000, /*beh*/ bhvWarpPipe),
+    OBJECT(/*model*/ MODEL_CASTLE_GROUNDS_WARP_PIPE, /*pos*/ -1378, 260, 3964, /*angle*/ 0, 180, 0, /*behParam*/ 0x00820000, /*beh*/ bhvWarpPipe),
     //OBJECT(/*model*/ MODEL_CASTLE_GROUNDS_WARP_PIPE, /*pos*/ -428, 260, 4264, /*angle*/ 0, 180, 0, /*behParam*/ 0x00830000, /*beh*/ bhvWarpPipe),
     //WARP_NODE(/*id*/ 0x80, /*destLevel*/ LEVEL_BOB, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
-    //WARP_NODE(/*id*/ 0x81, /*destLevel*/ LEVEL_JRB, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
-    //WARP_NODE(/*id*/ 0x82, /*destLevel*/ LEVEL_WF, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
+    WARP_NODE(/*id*/ 0x81, /*destLevel*/ LEVEL_JRB, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
+    WARP_NODE(/*id*/ 0x82, /*destLevel*/ LEVEL_WF, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
     //WARP_NODE(/*id*/ 0x83, /*destLevel*/ LEVEL_CCM, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
 
     WARP_NODE(/*id*/ 0x00, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x01, /*destNode*/ 0x00, /*flags*/ WARP_NO_CHECKPOINT),

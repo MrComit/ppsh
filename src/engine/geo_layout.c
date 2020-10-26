@@ -5,6 +5,7 @@
 #include "math_util.h"
 #include "game/memory.h"
 #include "graph_node.h"
+#include "game/print.h"
 
 typedef void (*GeoLayoutCommandProc)(void);
 
@@ -253,6 +254,9 @@ void geo_layout_cmd_node_ortho_projection(void) {
    cmd+0x06: s16 far
    [cmd+0x08: GraphNodeFunc frustumFunc]
 */
+
+//extern f32 gDefaultSoundArgs[3];
+
 void geo_layout_cmd_node_perspective(void) {
     struct GraphNodePerspective *graphNode;
     GraphNodeFunc frustumFunc = NULL;
@@ -266,11 +270,18 @@ void geo_layout_cmd_node_perspective(void) {
         gGeoLayoutCommand += 4 << CMD_SIZE_SHIFT;
     }
 
-    if (save_file_get_console_mode() == 0 && far != 0x4000) {
+    //if (far != 0x4000) {
+        //far = 0;
+        //play_sound(SOUND_MENU_CAMERA_ZOOM_OUT, gDefaultSoundArgs);
+    //}
+
+    if (save_file_get_console_mode() == 0 && far != 0x4000 && far != 25000) {
         far = 0xFFFF;
     }
 
+    //far = 0;
 
+    //print_text_fmt_int(120, 110, "%d", far);
 
     graphNode = init_graph_node_perspective(gGraphNodePool, NULL, (f32) fov, near, far, frustumFunc, 0);
 
