@@ -3318,7 +3318,7 @@ void update_camera(struct Camera *c) {
         gUnderwaterCam = FALSE;
     }
 
-    if (gPlayer1Controller->buttonPressed & R_TRIG) {
+    if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
         s8DirModeYawOffset = gMarioState->faceAngle[1] + 0x8000;
         set_r_button_camera(c);
     }
@@ -3333,7 +3333,11 @@ void update_camera(struct Camera *c) {
         s8DirModeYawOffset = gMarioState->faceAngle[1] + 0x8000;
     }
     if (gPlayer1Controller->buttonPressed & D_JPAD) {
-        s8DirModeYawOffset = (gMarioState->faceAngle[1] + 0x8000) & 0xE000;
+        if (absi(s8DirModeYawOffset - (s8DirModeYawOffset & 0xE000)) < 0x1000) {
+            s8DirModeYawOffset &= 0xE000;
+        } else {
+            s8DirModeYawOffset = (s8DirModeYawOffset & 0xE000) + 0x2000;
+        }
     }
 
 }

@@ -1498,7 +1498,7 @@ struct Painting hmc_painting = {
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */   270.0f,   0.0f,
-    /* Position */  -1499.85f, -50.0f, 109.063f,//2099.2f, -1484.8f, -2278.4f,
+    /* Position */  -1499.85f, -75.0f, 109.063f,//2099.2f, -1484.8f, -2278.4f,
     /* Ripple Magnitude */     0.0f,    10.0f,    30.0f,
     1.0f,   1.0f,   0.98f,
     0.0f,  0.05f,   0.05f,

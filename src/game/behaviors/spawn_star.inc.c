@@ -8,8 +8,8 @@ static struct ObjectHitbox sCollectStarHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 80,
-    /* height:            */ 50,
+    /* radius:            */ 90,
+    /* height:            */ 60,
     /* hurtboxRadius:     */ 0,
     /* hurtboxHeight:     */ 0,
 };

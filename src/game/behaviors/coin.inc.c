@@ -1,4 +1,5 @@
 // coin.c.inc
+#include "game/save_file.h"
 
 struct ObjectHitbox sYellowCoinHitbox = {
     /* interactType: */ INTERACT_COIN,
@@ -192,9 +193,17 @@ void bhv_coin_formation_init(void) {
 
 void bhv_coin_formation_loop(void) {
     s32 bitIndex;
+    f32 dist1, dist2;
+    if (save_file_get_console_mode()) {
+        dist1 = 2000.0f;
+    } else {
+        dist1 = 8000.0f;
+    }
+    dist2 = dist1 + 100.0f;
+
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 2000.0f) {
+            if (o->oDistanceToMario < dist1) {
                 for (bitIndex = 0; bitIndex < 8; bitIndex++) {
                     if (!(o->oCoinUnkF4 & (1 << bitIndex)))
                         func_802AB364(bitIndex, o->oBehParams2ndByte);
@@ -203,7 +212,7 @@ void bhv_coin_formation_loop(void) {
             }
             break;
         case 1:
-            if (o->oDistanceToMario > 2100.0f)
+            if (o->oDistanceToMario > dist2)
                 o->oAction++;
             break;
         case 2:

@@ -337,7 +337,7 @@ you're sure to get that\n\
 coochie!\n\
 \n\
 Try swimming through 20\n\
-of my rings in under 30\n\
+of my rings in under 45\n\
 seconds and I'll give\n\
 you something special!\n\
 //Yes////No"))
@@ -1712,9 +1712,9 @@ minding my own business,\n\
 then suddenly everything\n\
 went dark.\n\
 When I woke up, I saw \n\
-that everything was dark\n\
-and the Princess had\n\
-vanished!\n\
+that this strange pool\n\
+had appeared, and the\n\
+Princess had vanished!\n\
 Please help us!"))
 
 DEFINE_DIALOG(DIALOG_166, 1, 3, 30, 200, _("\
@@ -1735,7 +1735,7 @@ How could I ever repay\n\
 you?\n\
 Sex? Of course! I would\n\
 do anything for a man as\n\
-handsom as yourself..."))
+handsome as yourself..."))
 
 DEFINE_DIALOG(DIALOG_168, 1, 5, 30, 200, _("\
 Hey! Knock it off! That's\n\

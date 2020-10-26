@@ -2560,7 +2560,7 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     u8 maxOptions = 3;
 #endif
     u8 minIndex = 1;
-    if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX)
+    if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX && gCurrCourseNum != 4)
         minIndex = 0;
 
     if (gSickGameActive) {
@@ -2811,8 +2811,8 @@ s16 render_pause_courses_and_castle(void) {
 
             //if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
             render_pause_course_options(99, 93, &gDialogLineNum, 15);
-            if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX && gCurrLevelNum != LEVEL_CCM)
-                render_pause_my_score_coins();
+            //if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX && gCurrLevelNum != LEVEL_CCM)
+            //    render_pause_my_score_coins();
 
             if (gCurrLevelNum == LEVEL_CCM) {
                 gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
@@ -2821,7 +2821,22 @@ s16 render_pause_courses_and_castle(void) {
                 courseName = segmented_to_virtual(courseNameTbl[gCurrCourseNum - 1]);
                 print_generic_string(109, 157, &courseName[3]);
                 gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
-
+            } else if (gCurrLevelNum == LEVEL_CASTLE) {
+                gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+                courseNameTbl = segmented_to_virtual(seg2_course_name_table);
+                courseName = segmented_to_virtual(courseNameTbl[5]);
+                print_generic_string(109, 157, &courseName[3]);
+                gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+            } else if (gCurrLevelNum == LEVEL_CASTLE_GROUNDS) {
+                gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+                courseNameTbl = segmented_to_virtual(seg2_course_name_table);
+                courseName = segmented_to_virtual(courseNameTbl[4]);
+                print_generic_string(109, 157, &courseName[3]);
+                gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+            } else {
+                render_pause_my_score_coins();
             }
             //}
 

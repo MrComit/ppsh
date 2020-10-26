@@ -14,11 +14,11 @@ COURSE_ACTS(COURSE_CCM, _(" 4 The Eironeia Cortex"),
        _("Mole Maze")             , _("An Incredible View")             , _("Fight the Mole Queen!"),
        _("Expedition of the Fiery Cave")  , _("Secret of the Fiery Cave")       , _("Red Coins of Cuck Canyon"))
 
-COURSE_ACTS(COURSE_BBH, _(" 5 BIG BOO'S HAUNT"),
+COURSE_ACTS(COURSE_BBH, _(" 5 Castle Grounds"),
        _("The Cubes of the Rainbow")            , _("Crater in the Residential District") , _("Scaling the Skycrapers"),
        _("Stealing a Precious Metal")          , _("Dark Alley Platforming")             , _("Crater in the Alley"))
 
-COURSE_ACTS(COURSE_HMC, _(" 6 HAZY MAZE CAVE"),
+COURSE_ACTS(COURSE_HMC, _(" 6 Inside Castle"),
        _("Car Ride Behind the Gate")  , _("Skatepark Obstacle Course")       , _("Star Pieces in the Skatepark"),
        _("Red Coins of Simp City")     , _("Catching the Spying Toad")     , _("The Top of the Main Building"))
 
