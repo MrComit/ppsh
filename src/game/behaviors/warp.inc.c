@@ -13,6 +13,9 @@
 #define SIMP_3 9
 #define SIMP_4 10
 
+#define BOSS_1 11
+#define BOSS_2 12
+
 Vec3f sDeathII1[4] = {
 {-5270.55f, -400.0f, -8138.85f},
 {6788.95f, -123.058f, -10970.35f},
@@ -64,12 +67,19 @@ Vec3f sDeathSC3 = {-25153.45f, -5709.25f, -17227.8f};
 
 Vec3f sDeathSC4 = {576.245f, 13322.1f, -14205.7f};
 
+Vec3f sDeathB1 = {-8.8677f, 1916.0f, 17267.5f};
+
+Vec3f sDeathB2 = {0.0f, 300.0f, 4000.0f};
+
+
+
 Vec3f *sDeaths[] = {
 sDeathII1, sDeathCC1, sDeathCC2, sDeathCC3, sDeathCC4, sDeathCC5, sDeathCC6, sDeathSC1, sDeathSC2, sDeathSC3, sDeathSC4,
+sDeathB1, sDeathB2,
 };
 
 s16 sDeathCounts[] = {
-4, 3, 5, 2, 1, 1, 1, 10, 1, 1, 1,
+4, 3, 5, 2, 1, 1, 1, 10, 1, 1, 1, 1, 1,
 };
 
 s8 deathwarp_get_list(void) {
@@ -108,6 +118,13 @@ s8 deathwarp_get_list(void) {
                         return SIMP_3;
                 default:
                     return -1;
+            }
+            break;
+        case LEVEL_CCM:
+            if (gMarioState->pos[2] < 4500.0f) {
+                return BOSS_2;
+            } else {
+                return BOSS_1;
             }
             break;
         default:

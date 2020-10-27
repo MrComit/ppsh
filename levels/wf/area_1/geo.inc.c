@@ -12,37 +12,18 @@ const GeoLayout wf_area_1_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout wf_dl_ShrubDecal_geo[] = {
-	GEO_NODE_START(),
-	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, -6282, 70, 9054, wf_dl_ShrubDecal_mesh),
-	GEO_CLOSE_NODE(),
-	GEO_RETURN(),
-};
 const GeoLayout wf_dl_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(2, geo_switch_console_mode),
-		GEO_OPEN_NODE(),
-			GEO_BRANCH(1, wf_dl_ShrubDecal_geo),
-		GEO_CLOSE_NODE(),
-	GEO_CLOSE_NODE(),
-	GEO_RETURN(),
-};
-const GeoLayout wf_dl_BaseGround_004_geo[] = {
-	GEO_NODE_START(),
-	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 7382, 4044, 47, wf_dl_BaseGround_004_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -10512, 4, 3540, wf_dl_Debris_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, -6282, 70, 9054, wf_dl_ShrubDecal_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
 const GeoLayout wf_dl_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(2, geo_switch_console_mode),
-		GEO_OPEN_NODE(),
-			GEO_BRANCH(1, wf_dl_BaseGround_004_geo),
-		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 7382, 4044, 47, wf_dl_BaseGround_004_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

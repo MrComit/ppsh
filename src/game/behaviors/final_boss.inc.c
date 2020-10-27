@@ -1,4 +1,6 @@
 //#include "game/object_helpers2.h"
+#include "game/save_file.h"
+#include "game/camera.h"
 void generate_yellow_sparkles(s16 x, s16 y, s16 z, f32 radius);
 
 struct ObjectHitbox sSubwayKoopaHitbox = {
@@ -33,9 +35,9 @@ struct ObjectHitbox sToadMinionHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 2,
     /* numLootCoins:      */ 1,
-    /* radius:            */ 80,
+    /* radius:            */ 130,
     /* height:            */ 100,
-    /* hurtboxRadius:     */ 80,
+    /* hurtboxRadius:     */ 130,
     /* hurtboxHeight:     */ 100,
 };
 
@@ -204,8 +206,8 @@ void bhv_peach_boss_loop(void) {
             final_boss_dynamics(0);
             if (o->oTimer > 30) {
                 o->oAction = 5;
-                o->oF8 = CL_RandomMinMaxU16(60, 120);
-                o->o100 = CL_RandomMinMaxU16(1, 3);
+                o->oF8 = 45;
+                o->o100 = CL_RandomMinMaxU16(2, 3);
                 o->oFC = 0;
                 o->oForwardVel = 20.0f;
                 o->o104 = 0x200;
@@ -219,14 +221,14 @@ void bhv_peach_boss_loop(void) {
             o->oMoveAngleYaw = (o->oFaceAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, o->o104));
             if (o->oTimer > o->oF8) {
                 spawn_object(o, MODEL_RED_FLAME_SHADOW, bhvBossFlame);
-                o->oF8 = CL_RandomMinMaxU16(60, 120);
+                o->oF8 = CL_RandomMinMaxU16(50, 100);
                 o->oTimer = 0;
                 o->oFC++;
             }
             if (o->oFC > o->o100) {
                 o->oAction = 6;
                 o->oFC = 0;
-                o->o100 = CL_RandomMinMaxU16(3, 6);
+                o->o100 = 4;
                 o->oForwardVel = 0;
             }
             break;
@@ -287,6 +289,7 @@ void bhv_peach_boss_loop(void) {
             boss_change_circle_color(0, 255, 220, 0x18);
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 30);
             if (o->oTimer > 60) {
+                o->oFaceAngleYaw = 0;
                 o->oAction = 10;
                 o->oMoveAngleYaw = 0;
                 o->oPosX = o->oHomeX;
@@ -305,8 +308,8 @@ void bhv_peach_boss_loop(void) {
             }
             break;
         case 11:
-            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
-            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oAngleToMario, 0x1000);
+            if ((s16) o->oFaceAngleYaw == (s16) o->oAngleToMario) {
                 if (save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 40)
                     o->oAction = 12;//12;
                 else
@@ -347,7 +350,7 @@ void bhv_peach_boss_loop(void) {
         o->o104 = 0;
         o->o108 = 0;
         o->oOpacity = 255;
-        o->oMoveAngleYaw = 0;
+        o->oMoveAngleYaw = (o->oFaceAngleYaw = 0);
         sToadsDead = 0;
         set_obj_animation_and_sound_state(11);
         obj_scale(1.0f);
@@ -365,6 +368,13 @@ void bhv_toad_minion_init(void) {
     o->oPosX = o->parentObj->oPosX + ((50.0f + (((o->oBehParams >> 16) & 0xFF) * 25.0f)) * sins(o->oF8));
     o->oPosZ = o->parentObj->oPosZ + ((50.0f + (((o->oBehParams >> 16) & 0xFF) * 25.0f)) * coss(o->oF8));
     o->oMoveAngleYaw = o->oF8 - 0x1555;
+
+    if (save_file_get_console_mode()) {
+        obj_set_model(MODEL_LOD_SIMP_TOAD);
+    } else {
+        obj_set_model(MODEL_SIMP_TOAD);
+    }
+
 }
 
 
@@ -385,6 +395,13 @@ void bhv_toad_minion_loop(void) {
                 o->oAction = 2;
             break;
         case 2:
+            if (save_file_get_console_mode() && sToadsDead < 10) {
+                if (absi((s16)(o->oMoveAngleYaw - 0x1555) - (s8DirModeYawOffset + 0x4000)) < 0x3000) {
+                    obj_hide();
+                } else {
+                    obj_unhide();
+                }
+            }
             if (o->parentObj->oAction == 6)
                 o->oF4 = 0xC00;
             else
@@ -395,6 +412,7 @@ void bhv_toad_minion_loop(void) {
             o->oPosZ = o->parentObj->oPosZ + ((50.0f + (((o->oBehParams >> 16) & 0xFF) * 25.0f)) * coss(o->oF8));
 
             if (o->parentObj->oAction == 7) {
+                obj_unhide();
                 o->oAction = 3;
                 o->oForwardVel = 40.0f;
                 o->oVelY = 30.0f;
@@ -411,7 +429,7 @@ void bhv_toad_minion_loop(void) {
             obj_move_standard(-78);
             if (o->oMoveFlags & OBJ_MOVE_LANDED) {
                 o->oVelY = 20.0f;
-                o->oForwardVel = 15.0f;
+                o->oForwardVel = 10.0f;
                 PlaySound2(SOUND_GENERAL_BOING2_LOWPRIO);
             }
             if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
@@ -475,7 +493,7 @@ void bhv_toad_minion_loop(void) {
             if (o->oTimer > o->oFC) {
                 spawn_object(o, MODEL_RED_FLAME_SHADOW, bhvBossFlame);
                 o->oTimer = 0;
-                o->oFC = CL_RandomMinMaxU16(0x90, 0x300);
+                o->oFC = CL_RandomMinMaxU16(0x100, 0x380);
             }
             break;
         case 6:

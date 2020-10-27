@@ -640,6 +640,7 @@
 
 //custom boss
 #define MODEL_BOSS_GATE 0xFF
+#define MODEL_LOD_SIMP_TOAD 0xFE
 
 //custom hub
 #define MODEL_LEVEL_BUTTON 0xFF

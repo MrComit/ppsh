@@ -944,7 +944,12 @@ ahead of you, Mario!\n\
 \n\
 With the powers of us\n\
 all, Tier 1, 2, and 3,\n\
-we will destroy you!"))
+we will destroy you!\n\
+There's no way you\n\
+could ever hurt us\n\
+with the Princess'\n\
+magical protection on\n\
+our side!"))
 
 DEFINE_DIALOG(DIALOG_104, 1, 3, 30, 200, _("\
 Woah! A 4th button?\n\
