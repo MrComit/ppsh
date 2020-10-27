@@ -751,14 +751,14 @@ void cur_object_exec_behavior(void) {
     s32 behProcResult;
     s32 hasAnimation;
 
-    /*if (save_file_get_console_mode()) {
+    if (save_file_get_console_mode()) {
         hasAnimation = (gCurrentObject->header.gfx.node.flags & GRAPH_RENDER_HAS_ANIMATION) != 0;
 
         if (gGameLagged && hasAnimation && gCurrentObject->header.gfx.unk38.curAnim != NULL) {
             struct GraphNodeObject_sub *node = &gCurrentObject->header.gfx.unk38;
             node->animFrame = geo_update_animation_frame(node, &node->animFrameAccelAssist);
         }
-    }*/
+    }
 
 
 
