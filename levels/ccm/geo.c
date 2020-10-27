@@ -25,3 +25,4 @@
 
 #include "levels/ccm/boss_gate/geo.inc.c"
 #include "levels/ccm/simp_toad_lod/geo.inc.c"
+#include "levels/ccm/peach_lod/geo.inc.c"

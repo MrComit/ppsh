@@ -50,3 +50,4 @@
 #include "levels/ccm/boss_gate/model.inc.c"
 #include "levels/ccm/boss_gate/collision.inc.c"
 #include "levels/ccm/simp_toad_lod/model.inc.c"
+#include "levels/ccm/peach_lod/model.inc.c"

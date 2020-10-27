@@ -45,6 +45,7 @@ const LevelScript level_ccm_entry[] = {
 	//LOAD_MODEL_FROM_GEO(MODEL_CCM_SNOWMAN_HEAD, ccm_geo_00040C), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOSS_GATE, boss_gate_geo),
 	LOAD_MODEL_FROM_GEO(MODEL_LOD_SIMP_TOAD, simp_toad_lod_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_LOD_PEACH, peach_lod_geo),
 
 	AREA(1, ccm_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),

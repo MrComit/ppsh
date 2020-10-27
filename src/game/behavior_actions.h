@@ -644,7 +644,7 @@ void bhv_hint_shop_loop(void);
 void bhv_level_switch_loop(void);
 void bhv_level_switch_init(void);
 void bhv_black_smoke_object_loop(void);
-
+void bhv_arrow_simp_minions_loop(void);
 void bhv_arrow_water_ring_loop(void);
 
 extern s32 gBossReset;

@@ -7027,3 +7027,12 @@ const BehaviorScript bhvArrowForWaterRings[] = {
         CALL_NATIVE(bhv_arrow_water_ring_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvArrowForSimpMinions[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_arrow_simp_minions_loop),
+    END_LOOP(),
+};

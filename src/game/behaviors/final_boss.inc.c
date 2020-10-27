@@ -153,6 +153,16 @@ void boss_spawn_simps(void) {
 }
 
 
+void peach_handle_lod(void) {
+    if (save_file_get_console_mode()) {
+        if ((o->oAction != 4 && o->oAction != 5 && o->oAction != 6 && o->oAction != 7 && o->oAction != 8) || sToadsDead > 9)
+            obj_set_model(MODEL_PEACH);
+        else
+            obj_set_model(MODEL_LOD_PEACH);
+    }
+}
+
+
 
 void bhv_peach_boss_init(void) {
     o->oFriction = 1.0f;
@@ -164,6 +174,9 @@ void bhv_peach_boss_init(void) {
 void bhv_peach_boss_loop(void) {
     struct Object *obj;
     s32 dialogId;
+
+    peach_handle_lod();
+
     switch (o->oAction) {
         case 0:
             boss_change_circle_color(255, 0, 35, 0x10);
@@ -256,6 +269,8 @@ void bhv_peach_boss_loop(void) {
                     PlaySound2(SOUND_OBJ2_KING_BOBOMB_DAMAGE);
                     ShakeScreen(SHAKE_POS_MEDIUM);
                     obj_become_intangible();
+                    if (sToadsDead > 9)
+                        spawn_object(o, MODEL_ARROW_HEAD, bhvArrowForSimpMinions);
                 }
             }
             break;
@@ -266,6 +281,9 @@ void bhv_peach_boss_loop(void) {
             boss_change_circle_color(0, 255, 0, 0x10);
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 30, 20);
             if (o->oTimer > o->o108) {
+                obj = obj_nearest_object_with_behavior(bhvArrowForSimpMinions);
+                if (obj != NULL)
+                    obj->activeFlags = 0;
                 o->oAction = 8;
                 obj_become_tangible();
             }
@@ -308,6 +326,7 @@ void bhv_peach_boss_loop(void) {
             }
             break;
         case 11:
+            set_mario_npc_dialog(1);
             o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oAngleToMario, 0x1000);
             if ((s16) o->oFaceAngleYaw == (s16) o->oAngleToMario) {
                 if (save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 40)
@@ -648,4 +667,51 @@ void bhv_subway_ending_loop(void) {
             break;
     }
     o->oInteractStatus = 0;
+}
+
+
+struct Object *obj_nearest_simp_with_behavior(const BehaviorScript *behavior) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct Object *closestObj = NULL;
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    f32 minDist = 0x20000;
+
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr && obj->oAction == 3) {
+            if (obj->activeFlags != ACTIVE_FLAGS_DEACTIVATED && obj != o) {
+                f32 objDist = dist_between_objects(o, obj);
+                if (objDist < minDist) {
+                    closestObj = obj;
+                    minDist = objDist;
+                }
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+
+    return closestObj;
+}
+
+
+
+
+void bhv_arrow_simp_minions_loop(void) {
+    f32 dist;
+    s16 pitch, yaw;
+    struct Object *obj = obj_nearest_simp_with_behavior(bhvSimpToadMinion);
+    if (obj == NULL) {
+        o->activeFlags = 0;
+    } else {
+        o->oPosX = gMarioState->pos[0];
+        o->oPosY = gMarioState->pos[1] + 180.0f;
+        o->oPosZ = gMarioState->pos[2];
+        vec3f_get_dist_and_angle(&o->oPosX, &obj->oPosX, &dist, &pitch, &yaw);
+
+        o->oFaceAngleYaw = yaw + 0x8000;
+        o->oFaceAnglePitch = pitch;
+    }
 }

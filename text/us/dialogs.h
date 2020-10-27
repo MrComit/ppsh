@@ -150,7 +150,7 @@ Enjoy!"))
 
 DEFINE_DIALOG(DIALOG_013, 1, 5, 30, 200, _("\
 Hi, I'm the Hint Toad!\n\
-For 20 $ Coins I'll give\n\
+For 25 $ Coins I'll give\n\
 you a hint for a star\n\
 in this world you\n\
 haven't found yet!\n\

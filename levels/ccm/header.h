@@ -65,4 +65,6 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/simp_toad_lod/geo_header.h"
 
+#include "levels/ccm/peach_lod/geo_header.h"
+
 #endif

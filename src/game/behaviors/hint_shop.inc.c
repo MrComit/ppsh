@@ -113,7 +113,7 @@ void bhv_hint_shop_loop(void) {
             dialogResponse = hint_toad_dialog(DIALOG_013);
             if (dialogResponse) {
                 if (dialogResponse == 1) {
-                    if (gMarioState->numCoins < 20) {
+                    if (gMarioState->numCoins < 25) {
                         o->oAction = 3;
                     } else {
                         bhv_hint_shop_init();
@@ -128,7 +128,7 @@ void bhv_hint_shop_loop(void) {
                         } else {
                             randomHint = CL_RandomMinMaxU16(0, numHints - 1);
                             hint_toad_set_hint(sVacantHints[randomHint]);
-                            gMarioState->numCoins -= 20;
+                            gMarioState->numCoins -= 25;
                             o->oAction = 5;
 
                         }
@@ -164,11 +164,11 @@ void bhv_hint_shop_loop(void) {
         -run the init to make sure its up to date
     if dialog response is yes
         -assemble list of all vacant star ids in current level (hint already bought = non vacant)
-        -if you dont have 20 coins "sorry you cant afford this"
+        -if you dont have 25 coins "sorry you cant afford this"
         -if you dont have any vacant star ids "there are no hints for you to buy!"
     if you can purchase a hint
         -"ok thank you for doing business"
-        -subtracts 20 coins
+        -subtracts 25 coins
         -set bit for hint bought (randomly selected from list)
         -run the init again to update stuff
 */
