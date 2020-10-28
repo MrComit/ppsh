@@ -523,6 +523,8 @@ void render_hud(void) {
         //if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
         //    render_hud_mario_lives();
         //}
+        if (sCurrPlayMode == 2)
+            gHudTopY = 209;
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
             if (gHudTopY < 225)

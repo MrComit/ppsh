@@ -585,6 +585,7 @@ extern const BehaviorScript bhvCubeStar[];
 extern const BehaviorScript bhvColoredBoo[];
 extern const BehaviorScript bhvColoredDashBoo[];
 extern const BehaviorScript bhvDashBooSpawner[];
+extern const BehaviorScript bhvDashBooSpawner2[];
 extern const BehaviorScript bhvTimedCarSwitch[];
 extern const BehaviorScript bhvTimedGate[];
 extern const BehaviorScript bhvSimpTruck[];
@@ -615,5 +616,8 @@ extern const BehaviorScript bhvHubToad[];
 extern const BehaviorScript bhvBlackSmokeObject[];
 extern const BehaviorScript bhvArrowForWaterRings[];
 extern const BehaviorScript bhvArrowForSimpMinions[];
+extern const BehaviorScript bhvArrowForSimpCar[];
+extern const BehaviorScript bhvArrowForCubes[];
+extern const BehaviorScript bhvArrowForSimpSwitches[];
 
 #endif /* _BEHAVIOR_DATA_H */

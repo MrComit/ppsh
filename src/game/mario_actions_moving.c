@@ -965,11 +965,12 @@ void func_8026570C(struct MarioState *m) {
     s32 val08 = TRUE;
     f32 val04;
 
-    val04 = m->intendedMag > m->forwardVel ? m->intendedMag : m->forwardVel;
+    //val04 = m->intendedMag > m->forwardVel ? m->intendedMag : m->forwardVel;
+    val04 = 9.0f;
 
-    if (val04 < 2.0f) {
-        val04 = 2.0f;
-    }
+    //if (val04 < 2.0f) {
+    //    val04 = 2.0f;
+    //}
 
     while (val08) {
         switch (m->actionTimer) {
@@ -1262,7 +1263,7 @@ s32 act_hold_walking(struct MarioState *m) {
     }
 
     //m->intendedMag *= 0.4f;
-    m->intendedMag *= 0.65f;
+    //m->intendedMag *= 0.65f;
 
     update_walking_speed(m);
 

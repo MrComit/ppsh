@@ -3333,7 +3333,7 @@ void update_camera(struct Camera *c) {
         s8DirModeYawOffset = gMarioState->faceAngle[1] + 0x8000;
     }
     if (gPlayer1Controller->buttonPressed & D_JPAD) {
-        if (absi(s8DirModeYawOffset - (s8DirModeYawOffset & 0xE000)) < 0x1000) {
+        if (absi((u16)(s8DirModeYawOffset) - (u16)(s8DirModeYawOffset & 0xE000)) < 0x1000) {
             s8DirModeYawOffset &= 0xE000;
         } else {
             s8DirModeYawOffset = (s8DirModeYawOffset & 0xE000) + 0x2000;

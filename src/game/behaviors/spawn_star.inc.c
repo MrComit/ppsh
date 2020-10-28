@@ -14,10 +14,36 @@ static struct ObjectHitbox sCollectStarHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+static struct ObjectHitbox sCollectStarCoinHitbox = {
+    /* interactType:      */ INTERACT_COIN,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 10,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 90,
+    /* height:            */ 60,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
+
+
 static struct ObjectHitbox sCollectStarHitbox2 = {
     /* interactType:      */ INTERACT_STAR_OR_KEY,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 40,
+    /* height:            */ 10,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
+static struct ObjectHitbox sCollectStarCoinHitbox2 = {
+    /* interactType:      */ INTERACT_COIN,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 10,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
     /* radius:            */ 40,
@@ -41,14 +67,18 @@ void bhv_collect_star_init(void) {
     sp1E = save_file_get_star_flags(gCurrSaveFileNum - 1, CourseId - 1);
     if (sp1E & (1 << sp1F)) {
         o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_TRANSPARENT_STAR];
+        if (!(obj_has_behavior(bhvStarNoRotate))) {
+            set_object_hitbox(o, &sCollectStarCoinHitbox);
+        } else {
+            set_object_hitbox(o, &sCollectStarCoinHitbox2);
+        }
     } else {
         o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_STAR];
+        if (!(obj_has_behavior(bhvStarNoRotate))) {
+            set_object_hitbox(o, &sCollectStarHitbox);
+        } else {
+            set_object_hitbox(o, &sCollectStarHitbox2);
     }
-
-    if (!(obj_has_behavior(bhvStarNoRotate))) {
-        set_object_hitbox(o, &sCollectStarHitbox);
-    } else {
-        set_object_hitbox(o, &sCollectStarHitbox2);
     }
 }
 

@@ -72,6 +72,15 @@ Vec3f sDeathB1 = {-8.8677f, 1916.0f, 17267.5f};
 Vec3f sDeathB2 = {0.0f, 300.0f, 4000.0f};
 
 
+Vec3f sCheckpointSC[3] = {
+{-21702.15f, -1674.04f, 19317.15f},
+{-12833.8f, -1674.04f, 8403.75f},
+{-1634.05f, -1674.04f, 2137.22f},
+};
+
+s16 sCheckPointAngleSC[3] = {0x8000, 0x4000, 0x4000};
+
+
 
 Vec3f *sDeaths[] = {
 sDeathII1, sDeathCC1, sDeathCC2, sDeathCC3, sDeathCC4, sDeathCC5, sDeathCC6, sDeathSC1, sDeathSC2, sDeathSC3, sDeathSC4,
@@ -138,13 +147,40 @@ void bhv_deathwarp_loop(void) {
     s8 list;
     Vec3f *point;
     if (gMarioState->pos[1] <= gMarioState->floorHeight) {
-        list = deathwarp_get_list();
-        if (list >= 0) {
-            if (sDeathCounts[list] > 1)
-                point = CL_nearest_point(sDeaths[list], gMarioState->pos, sDeathCounts[list]);
-            else
-                point = sDeaths[list][0];
-            vec3f_copy(&o->oPosX, point);
+        if (gCurrLevelNum == LEVEL_JRB && gCurrAreaIndex == 5) {
+            switch (o->oAction) {
+                case 0:
+                    vec3f_copy(&o->oPosX, sCheckpointSC[0]);
+                    o->oFaceAngleYaw = sCheckPointAngleSC[0];
+
+                    if (gMarioState->pos[2] < 9500.0f && gMarioState->pos[0] > -14000.0f) {
+                        o->oAction = 1;
+                    }
+                    break;
+                case 1:
+                    vec3f_copy(&o->oPosX, sCheckpointSC[1]);
+                    o->oFaceAngleYaw = sCheckPointAngleSC[1];
+
+                    if (gMarioState->pos[2] < 4000.0f && gMarioState->pos[0] > -3000.0f) {
+                        o->oAction = 2;
+                    }
+                    break;
+                case 2:
+                    vec3f_copy(&o->oPosX, sCheckpointSC[2]);
+                    o->oFaceAngleYaw = sCheckPointAngleSC[2];
+
+
+                    break;
+            }
+        } else {
+            list = deathwarp_get_list();
+            if (list >= 0) {
+                if (sDeathCounts[list] > 1)
+                    point = CL_nearest_point(sDeaths[list], gMarioState->pos, sDeathCounts[list]);
+                else
+                    point = sDeaths[list][0];
+                vec3f_copy(&o->oPosX, point);
+            }
         }
     }
 }

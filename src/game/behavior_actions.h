@@ -609,6 +609,7 @@ void bhv_colored_boo_init(void);
 void bhv_colored_dash_boo_loop(void);
 void bhv_colored_dash_boo_init(void);
 void bhv_dash_boo_spawner_loop(void);
+void bhv_dash_boo_spawner_2_loop(void);
 void bhv_timed_gate_loop(void);
 void bhv_simp_truck_loop(void);
 void bhv_simp_truck_init(void);
@@ -646,6 +647,9 @@ void bhv_level_switch_init(void);
 void bhv_black_smoke_object_loop(void);
 void bhv_arrow_simp_minions_loop(void);
 void bhv_arrow_water_ring_loop(void);
+void bhv_arrow_simp_car_loop(void);
+void bhv_arrow_cubes_loop(void);
+void bhv_arrow_switches_loop(void);
 
 extern s32 gBossReset;
 extern s8 gCurrLevelButton;

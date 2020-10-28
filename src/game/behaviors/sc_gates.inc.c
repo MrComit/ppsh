@@ -31,6 +31,7 @@ void bhv_car_gate(void) {
                 o->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
             } else if (o->oTimer == 71) {
                 spawn_object(o, MODEL_SC_TRUCK, bhvSimpTruck);
+                spawn_object(o, MODEL_ARROW_HEAD, bhvArrowForSimpCar);
             }
             if (bswitch->oAction != PURPLE_SWITCH_TICKING)
                 o->oAction = 0;
@@ -88,11 +89,15 @@ void bhv_simp_truck_init(void) {
 }
 
 void bhv_simp_truck_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (gMarioObject->platform == o) {
                 o->oAction = 1;
                 o->oForwardVel = 90.0f;
+                obj = obj_nearest_object_with_behavior(bhvArrowForSimpCar);
+                if (obj != NULL)
+                    obj->activeFlags = 0;
             }
             break;
         case 1:
@@ -159,5 +164,23 @@ void bhv_simp_big_truck_loop(void) {
                 }
                 break;
         }
+    }
+}
+
+
+void bhv_arrow_simp_car_loop(void) {
+    f32 dist;
+    s16 pitch, yaw;
+    struct Object *obj = obj_nearest_object_with_behavior(bhvSimpTruck);
+    if (obj == NULL) {
+        o->activeFlags = 0;
+    } else {
+        o->oPosX = gMarioState->pos[0];
+        o->oPosY = gMarioState->pos[1] + 180.0f;
+        o->oPosZ = gMarioState->pos[2];
+        vec3f_get_dist_and_angle(&o->oPosX, &obj->oPosX, &dist, &pitch, &yaw);
+
+        o->oFaceAngleYaw = yaw + 0x8000;
+        o->oFaceAnglePitch = pitch;
     }
 }

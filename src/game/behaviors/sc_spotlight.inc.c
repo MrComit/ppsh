@@ -14,7 +14,7 @@ void bhv_spotlight_loop(void) {
             dist = lateral_dist_between_objects(o, gMarioObject);
             if (dist < 320.0f && absf(m->pos[1] - o->oPosY) < 500.0f) {
                 if (variable != 1)
-                    o->oAction = 1;
+                    o->oAction = 2;
                 else
                     o->oAction = 2;
                 m->floorHeight = m->pos[1];

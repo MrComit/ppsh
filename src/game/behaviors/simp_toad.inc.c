@@ -7,13 +7,20 @@ struct ObjectHitbox sChaseHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 1,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 80,
-    /* height:            */ 100,
+    /* radius:            */ 65,
+    /* height:            */ 80,
     /* hurtboxRadius:     */ 80,
     /* hurtboxHeight:     */ 100,
 };
 
-Vec3f sMGStartingPos = {-28152.0f, -9700.0f, -8521.45f};
+
+void *sSimpSwitches[5] = {NULL};
+
+s16 sMGStartingAngle[2] = {0x4000, 0x8000};
+Vec3f sMGStartingPos[2] = {
+{-28152.0f, -9700.0f, -8521.45f},
+{-22055.75f, -9700.0f, -19197.1f},
+};
 Vec3f sMGMinePos[7] = {
 {-31247.85f, -9743.7f, -12724.79f},
 {-31459.8f, -9743.7f, -15274.94f},
@@ -47,7 +54,7 @@ struct ShadowCopy {
     u16 filler;
 };
 
-#define CHASE_SIZE 50
+#define CHASE_SIZE 70
 struct ShadowCopy toadChase[CHASE_SIZE] = {
 0, /*{{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
 {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0}, {{0, 0, 0}, 0, 0},
@@ -68,6 +75,11 @@ struct ShadowCopy toadChase[CHASE_SIZE] = {
 
 
 void gang_toad_npc(void) {
+    if (o->oBehParams >> 24 == 0x4B) {
+        if (save_file_get_star_flags(gCurrSaveFileNum - 1, 4) & 0x8)
+            o->activeFlags = 0;
+    }
+
     switch (o->oAction) {
         case 0:
             o->oOpacity = 30;
@@ -179,13 +191,14 @@ void gang_toad_spawn_switches(void) {
     s32 i;
     for (i = 1; i < 6; i++) {
         obj = spawn_object(o, MODEL_SIMP_SMALL_SwITCH, bhvSimpSmallSwitch);
+        sSimpSwitches[i - 1] = obj;
         vec3f_copy(&obj->oPosX, sChaseRespawn[i]);
     }
 }
 
 void gang_toad_perform_chase(void) {
     if (o->oFC != gRedSwitchesPushed) {
-        o->oF4 -= 9;
+        o->oF4 -= 12;
         if (o->oF4 < 0)
             o->oF4 += CHASE_SIZE;
     }
@@ -207,7 +220,7 @@ void gang_toad_perform_chase(void) {
 
 void gang_toad_chase(void) {
     struct Object *obj;
-    s32 respawn;
+    s32 respawn, i;
     switch (o->oAction) {
         case 0:
             o->oInteractType = 0x40000000;
@@ -240,9 +253,11 @@ void gang_toad_chase(void) {
                 o->oAction = 4;
                 vec3f_copy(&o->oPosX, gMarioState->pos);
                 o->oFaceAngleYaw = gMarioState->faceAngle[1];
+                spawn_object(o, MODEL_ARROW_HEAD, bhvArrowForSimpSwitches);
             }    
             break;
         case 4:
+            o->oInteractType = 0x00000008;
             gang_toad_perform_chase();
             if (o->oTimer > 30 && o->oOpacity < 255) {
                 obj_enable();
@@ -257,11 +272,19 @@ void gang_toad_chase(void) {
                 o->oAction = 5;
             break;
         case 5:
+            obj_become_intangible();
             if (gMarioState->health <= 0x280) {
                 level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR);
                 o->oAction = 0;
                 vec3f_copy(&o->oPosX, &o->oHomeX);
                 o->oFaceAngleYaw = 0x4000;
+                sSimpSwitches[0] = NULL;
+                sSimpSwitches[1] = NULL;
+                sSimpSwitches[2] = NULL;
+                sSimpSwitches[3] = NULL;
+                sSimpSwitches[4] = NULL;
+                //obj = obj_nearest_object_with_behavior(bhvArrowForSimpSwitches);
+                //obj->activeFlags = 0;
                 obj = obj_nearest_object_with_behavior(bhvChaseSwitch);
                 obj->header.gfx.scale[1] = 1.5f;
                 obj->oAction = 0;
@@ -273,10 +296,15 @@ void gang_toad_chase(void) {
                         play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0xC, 0x00, 0x00, 0x00);
                         break;
                     case 9:
-                        vec3f_copy(gMarioState->pos, sChaseRespawn[gRedSwitchesPushed]);
-                        CL_set_camera_pos(sChaseRespawn[gRedSwitchesPushed]);
-                        gMarioState->faceAngle[1] = sAngleTable[gRedSwitchesPushed];
-                        s8DirModeYawOffset = (s16)(sAngleTable[gRedSwitchesPushed] & 0xC000) - 0x8000;
+                        for (i = 0; i < 5; i++) {
+                            obj = sSimpSwitches[i];
+                            if (obj->oAction == 0)
+                                break;
+                        }
+                        vec3f_copy(gMarioState->pos, sChaseRespawn[i]);
+                        CL_set_camera_pos(sChaseRespawn[i]);
+                        gMarioState->faceAngle[1] = sAngleTable[i];
+                        s8DirModeYawOffset = (s16)(sAngleTable[i] & 0xC000) - 0x8000;
                         set_mario_action(gMarioState, ACT_JUMP_LAND_STOP, 0);
                         break;
                     case 12:
@@ -343,9 +371,9 @@ void spawn_simp_mines(void) {
 
 
 void bhv_simp_mg_toad_loop(void) {
-s32 dialogResponse;
-struct MarioState *m = gMarioState;
-struct Object *star;
+    s32 dialogResponse;
+    struct MarioState *m = gMarioState;
+    struct Object *star;
 
     switch (o->oAction) {
         case 0:
@@ -379,13 +407,13 @@ struct Object *star;
             break;
         case 3:
             if (o->oTimer > 10) {
-                vec3f_copy(m->pos, sMGStartingPos);
-                m->faceAngle[1] = 0xC000;
+                vec3f_copy(m->pos, sMGStartingPos[0]);
+                m->faceAngle[1] = sMGStartingAngle[0] + 0x8000;
                 m->forwardVel = 0;
                 m->vel[0] = 0;
                 m->vel[1] = 0;
                 m->vel[2] = 0;
-                s8DirModeYawOffset = 0x4000;
+                s8DirModeYawOffset = sMGStartingAngle[0];
                 set_mario_action(m, ACT_CUTSCENE_JUMP, 0);
             }
             if (o->oTimer > 15) {
@@ -457,9 +485,9 @@ struct Object *star;
                 case 1:
                     grindInitTriggered = 0;
                     o->oKoopaAction = 1;
-                    vec3f_copy(m->pos, sMGStartingPos);
-                    s8DirModeYawOffset = 0x4000;
-                    m->faceAngle[1] = 0xC000;
+                    vec3f_copy(m->pos, sMGStartingPos[0]);
+                    s8DirModeYawOffset = sMGStartingAngle[0];
+                    m->faceAngle[1] = sMGStartingAngle[0] + 0x8000;
                     m->forwardVel = 0;
                     m->vel[0] = 0;
                     m->vel[1] = 0;
@@ -531,4 +559,29 @@ void bhv_secret_door_init(void) {
             obj->activeFlags = 0;
         }
 
+}
+
+
+
+void bhv_arrow_switches_loop(void) {
+    f32 dist;
+    s16 pitch, yaw;
+    s32 i;
+    struct Object *obj;
+    if  (gRedSwitchesPushed >= 5 || sSimpSwitches[0] == NULL) {
+        o->activeFlags = 0;
+    } else {
+        for (i = 0; i < 5; i++) {
+            obj = sSimpSwitches[i];
+            if (obj->oAction == 0)
+                break;
+        }
+        o->oPosX = gMarioState->pos[0];
+        o->oPosY = gMarioState->pos[1] + 180.0f;
+        o->oPosZ = gMarioState->pos[2];
+        vec3f_get_dist_and_angle(&o->oPosX, &obj->oPosX, &dist, &pitch, &yaw);
+
+        o->oFaceAngleYaw = yaw + 0x8000;
+        o->oFaceAnglePitch = pitch;
+    }    
 }

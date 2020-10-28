@@ -12,7 +12,7 @@ struct ObjectHitbox sBooHitbox = {
 
 extern s32 sCubesActive;
 
-f32 sBooSpeeds[4] = {9.0f, 11.0f, 14.0f, 15.0f};
+f32 sBooSpeeds[4] = {11.0f, 13.0f, 14.0f, 15.0f};
 s32 sBooSpawnFrames[3] = {45, 35, 20};
 
 void bhv_colored_boo_init(void) {
@@ -28,6 +28,7 @@ void bhv_colored_boo_init(void) {
 void bhv_colored_boo_loop(void) {
     f32 dist;
     struct Object *cube;
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             CL_Move();
@@ -64,10 +65,13 @@ void bhv_colored_boo_loop(void) {
                 cube->oBehParams = o->oBehParams;
                 cube->oBehParams2ndByte = o->oBehParams2ndByte;
                 cube->oAnimState = o->oBehParams2ndByte;
-                cube->oFaceAngleYaw = (o->oMoveAngleYaw = 0);
+                cube->oFaceAngleYaw = (cube->oMoveAngleYaw = 0);
                 vec3f_copy(&cube->oPosX, &o->parentObj->oHomeX);
                 o->parentObj->activeFlags = 0;
                 o->activeFlags = 0;
+
+                obj = spawn_object(o, MODEL_ARROW_HEAD, bhvArrowForCubes);
+                obj->parentObj = cube;
             }
             break;
     }
@@ -87,8 +91,8 @@ void bhv_colored_dash_boo_init(void) {
     o->oForwardVel = 50.0f;
     o->oBehParams2ndByte = (o->oBehParams >> 16) & 0xFF;
 
-    o->oPosX += 600.0f * sins(gMarioState->faceAngle[1]);
-    o->oPosZ += 600.0f * coss(gMarioState->faceAngle[1]);
+    o->oPosX += o->oFloatF4 * sins(gMarioState->faceAngle[1]);
+    o->oPosZ += o->oFloatF4 * coss(gMarioState->faceAngle[1]);
 
     //o->oPosX += 750.0f * sins(gMarioState->faceAngle[1]);
     //o->oPosZ += 750.0f * coss(gMarioState->faceAngle[1]);
@@ -106,11 +110,29 @@ void bhv_colored_dash_boo_loop(void) {
 
 
 void bhv_dash_boo_spawner_loop(void) {
+    struct Object *obj;
     o->oPosY = gMarioState->pos[1];
     if (gMarioState->heldObj != NULL && gMarioState->heldObj == o->parentObj) {
         if (o->oTimer > sBooSpawnFrames[o->oCubeFlag - 1]) {
             o->oTimer = 0;
-            spawn_object(o, MODEL_BOO, bhvColoredDashBoo);
+            obj = spawn_object(o, MODEL_BOO, bhvColoredDashBoo);
+            obj->oFloatF4 = 600.0f;
+        }
+    } else
+        o->oTimer = 0;
+    if (o->parentObj->oAction == 1 || gMarioState->heldObj != o->parentObj)
+        o->activeFlags = 0;
+}
+
+
+void bhv_dash_boo_spawner_2_loop(void) {
+    struct Object *obj;
+    o->oPosY = gMarioState->pos[1];
+    if (gMarioState->heldObj != NULL && gMarioState->heldObj == o->parentObj) {
+        if (o->oTimer > (sBooSpawnFrames[o->oCubeFlag - 1] * 3)) {
+            o->oTimer = 0;
+            obj = spawn_object(o, MODEL_BOO, bhvColoredDashBoo);
+            obj->oFloatF4 = (f32)(CL_RandomMinMaxU16(1200, 1300));
         }
     } else
         o->oTimer = 0;

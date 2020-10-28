@@ -1321,7 +1321,7 @@ static s32 obj_move_xz(f32 steepSlopeNormalY, s32 careAboutEdgesAndSteepSlopes) 
         }
     }
 
-    if (intendedFloorHeight < -10000.0f) {
+    if (intendedFloorHeight < -10500.0f) {
         // Don't move into OoB
         o->oMoveFlags |= OBJ_MOVE_HIT_EDGE;
         return FALSE;

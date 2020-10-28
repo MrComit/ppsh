@@ -43,9 +43,12 @@ void handle_boos(void) {
         switch (bits) {
             case 0:
                 break;
-            case 1:
             case 2:
             case 3:
+                spawner = spawn_object(o, MODEL_NONE, bhvDashBooSpawner2);
+                spawner->oCubeFlag = bits;
+                spawner->oBehParams2ndByte = o->oBehParams2ndByte;            
+            case 1:
                 spawner = spawn_object(o, MODEL_NONE, bhvDashBooSpawner);
                 spawner->oCubeFlag = bits;
                 spawner->oBehParams2ndByte = o->oBehParams2ndByte;
@@ -77,6 +80,7 @@ void cube_released_loop(void) {
 
 
 void cube_idle_loop(void) {
+    struct Object *obj;
     if (!o->oAction) {
         s16 sp1E = object_step();
 
@@ -96,7 +100,15 @@ void cube_idle_loop(void) {
         }
         if (o->oBreakableBoxSmallReleased == 1)
             cube_released_loop();
-
+        if (obj_nearest_object_with_behavior(bhvArrowForCubes) == NULL) {
+            if (gMarioState->floor != NULL && gMarioState->floor->type == SURFACE_COLORED_CUBE && 
+            gMarioState->floor->force == o->oBehParams2ndByte) {
+                obj = spawn_object(o, MODEL_ARROW_HEAD, bhvArrowForCubes);
+                obj->parentObj = o;
+                obj->oAction = 1;
+                obj->oBehParams2ndByte = o->oBehParams2ndByte;
+            }
+        }
     }
 }
 
@@ -135,6 +147,7 @@ void cube_dropped_loop(void) {
 
 
 void bhv_colored_cube_loop(void) {
+    struct Object *obj;
     switch (o->oHeldState) {
         case HELD_FREE:
             //wrench_idle_loop();
@@ -142,6 +155,13 @@ void bhv_colored_cube_loop(void) {
             break;
 
         case HELD_HELD:
+            if (obj_nearest_object_with_behavior(bhvArrowForCubes) == NULL) {
+                obj = spawn_object(o, MODEL_ARROW_HEAD, bhvArrowForCubes);
+                obj->parentObj = o;
+                obj->oAction = 2;
+                obj->oBehParams2ndByte = o->oBehParams2ndByte;
+            }
+
             obj_disable_rendering();
             obj_become_intangible();
             handle_boos();
@@ -157,4 +177,47 @@ void bhv_colored_cube_loop(void) {
     }
 
     o->oInteractStatus = 0;    
+}
+
+
+
+void bhv_arrow_cubes_loop(void) {
+    Vec3f pos;
+    f32 dist;
+    s16 pitch, yaw;
+    o->oPosX = gMarioState->pos[0];
+    o->oPosY = gMarioState->pos[1] + 180.0f;
+    o->oPosZ = gMarioState->pos[2];
+
+    switch (o->oAction) {
+        case 0:
+            vec3f_get_dist_and_angle(&o->oPosX, &o->parentObj->oPosX, &dist, &pitch, &yaw);
+            o->oFaceAngleYaw = yaw + 0x8000;
+            o->oFaceAnglePitch = pitch;
+
+            if (o->oTimer > 450)
+                o->activeFlags = 0;
+            break;
+        case 1:
+            vec3f_get_dist_and_angle(&o->oPosX, &o->parentObj->oPosX, &dist, &pitch, &yaw);
+            o->oFaceAngleYaw = yaw + 0x8000;
+            o->oFaceAnglePitch = pitch;
+
+            if (gMarioState->floor == NULL || gMarioState->floor->type != SURFACE_COLORED_CUBE
+             || gMarioState->floor->force != o->oBehParams2ndByte) {
+                 o->activeFlags = 0;
+             }
+            break;
+        case 2:
+            pos[0] = sCubeXPos[o->parentObj->oBehParams2ndByte];
+            pos[1] = -10064.7f;
+            pos[2] = 5975.8f;
+            vec3f_get_dist_and_angle(&o->oPosX, pos, &dist, &pitch, &yaw);
+            o->oFaceAngleYaw = yaw + 0x8000;
+            o->oFaceAnglePitch = pitch;
+            if (o->parentObj->oHeldState != HELD_HELD) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
 }

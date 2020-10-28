@@ -6604,6 +6604,14 @@ const BehaviorScript bhvDashBooSpawner[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvDashBooSpawner2[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_dash_boo_spawner_2_loop),
+    END_LOOP(),
+};
+
 
 const BehaviorScript bhvTimedCarSwitch[] = {
     BEGIN(OBJ_LIST_SURFACE),
@@ -6769,6 +6777,7 @@ const BehaviorScript bhvAppearingBlock[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(appearing_block_collision),
+    SCALE(115),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oCollisionDistance, 0x900),
     BEGIN_LOOP(),
@@ -7034,5 +7043,32 @@ const BehaviorScript bhvArrowForSimpMinions[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_arrow_simp_minions_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvArrowForSimpCar[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_arrow_simp_car_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvArrowForCubes[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_arrow_cubes_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvArrowForSimpSwitches[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_arrow_switches_loop),
     END_LOOP(),
 };

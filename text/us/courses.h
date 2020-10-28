@@ -16,7 +16,7 @@ COURSE_ACTS(COURSE_CCM, _(" 4 The Eironeia Cortex"),
 
 COURSE_ACTS(COURSE_BBH, _(" 5 Castle Grounds"),
        _("The Cubes of the Rainbow")            , _("Crater in the Residential District") , _("Scaling the Skycrapers"),
-       _("Stealing a Precious Metal")          , _("Dark Alley Platforming")             , _("Crater in the Alley"))
+       _("Stealing a Precious Metal")          , _("Dark Alley Platforming")             , _("Crater in the Dark Alley"))
 
 COURSE_ACTS(COURSE_HMC, _(" 6 Inside Castle"),
        _("Car Ride Behind the Gate")  , _("Skatepark Obstacle Course")       , _("Star Pieces in the Skatepark"),
