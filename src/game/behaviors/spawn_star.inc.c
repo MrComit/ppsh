@@ -255,7 +255,7 @@ void bhv_bonus_star_loop(void) {
             }
             break;
         case 2:
-            if (course3 & 0xFF == 0xFF && course4 & 0xF == 0xF) {
+            if (course3 == 0xFF && course4 & 0xF == 0xF) {
                     create_star(o->oPosX, o->oPosY, o->oPosZ);
             }
             break;

@@ -6,6 +6,7 @@
 #include "levels/bob/header.h"
 #include "game/camera.h"
 #include "engine/math_util.h"
+#include "levels/jrb/header.inc.h"
 
 #define SCROLL_UV 0
 #define SCROLL_X 1
@@ -151,6 +152,46 @@ extern wf_dl_Clouds3_mesh_vtx_0;
 extern wf_dl_Clouds4_mesh_vtx_0;
 //extern ccm_dl_Mist_mesh_vtx_0;
 
+
+
+static void shift_traffic(Vtx *vert1, Vtx *vert2, s16 speed) {
+    u32 i;
+    Vtx *verts1 = segmented_to_virtual(vert1);
+    Vtx *verts2 = segmented_to_virtual(vert2);
+    for (i = 0; i < 104; i++) {
+        verts1[i].n.ob[0] -= speed;
+        if (i < 18) {
+            verts2[i].n.ob[0] -= speed;
+        }
+
+    }
+    if (verts1[0].n.ob[0] < -10000) {
+        for (i = 0; i < 104; i++)
+            verts1[i].n.ob[0] += 28000;
+        for (i = 0; i < 18; i++)
+            verts2[i].n.ob[0] += 28000;
+            //break;
+    }
+    /*for (i = 0; i < 18; i++) {
+        verts2[i].n.ob[0] += speed;
+        if (verts2[i].n.ob[0] > cycle * signum_positive(speed)) {
+            for (i = 0; i < vertcount; i++)
+                verts2[i].n.ob[0] -= cycle * signum_positive(speed);
+            break;
+        }
+    }*/
+
+
+    //verts1[0].n.flag += absi(speed);
+}
+
+
+
+//jrb_dl_TraffLight_001_mesh_vtx_0 18
+//jrb_dl_TraffPost_mesh_vtx_0 90
+
+
+
 // Call this function inside play_mode_normal() in level_update.c
 void uv_update_scroll() {
     switch(gCurrLevelNum) {
@@ -171,7 +212,12 @@ void uv_update_scroll() {
                 shift_uv(SCROLL_X, &wf_dl_Clouds3_mesh_vtx_0, 24, 64, 32, -20, -32000);
                 shift_uv(SCROLL_X, &wf_dl_Clouds4_mesh_vtx_0, 24, 64, 32, -20, -32000);
             }
-        case LEVEL_CCM:
+        case LEVEL_JRB:
+            if (gCurrAreaIndex == 3 && gMarioState->pos[2] < 0.0f) {
+                shift_traffic(&jrb_dl_TraffPost_mesh_vtx_0, &jrb_dl_red_mesh_vtx_0, 68);
+                shift_traffic(&jrb_dl_TraffPost_001_mesh_vtx_0, &jrb_dl_TraffLight_001_mesh_vtx_0, 68);
+                shift_traffic(&jrb_dl_TraffPost_002_mesh_vtx_0, &jrb_dl_TraffLight_002_mesh_vtx_0, 68);
+            }
             //shift_uv(SCROLL_Y_SINE, &ccm_dl_Mist_mesh_vtx_0, 22, 64, 64, 20, 50);
             break;
         /*case LEVEL_WF:

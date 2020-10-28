@@ -38,6 +38,8 @@ const MacroObject jrb_area_1_macro_objs[] = {
 	MACRO_OBJECT(macro_coin_line_horizontal, -180, 3235, -5643, 3864),
 	MACRO_OBJECT(macro_coin_line_horizontal, -90, -7357, -67, 13407),
 	MACRO_OBJECT(macro_coin_line_horizontal, -90, -8399, -67, 6610),
+	MACRO_OBJECT(macro_coin_arrow, -90, -31471, -10000, -669),
+	MACRO_OBJECT(macro_coin_arrow, -39, -1975, 12835, -13088),
 	MACRO_OBJECT_END(),
 };
 
