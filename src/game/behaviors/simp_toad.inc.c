@@ -423,6 +423,14 @@ void bhv_simp_mg_toad_loop(void) {
             break;
         case 4:
             grindForward = TRUE;
+            gSickGameActive = 1;
+            if (gMarioState->health == 0xFF) {
+                o->oAction = 0;
+                o->oInteractType = 0x00800000;
+                o->oKoopaRunAngleX = 0;
+                o->oKoopaAction = 0;
+                grindInitTriggered = 0;
+            }
             switch (o->oKoopaAction) {
                 case 0:
                     if (m->floor != NULL && m->floor->force == 0x14 && m->action == ACT_GRIND) {
@@ -458,6 +466,7 @@ void bhv_simp_mg_toad_loop(void) {
             star = create_star(-29950.6f, -10421.55f, -16314.35f);
             star->oBehParams = 0x1F << 24;
             o->oAction = 6;
+            gSickGameActive = 0;
             break;
         case 6:
             break;
