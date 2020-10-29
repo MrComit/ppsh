@@ -345,11 +345,14 @@ struct GrindPoints grind22[2] = {
     {{-14871.05f, -9911.05f, 15438.65f}, -1},
 };
 
-struct GrindPoints grind23[4] = {
+struct GrindPoints grind23[5] = {
     {{-5466.75f, -66.7715f, 12800.05f}, -2},
     {{-5466.75f, -66.7715f, 12474.05f}, 0},
+
+    {{-5466.75f, 2134.01f, 6849.5f}, 0},
+
     {{-5466.75f, 4334.775f, 1224.92f}, 0},
-    {{-8628.9f, -66.7715f, 1224.92f}, -1},
+    {{-8628.9f, 4334.775f, 1224.92f}, -1},
 };
 
 struct GrindPoints *grindTrajectories[] = {
@@ -359,7 +362,7 @@ struct GrindPoints *grindTrajectories[] = {
 };
 
 u16 grindLengths[] = {
-    2, 6, 4, 2, 14, 2, 2, 4, 2, 2, 3, 3, 5, 2, 3, 2, 2, 3, 4, 5, 11, 5, 20, 6, 21, 3, 14, 6, 12, 6, 8, 2, 4, 2, 2, 4,
+    2, 6, 4, 2, 14, 2, 2, 4, 2, 2, 3, 3, 5, 2, 3, 2, 2, 3, 4, 5, 11, 5, 20, 6, 21, 3, 14, 6, 12, 6, 8, 2, 4, 2, 2, 5,
 };
 
 struct LandingAction {
@@ -2474,6 +2477,7 @@ s32 act_grind(struct MarioState *m) {
     }
 
 
+    play_sound(SOUND_MARIO_GAME_OVER, m->marioObj->header.gfx.cameraToObject);
     return FALSE;
 }
 
