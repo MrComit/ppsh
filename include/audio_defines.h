@@ -190,7 +190,7 @@
 #define SOUND_MARIO_YAHOO_WAHA_YIPPEE           SOUND_ARG_LOAD(2, 4, 0x2B, 0x80, 8)
 
 #define SOUND_MARIO_DOH                         SOUND_ARG_LOAD(2, 4, 0x30, 0x80, 8)
-#define SOUND_MARIO_GAME_OVER                   SOUND_ARG_LOAD(2, 4, 0x31, 0xFF, 8)
+#define SOUND_MARIO_GAME_OVER                   SOUND_ARG_LOAD(2, 0, 0x31, 0x80, 0)
 #define SOUND_MARIO_HELLO                       SOUND_ARG_LOAD(2, 4, 0x32, 0xFF, 8)
 #define SOUND_MARIO_PRESS_START_TO_PLAY         SOUND_ARG_LOAD(2, 4, 0x33, 0xFF, 0xA)
 #define SOUND_MARIO_TWIRL_BOUNCE                SOUND_ARG_LOAD(2, 4, 0x34, 0x80, 8)

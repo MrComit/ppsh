@@ -2477,7 +2477,7 @@ s32 act_grind(struct MarioState *m) {
     }
 
 
-    play_sound(SOUND_MARIO_GAME_OVER, m->marioObj->header.gfx.cameraToObject);
+    //play_sound(SOUND_MARIO_GAME_OVER/*0x20318001*/, m->marioObj->header.gfx.cameraToObject);
     return FALSE;
 }
 
