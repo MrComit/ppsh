@@ -614,9 +614,45 @@ this song takes place 10\n\
 minutes before gangnam\n\
 style"))
 
-DEFINE_DIALOG(DIALOG_063, 1, 2, 30, 200, _("\
-PLACEHOLDER DIALOG\n\
-Credits will go here"))
+DEFINE_DIALOG(DIALOG_063, 1, 5, 30, 200, _("\
+CREDITS:\n\
+All original music in\n\
+this hack was composed\n\
+by me, MrComit\n\
+\n\
+A full OST upload will\n\
+be available shortly\n\
+after release at\n\
+youtube.com/MrComit\n\
+\n\
+Beta Testers:\n\
+GTM\n\
+Pyro Jay\n\
+Rovert\n\
+Cheezepin\n\
+LilianaUwU\n\
+FuryiousFight\n\
+S NDBB\n\
+Arthurtilly\n\
+\n\
+Special Thanks:\n\
+Kurethedead, for his\n\
+incredibly useful tool,\n\
+Fast64.\n\
+\n\
+Cheezepin, for writing\n\
+some code.\n\
+Dan from GomeplayTV,\n\
+for some models.\n\
+\n\
+InTheBeef, for their\n\
+low poly mario model.\n\
+S NDBB, for writing\n\
+some dialog.\n\
+\n\
+Wiseguy, for help with\n\
+console compatibility\n\
+issues."))
 
 DEFINE_DIALOG(DIALOG_064, 1, 5, 30, 200, _("\
 When you put on the Wing\n\
