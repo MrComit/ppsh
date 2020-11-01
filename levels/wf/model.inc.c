@@ -19156,14 +19156,14 @@ Vtx wf_dl_Mines2_mesh_vtx_cull[8] = {
 };
 
 Vtx wf_dl_Mines2_mesh_vtx_0[8] = {
-	{{{6156, 4249, -10132},0, {-4894, -3089},{0x5A, 0x5A, 0x5A, 0xFF}}},
-	{{{7059, 4249, -10561},0, {-4894, -1762},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{6659, 4249, -11405},0, {-5518, -1762},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{5756, 4249, -10975},0, {-5518, -3089},{0x5A, 0x5A, 0x5A, 0xFF}}},
-	{{{-9785, 4249, -10146},0, {9466, -2719},{0x5A, 0x5A, 0x5A, 0xFF}}},
-	{{{-10775, 4249, -10284},0, {9466, -1762},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{-10904, 4249, -9358},0, {8332, -1762},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{-9913, 4249, -9221},0, {8332, -2719},{0x5A, 0x5A, 0x5A, 0xFF}}},
+	{{{6156, 4249, -10132},0, {-4878, -3073},{0x5A, 0x5A, 0x5A, 0xFF}}},
+	{{{7059, 4249, -10561},0, {-4878, -1746},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6659, 4249, -11405},0, {-5502, -1746},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{5756, 4249, -10975},0, {-5502, -3073},{0x5A, 0x5A, 0x5A, 0xFF}}},
+	{{{-9785, 4249, -10146},0, {9482, -2703},{0x5A, 0x5A, 0x5A, 0xFF}}},
+	{{{-10775, 4249, -10284},0, {9482, -1746},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-10904, 4249, -9358},0, {8348, -1746},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-9913, 4249, -9221},0, {8348, -2703},{0x5A, 0x5A, 0x5A, 0xFF}}},
 };
 
 Gfx wf_dl_Mines2_mesh_tri_0[] = {
@@ -27602,9 +27602,9 @@ Gfx wf_dl_Mines2_mesh[] = {
 	gsSPVertex(wf_dl_Mines2_mesh_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_wf_dl_WhiteVertWall),
+	gsSPDisplayList(mat_wf_dl_WhiteVertFloor),
 	gsSPDisplayList(wf_dl_Mines2_mesh_tri_0),
-	gsSPDisplayList(mat_revert_wf_dl_WhiteVertWall),
+	gsSPDisplayList(mat_revert_wf_dl_WhiteVertFloor),
 	gsSPDisplayList(mat_wf_dl_WhiteVertWall),
 	gsSPDisplayList(wf_dl_Mines2_mesh_tri_1),
 	gsSPDisplayList(mat_revert_wf_dl_WhiteVertWall),
