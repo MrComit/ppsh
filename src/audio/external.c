@@ -516,6 +516,7 @@ u8 sBackgroundMusicDefaultVolume[] = {
     75, // dark area
     75, // before gangnam style
     75, // final boss
+    75, // trailer
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,

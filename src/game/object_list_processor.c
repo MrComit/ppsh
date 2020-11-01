@@ -270,11 +270,20 @@ void spawn_particle(u32 activeParticleFlag, s16 model, const BehaviorScript *beh
 }
 
 static void mario_moon_jump(void) {
-    if (gMarioState->controller->buttonDown & L_TRIG) {
-        gMarioState->vel[1] = 40.0f;
-        gMarioState->action = ACT_JUMP;
-        gMarioState->faceAngle[1] -= gMarioState->controller->stickX * 32.0f;
+    if (gMarioState->controller->buttonPressed & L_TRIG) {
+        //gMarioState->vel[1] = 40.0f;
+        //gMarioState->action = ACT_JUMP;
+        //gMarioState->faceAngle[1] -= gMarioState->controller->stickX * 32.0f;
         //print_text_fmt_int(120, 110, "%d tris", gNumStaticSurfaces);
+        if (gMarioState->action == ACT_DEBUG_FREE_MOVE) {
+            set_mario_action(gMarioState, ACT_JUMP, 0);
+            gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[1];
+        } else {
+            set_mario_action(gMarioState, ACT_DEBUG_FREE_MOVE, 0);
+            gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0];
+        }
+
+
     }
 }
 

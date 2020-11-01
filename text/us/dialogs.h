@@ -631,10 +631,10 @@ Pyro Jay\n\
 Rovert\n\
 Cheezepin\n\
 LilianaUwU\n\
+Soda j\n\
 FuryiousFight\n\
 S NDBB\n\
 Arthurtilly\n\
-\n\
 Special Thanks:\n\
 Kurethedead, for his\n\
 incredibly useful tool,\n\
@@ -1220,33 +1220,62 @@ honor! It is against the\n\
 royal rules to throw the\n\
 king out of the ring!"))
 
-DEFINE_DIALOG(DIALOG_129, 1, 6, 30, 200, _("\
-PLACEHOLDER DIALOG\n\
--Introduce Subway Koopa\n\
--Explain how peach has\n\
-been captured by a gang\n\
-of evil toads, named\n\
-'The Rejects'\n\
--Basic backstory 'they\n\
-got so desperate for\n\
-pussy that they turned\n\
-to crime and started a\n\
-gang'\n\
+DEFINE_DIALOG(DIALOG_129, 1, 4, 30, 200, _("\
+Yo! Yo! Itsa him Mario,\n\
+I'm the Subway Koopa\n\
+don't ya know?\n\
 \n\
--Explain how mario has\n\
-to find their hideout\n\
-in Simp City to save\n\
-peach"))
+You gotta help me out\n\
+with this problem with\n\
+your hoe, pull up a chair\n\
+and I'll lay it down slow:\n\
+It all started with some\n\
+Toads who went a bit\n\
+awry, called themselves\n\
+Rejects, don't know why.\n\
+They're pretty evil fellas,\n\
+not a word of a lie, all I\n\
+know right now is they\n\
+want us all to die!\n\
+They kidnapped Peach, the\n\
+girl you find so pretty, \n\
+took her all the way along\n\
+the road to Simp City!\n\
+You'd better get along,\n\
+and knock those guys out,\n\
+at The Eironeia Cortex,\n\
+the villain's hideout!\n\
+...I'm sorry, I won't\n\
+rap ever again."))
 
-DEFINE_DIALOG(DIALOG_130, 1, 4, 30, 200, _("\
-PLACEHOLDER DIALOG\n\
--just talk about how\n\
-this land wasn't\n\
-always flashing, but\n\
-one day something\n\
-wacky happened that\n\
-caused it to be like\n\
-this"))
+DEFINE_DIALOG(DIALOG_130, 1, 5, 30, 200, _("\
+Did you know there\n\
+used to be a massive\n\
+research facility here?\n\
+Now THERE'S an\n\
+interesting story.\n\
+The people who worked\n\
+in it were employed in\n\
+the creation of some...\n\
+unnatural things.\n\
+Dangerous things.\n\
+Legends say that one\n\
+day they went too far\n\
+with their experiments,\n\
+and the entire place\n\
+vanished overnight.\n\
+Of course, that was a\n\
+long time ago, and\n\
+honestly isn't that\n\
+relevant now, if indeed\n\
+it's even true.\n\
+My mate Terry works\n\
+here, making sure the\n\
+lights stay on. He's just\n\
+bad at his job. It's his\n\
+first day.\n\
+OI, TERRY!\n\
+KEEP THE LIGHT ON!"))
 
 DEFINE_DIALOG(DIALOG_131, 1, 5, 30, 200, _("\
 Welcome to the Wing Cap\n\
@@ -1386,28 +1415,52 @@ Down: Underground Lake\n\
 Left: Black Hole\n\
 Right: Hazy Maze (Closed)"))
 
-DEFINE_DIALOG(DIALOG_139, 1, 5, 30, 200, _("\
-PLACEHOLDER DIALOG\n\
--subway koopa just rants\n\
-to himself about the time\n\
-he visited cuck canyon\n\
-years ago "))
+DEFINE_DIALOG(DIALOG_139, 1, 4, 30, 200, _("\
+Ah, the majestic Cuck\n\
+Canyon. It's been a long\n\
+time since I've been here...\n\
+\n\
+Not that long ago of\n\
+course, I'm not that old.\n\
+Then again, I was very\n\
+young at the time...\n\
+Where was I? Oh yes!\n\
+Cuck Canyon! A majestic\n\
+sight, and not one I've\n\
+seen for a long time.\n\
+I remember it like it was\n\
+yesterday... Actually, it\n\
+WAS yesterday come to\n\
+think of it.\n\
+Or was it 1989? I\n\
+can't remember."))
 
 DEFINE_DIALOG(DIALOG_140, 1, 5, 30, 200, _("\
-PLACEHOLDER DIALOG\n\
--'aha, i see youve\n\
-found my place of\n\
-work' or smth like\n\
-that as an intro\n\
--tell mario he's\n\
-close to finding\n\
-the secret hideout,\n\
-and come up with a\n\
-really stupid story\n\
-behind how subway\n\
-koopa found their\n\
-hideout in the first\n\
-place"))
+Welcome to Subway,\n\
+can I take your order?\n\
+\n\
+\n\
+...Oh! Mario! It's you!\n\
+This is where I work. I\n\
+sort of had to get a job\n\
+here really, since my\n\
+parents gave me the\n\
+first name 'Subway'.\n\
+Funny story actually.\n\
+Before I got a job here,\n\
+I was hunting through\n\
+the Transit Subway,\n\
+looking for work there.\n\
+While I was looking,\n\
+you'll never believe it,\n\
+I found the villain's lair!\n\
+The Eironeia Cortex!\n\
+Crazy luck, eh?\n\
+Anyway, do you want\n\
+anything? I am still\n\
+working after all, if you\n\
+don't want to order\n\
+anything, you'd better go."))
 
 DEFINE_DIALOG(DIALOG_141, 1, 5, 150, 200, _("\
 You've recovered one of\n\

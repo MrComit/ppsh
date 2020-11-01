@@ -44,9 +44,10 @@ enum SeqId {
     SEQ_FEAR,                         // 0x25
     SEQ_FEAR_BOSS,                    // 0x26
     SEQ_EMBRACE,                      // 0x27
-    SEQ_DARK,
-    SEQ_GANGNAM,
-    SEQ_FINAL,
+    SEQ_DARK,                         // 0x28
+    SEQ_GANGNAM,                      // 0x29
+    SEQ_FINAL,                        // 0x2A
+    SEQ_TRAILER,                      // 0x2B
     SEQ_COUNT
 };
 
