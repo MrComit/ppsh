@@ -2835,7 +2835,7 @@ s16 render_pause_courses_and_castle(void) {
                 courseName = segmented_to_virtual(courseNameTbl[4]);
                 print_generic_string(109, 157, &courseName[3]);
                 gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
-            } else {
+            } else if (gCurrLevelNum != LEVEL_CASTLE_COURTYARD) {
                 render_pause_my_score_coins();
             }
             //}
@@ -3683,7 +3683,7 @@ void handle_tutorials(void) {
                     break;
                 case 2:
                     if (m->input & INPUT_Z_DOWN && m->action & ACT_FLAG_SWIMMING) {
-                        if (sTextTimer++ > 30)
+                        if (sTextTimer++ > 10)
                             sTextState = 1;
                     } else {
                         sTextTimer = 0;

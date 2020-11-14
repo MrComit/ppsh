@@ -31,8 +31,18 @@ void wrench_released_loop(void) {
 
     // Despawn, and create a corkbox respawner
     if (o->oBreakableBoxSmallFramesSinceReleased > 900) {
-        create_respawner(MODEL_WRENCH, bhvWrenchCollect, 3000);
-        o->activeFlags = 0;
+        //create_respawner(MODEL_WRENCH, bhvWrenchCollect, 3000);
+        //o->activeFlags = 0;
+        vec3f_copy(&o->oPosX, &o->oHomeX);
+        o->oFaceAngleYaw = (o->oMoveAngleYaw = 0);
+        o->oFaceAngleRoll = (o->oMoveAngleRoll = 0);
+        o->oFaceAnglePitch = (o->oMoveAnglePitch = 0);
+        o->oHeldState = 2;
+        o->oIntangibleTimer = 0;
+        o->oInteractStatus = 0;
+        o->oInteractType = INTERACT_GRABBABLE;
+        o->oBreakableBoxSmallFramesSinceReleased = 0;
+        o->oBreakableBoxSmallReleased = 0;
     }
 }
 

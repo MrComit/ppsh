@@ -61,17 +61,27 @@ void bhv_colored_boo_loop(void) {
             approach_f32_ptr(&o->header.gfx.scale[1], 0, 0.03f);
             approach_f32_ptr(&o->header.gfx.scale[2], 0, 0.03f);
             if (o->header.gfx.scale[0] < 0.05f) {
-                cube = spawn_object(o, MODEL_CUBE, bhvColoredCube);
-                cube->oBehParams = o->oBehParams;
-                cube->oBehParams2ndByte = o->oBehParams2ndByte;
-                cube->oAnimState = o->oBehParams2ndByte;
-                cube->oFaceAngleYaw = (cube->oMoveAngleYaw = 0);
-                vec3f_copy(&cube->oPosX, &o->parentObj->oHomeX);
-                o->parentObj->activeFlags = 0;
+                //cube = spawn_object(o, MODEL_CUBE, bhvColoredCube);
+                //cube->oBehParams = o->oBehParams;
+                //cube->oBehParams2ndByte = o->oBehParams2ndByte;
+                //cube->oAnimState = o->oBehParams2ndByte;
+                //cube->oFaceAngleYaw = (cube->oMoveAngleYaw = 0);
+                //vec3f_copy(&cube->oPosX, &o->parentObj->oHomeX);
+                //o->parentObj->activeFlags = 0;
+                vec3f_copy(&o->parentObj->oPosX, &o->parentObj->oHomeX);
+                o->parentObj->oFaceAngleYaw = (o->parentObj->oMoveAngleYaw = 0);
+                o->parentObj->oFaceAngleRoll = (o->parentObj->oMoveAngleRoll = 0);
+                o->parentObj->oFaceAnglePitch = (o->parentObj->oMoveAnglePitch = 0);
+                o->parentObj->oHeldState = 2;
+                o->parentObj->oIntangibleTimer = 0;
+                o->parentObj->oInteractStatus = 0;
+                o->parentObj->oInteractType = INTERACT_GRABBABLE;
+                o->parentObj->oCubeFlag = 0;
+                //o->parentObj->oBreakableBoxSmallReleased = 0;
                 o->activeFlags = 0;
 
                 obj = spawn_object(o, MODEL_ARROW_HEAD, bhvArrowForCubes);
-                obj->parentObj = cube;
+                obj->parentObj = o->parentObj;
             }
             break;
     }

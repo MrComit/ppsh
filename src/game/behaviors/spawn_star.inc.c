@@ -241,7 +241,7 @@ void bhv_hidden_red_coin_star_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (gRedCoinsCollected == 6)
+            if (gRedCoinsCollected >= 6)
                 o->oAction = 1;
             break;
 

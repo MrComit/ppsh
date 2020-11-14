@@ -1372,6 +1372,41 @@ static void mario_simp_dynamics(void) {
 }
 
 
+extern struct Controller *gPlayer1Controller;
+
+
+s16 sDebugSongList[] = {SEQ_REJECT, SEQ_FEAR, SEQ_FEAR_BOSS, SEQ_EMBRACE, SEQ_DARK, SEQ_GANGNAM, SEQ_FINAL, SEQ_TRAILER,};
+
+s16 sDebugDynPos = 0;
+
+struct MusicDynamic sDebugDyn[] = {
+    { 0x003F, 127, 20, 0x01C0, 0, 20 }, // PHASE 1
+    { 0x007C, 127, 20, 0x0003, 0, 20 }, // PHASE 2
+    { 0x0128, 127, 20, 0x0000, 0, 20 }, // PHASE 3
+};
+
+
+
+static void debug_dynamics(void) {
+    s32 i;
+    u16 bit = 1;
+    if (gCurrLevelNum != LEVEL_JRB || sPlayer0CurSeqId != 0x27)
+        return;
+    if (gPlayer1Controller->buttonPressed & U_JPAD)
+        sDebugDynPos++;
+    if (gPlayer1Controller->buttonPressed & D_JPAD)
+        sDebugDynPos--;
+    for (i = 0; i < 16; i++) {
+        if (sDebugDyn[sDebugDynPos].bits1 & bit) {
+            fade_channel_volume_scale(0, i, sDebugDyn[sDebugDynPos].volScale1, sDebugDyn[sDebugDynPos].dur1);
+        }
+        if (sDebugDyn[sDebugDynPos].bits2 & bit) {
+            fade_channel_volume_scale(0, i, sDebugDyn[sDebugDynPos].volScale2, sDebugDyn[sDebugDynPos].dur2);
+        }
+        bit <<= 1;
+    }
+}
+
 #ifdef VERSION_JP
 #define ARG2_VAL1 0.8f
 #define ARG2_VAL2 1.0f

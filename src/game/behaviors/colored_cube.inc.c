@@ -64,18 +64,28 @@ void cube_released_loop(void) {
     o->oBreakableBoxSmallFramesSinceReleased++;
 
     // Begin flashing
-    if (o->oBreakableBoxSmallFramesSinceReleased > 810) {
+    /*if (o->oBreakableBoxSmallFramesSinceReleased > 810) {
         if (o->oBreakableBoxSmallFramesSinceReleased & 1)
             o->header.gfx.node.flags |= 0x10;
         else
             o->header.gfx.node.flags &= ~0x10;
-    }
+    }*/
 
     // Despawn, and create a corkbox respawner
-    if (o->oBreakableBoxSmallFramesSinceReleased > 900) {
-        create_respawner(MODEL_CUBE, bhvColoredCube, 3000);
-        o->activeFlags = 0;
-    }
+    /*if (o->oBreakableBoxSmallFramesSinceReleased > 900) {
+        //create_respawner(MODEL_CUBE, bhvColoredCube, 3000);
+        //o->activeFlags = 0;
+        vec3f_copy(&o->oPosX, &o->oHomeX);
+        o->oFaceAngleYaw = (o->oMoveAngleYaw = 0);
+        o->oFaceAngleRoll = (o->oMoveAngleRoll = 0);
+        o->oFaceAnglePitch = (o->oMoveAnglePitch = 0);
+        o->oHeldState = 2;
+        o->oIntangibleTimer = 0;
+        o->oInteractStatus = 0;
+        o->oInteractType = INTERACT_GRABBABLE;
+        o->oBreakableBoxSmallFramesSinceReleased = 0;
+        o->oCubeFlag = 0;
+    }*/
 }
 
 
@@ -147,7 +157,7 @@ void cube_dropped_loop(void) {
 
 
 void bhv_colored_cube_loop(void) {
-    struct Object *obj;
+    struct Object *obj, *obj2;
     switch (o->oHeldState) {
         case HELD_FREE:
             //wrench_idle_loop();
@@ -155,11 +165,14 @@ void bhv_colored_cube_loop(void) {
             break;
 
         case HELD_HELD:
-            if (obj_nearest_object_with_behavior(bhvArrowForCubes) == NULL) {
+            obj2 = obj_nearest_object_with_behavior(bhvArrowForCubes);
+            if (obj2 == NULL) {
                 obj = spawn_object(o, MODEL_ARROW_HEAD, bhvArrowForCubes);
                 obj->parentObj = o;
                 obj->oAction = 2;
                 obj->oBehParams2ndByte = o->oBehParams2ndByte;
+            } else if (obj2->oAction == 0) {
+                obj2->activeFlags = 0;
             }
 
             obj_disable_rendering();
